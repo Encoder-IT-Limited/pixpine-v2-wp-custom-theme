@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #fafafa;
+  color: var(--text-color);
+}
+a {
+  transition: 0.3s;
+  text-decoration: none;
+  color: var(--text-color);
+}
+a:hover {
+  color: var(--primary-color);
+}
+img {
+  max-width: 100%;
+}
+.container {
+  max-width: 1500px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.row_d {
+  display: flex;
+  flex-flow: wrap;
+}
+:root {
+  --text-color: #333333;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+._btn {
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 10px 40px;
+  border-radius: 3px;
+  display: inline-block;
+  background-color: var(--text-color) !important;
+  color: #ffffff !important;
+}
+._btn:hover {
+  color: #ffffff;
+}
+
+.navbar .nav-link {
+  margin-left: 20px;
+  display: inline-block;
+}
+.form_section {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.form_section .form_column {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+.form_section .form_small_width {
+  max-width: 500px;
+}
+.form_section .form_heading {
+  margin-bottom: 50px;
+}
+.form_section form {
+  padding: 35px;
+  border-radius: 3px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  box-sizing: border-box;
+}
+.form_section .input_gorup:not(:last-child),
+.form_section .full_width {
+  margin-bottom: 25px;
+}
+.form_section label {
+  margin-bottom: 8px;
+}
+.form_section label,
+.form_section input,
+.form_section select {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-color);
+}
+.form_section input,
+.form_section select {
+  height: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  outline: none;
+  box-shadow: none;
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-weight: 400;
+  background-color: transparent;
+}
+.form_section input:focus {
+  background-color: #ebebeb;
+}
+.form_section form ._btn {
+  margin-top: 15px;
+}
+.form_section .full_width {
+  display: flex;
+  width: 100%;
+  align-items: start;
+}
+.form_section .full_width .input_gorup {
+  width: calc(50% - 15px);
+  margin-bottom: 0;
+}
+.form_section .full_width .input_gorup:first-child {
+  margin-right: 30px;
+}
+.form_section ul {
+  border: 1px solid var(--text-color);
+}
+.form_section ul li:not(:last-child) {
+  border-bottom: 1px solid var(--text-color);
+}
+.form_section ul input {
+  width: 15px;
+  height: 15px;
+}
+.form_section .checkbox_col {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  border-right: 1px solid var(--text-color);
+  padding: 3px 5px;
+}
+.form_section .users {
+  width: calc(100% - 150px);
+  padding: 4px 5px;
+}
+.form_section ul .heading,
+.form_section ul li {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form_section ul p {
+  margin-bottom: 0;
+}
+.form_section ul .heading .checkbox_col p {
+  margin-bottom: 0;
+  margin-left: 8px;
+}
+.form_section ul .heading p {
+  font-weight: 700;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style-type: none;
+}
+
+/* ===================================
+============= Responsive =============
+====================================== */
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .navbar .nav-link {
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .form_section form {
+    padding: 25px;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .form_section input,
+  .form_section select {
+    height: 35px;
+  }
+  .form_section .input_gorup:not(:last-child),
+  .form_section .full_width .input_gorup {
+    margin-bottom: 20px;
+  }
+  .form_section .full_width {
+    margin-bottom: 0;
+    flex-direction: column;
+  }
+  .form_section .full_width .input_gorup {
+    width: 100%;
+  }
+  .form_section .full_width .input_gorup:first-child {
+    margin-right: 0;
+  }
+  .form_section .users {
+    width: calc(100% - 120px);
+  }
+  .form_section .checkbox_col {
+    width: 120px;
+  }
+}
