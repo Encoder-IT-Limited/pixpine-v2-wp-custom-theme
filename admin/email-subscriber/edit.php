@@ -7,7 +7,7 @@
     <?php
     $msg = '';
     global $wpdb;
-    $table_name = $wpdb->prefix . 'subscribers';
+    $table_name = $wpdb->prefix . 'email_subscribers';
     $id = $_GET['id'];
     if (isset($_POST['submit'])) {
         $user_email         = $_POST['user_email'];

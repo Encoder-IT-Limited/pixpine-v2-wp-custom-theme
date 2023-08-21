@@ -173,7 +173,7 @@ function create_custom_table() {
     $charset_collate = $wpdb->get_charset_collate();
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-    $table_name = $wpdb->prefix . 'subscribers';
+    $table_name = $wpdb->prefix . 'email_subscribers';
     $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
     if (!$table_exists) {
         $sql = "CREATE TABLE $table_name (
@@ -196,26 +196,26 @@ add_action( 'after_switch_theme', 'create_custom_table' );
 // Add custom admin menu
 function add_custom_admin_menu() {
     /**
-     * Subscriber
+     * Email Subscriber
      */
     // list
     add_menu_page(
-        'Subscriber',      // Page title
-        'Subscriber',      // Menu title
+        'Email Subscriber',      // Page title
+        'Email Subscriber',      // Menu title
         'manage_options',   // Capability required to access the menu
-        'subscriber',      // Menu slug
-        'subscriber_page', // Callback function to render the menu page
+        'email-subscriber',      // Menu slug
+        'email_subscriber_page', // Callback function to render the menu page
         'dashicons-admin-generic', // Icon URL or dashicon class
         2                  // Menu position
     );
     // create
     add_submenu_page(
-        'subscriber',      // Parent menu slug
+        'email-subscriber',      // Parent menu slug
         'Create',          // Page title
         'Create',          // Menu title
         'manage_options',   // Capability required to access the submenu
-        'create-subscriber',   // Submenu slug
-        'create_subscriber_page' // Callback function to render the submenu page
+        'create-email-subscriber',   // Submenu slug
+        'create_email_subscriber_page' // Callback function to render the submenu page
     );
     // edit
     add_submenu_page(
@@ -223,8 +223,8 @@ function add_custom_admin_menu() {
         'Edit',          // Page title
         'Edit',          // Menu title
         'manage_options',   // Capability required to access the submenu
-        'edit-subscriber',   // Submenu slug
-        'edit_subscriber_page' // Callback function to render the submenu page
+        'edit-email-subscriber',   // Submenu slug
+        'edit_email_subscriber_page' // Callback function to render the submenu page
     );
     // delete
     add_submenu_page(
@@ -232,26 +232,26 @@ function add_custom_admin_menu() {
         'Delete',          // Page title
         'Delete',          // Menu title
         'manage_options',   // Capability required to access the submenu
-        'delete-subscriber',   // Submenu slug
-        'delete_subscriber_page' // Callback function to render the submenu page
+        'delete-email-subscriber',   // Submenu slug
+        'delete_email_subscriber_page' // Callback function to render the submenu page
     );
     /**
-     * Subscriber - Ends
+     * Email Subscriber - Ends
      */
 }
 add_action('admin_menu', 'add_custom_admin_menu');
 
 //  subscriber
-function subscriber_page(){
-    require get_template_directory() . '/admin/subscriber/index.php';
+function email_subscriber_page(){
+    require get_template_directory() . '/admin/email-subscriber/index.php';
 }
-function create_subscriber_page(){
-    require get_template_directory() . '/admin/subscriber/create.php';
+function create_email_subscriber_page(){
+    require get_template_directory() . '/admin/email-subscriber/create.php';
 }
-function edit_subscriber_page(){
-    require get_template_directory() . '/admin/subscriber/edit.php';
+function edit_email_subscriber_page(){
+    require get_template_directory() . '/admin/email-subscriber/edit.php';
 }
-function delete_subscriber_page(){
-    require get_template_directory() . '/admin/subscriber/delete.php';
+function delete_email_subscriber_page(){
+    require get_template_directory() . '/admin/email-subscriber/delete.php';
 }
 //  subscriber - Ends

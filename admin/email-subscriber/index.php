@@ -101,7 +101,7 @@ class School_Table extends WP_List_Table
     {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . 'subscribers';
+        $table_name = $wpdb->prefix . 'email_subscribers';
 
         if(isset($_POST['s']) && !empty($_POST['s'])){
         	$search_data = $_POST['s'];
@@ -117,8 +117,8 @@ class School_Table extends WP_List_Table
 	                'ID'                                    => $singledata->id,
 	                'User Email'                            => $singledata->user_email,
 	                'Action'                                => '
-	                <a  href="' . admin_url() . 'admin.php?page=delete-subscriber&id='.$singledata->id.'" class="button button-primary">Delete</a>
-	                <a  href="' . admin_url() . 'admin.php?page=edit-subscriber&id='.$singledata->id.'" class="button button-primary">Edit</a>'
+	                <a  href="' . admin_url() . 'admin.php?page=delete-email-subscriber&id='.$singledata->id.'" class="button button-primary">Delete</a>
+	                <a  href="' . admin_url() . 'admin.php?page=edit-email-subscriber&id='.$singledata->id.'" class="button button-primary">Edit</a>'
 	            );
 	        }
         }else{

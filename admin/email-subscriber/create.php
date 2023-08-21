@@ -10,7 +10,7 @@
         $user_email         = $_POST['user_email'];
 
         global $wpdb;
-        $table_name = $wpdb->prefix . 'subscribers';
+        $table_name = $wpdb->prefix . 'email_subscribers';
         $query = "SELECT COUNT(*) FROM $table_name WHERE user_email = '$user_email'";
 
         // Retrieve the count
