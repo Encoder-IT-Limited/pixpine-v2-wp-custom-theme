@@ -173,6 +173,7 @@ function create_custom_table() {
     $charset_collate = $wpdb->get_charset_collate();
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
+
     $table_name = $wpdb->prefix . 'email_subscribers';
     $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
     if (!$table_exists) {
@@ -185,6 +186,82 @@ function create_custom_table() {
         dbDelta( $sql );
     }
 
+
+    $table_name = $wpdb->prefix . 'pixpine_payment_details';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            payment_method VARCHAR(255) DEFAULT NULL,
+            tnx_id VARCHAR(255) DEFAULT NULL,
+            amount VARCHAR(255) DEFAULT NULL,
+            payment_for VARCHAR(255) DEFAULT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+        ) $charset_collate;";
+        dbDelta( $sql );
+    }
+
+
+    $table_name = $wpdb->prefix . 'pixpine_orders';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $t1 = $wpdb->prefix."users";
+        $t2 = $wpdb->prefix."pixpine_payment_details";
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            user_id INT(11) DEFAULT NULL,
+            pixpine_payment_detail_id INT(11) DEFAULT NULL,
+            total_price VARCHAR(255) DEFAULT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            -- FOREIGN KEY (user_id) REFERENCES $t1(ID),
+            -- FOREIGN KEY (pixpine_payment_detail_id) REFERENCES $t2(id)
+        ) $charset_collate;";
+        update_option('sql', $sql);
+        dbDelta( $sql );
+    }
+
+    
+
+    $table_name = $wpdb->prefix . 'pixpine_order_items';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $t1 = $wpdb->prefix."pixpine_orders";
+        $t2 = $wpdb->prefix."posts";
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            pixpine_order_id INT(11) DEFAULT NULL,
+            product_id INT(11) DEFAULT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            -- FOREIGN KEY (pixpine_order_id) REFERENCES $t1(id),
+            -- FOREIGN KEY (product_id) REFERENCES $t2(ID)
+        ) $charset_collate;";
+        dbDelta( $sql );
+    }
+    
+
+    $table_name = $wpdb->prefix . 'pixpine_carts';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $t1 = $wpdb->prefix."users";
+        $t2 = $wpdb->prefix."posts";
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            user_id INT(11) DEFAULT NULL,
+            product_id INT(11) DEFAULT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            -- FOREIGN KEY (user_id) REFERENCES $t1(ID),
+            -- FOREIGN KEY (product_id) REFERENCES $t2(ID)
+        ) $charset_collate;";
+        dbDelta( $sql );
+    }
 }
 add_action( 'after_switch_theme', 'create_custom_table' );
 
@@ -195,9 +272,13 @@ add_action( 'after_switch_theme', 'create_custom_table' );
 
 // Add custom admin menu
 function add_custom_admin_menu() {
-    /**
-     * Email Subscriber
-     */
+    create_admin_pages_for_newsletter_subscribers();
+    create_admin_pages_for_orders();
+}
+add_action('admin_menu', 'add_custom_admin_menu');
+
+// Email Subscriber
+function create_admin_pages_for_newsletter_subscribers(){
     // list
     add_menu_page(
         'Email Subscriber',      // Page title
@@ -235,11 +316,75 @@ function add_custom_admin_menu() {
         'delete-email-subscriber',   // Submenu slug
         'delete_email_subscriber_page' // Callback function to render the submenu page
     );
-    /**
-     * Email Subscriber - Ends
-     */
 }
-add_action('admin_menu', 'add_custom_admin_menu');
+// Email Subscriber - Ends
+
+
+
+
+// Order
+function create_admin_pages_for_orders(){
+    // list
+    add_menu_page(
+        'Orders',      // Page title
+        'Orders',      // Menu title
+        'manage_options',   // Capability required to access the menu
+        'order',      // Menu slug
+        'order_page', // Callback function to render the menu page
+        'dashicons-admin-generic', // Icon URL or dashicon class
+        2                  // Menu position
+    );
+    // create
+    add_submenu_page(
+        'order',      // Parent menu slug
+        'Create',          // Page title
+        'Create',          // Menu title
+        'manage_options',   // Capability required to access the submenu
+        'create-order',   // Submenu slug
+        'create_order_page' // Callback function to render the submenu page
+    );
+    // edit
+    add_submenu_page(
+        null,      // Parent menu slug
+        'Edit',          // Page title
+        'Edit',          // Menu title
+        'manage_options',   // Capability required to access the submenu
+        'edit-order',   // Submenu slug
+        'edit_order_page' // Callback function to render the submenu page
+    );
+    // delete
+    add_submenu_page(
+        null,      // Parent menu slug
+        'Delete',          // Page title
+        'Delete',          // Menu title
+        'manage_options',   // Capability required to access the submenu
+        'delete-order',   // Submenu slug
+        'delete_order_page' // Callback function to render the submenu page
+    );
+}
+// Order - Ends
+
+
+
+
+/**
+ * Callback Functions for admin pages
+ */
+
+// Order
+function order_page(){
+    require get_template_directory() . '/admin/order/index.php';
+}
+function create_order_page(){
+    require get_template_directory() . '/admin/order/create.php';
+}
+function edit_order_page(){
+    require get_template_directory() . '/admin/order/edit.php';
+}
+function delete_order_page(){
+    require get_template_directory() . '/admin/order/delete.php';
+}
+// Order - Ends
 
 //  subscriber
 function email_subscriber_page(){
@@ -255,3 +400,8 @@ function delete_email_subscriber_page(){
     require get_template_directory() . '/admin/email-subscriber/delete.php';
 }
 //  subscriber - Ends
+
+
+/**
+ * Callback Functions for admin pages - Ends
+ */
