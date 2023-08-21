@@ -334,33 +334,16 @@ function create_admin_pages_for_orders(){
         'dashicons-admin-generic', // Icon URL or dashicon class
         2                  // Menu position
     );
-    // create
-    add_submenu_page(
-        'order',      // Parent menu slug
-        'Create',          // Page title
-        'Create',          // Menu title
-        'manage_options',   // Capability required to access the submenu
-        'create-order',   // Submenu slug
-        'create_order_page' // Callback function to render the submenu page
-    );
-    // edit
+    // detail
     add_submenu_page(
         null,      // Parent menu slug
-        'Edit',          // Page title
-        'Edit',          // Menu title
+        'Detail',          // Page title
+        'Detail',          // Menu title
         'manage_options',   // Capability required to access the submenu
-        'edit-order',   // Submenu slug
-        'edit_order_page' // Callback function to render the submenu page
+        'detail-order',   // Submenu slug
+        'detail_order_page' // Callback function to render the submenu page
     );
-    // delete
-    add_submenu_page(
-        null,      // Parent menu slug
-        'Delete',          // Page title
-        'Delete',          // Menu title
-        'manage_options',   // Capability required to access the submenu
-        'delete-order',   // Submenu slug
-        'delete_order_page' // Callback function to render the submenu page
-    );
+
 }
 // Order - Ends
 
@@ -375,14 +358,8 @@ function create_admin_pages_for_orders(){
 function order_page(){
     require get_template_directory() . '/admin/order/index.php';
 }
-function create_order_page(){
-    require get_template_directory() . '/admin/order/create.php';
-}
-function edit_order_page(){
-    require get_template_directory() . '/admin/order/edit.php';
-}
-function delete_order_page(){
-    require get_template_directory() . '/admin/order/delete.php';
+function detail_order_page(){
+    require get_template_directory() . '/admin/order/detail.php';
 }
 // Order - Ends
 

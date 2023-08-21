@@ -4,7 +4,7 @@ $subscriber_table = new School_Table();
 $subscriber_table->prepare_items();
 ?>
 <div class="wrap">
-    <h1>Subscriber List</h1>
+    <h1>Order List</h1>
     <div id="icon-users" class="icon32"></div>
     <form method="post">
         <input type="hidden" name="page" value="School_Table" />
@@ -62,7 +62,8 @@ class School_Table extends WP_List_Table
     {
         $columns = array(
             'ID'                                => 'id',
-            'User Email'                              => 'User Email',
+            'User Email'                        => 'User Email',
+            'Date'                              => 'Date',
             'Action'                            => 'Action'
         );
 
@@ -88,7 +89,8 @@ class School_Table extends WP_List_Table
     {
         return array(
             'ID'                    => array('ID', false),
-            'User Email'                  => array('User Email', false),
+            'User Email'            => array('User Email', false),
+            'Date'                  => array('Date', false),
         );
     }
 
@@ -101,24 +103,24 @@ class School_Table extends WP_List_Table
     {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . 'email_subscribers';
+        $table_name = $wpdb->prefix . 'pixpine_orders';
 
         if(isset($_POST['s']) && !empty($_POST['s'])){
         	$search_data = $_POST['s'];
-            $result = $wpdb->get_results("SELECT * FROM " . $table_name. " WHERE user_email LIKE '%".$search_data."%'");
+            $result = $wpdb->get_results("SELECT * FROM " . $table_name. " WHERE created_at LIKE '%".$search_data."%'");
         }else{
             $result = $wpdb->get_results("SELECT * FROM " . $table_name);
         }
 
         if (count($result) != 0) {
 	        foreach ($result as $singledata) {
-
+                $user_detail = get_user_by("ID", $singledata->user_id);
 	            $data[] = array(
 	                'ID'                                    => $singledata->id,
-	                'User Email'                            => $singledata->user_email,
+	                'User Email'                            => $user_detail->user_email,
+	                'Date'                                  => $singledata->created_at,
 	                'Action'                                => '
-	                <a  href="' . admin_url() . 'admin.php?page=delete-email-subscriber&id='.$singledata->id.'" class="button button-primary">Delete</a>
-	                <a  href="' . admin_url() . 'admin.php?page=edit-email-subscriber&id='.$singledata->id.'" class="button button-primary">Edit</a>'
+	                <a  href="' . admin_url() . 'admin.php?page=detail-order&id='.$singledata->id.'" class="button button-primary">Detail</a>'
 	            );
 	        }
         }else{
@@ -141,6 +143,7 @@ class School_Table extends WP_List_Table
         switch ($column_name) {
             case 'ID':
             case 'User Email':
+            case 'Date':
             case 'Action':
                 return $item[$column_name];
 
@@ -157,8 +160,8 @@ class School_Table extends WP_List_Table
     private function sort_data($a, $b)
     {
         // Set defaults
-        $orderby = 'User Email';
-        $order = 'asc';
+        $orderby = 'Date';
+        $order = 'desc';
 
         // If orderby is set, use this as the sort column
         if (!empty($_GET['orderby'])) {
