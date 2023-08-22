@@ -18,7 +18,7 @@
 
         $msg = '
             <div class="alert alert-success" role="alert">
-            Subscriber Updated successfully.
+            Updated is successful.
             </div>';
         
     }    
