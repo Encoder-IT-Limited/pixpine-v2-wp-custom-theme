@@ -8,25 +8,34 @@ $subscriber_table->prepare_items();
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- Date range picker CND -->
+<link href="<?php echo get_template_directory_uri(); ?>/admin/css/style.css" rel="stylesheet" />
 <div class="wrap">
     <h1>Order List</h1>
     <div id="icon-users" class="icon32"></div>
     <form method="post">
         <input type="hidden" name="page" value="School_Table" />
-        <?php $subscriber_table->search_box('search', 'search_id'); ?>
+        <label class="search-form-label" for="u_email">Search By User Email: </label>
+        <input type="email" name="u_email" id="u_email" placeholder="Enter email" />
+
+        <label class="search-form-label" for="date_range">Search By Date Range: </label>
+        <input type="text" name="date_range" id="date_range" placeholder="Enter date" />
+
+        <input type="submit" id="search-submit" class="button" name="submit" value="search">
+        <?php //$subscriber_table->search_box('search', 'search_id'); ?>
     </form>
     <?php $subscriber_table->display(); ?>
 </div>
 <!-- Date range picker -->
 <script>
     jQuery(function() {
-        jQuery('input[name="s"]').daterangepicker({
+        jQuery('input[name="date_range"]').daterangepicker({
+            // autoUpdateInput: false,
             locale: {
                 format: 'YYYY-MM-DD'
             },
             opens: 'left'
         }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
     });
 </script>
@@ -124,16 +133,31 @@ class School_Table extends WP_List_Table
 
         $table_name = $wpdb->prefix . 'pixpine_orders';
 
-        if(isset($_POST['s']) && !empty($_POST['s'])){
-        	$search_data = $_POST['s'];
-            $search_data = explode(' - ', $search_data);
-            $s_date = $search_data[0];
-            $e_date = $search_data[1];
-            if($s_date == $e_date){
-                $query = "SELECT * FROM " . $table_name. " WHERE created_at LIKE  '%".$s_date."%'";
-            }else{
-                $query = "SELECT * FROM " . $table_name. " WHERE created_at >= '$s_date' AND created_at <= '$e_date'";
+        if(isset($_POST['submit']) && !empty($_POST['submit'])){
+            $query = "SELECT * FROM " . $table_name;
+        	$search_data = $_POST['date_range'];
+            if(!empty($search_data)){
+                $search_data = explode(' - ', $search_data);
+                $s_date = $search_data[0];
+                $e_date = $search_data[1];
+                if($s_date == $e_date){
+                    $query .= " WHERE created_at LIKE  '%".$s_date."%'";
+                }else{
+                    $query .= " WHERE created_at >= '$s_date' AND created_at <= '$e_date'";
+                }
             }
+            
+            $u_email = $_POST['u_email'];
+            if(!empty($u_email)){
+                $user_id = get_user_by('email', $u_email)->ID;       
+                if(empty($search_data)){
+                    $query .=" WHERE user_id='$user_id'";
+                }else{
+                    $query .=" AND user_id='$user_id'";
+                }
+                
+            }
+
             $result = $wpdb->get_results($query);
         }else{
             $result = $wpdb->get_results("SELECT * FROM " . $table_name);

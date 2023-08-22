@@ -343,6 +343,15 @@ function create_admin_pages_for_orders(){
         'detail-order',   // Submenu slug
         'detail_order_page' // Callback function to render the submenu page
     );
+    // csv generate 
+    add_submenu_page(
+        null,      // Parent menu slug
+        'Detail',          // Page title
+        'Detail',          // Menu title
+        'manage_options',   // Capability required to access the submenu
+        'csv-generate-order',   // Submenu slug
+        'csv_generate_order_page' // Callback function to render the submenu page
+    );
 
 }
 // Order - Ends
@@ -360,6 +369,9 @@ function order_page(){
 }
 function detail_order_page(){
     require get_template_directory() . '/admin/order/detail.php';
+}
+function csv_generate_order_page(){
+    require get_template_directory() . '/admin/order/csv-generate.php';
 }
 // Order - Ends
 

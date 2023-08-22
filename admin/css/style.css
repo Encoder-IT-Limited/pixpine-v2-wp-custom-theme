@@ -230,3 +230,7 @@ ul li {
     width: 120px;
   }
 }
+.search-form-label{
+  font-size: 16px;
+  font-weight: 500;
+}
