@@ -275,8 +275,24 @@ function add_custom_admin_menu() {
     create_admin_pages_for_newsletter_subscribers();
     create_admin_pages_for_orders();
     create_admin_pages_for_payment();
+    create_admin_pages_for_google_adds();
 }
 add_action('admin_menu', 'add_custom_admin_menu');
+
+
+// Google Adds
+function create_admin_pages_for_google_adds(){
+        // list
+    add_menu_page(
+        'Google Adds',      // Page title
+        'Google Adds',      // Menu title
+        'manage_options',   // Capability required to access the menu
+        'google-adds',      // Menu slug
+        'google_adds_page', // Callback function to render the menu page
+        'dashicons-admin-generic', // Icon URL or dashicon class
+        2                  // Menu position
+    );
+}
 
 // Email Subscriber
 function create_admin_pages_for_newsletter_subscribers(){
@@ -319,6 +335,8 @@ function create_admin_pages_for_newsletter_subscribers(){
     );
 }
 // Email Subscriber - Ends
+
+
 
 
 // Order
@@ -369,6 +387,10 @@ function payments_page(){
     require get_template_directory() . '/admin/payments/index.php';
 }
 
+// google adds
+function google_adds_page(){
+    require get_template_directory() . '/admin/google-adds/edit.php';
+}
 
 
 // Order
