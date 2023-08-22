@@ -3,6 +3,11 @@ ob_start();
 $subscriber_table = new School_Table();
 $subscriber_table->prepare_items();
 ?>
+<!-- Date range picker CND -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<!-- Date range picker CND -->
 <div class="wrap">
     <h1>Order List</h1>
     <div id="icon-users" class="icon32"></div>
@@ -12,6 +17,20 @@ $subscriber_table->prepare_items();
     </form>
     <?php $subscriber_table->display(); ?>
 </div>
+<!-- Date range picker -->
+<script>
+    jQuery(function() {
+        jQuery('input[name="s"]').daterangepicker({
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            opens: 'left'
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
+</script>
+<!-- Date range picker Ends -->
 <?php
 
 // WP_List_Table is not loaded automatically so we need to load it in our application
@@ -107,7 +126,15 @@ class School_Table extends WP_List_Table
 
         if(isset($_POST['s']) && !empty($_POST['s'])){
         	$search_data = $_POST['s'];
-            $result = $wpdb->get_results("SELECT * FROM " . $table_name. " WHERE created_at LIKE '%".$search_data."%'");
+            $search_data = explode(' - ', $search_data);
+            $s_date = $search_data[0];
+            $e_date = $search_data[1];
+            if($s_date == $e_date){
+                $query = "SELECT * FROM " . $table_name. " WHERE created_at LIKE  '%".$s_date."%'";
+            }else{
+                $query = "SELECT * FROM " . $table_name. " WHERE created_at >= '$s_date' AND created_at <= '$e_date'";
+            }
+            $result = $wpdb->get_results($query);
         }else{
             $result = $wpdb->get_results("SELECT * FROM " . $table_name);
         }
