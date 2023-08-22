@@ -8,7 +8,7 @@ function custom_product_post_type() {
         'name_admin_bar'        => __( 'Product', 'text_domain' ),
         'archives'              => __( 'Product Archives', 'text_domain' ),
         'attributes'            => __( 'Product Attributes', 'text_domain' ),
-        'parent_item_colon'     => __( 'Parent Product:', 'text_domain' ),
+        'payment_item_colon'     => __( 'Payment Product:', 'text_domain' ),
         'all_items'             => __( 'All Products', 'text_domain' ),
         'add_new_item'          => __( 'Add New Product', 'text_domain' ),
         'add_new'               => __( 'Add New', 'text_domain' ),
@@ -63,8 +63,8 @@ function custom_product_taxonomy() {
         'singular_name'              => _x( 'Product Category', 'Taxonomy Singular Name', 'text_domain' ),
         'menu_name'                  => __( 'Product Categories', 'text_domain' ),
         'all_items'                  => __( 'All Categories', 'text_domain' ),
-        'parent_item'                => __( 'Parent Category', 'text_domain' ),
-        'parent_item_colon'          => __( 'Parent Category:', 'text_domain' ),
+        'payment_item'                => __( 'Payment Category', 'text_domain' ),
+        'payment_item_colon'          => __( 'Payment Category:', 'text_domain' ),
         'new_item_name'              => __( 'New Category Name', 'text_domain' ),
         'add_new_item'               => __( 'Add New Category', 'text_domain' ),
         'edit_item'                  => __( 'Edit Category', 'text_domain' ),
@@ -274,6 +274,7 @@ add_action( 'after_switch_theme', 'create_custom_table' );
 function add_custom_admin_menu() {
     create_admin_pages_for_newsletter_subscribers();
     create_admin_pages_for_orders();
+    create_admin_pages_for_payment();
 }
 add_action('admin_menu', 'add_custom_admin_menu');
 
@@ -291,7 +292,7 @@ function create_admin_pages_for_newsletter_subscribers(){
     );
     // create
     add_submenu_page(
-        'email-subscriber',      // Parent menu slug
+        'email-subscriber',      // Payment menu slug
         'Create',          // Page title
         'Create',          // Menu title
         'manage_options',   // Capability required to access the submenu
@@ -300,7 +301,7 @@ function create_admin_pages_for_newsletter_subscribers(){
     );
     // edit
     add_submenu_page(
-        null,      // Parent menu slug
+        null,      // Payment menu slug
         'Edit',          // Page title
         'Edit',          // Menu title
         'manage_options',   // Capability required to access the submenu
@@ -309,7 +310,7 @@ function create_admin_pages_for_newsletter_subscribers(){
     );
     // delete
     add_submenu_page(
-        null,      // Parent menu slug
+        null,      // Payment menu slug
         'Delete',          // Page title
         'Delete',          // Menu title
         'manage_options',   // Capability required to access the submenu
@@ -318,8 +319,6 @@ function create_admin_pages_for_newsletter_subscribers(){
     );
 }
 // Email Subscriber - Ends
-
-
 
 
 // Order
@@ -336,32 +335,41 @@ function create_admin_pages_for_orders(){
     );
     // detail
     add_submenu_page(
-        null,      // Parent menu slug
+        null,      // Payment menu slug
         'Detail',          // Page title
         'Detail',          // Menu title
         'manage_options',   // Capability required to access the submenu
         'detail-order',   // Submenu slug
         'detail_order_page' // Callback function to render the submenu page
     );
-    // csv generate 
-    add_submenu_page(
-        null,      // Parent menu slug
-        'Detail',          // Page title
-        'Detail',          // Menu title
-        'manage_options',   // Capability required to access the submenu
-        'csv-generate-order',   // Submenu slug
-        'csv_generate_order_page' // Callback function to render the submenu page
-    );
-
 }
 // Order - Ends
 
-
+// Payment
+function create_admin_pages_for_payment(){
+    // list
+    add_menu_page(
+        'Payments',      // Page title
+        'Payments',      // Menu title
+        'read',   // Capability required to access the menu
+        'payments',      // Menu slug
+        'payments_page', // Callback function to render the menu page
+        'dashicons-admin-generic', // Icon URL or dashicon class
+        2                  // Menu position
+    );
+}
+// Payment Ends
 
 
 /**
  * Callback Functions for admin pages
  */
+// Payments
+function payments_page(){
+    require get_template_directory() . '/admin/payments/index.php';
+}
+
+
 
 // Order
 function order_page(){
