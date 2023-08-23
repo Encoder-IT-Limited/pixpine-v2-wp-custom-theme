@@ -94,77 +94,7 @@ add_action( 'init', 'custom_product_taxonomy', 0 );
 
 
 
-/**
- * Add gallery in the wp-admin panel
- */
-// Add custom metabox for gallery images
-// function custom_product_gallery_metabox() {
-//     add_meta_box(
-//         'product_gallery',
-//         'Product Gallery',
-//         'render_product_gallery_metabox',
-//         'product',
-//         'normal',
-//         'default'
-//     );
-// }
-// add_action('add_meta_boxes', 'custom_product_gallery_metabox');
 
-// // Render the metabox content
-// function render_product_gallery_metabox($post) {
-//     wp_nonce_field('custom_product_gallery_nonce', 'custom_product_gallery_nonce');
-
-//     $gallery_images = get_post_meta($post->ID, '_custom_product_gallery', true);
-//     $gallery_images = !empty($gallery_images) ? explode(',', $gallery_images) : array();
-
-//     echo '<input type="button" class="button" value="Add Images" id="custom_product_gallery_button">';
-//     echo '<ul id="custom_product_gallery_container">';
-
-//     foreach ($gallery_images as $image_id) {
-//         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
-//     }
-
-//     echo '</ul>';
-// }
-
-
-// function custom_product_gallery_enqueue_scripts($hook) {
-//     if ('post.php' != $hook && 'post-new.php' != $hook) {
-//         return;
-//     }
-
-//     if ('product' != get_post_type()) {
-//         return;
-//     }
-
-//     wp_enqueue_media();
-//     wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/js/custom-product-gallery.js', array('jquery'), '1.0', true);
-// }
-// add_action('admin_enqueue_scripts', 'custom_product_gallery_enqueue_scripts');
-
-
-// function save_custom_product_gallery() {
-//     check_ajax_referer('custom_product_gallery_nonce', 'nonce');
-
-//     $image_ids = !empty($_POST['imageIds']) ? $_POST['imageIds'] : array();
-//     $image_ids_str = implode(',', $image_ids);
-
-//     // Debug: Check if AJAX action is triggered
-//     error_log('AJAX action triggered');
-
-//     echo '<ul>';
-//     foreach ($image_ids as $image_id) {
-//         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
-//     }
-//     echo '</ul>';
-
-//     die();
-// }
-// add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery');
-
-/**
- * Add gallery in the wp-admin panel
- */
 
 
 
@@ -530,8 +460,19 @@ function custom_meta_box_markup($post) {
     echo '<input type="text" id="download_link" name="download_link" value="' . esc_attr($value3) . '" />';
     echo '<br>';
     echo '<br>';
-    
 
+
+    wp_nonce_field('custom_product_gallery_nonce', 'custom_product_gallery_nonce');
+
+    $_custom_product_gallery = get_post_meta($post->ID, '_custom_product_gallery', true);
+    echo '<input type="hidden" id="_custom_product_gallery" name="_custom_product_gallery" value="'.$_custom_product_gallery.'" >';
+    $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+    echo '<input type="button" class="button" value="Add Images" id="custom_product_gallery_button">';
+    echo '<ul id="custom_product_gallery_container">';
+    foreach ($_custom_product_gallery as $image_id) {
+        echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
+    }
+    echo '</ul>';
 }
 
 function add_custom_meta_box() {
@@ -560,7 +501,54 @@ function save_custom_meta_box($post_id) {
             $new_value = sanitize_text_field($_POST['download_link']);
             update_post_meta($post_id, 'download_link', $new_value);
             
+            
+            $new_value = sanitize_text_field($_POST['_custom_product_gallery']);
+            update_post_meta($post_id, '_custom_product_gallery', $new_value);
+            
         }
     }
 }
 add_action('save_post', 'save_custom_meta_box');
+/**
+ * Add gallery in the wp-admin panel
+ */
+// Add custom metabox for gallery images
+
+
+function custom_product_gallery_enqueue_scripts($hook) {
+    if ('post.php' != $hook && 'post-new.php' != $hook) {
+        return;
+    }
+
+    if ('product' != get_post_type()) {
+        return;
+    }
+
+    wp_enqueue_media();
+    wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/js/custom-product-gallery.js', array('jquery'), '1.0', true);
+}
+add_action('admin_enqueue_scripts', 'custom_product_gallery_enqueue_scripts');
+
+
+function save_custom_product_gallery() {
+    check_ajax_referer('custom_product_gallery_nonce', 'nonce');
+
+    $image_ids = !empty($_POST['imageIds']) ? $_POST['imageIds'] : array();
+    $image_ids_str = implode(',', $image_ids);
+
+    // Debug: Check if AJAX action is triggered
+    error_log('AJAX action triggered');
+
+    echo '<ul>';
+    foreach ($image_ids as $image_id) {
+        echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
+    }
+    echo '</ul>';
+
+    die();
+}
+add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery');
+
+/**
+ * Add gallery in the wp-admin panel
+ */
