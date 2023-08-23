@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Register CPT For Product
+ */
 function custom_product_post_type() {
     $labels = array(
         'name'                  => _x( 'Products', 'Post Type General Name', 'text_domain' ),
@@ -96,71 +98,73 @@ add_action( 'init', 'custom_product_taxonomy', 0 );
  * Add gallery in the wp-admin panel
  */
 // Add custom metabox for gallery images
-function custom_product_gallery_metabox() {
-    add_meta_box(
-        'product_gallery',
-        'Product Gallery',
-        'render_product_gallery_metabox',
-        'product',
-        'normal',
-        'default'
-    );
-}
-add_action('add_meta_boxes', 'custom_product_gallery_metabox');
+// function custom_product_gallery_metabox() {
+//     add_meta_box(
+//         'product_gallery',
+//         'Product Gallery',
+//         'render_product_gallery_metabox',
+//         'product',
+//         'normal',
+//         'default'
+//     );
+// }
+// add_action('add_meta_boxes', 'custom_product_gallery_metabox');
 
-// Render the metabox content
-function render_product_gallery_metabox($post) {
-    wp_nonce_field('custom_product_gallery_nonce', 'custom_product_gallery_nonce');
+// // Render the metabox content
+// function render_product_gallery_metabox($post) {
+//     wp_nonce_field('custom_product_gallery_nonce', 'custom_product_gallery_nonce');
 
-    $gallery_images = get_post_meta($post->ID, '_custom_product_gallery', true);
-    $gallery_images = !empty($gallery_images) ? explode(',', $gallery_images) : array();
+//     $gallery_images = get_post_meta($post->ID, '_custom_product_gallery', true);
+//     $gallery_images = !empty($gallery_images) ? explode(',', $gallery_images) : array();
 
-    echo '<input type="button" class="button" value="Add Images" id="custom_product_gallery_button">';
-    echo '<ul id="custom_product_gallery_container">';
+//     echo '<input type="button" class="button" value="Add Images" id="custom_product_gallery_button">';
+//     echo '<ul id="custom_product_gallery_container">';
 
-    foreach ($gallery_images as $image_id) {
-        echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
-    }
+//     foreach ($gallery_images as $image_id) {
+//         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
+//     }
 
-    echo '</ul>';
-}
-
-
-function custom_product_gallery_enqueue_scripts($hook) {
-    if ('post.php' != $hook && 'post-new.php' != $hook) {
-        return;
-    }
-
-    if ('product' != get_post_type()) {
-        return;
-    }
-
-    wp_enqueue_media();
-    wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/js/custom-product-gallery.js', array('jquery'), '1.0', true);
-}
-add_action('admin_enqueue_scripts', 'custom_product_gallery_enqueue_scripts');
+//     echo '</ul>';
+// }
 
 
-function save_custom_product_gallery() {
-	update_option('test11', 'working');
-    check_ajax_referer('custom_product_gallery_nonce', 'nonce');
+// function custom_product_gallery_enqueue_scripts($hook) {
+//     if ('post.php' != $hook && 'post-new.php' != $hook) {
+//         return;
+//     }
 
-    $image_ids = !empty($_POST['imageIds']) ? $_POST['imageIds'] : array();
-    $image_ids_str = implode(',', $image_ids);
+//     if ('product' != get_post_type()) {
+//         return;
+//     }
 
-    // Debug: Check if AJAX action is triggered
-    error_log('AJAX action triggered');
+//     wp_enqueue_media();
+//     wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/js/custom-product-gallery.js', array('jquery'), '1.0', true);
+// }
+// add_action('admin_enqueue_scripts', 'custom_product_gallery_enqueue_scripts');
 
-    echo '<ul>';
-    foreach ($image_ids as $image_id) {
-        echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
-    }
-    echo '</ul>';
 
-    die();
-}
-add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery');
+// function save_custom_product_gallery() {
+//     check_ajax_referer('custom_product_gallery_nonce', 'nonce');
 
+//     $image_ids = !empty($_POST['imageIds']) ? $_POST['imageIds'] : array();
+//     $image_ids_str = implode(',', $image_ids);
+
+//     // Debug: Check if AJAX action is triggered
+//     error_log('AJAX action triggered');
+
+//     echo '<ul>';
+//     foreach ($image_ids as $image_id) {
+//         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
+//     }
+//     echo '</ul>';
+
+//     die();
+// }
+// add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery');
+
+/**
+ * Add gallery in the wp-admin panel
+ */
 
 
 
@@ -244,7 +248,6 @@ function create_custom_table() {
         dbDelta( $sql );
     }
     
-
     $table_name = $wpdb->prefix . 'pixpine_carts';
     $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
     if (!$table_exists) {
@@ -262,6 +265,44 @@ function create_custom_table() {
         ) $charset_collate;";
         dbDelta( $sql );
     }
+
+
+
+    $table_name = $wpdb->prefix . 'pixpine_subscriptions';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $t1 = $wpdb->prefix."users";
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            user_id INT(11) DEFAULT NULL,
+            subscripton_plan VARCHAR(255) DEFAULT NULL,
+            starting_date DATE DEFAULT NULL,
+            end_date DATE DEFAULT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            -- FOREIGN KEY (user_id) REFERENCES $t1(id),
+        ) $charset_collate;";
+        dbDelta( $sql );
+    }
+
+
+    $table_name = $wpdb->prefix . 'pixpine_subscription_payment';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $t1 = $wpdb->prefix."pixpine_subscriptions";
+        $t2 = $wpdb->prefix."pixpine_payment_details";
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            subscription_id INT(11) DEFAULT NULL,
+            payment_detail_id INT(11) DEFAULT NULL,
+            PRIMARY KEY (id)
+            -- FOREIGN KEY (subscription_id) REFERENCES $t1(id),
+            -- FOREIGN KEY (payment_detail_id) REFERENCES $t2(ID)
+        ) $charset_collate;";
+        dbDelta( $sql );
+    }
+
 }
 add_action( 'after_switch_theme', 'create_custom_table' );
 
@@ -276,9 +317,33 @@ function add_custom_admin_menu() {
     create_admin_pages_for_orders();
     create_admin_pages_for_payment();
     create_admin_pages_for_google_adds();
+    create_admin_pages_for_subscription();
 }
 add_action('admin_menu', 'add_custom_admin_menu');
 
+
+// Subscription
+function create_admin_pages_for_subscription(){
+    // list
+    add_menu_page(
+        'Subscription',      // Page title
+        'Subscription',      // Menu title
+        'manage_options',   // Capability required to access the menu
+        'subscription',      // Menu slug
+        'subscription_page', // Callback function to render the menu page
+        'dashicons-admin-generic', // Icon URL or dashicon class
+        2                  // Menu position
+    );
+    // detail
+    add_submenu_page(
+        null,      // Payment menu slug
+        'Detail',          // Page title
+        'Detail',          // Menu title
+        'manage_options',   // Capability required to access the submenu
+        'detail-subscription',   // Submenu slug
+        'detial_subscription_page' // Callback function to render the submenu page
+    );
+}
 
 // Google Adds
 function create_admin_pages_for_google_adds(){
@@ -336,9 +401,6 @@ function create_admin_pages_for_newsletter_subscribers(){
 }
 // Email Subscriber - Ends
 
-
-
-
 // Order
 function create_admin_pages_for_orders(){
     // list
@@ -392,6 +454,19 @@ function google_adds_page(){
     require get_template_directory() . '/admin/google-adds/edit.php';
 }
 
+// 
+
+
+// Subscription
+function subscription_page(){
+    require get_template_directory() . '/admin/subscription/index.php';
+}
+function detial_subscription_page(){
+    require get_template_directory() . '/admin/subscription/detail.php';
+}
+
+// Subscription - Ends
+
 
 // Order
 function order_page(){
@@ -424,3 +499,68 @@ function delete_email_subscriber_page(){
 /**
  * Callback Functions for admin pages - Ends
  */
+
+
+
+
+ /**
+  * Custom meta box for product (CPT)
+  */
+
+function custom_meta_box_markup($post) {
+    wp_nonce_field(basename(__FILE__), 'custom_nonce');
+           
+    $value1 = get_post_meta($post->ID, 'personal_commercial_price', true);
+    echo '<label for="personal_commercial_price">Personal & Commercial Price:</label>';
+    echo '<br>';
+    echo '<input type="text" id="personal_commercial_price" name="personal_commercial_price" value="' . esc_attr($value1) . '" />';
+    echo '<br>';
+    echo '<br>';
+    
+    $value2 = get_post_meta($post->ID, 'extended_license_price', true);
+    echo '<label for="extended_license_price">Extended License Price:</label>';
+    echo '<br>';
+    echo '<input type="text" id="extended_license_price" name="extended_license_price" value="' . esc_attr($value2) . '" />';
+    echo '<br>';
+    echo '<br>';
+    
+    $value3 = get_post_meta($post->ID, 'download_link', true);
+    echo '<label for="download_link">Download link:</label>';
+    echo '<br>';
+    echo '<input type="text" id="download_link" name="download_link" value="' . esc_attr($value3) . '" />';
+    echo '<br>';
+    echo '<br>';
+    
+
+}
+
+function add_custom_meta_box() {
+    add_meta_box('custom_meta_box', 'Custom Field', 'custom_meta_box_markup', 'product', 'normal', 'high');
+}
+add_action('add_meta_boxes', 'add_custom_meta_box');
+
+
+function save_custom_meta_box($post_id) {
+    if (!isset($_POST['custom_nonce']) || !wp_verify_nonce($_POST['custom_nonce'], basename(__FILE__))) {
+        return $post_id;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return $post_id;
+    }
+
+    if ('product' === $_POST['post_type']) {
+        if (current_user_can('edit_post', $post_id)) {
+            $new_value = sanitize_text_field($_POST['personal_commercial_price']);
+            update_post_meta($post_id, 'personal_commercial_price', $new_value);
+            
+            $new_value = sanitize_text_field($_POST['extended_license_price']);
+            update_post_meta($post_id, 'extended_license_price', $new_value);
+            
+            $new_value = sanitize_text_field($_POST['download_link']);
+            update_post_meta($post_id, 'download_link', $new_value);
+            
+        }
+    }
+}
+add_action('save_post', 'save_custom_meta_box');
