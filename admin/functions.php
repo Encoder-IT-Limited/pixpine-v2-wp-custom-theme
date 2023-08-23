@@ -552,3 +552,21 @@ add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery')
 /**
  * Add gallery in the wp-admin panel
  */
+
+
+ /**
+  * change url and add ID for product (CPT)
+  */
+
+  function custom_modify_post_slug($slug, $post_ID, $post_status, $post_type) {
+    // Check if the post type is the one you're interested in
+    if ($post_type === 'product') {
+        // Append the post ID to the proposed slug
+        if (!str_contains($slug, '-'.$post_ID)) { 
+            $slug .= '-' . $post_ID;
+        }
+    }
+    return $slug;
+}
+
+add_filter('wp_unique_post_slug', 'custom_modify_post_slug', 10, 4);
