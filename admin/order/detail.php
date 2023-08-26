@@ -2,7 +2,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<?php echo get_template_directory_uri(); ?>/admin/css/style.css" rel="stylesheet" />
-    <!-- <h1>Edit Subscriber</h1> -->
+    <!-- <h3>Edit Subscriber</h3> -->
 
     <?php
     $msg = '';
@@ -31,13 +31,19 @@
                 </div>
 
                 <p>
-                    <h2>Order</h2>
+                    <h3>Order</h3>
                     <b>Price:</b> <?php echo $order->total_price;?><br>
                     <b>Date:</b> <?php echo $order->created_at;?>
                 </p>
 
                 <p>
-                    <h2>Payment Detail</h2>
+                    <h3>User</h3>
+                    <b>ID:</b> <?php echo $order->user_id;?><br>
+                    <b>Email:</b> <?php echo get_user_by('ID', $order->user_id)->user_email;?>
+                </p>
+
+                <p>
+                    <h3>Payment Detail</h3>
                     <b>Payment method: </b><?php echo $payment_detail->payment_method;?><br>
                     <b>Tnx id: </b><?php echo $payment_detail->tnx_id;?><br>
                     <b>Amount: </b><?php echo $payment_detail->amount;?><br>
@@ -48,13 +54,12 @@
                 </p>
               
                 <p>
-                    <h2>Product List</h2>
+                    <h3>Product List</h3>
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Product</th>
-                                <th scope="col">Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +70,6 @@
                             <tr scope="row">
                                 <td><?php echo $product->product_id;?></td>
                                 <td><?php echo $product_detail->post_name?></td>
-                                <td><?php echo $product->product_id;?></td>
                             </tr>
                             <?php } ?>
                         </tbody>
