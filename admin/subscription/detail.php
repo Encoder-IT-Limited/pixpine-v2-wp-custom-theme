@@ -32,11 +32,15 @@
                 </div>
                 <p>
                     <h2>Subscriptoin</h2>
-                    <b>User:</b> <?php echo $subscription->user_id;?><br>
                     <b>Plan:</b> <?php echo $subscription->subscripton_plan;?><br>
                     <b>Starting date:</b> <?php echo $subscription->starting_date;?>
                     <b>End date:</b> <?php echo $subscription->end_date;?>
                     <b>Created at:</b> <?php echo $subscription->created_at;?>
+                </p>
+                <p>
+                    <h2>User</h2>
+                    <b>ID:</b> <?php echo $subscription->user_id;?><br>
+                    <b>Email:</b> <?php echo get_user_by('ID', $subscription->user_id)->user_email;?>
                 </p>
                 <br><br>
                 <p>
