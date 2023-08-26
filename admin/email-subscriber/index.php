@@ -7,6 +7,9 @@ $subscriber_table->prepare_items();
     <h1>Subscriber List</h1>
     <div id="icon-users" class="icon32"></div>
     <form method="post">
+        <a href="<?php echo site_url('/export');?>" >
+            <input type="button" id="export-and-delete" class="button" name="export_and_delete" value="Export And Delete">
+        </a>
         <input type="hidden" name="page" value="School_Table" />
         <?php $subscriber_table->search_box('search', 'search_id'); ?>
     </form>

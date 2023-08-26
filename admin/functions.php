@@ -535,13 +535,13 @@ add_action('save_post', 'save_custom_meta_box');
 
 
 function custom_product_gallery_enqueue_scripts($hook) {
-    if ('post.php' != $hook && 'post-new.php' != $hook) {
-        return;
-    }
+    // if ('post.php' != $hook && 'post-new.php' != $hook) {
+    //     return;
+    // }
 
-    if ('product' != get_post_type()) {
-        return;
-    }
+    // if ('product' != get_post_type()) {
+    //     return;
+    // }
 
 
     // css

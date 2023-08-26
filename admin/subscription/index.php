@@ -1,5 +1,6 @@
 <?php
 ob_start();
+
 $subscriber_table = new School_Table();
 $subscriber_table->prepare_items();
 $subscripton_plan = '';
