@@ -461,18 +461,37 @@ function custom_meta_box_markup($post) {
     echo '<br>';
     echo '<br>';
 
-
+    // gallery
     wp_nonce_field('custom_product_gallery_nonce', 'custom_product_gallery_nonce');
-
     $_custom_product_gallery = get_post_meta($post->ID, '_custom_product_gallery', true);
     echo '<input type="hidden" id="_custom_product_gallery" name="_custom_product_gallery" value="'.$_custom_product_gallery.'" >';
     $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
     echo '<input type="button" class="button" value="Add Images" id="custom_product_gallery_button">';
-    echo '<ul id="custom_product_gallery_container">';
+    echo '<ul id="custom_product_gallery_container"  class="side-by-side-list">';
     foreach ($_custom_product_gallery as $image_id) {
         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
     }
     echo '</ul>';
+
+
+
+    echo '<div class="custom-dd">';
+    echo '<label for="">Related Product:</label>';
+    echo '<br>';
+    echo '<div class="related-product"></div>';
+    echo '<br>';
+    echo '<br>';
+    echo '</div>';
+    
+    echo '<div class="custom-dd">';
+    echo '<label for="">Similar Product:</label>';
+    echo '<br>';
+    echo '<div class="similar-product"></div>';
+    echo '</div>';
+
+
+
+
 }
 
 function add_custom_meta_box() {
@@ -524,8 +543,14 @@ function custom_product_gallery_enqueue_scripts($hook) {
         return;
     }
 
+
+    // css
+    wp_enqueue_style('js-dropdown-css', get_template_directory_uri() . '/admin/assets/dropdown/jquery-multi-select.css', array(), '1.0', 'all');
+    
+    wp_enqueue_script('dropdown-js', get_template_directory_uri() . '/admin/assets/dropdown/jquery-multi-select.js', array('jquery'), '1.0', true);
     wp_enqueue_media();
-    wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/js/custom-product-gallery.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/admin/assets/js/custom-product-gallery.js', array('jquery'), '1.0', true);
+    // js
 }
 add_action('admin_enqueue_scripts', 'custom_product_gallery_enqueue_scripts');
 
@@ -539,7 +564,7 @@ function save_custom_product_gallery() {
     // Debug: Check if AJAX action is triggered
     error_log('AJAX action triggered');
 
-    echo '<ul>';
+    echo '<ul class="side-by-side-list">';
     foreach ($image_ids as $image_id) {
         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
     }
@@ -548,6 +573,27 @@ function save_custom_product_gallery() {
     die();
 }
 add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery');
+
+function get_all_product() {
+    check_ajax_referer('custom_product_gallery_nonce', 'nonce');
+
+    global $wpdb;
+
+    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish'";
+    
+    $results = $wpdb->get_results($query);
+    
+    $post_array = array();
+    
+    foreach ($results as $result) {
+        $post_array[$result->ID] = $result->post_title;
+    }
+
+    echo json_encode($post_array);
+    
+    die();
+}
+add_action('wp_ajax_get_all_product', 'get_all_product');
 
 /**
  * Add gallery in the wp-admin panel
