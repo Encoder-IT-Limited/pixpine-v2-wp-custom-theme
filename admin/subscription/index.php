@@ -2,6 +2,20 @@
 ob_start();
 $subscriber_table = new School_Table();
 $subscriber_table->prepare_items();
+$subscripton_plan = '';
+if(isset($_POST['subscripton_plan'])){
+    $subscripton_plan = $_POST['subscripton_plan'];
+}
+$u_email = '';
+if(isset($_POST['u_email'])){
+    $u_email = $_POST['u_email'];
+}
+$date_range = '';
+if(isset($_POST['date_range'])){
+    $date_range = $_POST['date_range'];
+}
+
+
 ?>
 <!-- End Date range picker CND -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -14,11 +28,19 @@ $subscriber_table->prepare_items();
     <div id="icon-users" class="icon32"></div>
     <form method="post">
         <input type="hidden" name="page" value="School_Table" />
+
+        <label class="search-form-label" for="subscripton_plan">Subscription Plan: </label>
+        <select class="form-control" id="subscripton_plan" name="subscripton_plan">
+            <option value="--">Select option</option>
+            <option value="monthly" <?php ($subscripton_plan =='monthly') ? 'selected': '' ;?> >Monthly</option>
+            <option value="yearly" <?php ($subscripton_plan =='yearly') ? 'selected': '' ;?> >Yearly</option>
+        </select>
+
         <label class="search-form-label" for="u_email">Search By User Email: </label>
-        <input type="email" name="u_email" id="u_email" placeholder="Enter email" />
+        <input type="email" name="u_email" id="u_email" placeholder="Enter email" value="<?php echo $u_email;?>" />
 
         <label class="search-form-label" for="date_range">Search By End Date Range: </label>
-        <input type="text" name="date_range" id="date_range" placeholder="Enter date" />
+        <input type="text" name="date_range" id="date_range" placeholder="Enter date" value="<?php echo $date_range;?>" />
 
         <input type="submit" id="search-submit" class="button" name="submit" value="search">
         <?php //$subscriber_table->search_box('search', 'search_id'); ?>
@@ -158,8 +180,18 @@ class School_Table extends WP_List_Table
                 }else{
                     $query .=" AND user_id='$user_id'";
                 }
-                
             }
+
+            $subscripton_plan = $_POST['subscripton_plan'];
+            if ($subscripton_plan != '--') {
+                if (empty($search_data) && empty($u_email)) {
+                    $query .= " WHERE subscripton_plan='$subscripton_plan'";
+                } else {
+                    $query .= " AND subscripton_plan='$subscripton_plan'";
+                }
+            }
+
+
 
             $result = $wpdb->get_results($query);
         }else{
