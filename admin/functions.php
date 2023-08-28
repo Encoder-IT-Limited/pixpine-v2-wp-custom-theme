@@ -474,20 +474,32 @@ function custom_meta_box_markup($post) {
     echo '</ul>';
 
 
-
-    echo '<div class="custom-dd">';
+    $value4 = get_post_meta($post->ID, 'related_product', true);
     echo '<label for="">Related Product:</label>';
+    echo '<input type="hidden" value="' . esc_attr($value4) . '" name="related_product">';
+    echo '
+    <ol class="selected-related-product">
+        <!-- <li id="">Product - 1 <span id="r-id" class="remove-related-product">remove</span></li> -->
+    </ol>
+    ';
     echo '<br>';
-    echo '<div class="related-product"></div>';
+    echo '
+    <div class="autocomplete" style="width:300px;">
+        <input id="related-product-search-input" class="search-input" type="text" placeholder="Country">
+        <div id="related-product-options" class="autocomplete-items">
+
+        </div>
+    </div>';
     echo '<br>';
     echo '<br>';
-    echo '</div>';
     
-    echo '<div class="custom-dd">';
-    echo '<label for="">Similar Product:</label>';
-    echo '<br>';
-    echo '<div class="similar-product"></div>';
-    echo '</div>';
+
+    
+    // echo '<div class="custom-dd">';
+    // echo '<label for="">Similar Product:</label>';
+    // echo '<br>';
+    // echo '<div class="similar-product"></div>';
+    // echo '</div>';
 
 
 
@@ -535,22 +547,20 @@ add_action('save_post', 'save_custom_meta_box');
 
 
 function custom_product_gallery_enqueue_scripts($hook) {
-    // if ('post.php' != $hook && 'post-new.php' != $hook) {
-    //     return;
-    // }
+    if ('post.php' != $hook && 'post-new.php' != $hook) {
+        return;
+    }
 
-    // if ('product' != get_post_type()) {
-    //     return;
-    // }
+    if ('product' != get_post_type()) {
+        return;
+    }
+
+    wp_enqueue_style('search-dropdown-css', get_template_directory_uri() . '/admin/assets/dropdown/jquery-multi-select.css', array(), '1.0', 'all');
 
 
-    // css
-    wp_enqueue_style('js-dropdown-css', get_template_directory_uri() . '/admin/assets/dropdown/jquery-multi-select.css', array(), '1.0', 'all');
-    
-    wp_enqueue_script('dropdown-js', get_template_directory_uri() . '/admin/assets/dropdown/jquery-multi-select.js', array('jquery'), '1.0', true);
     wp_enqueue_media();
     wp_enqueue_script('custom-product-gallery', get_template_directory_uri() . '/admin/assets/js/custom-product-gallery.js', array('jquery'), '1.0', true);
-    // js
+
 }
 add_action('admin_enqueue_scripts', 'custom_product_gallery_enqueue_scripts');
 
@@ -573,6 +583,28 @@ function save_custom_product_gallery() {
     die();
 }
 add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery');
+
+
+function search_product() {
+    check_ajax_referer('custom_product_gallery_nonce', 'nonce');
+
+    global $wpdb;
+
+    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish'";
+    
+    $results = $wpdb->get_results($query);
+    
+    $post_array = array();
+    
+    foreach ($results as $result) {
+        $post_array[$result->ID] = $result->post_title;
+    }
+
+    echo json_encode($post_array);
+
+    die();
+}
+add_action('wp_ajax_search_product', 'search_product');
 
 function get_all_product() {
     check_ajax_referer('custom_product_gallery_nonce', 'nonce');

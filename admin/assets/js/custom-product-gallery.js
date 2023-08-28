@@ -1,69 +1,52 @@
 jQuery(document).ready(function($) {
 
-    // var finalData = [];
-    // $.ajax({
-    //     type: 'POST',
-    //     url: ajaxurl, // Use the WordPress AJAX URL
-    //     data: {
-    //         action: 'get_all_product',
-    //         nonce: $('#custom_product_gallery_nonce').val(),
-    //     },
-    //     success: function(response) {
-    //         var dataObject = JSON.parse(response);
-            
-    //         $.each( dataObject, function( key, value ) {
-    //             // console.log(key + ": " + value)
-    //             var tmp = {};
-    //             tmp.text = value;
-    //             tmp.value = key;
-    //             finalData.push(tmp)
-    //         });
-    //         console.log(finalData)
+    // search product
+    // $("#related-product-search-input").keyup(function(){
+    $(document).on('keyup click', "#related-product-search-input", function(){
+        var search = $(this).val();
+        if(search.length > 3){
+            $.ajax({
+                type: 'POST',
+                url: ajaxurl, // Use the WordPress AJAX URL
+                data: {
+                    action: 'search_product',
+                    nonce: $('#custom_product_gallery_nonce').val(),
+                    search: search
+                },
+                success: function(response) {
+                    var obj = JSON.parse(response);
+                    // console.log(data)
+                    var html = '';
+                    // var html = '<div p-id="5" class="related-product-option"><strong>This is good</strong></div>';
+                    $.each( obj, function( key, value ) {
+                        html += '<div p-id="'+key+'" p-name="'+value+'" class="related-product-option"><strong>'+value+'</strong></div>';
+                    });
+                    $("#related-product-options").html(html)
+                }
+            });
+        }else{
+            $("#related-product-options").html('')
+        }
+    });
+    $(document).on('click', '.related-product-option', function(){
+        var pId = $(this).attr('p-id');
+        var pName = $(this).attr('p-name');
+        var html2 = '<li id="'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-related-product remoove-product">remove</span></li>';
+        $(".selected-related-product").append(html2);
+        $(this).remove();
+    });
+    $(document).on('click', '.remove-related-product', function(){
+        var pId = $(this).attr('r-id');
+        $("#"+pId).remove();
+    });
+    
+    $(document).on("click", function(event){
+        if(!$(event.target).closest(".related-product-option").length){
+            $("#related-product-options").html('')
+        }
+    });
 
-
-    //         // Select 2 multi select with search
-    //         $('.related-product').multiSelect({
-    //             data: finalData,
-    //             listen(tags, item, operate){
-    //                 console.log("-----------a-----------")
-    //                 console.log(tags);
-    //                 // console.log('tags: ',tags,'item: ', item,'operate: ', operate);
-    //                 console.log("-----------a-----------")
-    //             },
-    //             compare(item1, item2){
-    //                 if(item1.text.length > item2.text.length){
-    //                     return true;
-    //                 }else{
-    //                     return false;
-    //                 }
-    //             }
-    //         });
-            
-            
-    //         $('.similar-product').multiSelect({
-    //             data: finalData,
-    //             listen(tags, item, operate){
-    //                 console.log("-----------b-----------")
-    //                 console.log(tags, item, operate);
-    //                 console.log("-----------b-----------")
-    //             },
-    //             compare(item1, item2){
-    //                 if(item1.text.length > item2.text.length){
-    //                     return true;
-    //                 }else{
-    //                     return false;
-    //                 }
-    //             }
-    //         });
-
-
-    //     }
-    // });
-
-
-
-
-
+    // search product - Ends
     // Gallery
 
     var preSelectedImages = $("#_custom_product_gallery").val();
