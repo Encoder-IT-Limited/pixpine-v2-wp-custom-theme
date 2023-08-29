@@ -2,6 +2,17 @@
 ob_start();
 $subscriber_table = new School_Table();
 $subscriber_table->prepare_items();
+$date_range = '';
+$export_url = site_url('/export').'?type=order';
+if(isset($_POST['date_range'])){
+    $date_range = $_POST['date_range'];
+}
+$export_url .= '&date_range='.$date_range;
+$u_email = '';
+if(isset($_POST['u_email'])){
+    $u_email = $_POST['u_email'];
+}
+$export_url .= '&u_email='.$u_email;
 ?>
 <!-- Date range picker CND -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -11,31 +22,36 @@ $subscriber_table->prepare_items();
 <link href="<?php echo get_template_directory_uri(); ?>/admin/css/style.css" rel="stylesheet" />
 <div class="wrap">
     <h1>Order List</h1>
+    <br>
     <div id="icon-users" class="icon32"></div>
     <form method="post">
         <input type="hidden" name="page" value="School_Table" />
         <label class="search-form-label" for="u_email">Search By User Email: </label>
-        <input type="email" name="u_email" id="u_email" placeholder="Enter email" />
+        <input type="email" name="u_email" id="u_email" placeholder="Enter email" value="<?php echo $u_email;?>" />
 
         <label class="search-form-label" for="date_range">Search By Date Range: </label>
-        <input type="text" name="date_range" id="date_range" placeholder="Enter date" />
+        <input type="text" name="date_range" id="date_range" placeholder="Enter date" value="<?php echo $date_range;?>"  />
 
         <input type="submit" id="search-submit" class="button" name="submit" value="search">
         <?php //$subscriber_table->search_box('search', 'search_id'); ?>
     </form>
+    <a href="<?php echo $export_url;?>" >
+        <input type="button" class="button" name="submit" value="Export">
+    </a>
     <?php $subscriber_table->display(); ?>
 </div>
 <!-- Date range picker -->
 <script>
     jQuery(function() {
         jQuery('input[name="date_range"]').daterangepicker({
-            // autoUpdateInput: false,
+            autoUpdateInput: false,
+            autoApply: true,
             locale: {
                 format: 'YYYY-MM-DD'
             },
             opens: 'left'
         }, function(start, end, label) {
-            // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            jQuery('input[name="date_range"]').val(start.format('YYYY-MM-DD')+' - '+end.format('YYYY-MM-DD'));
         });
     });
 </script>
