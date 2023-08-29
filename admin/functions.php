@@ -436,9 +436,10 @@ function delete_email_subscriber_page(){
  /**
   * Custom meta box for product (CPT)
   */
-
-function custom_meta_box_markup($post) {
+  
+  function custom_meta_box_markup($post) {
     wp_nonce_field(basename(__FILE__), 'custom_nonce');
+    global $wpdb;
            
     $value1 = get_post_meta($post->ID, 'personal_commercial_price', true);
     echo '<label for="personal_commercial_price">Personal & Commercial Price:</label>';
@@ -475,17 +476,24 @@ function custom_meta_box_markup($post) {
 
 
     $value4 = get_post_meta($post->ID, 'related_product', true);
+    $html = '';
+    if($value4 != ''){
+        $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value4)";
+        $results = $wpdb->get_results($query);
+        foreach ($results as $result) {
+            $html .= '<li id="'.$result->ID.'">'.$result->post_title.'<span r-id="'.$result->ID.'" class="remove-related-product remoove-product">remove</span></li>';
+        }        
+    }
     echo '<label for="">Related Product:</label>';
-    echo '<input type="hidden" value="' . esc_attr($value4) . '" name="related_product">';
+    echo '<input type="hidden" value="' . esc_attr($value4) . '" name="related_product" id="related-product">';
     echo '
     <ol class="selected-related-product">
-        <!-- <li id="">Product - 1 <span id="r-id" class="remove-related-product">remove</span></li> -->
+        '.$html.'
     </ol>
     ';
-    echo '<br>';
     echo '
     <div class="autocomplete" style="width:300px;">
-        <input id="related-product-search-input" class="search-input" type="text" placeholder="Country">
+        <input id="related-product-search-input" class="search-input" type="text" placeholder="Search Product">
         <div id="related-product-options" class="autocomplete-items">
 
         </div>
@@ -495,11 +503,31 @@ function custom_meta_box_markup($post) {
     
 
     
-    // echo '<div class="custom-dd">';
-    // echo '<label for="">Similar Product:</label>';
-    // echo '<br>';
-    // echo '<div class="similar-product"></div>';
-    // echo '</div>';
+    $value5 = get_post_meta($post->ID, 'similar_product', true);
+    $html = '';
+    if($value5 != ''){
+        $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
+        $results = $wpdb->get_results($query);
+        foreach ($results as $result) {
+            $html .= '<li id="'.$result->ID.'">'.$result->post_title.'<span r-id="'.$result->ID.'" class="remove-similar-product remoove-product">remove</span></li>';
+        }        
+    }
+    echo '<label for="">Similar Product:</label>';
+    echo '<input type="hidden" value="' . esc_attr($value5) . '" name="similar_product" id="similar-product">';
+    echo '
+    <ol class="selected-similar-product">
+        '.$html.'
+    </ol>
+    ';
+    echo '
+    <div class="autocomplete" style="width:300px;">
+        <input id="similar-product-search-input" class="search-input" type="text" placeholder="Search Product">
+        <div id="similar-product-options" class="autocomplete-items">
+
+        </div>
+    </div>';
+    echo '<br>';
+    echo '<br>';
 
 
 
@@ -531,6 +559,12 @@ function save_custom_meta_box($post_id) {
             
             $new_value = sanitize_text_field($_POST['download_link']);
             update_post_meta($post_id, 'download_link', $new_value);
+            
+            $new_value = sanitize_text_field($_POST['related_product']);
+            update_post_meta($post_id, 'related_product', $new_value);
+            
+            $new_value = sanitize_text_field($_POST['similar_product']);
+            update_post_meta($post_id, 'similar_product', $new_value);
             
             
             $new_value = sanitize_text_field($_POST['_custom_product_gallery']);
@@ -588,9 +622,16 @@ add_action('wp_ajax_save_custom_product_gallery', 'save_custom_product_gallery')
 function search_product() {
     check_ajax_referer('custom_product_gallery_nonce', 'nonce');
 
+    $search = $_POST['search'];
+    $expect_product_id = $_POST['expect_product_id'];
+
     global $wpdb;
 
-    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish'";
+    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish' AND post_title LIKE '%$search%' ";
+    if($expect_product_id != ''){
+        $query .= " AND  ID NOT IN ($expect_product_id)";
+
+    }
     
     $results = $wpdb->get_results($query);
     
