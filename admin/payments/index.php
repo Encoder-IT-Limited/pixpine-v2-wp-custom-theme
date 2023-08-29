@@ -2,6 +2,15 @@
 ob_start();
 $school_table = new Class_Table();
 $school_table->prepare_items();
+$payment_for = '';
+if(isset($_POST['payment_for'])){
+    $payment_for = $_POST['payment_for'];
+}
+$date_range = '';
+if(isset($_POST['date_range'])){
+    $date_range = $_POST['date_range'];
+}
+
 ?>
 <!-- Date range picker CND -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -12,18 +21,19 @@ $school_table->prepare_items();
 
 <div class="wrap">
     <h1>Payment method List</h1>
+    <br>
     <div id="icon-users" class="icon32"></div>
     <form method="post">
         <input type="hidden" name="page" value="School_Table" />
         <label class="search-form-label" for="payment_for">Search By Payment For: </label>
         <select class="form-control" id="payment_for" name="payment_for">
             <option value="--">Select option</option>
-            <option value="product">Product</option>
-            <option value="subscription">Subscription</option>
+            <option value="product" <?php echo ($payment_for =='product') ? 'selected': '' ;?> >Product</option>
+            <option value="subscription" <?php echo ($payment_for =='subscription') ? 'selected': '' ;?> >Subscription</option>
         </select>
 
         <label class="search-form-label" for="date_range">Search By Date Range: </label>
-        <input type="text" name="date_range" id="date_range" placeholder="Enter date" />
+        <input type="text" name="date_range" id="date_range" placeholder="Enter date" value="<?php echo $date_range;?>" />
 
         <input type="submit" id="search-submit" class="button" name="submit" value="search">
         <?php //$subscriber_table->search_box('search', 'search_id'); ?>
@@ -34,13 +44,14 @@ $school_table->prepare_items();
 <script>
     jQuery(function() {
         jQuery('input[name="date_range"]').daterangepicker({
-            // autoUpdateInput: false,
+            autoUpdateInput: false,
+            autoApply: true,
             locale: {
                 format: 'YYYY-MM-DD'
             },
             opens: 'left'
         }, function(start, end, label) {
-            // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            jQuery('input[name="date_range"]').val(start.format('YYYY-MM-DD')+' - '+end.format('YYYY-MM-DD'));
         });
     });
 </script>
@@ -100,7 +111,7 @@ class Class_Table extends WP_List_Table
             'Amount'                           => 'Amount',
             'Payment for'                         => 'Payment for',
             'Created at'                         => 'Created at',
-            'Action'                            => 'Action'
+            // 'Action'                            => 'Action'
         );
 
         return $columns;
@@ -181,9 +192,9 @@ class Class_Table extends WP_List_Table
                     'Amount'                        => $singledata->amount,
                     'Payment for'                   => $singledata->payment_for,
                     'Created at'                    => $singledata->created_at,
-                    'Action'                        => '
-	                <a  href="' . admin_url() . 'admin.php?page=create-parents&type=delete&id=' . $singledata->id . '" class="button button-primary">Delete</a>
-	                <a  href="' . admin_url() . 'admin.php?page=create-parents&type=edit&id=' . $singledata->id . '" class="button button-primary">Edit</a>'
+                    // 'Action'                        => '
+	                // <a  href="' . admin_url() . 'admin.php?page=create-parents&type=delete&id=' . $singledata->id . '" class="button button-primary">Delete</a>
+	                // <a  href="' . admin_url() . 'admin.php?page=create-parents&type=edit&id=' . $singledata->id . '" class="button button-primary">Edit</a>'
                 );
             }
         } else {
@@ -211,7 +222,7 @@ class Class_Table extends WP_List_Table
             case 'Amount':
             case 'Payment for':
             case 'Created at':
-            case 'Action':
+            // case 'Action':
                 return $item[$column_name];
 
             default:
