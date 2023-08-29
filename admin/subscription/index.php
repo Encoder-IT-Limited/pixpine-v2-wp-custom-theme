@@ -25,7 +25,8 @@ if(isset($_POST['date_range'])){
 <!-- End Date range picker CND -->
 <link href="<?php echo get_template_directory_uri(); ?>/admin/css/style.css" rel="stylesheet" />
 <div class="wrap">
-    <h1>Order List</h1>
+    <h1>Subscription List</h1>
+    <br>
     <div id="icon-users" class="icon32"></div>
     <form method="post">
         <input type="hidden" name="page" value="School_Table" />
@@ -33,8 +34,8 @@ if(isset($_POST['date_range'])){
         <label class="search-form-label" for="subscripton_plan">Subscription Plan: </label>
         <select class="form-control" id="subscripton_plan" name="subscripton_plan">
             <option value="--">Select option</option>
-            <option value="monthly" <?php ($subscripton_plan =='monthly') ? 'selected': '' ;?> >Monthly</option>
-            <option value="yearly" <?php ($subscripton_plan =='yearly') ? 'selected': '' ;?> >Yearly</option>
+            <option value="monthly" <?php echo ($subscripton_plan =='monthly') ? 'selected': '' ;?> >Monthly</option>
+            <option value="yearly" <?php echo ($subscripton_plan =='yearly') ? 'selected': '' ;?> >Yearly</option>
         </select>
 
         <label class="search-form-label" for="u_email">Search By User Email: </label>
@@ -52,13 +53,14 @@ if(isset($_POST['date_range'])){
 <script>
     jQuery(function() {
         jQuery('input[name="date_range"]').daterangepicker({
-            // autoUpdateInput: false,
+            autoUpdateInput: false,
+            autoApply: true,
             locale: {
                 format: 'YYYY-MM-DD'
             },
             opens: 'left'
         }, function(start, end, label) {
-            // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            jQuery('input[name="date_range"]').val(start.format('YYYY-MM-DD')+' - '+end.format('YYYY-MM-DD'));
         });
     });
 </script>

@@ -44,7 +44,7 @@
                 </p>
                 <br><br>
                 <p>
-                    <h2>Product List</h2>
+                    <h2>Payments</h2>
                     <table class="table table-striped">
                         <thead>
                             <tr>
