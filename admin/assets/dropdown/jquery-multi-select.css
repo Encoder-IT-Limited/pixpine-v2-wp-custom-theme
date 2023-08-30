@@ -1,46 +1,62 @@
-
 .autocomplete {
-position: relative;
-display: inline-block;
-}
-.search-input{
-border: 1px solid transparent;
-background-color: #f1f1f1;
-padding: 10px;
-font-size: 16px;
-background-color: #f1f1f1;
-width: 100%;
-}
-
-.autocomplete-items {
-position: absolute;
-border: 1px solid #d4d4d4;
-border-bottom: none;
-border-top: none;
-z-index: 99;
-top: 100%;
-left: 0;
-right: 0;
-}
-.autocomplete-items div {
-padding: 10px;
-cursor: pointer;
-background-color: #fff;
-border-bottom: 1px solid #d4d4d4;
-}
-.autocomplete-items div:hover {
-background-color: #e9e9e9;
-}
-.autocomplete-active {
-background-color: DodgerBlue !important;
-color: #ffffff;
-}
-
-.remoove-product{
-    color: white;
-    padding: 1px 6px;
-    background-color: red;
-    border-radius: 5px;
-    margin-left: 5px;
+    position: relative;
+    display: inline-block;
+    }
+    .search-input{
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    width: 100%;
+    }
+    
+    .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    overflow-y: scroll;
+    }
+    .autocomplete-items div {
+    padding: 10px;
     cursor: pointer;
-}
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+    }
+    .autocomplete-items div:hover {
+    background-color: #e9e9e9;
+    }
+    .autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+    }
+    
+    .remoove-product{
+        color: white;
+        padding: 1px 6px;
+        background-color: red;
+        border-radius: 5px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    .side-by-side-list,
+    .selected-related-product,
+    .selected-similar-product {
+      display: flex;
+      flex-wrap: wrap;
+        margin-left: 0;
+    }
+    .side-by-side-list li,
+    .selected-related-product li,
+    .selected-similar-product li {
+      display: inline-block;
+      list-style: none;
+      margin: 7.5px;
+    }
+    
