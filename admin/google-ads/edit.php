@@ -34,20 +34,20 @@
                 <div class="form_column form_small_width">
                     <form action="#" method="post">
                         <div class="form_heading text-center">
-                            <h1>Update Google Adds</h1>
+                            <h1>Update Google Ads</h1>
                             <p><?php echo $msg;?></p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Google Add #1</label>
+                            <label for="exampleFormControlTextarea1">Google Ad #1</label>
                             <textarea name="google_add_1" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $google_add_1;?></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Google Add #2</label>
+                            <label for="exampleFormControlTextarea1">Google Ad #2</label>
                             <textarea name="google_add_2" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $google_add_2;?></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Google Add #3  </label>
+                            <label for="exampleFormControlTextarea1">Google Ad #3  </label>
                             <textarea name="google_add_3" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $google_add_3;?></textarea>
                         </div>
 
