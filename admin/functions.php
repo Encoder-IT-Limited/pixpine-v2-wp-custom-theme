@@ -481,7 +481,7 @@ function delete_email_subscriber_page(){
         $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value4)";
         $results = $wpdb->get_results($query);
         foreach ($results as $result) {
-            $html .= '<li id="'.$result->ID.'">'.$result->post_title.'<span r-id="'.$result->ID.'" class="remove-related-product remoove-product">remove</span></li>';
+            $html .= '<li id="r-p-'.$result->ID.'">'.$result->post_title.'<span r-id="'.$result->ID.'" class="remove-related-product remoove-product">remove</span></li>';
         }        
     }
     echo '<label for="">Related Product:</label>';
@@ -509,7 +509,7 @@ function delete_email_subscriber_page(){
         $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
         $results = $wpdb->get_results($query);
         foreach ($results as $result) {
-            $html .= '<li id="'.$result->ID.'">'.$result->post_title.'<span r-id="'.$result->ID.'" class="remove-similar-product remoove-product">remove</span></li>';
+            $html .= '<li id="s-p-'.$result->ID.'">'.$result->post_title.'<span r-id="'.$result->ID.'" class="remove-similar-product remoove-product">remove</span></li>';
         }        
     }
     echo '<label for="">Similar Product:</label>';

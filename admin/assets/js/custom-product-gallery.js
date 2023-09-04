@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.related-product-option', function(){
         var pId = $(this).attr('p-id');
         var pName = $(this).attr('p-name');
-        var html2 = '<li id="'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-related-product remoove-product">remove</span></li>';
+        var html2 = '<li id="r-p-'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-related-product remoove-product">remove</span></li>';
         $(".selected-related-product").append(html2);
         $(this).remove();
         relatedProductArray.push(pId);
@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
     });
     $(document).on('click', '.remove-related-product', function(){
         var pId = $(this).attr('r-id');
-        $("#"+pId).remove();
+        $("#r-p-"+pId).remove();
         var index = relatedProductArray.indexOf(pId);
         relatedProductArray.splice(index, 1);
         $("#related-product").val(relatedProductArray.toString());
@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.similar-product-option', function(){
         var pId = $(this).attr('p-id');
         var pName = $(this).attr('p-name');
-        var html2 = '<li id="'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-similar-product remoove-product">remove</span></li>';
+        var html2 = '<li id="s-p-'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-similar-product remoove-product">remove</span></li>';
         $(".selected-similar-product").append(html2);
         $(this).remove();
         similarProductArray.push(pId);
@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
     });
     $(document).on('click', '.remove-similar-product', function(){
         var pId = $(this).attr('r-id');
-        $("#"+pId).remove();
+        $("#s-p-"+pId).remove();
         var index = similarProductArray.indexOf(pId);
         similarProductArray.splice(index, 1);
         $("#similar-product").val(similarProductArray.toString());
