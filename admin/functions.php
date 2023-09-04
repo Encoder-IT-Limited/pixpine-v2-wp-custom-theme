@@ -277,7 +277,7 @@ function create_admin_pages_for_subscription(){
 
 // Google Adds
 function create_admin_pages_for_google_adds(){
-        // list
+    // list
     add_menu_page(
         'Google Adds',      // Page title
         'Google Adds',      // Menu title
