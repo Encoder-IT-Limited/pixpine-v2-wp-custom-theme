@@ -9,7 +9,7 @@ get_header();
   <section class="banner_section">
     <div class="container">
       <!-- Banner search form -->
-      <?php include 'includes/search-form.php';?>
+      <?php include get_template_directory() .'/includes/search-form.php';?>
     </div>
   </section>
   <section class="dashboard_section dashboard__likes">
@@ -18,7 +18,7 @@ get_header();
         <div class="dashboard_main d-flex">
           <div class="dashboard_navbar">
             <!-- Dashboard inner menu -->
-            <?php $currentPage = 'dashboard__likes'; include 'includes/dashboard-menu.php';?>
+            <?php $currentPage = 'dashboard__likes'; include get_template_directory() .'/includes/dashboard-menu.php';?>
           </div>
           <div class="content__column">
             <div class="tab__container__main">
@@ -484,10 +484,10 @@ get_header();
 </main>
 
 <!-- Bundle Modal -->
-<?php include 'includes/bundle-modal.php';?>
+<?php include get_template_directory() .'/includes/bundle-modal.php';?>
 
 <!-- Premium Modal -->
-<?php include 'includes/premium-modal.php';?>
+<?php include get_template_directory() .'/includes/premium-modal.php';?>
 
 <!-- Footer -->
 <?php get_footer();?>

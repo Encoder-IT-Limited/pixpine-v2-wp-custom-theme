@@ -326,14 +326,14 @@
     <div class="modal-content">
 
       <!-- Product page Menu Start  -->
-      <?php include 'includes/menu.php';?>
+      <?php include get_template_directory() .'/includes/menu.php';?>
       <!-- Product page Menu End  -->
 
       <main>
         <section class="banner_section">
           <div class="container">
             <!-- Banner search form -->
-            <?php include 'includes/search-form.php';?>
+            <?php include get_template_directory() .'/includes/search-form.php';?>
           </div>
         </section>
         <section class="bundle_product_page premium_product_page">

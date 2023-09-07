@@ -28,4 +28,4 @@
   <body>
 
 <!-- Menu bar -->
-<?php include 'includes/menu.php';?>
+<?php include get_template_directory() .'/includes/menu.php';?>
