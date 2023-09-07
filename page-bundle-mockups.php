@@ -503,4 +503,4 @@ get_header();
 
 
 <!-- Footer -->
-<?php get_header();?>
+<?php get_footer();?>

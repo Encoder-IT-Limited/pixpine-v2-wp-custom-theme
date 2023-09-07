@@ -3442,4 +3442,4 @@
     <?php include get_template_directory() .'/includes/bundle-modal.php';?>
 
     <!-- Footer -->
-    <?php include get_template_directory() .'/includes/footer.php';?>
+    <?php get_footer();?>
