@@ -9,7 +9,7 @@ get_header();
   <section class="banner_section">
     <div class="container">
       <!-- Banner search form -->
-      <?php include 'includes/search-form.php';?>
+      <?php include get_template_directory() .'/includes/search-form.php';?>
     </div>
   </section>
   <section class="terms_conditions_section">
