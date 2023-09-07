@@ -46,7 +46,7 @@
                 <div class="card_inner pixpine_card_border">
                   <p href="">Apparel</p>
                   <div class="img_col">
-                    <img src="images/premium_img.png" alt="" />
+                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                   </div>
                 </div>
               </a>
@@ -56,7 +56,7 @@
                 <div class="card_inner pixpine_card_border">
                   <p href="">Packaging Box</p>
                   <div class="img_col">
-                    <img src="images/premium_img.png" alt="" />
+                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                   </div>
                 </div>
               </a>
@@ -66,7 +66,7 @@
                 <div class="card_inner pixpine_card_border">
                   <p href="">Food</p>
                   <div class="img_col">
-                    <img src="images/premium_img.png" alt="" />
+                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                   </div>
                 </div>
               </a>
@@ -76,7 +76,7 @@
                 <div class="card_inner pixpine_card_border">
                   <p href="">Bags</p>
                   <div class="img_col">
-                    <img src="images/premium_img.png" alt="" />
+                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                   </div>
                 </div>
               </a>
@@ -86,7 +86,7 @@
                 <div class="card_inner pixpine_card_border">
                   <p href="">Fabric</p>
                   <div class="img_col">
-                    <img src="images/premium_img.png" alt="" />
+                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                   </div>
                 </div>
               </a>
@@ -96,7 +96,7 @@
                 <div class="card_inner pixpine_card_border">
                   <p href="">Stationery</p>
                   <div class="img_col">
-                    <img src="images/premium_img.png" alt="" />
+                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                   </div>
                 </div>
               </a>
@@ -117,7 +117,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">
@@ -136,7 +136,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -153,7 +153,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -170,7 +170,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -187,7 +187,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -204,7 +204,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -221,7 +221,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -238,7 +238,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -255,7 +255,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -272,7 +272,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -289,7 +289,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -306,7 +306,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -323,7 +323,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -340,7 +340,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -357,7 +357,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -374,7 +374,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -391,7 +391,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -408,7 +408,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -425,7 +425,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -442,7 +442,7 @@
           >
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
-                <img src="images/premium_img.png" alt="" />
+                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
               </div>
               <div class="text_col">
                 <h4 class="default_color">Business Card Mockup</h4>
@@ -456,7 +456,7 @@
         <ul class="pagination justify-content-center">
           <li class="page-item left_button">
             <a class="page-link" href="#">
-              <img src="images/pagination_left_icon.png" alt="" />
+              <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_left_icon.png" alt="" />
             </a>
           </li>
           <li class="page-item">
@@ -479,7 +479,7 @@
           </li>
           <li class="page-item right_button">
             <a class="page-link" href="#">
-              <img src="images/pagination_right_icon.png" alt="" />
+              <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_right_icon.png" alt="" />
             </a>
           </li>
         </ul>

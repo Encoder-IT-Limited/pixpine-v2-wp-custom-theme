@@ -56,7 +56,7 @@
           <div class="last_inner_container d-flex justify-content-between">
             <div class="copyright_text d-flex">
               <a id="desktop_footer_logo" href="index.php">
-                <img class="footer_logo" src="images/footer_logo.png" alt="" />
+                <img class="footer_logo" src="<?php echo get_template_directory_uri();?>/assets/images/footer_logo.png" alt="" />
               </a>
               <p>
                 ©2019 - 2023 <a href="index.php">Pixpine</a> - All rights
@@ -66,32 +66,32 @@
             <ul class="d-flex social_link">
               <li>
                 <a target="_blank" href="https://www.youtube.com/">
-                  <img src="images/youtube.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/youtube.png" alt="" />
                 </a>
               </li>
               <li>
                 <a target="_blank" href="https://www.pinterest.com/">
-                  <img src="images/pinterest.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/pinterest.png" alt="" />
                 </a>
               </li>
               <li>
                 <a target="_blank" href="https://www.instagram.com/">
-                  <img src="images/instagram.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/instagram.png" alt="" />
                 </a>
               </li>
               <li>
                 <a target="_blank" href="https://twitter.com/">
-                  <img src="images/twitter.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/twitter.png" alt="" />
                 </a>
               </li>
               <li>
                 <a target="_blank" href="https://www.behance.net/">
-                  <img src="images/behance.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/behance.png" alt="" />
                 </a>
               </li>
               <li>
                 <a target="_blank" href="https://www.facebook.com/">
-                  <img src="images/facebook.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/facebook.png" alt="" />
                 </a>
               </li>
             </ul>

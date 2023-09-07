@@ -14,7 +14,7 @@
       <section class="affiliate_ad">
         <div class="container">
           <div class="section_width">
-            <img src="images/affiliate_ad.png" alt="" />
+            <img src="<?php echo get_template_directory_uri();?>/assets/images/affiliate_ad.png" alt="" />
           </div>
         </div>
       </section>
@@ -29,12 +29,12 @@
                       <div class="first_image_text_col">
                         <div class="card_item">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </div>
                         <div class="card_item">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </div>
                         <p>
@@ -60,7 +60,7 @@
                           <a href="">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
-                                <img src="images/premium_img.png" alt="" />
+                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                               </div>
                               <div class="text_col">
                                 <h4 class="default_color">
@@ -75,7 +75,7 @@
                           <a href="">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
-                                <img src="images/premium_img.png" alt="" />
+                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                               </div>
                               <div class="text_col">
                                 <h4 class="default_color">
@@ -119,7 +119,7 @@
                           <a href="">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
-                                <img src="images/premium_img.png" alt="" />
+                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                               </div>
                               <div class="text_col">
                                 <h4 class="default_color">
@@ -157,7 +157,7 @@
                       </div>
                       <div class="application_photoshop_img google_ad">
                         <img
-                          src="images/application_photoshop_img.png"
+                          src="<?php echo get_template_directory_uri();?>/assets/images/application_photoshop_img.png"
                           alt=""
                         />
                       </div>
@@ -170,7 +170,7 @@
                   </div>
                 </div>
                 <div class="google_ad">
-                  <img src="images/google_ad_h117.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/google_ad_h117.png" alt="" />
                 </div>
                 <div class="related_mockups_col">
                   <div class="section_heading_container">
@@ -181,70 +181,70 @@
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
                       <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
-                            <img src="images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
                       </div>
@@ -264,10 +264,10 @@
                 <div class="google_add">
                   <img
                     id="desktop_ad"
-                    src="images/google_ad_long_height.png"
+                    src="<?php echo get_template_directory_uri();?>/assets/images/google_ad_long_height.png"
                     alt=""
                   />
-                  <img id="mobile_ad" src="images/google_ad_h117.png" alt="" />
+                  <img id="mobile_ad" src="<?php echo get_template_directory_uri();?>/assets/images/google_ad_h117.png" alt="" />
                 </div>
               </div>
             </div>

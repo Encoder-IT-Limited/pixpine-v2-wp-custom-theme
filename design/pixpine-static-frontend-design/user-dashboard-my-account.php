@@ -62,7 +62,7 @@
             <div class="user_profile_photo">
               <div class="d-flex align-items-center">
                 <div class="user_img_column">
-                  <img src="images/dashboard_user_photo.png" alt="" />
+                  <img src="<?php echo get_template_directory_uri();?>/assets/images/dashboard_user_photo.png" alt="" />
                 </div>
                 <div class="upload_btn_column">
                   <div class="d-flex">

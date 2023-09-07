@@ -72,7 +72,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -92,7 +92,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -112,7 +112,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -132,7 +132,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -152,7 +152,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -172,7 +172,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -192,7 +192,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -212,7 +212,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -232,7 +232,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -252,7 +252,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -272,7 +272,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -292,7 +292,7 @@
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -322,7 +322,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -342,7 +342,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -361,7 +361,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -380,7 +380,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -399,7 +399,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -418,7 +418,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -437,7 +437,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
@@ -456,7 +456,7 @@
                         >
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="images/premium_img.png" alt="" />
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">

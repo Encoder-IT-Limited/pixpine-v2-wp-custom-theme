@@ -27,35 +27,35 @@
                   </div>
                   <ul>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>90% off on Premium Mockups</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>30% off on Bundle Mockups</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>56 downloads every month</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>Free Extended Commercial License</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>Commercial and Personal Use</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>Priority email support</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>Unused downloads roll over to next month</p>
                     </li>
                     <li>
-                      <img src="images/subscription__dark-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
                       <p>First to know about daily free mockups</p>
                     </li>
                   </ul>
@@ -80,40 +80,40 @@
                   </div>
                   <ul>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>96% off on Premium Mockups</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>50% off on Bundle Mockups</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>30% Off on Customize Mockup</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>Unlimited downloads every month</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>Free Extended Commercial License</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>Commercial and Personal Use</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>Priority email support</p>
                     </li>
 
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>Custom Mockups wishlist</p>
                     </li>
                     <li>
-                      <img src="images/subscription__white-mark.png" alt="" />
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>First to know about daily free mockups</p>
                     </li>
                   </ul>
