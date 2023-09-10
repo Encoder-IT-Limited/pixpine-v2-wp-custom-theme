@@ -444,14 +444,28 @@ function delete_email_subscriber_page(){
     $value1 = get_post_meta($post->ID, 'personal_commercial_price', true);
     echo '<label for="personal_commercial_price">Personal & Commercial Price:</label>';
     echo '<br>';
-    echo '<input type="text" id="personal_commercial_price" name="personal_commercial_price" value="' . esc_attr($value1) . '" />';
+    echo '<input type="number" id="personal_commercial_price" name="personal_commercial_price" value="' . esc_attr($value1) . '" />';
+    echo '<br>';
+    echo '<br>';
+           
+    $value1 = get_post_meta($post->ID, 'personal_commercial_sale_price', true);
+    echo '<label for="personal_commercial_sale_price">Personal & Commercial Sale Price:</label>';
+    echo '<br>';
+    echo '<input type="number" id="personal_commercial_sale_price" name="personal_commercial_sale_price" value="' . esc_attr($value1) . '" />';
     echo '<br>';
     echo '<br>';
     
     $value2 = get_post_meta($post->ID, 'extended_license_price', true);
     echo '<label for="extended_license_price">Extended License Price:</label>';
     echo '<br>';
-    echo '<input type="text" id="extended_license_price" name="extended_license_price" value="' . esc_attr($value2) . '" />';
+    echo '<input type="number" id="extended_license_price" name="extended_license_price" value="' . esc_attr($value2) . '" />';
+    echo '<br>';
+    echo '<br>';
+    
+    $value2 = get_post_meta($post->ID, 'extended_license_sale_price', true);
+    echo '<label for="extended_license_sale_price">Extended License Sale Price:</label>';
+    echo '<br>';
+    echo '<input type="number" id="extended_license_sale_price" name="extended_license_sale_price" value="' . esc_attr($value2) . '" />';
     echo '<br>';
     echo '<br>';
     
@@ -553,9 +567,15 @@ function save_custom_meta_box($post_id) {
         if (current_user_can('edit_post', $post_id)) {
             $new_value = sanitize_text_field($_POST['personal_commercial_price']);
             update_post_meta($post_id, 'personal_commercial_price', $new_value);
+
+            $new_value = sanitize_text_field($_POST['personal_commercial_sale_price']);
+            update_post_meta($post_id, 'personal_commercial_sale_price', $new_value);
             
             $new_value = sanitize_text_field($_POST['extended_license_price']);
             update_post_meta($post_id, 'extended_license_price', $new_value);
+            
+            $new_value = sanitize_text_field($_POST['extended_license_sale_price']);
+            update_post_meta($post_id, 'extended_license_sale_price', $new_value);
             
             $new_value = sanitize_text_field($_POST['download_link']);
             update_post_meta($post_id, 'download_link', $new_value);
