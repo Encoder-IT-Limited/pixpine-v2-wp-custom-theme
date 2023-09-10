@@ -88,7 +88,7 @@ function custom_product_taxonomy() {
         'show_in_nav_menus'          => true, // Show in navigation menus
         'show_tagcloud'              => true, // Show in tag cloud widget
     );
-    register_taxonomy( 'product_category', array( 'product' ), $args );
+    register_taxonomy( 'general_category', array( 'product' ), $args );
 
 
     $labels = array(
@@ -127,7 +127,88 @@ add_action( 'init', 'custom_product_taxonomy', 0 );
 
 
 
+/**
+ * Drag and drop category - general_category
+ */
+// Add custom JavaScript for drag-and-drop sorting
+function custom_admin_scripts() {
+    global $pagenow;
 
+    // Check if we're on the categories editing page
+    if ($pagenow === 'edit-tags.php' && isset($_GET['taxonomy']) && $_GET['taxonomy'] === 'general_category') {
+        wp_enqueue_script('jquery-ui-sortable');
+    }
+}
+
+add_action('admin_enqueue_scripts', 'custom_admin_scripts');
+
+// Add custom JavaScript to handle drag-and-drop sorting
+function custom_category_sorting_script() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#the-list').sortable({
+                axis: 'y',
+                cursor: 'move',
+                update: function(event, ui) {
+                    var data = {
+                        action: 'update_category_order',
+                        order: $('#the-list').sortable('serialize')
+                    };
+
+                    $.post(ajaxurl, data);
+                }
+            });
+        });
+    </script>
+    <?php
+}
+
+add_action('admin_footer', 'custom_category_sorting_script');
+
+// Handle the category order update via AJAX
+function update_category_order() {
+    parse_str($_POST['order'], $category_order);
+    $categories = $category_order['tag'];
+
+    // Update the category order
+    foreach ($categories as $position => $cat_id) {
+        // wp_update_term($cat_id, 'term_order', array('term_order' => $position + 1));
+        // update_term_meta($cat_id, 'term_order', $position + 1);
+        // update_term_meta($cat_id, 'term_order', $position + 1);
+        // update_term_meta($, 'category_order', array('term_order' => $position + 1));
+        // wp_update_term($cat_id, 'category', array(
+        //     'term_order' => $position+1,
+        // ));
+        wp_update_term($cat_id, 'general_category', array(
+            'term_order' => $position+1,
+        ));
+        // wp_update_term($cat_id, 'general_category', array(
+        //     'term_order' => $position + 1, // Add 1 to position to account for zero-based index
+        // ));
+    }
+
+    die();
+}
+
+add_action('wp_ajax_update_category_order', 'update_category_order');
+
+// Admin panel
+// Hook into the wp_terms_checklist_args filter
+add_filter('wp_terms_checklist_args', 'custom_taxonomy_term_order');
+
+function custom_taxonomy_term_order($args) {
+    // Replace 'your_custom_taxonomy' with the name of your custom taxonomy
+    if ($args['taxonomy'] === 'general_category') {
+        // Modify the orderby parameter to 'term_order' to order by the custom term_order field
+        $args['orderby'] = 'term_order';
+        // $args['order'] = 'ASC'; // Change to 'DESC' for descending order
+    }
+    return $args;
+}
+/**
+ * Drag and drop category - general_category - Ends
+ */
 
 
 
