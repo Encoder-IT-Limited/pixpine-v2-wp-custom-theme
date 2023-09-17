@@ -159,4 +159,4 @@ require get_template_directory() . '/admin/functions.php';
 /**
  * Frontend functions
  */
-// require get_template_directory() . '/admin/test.php';
+require get_template_directory() . '/admin/show-product-and-cat.php';
