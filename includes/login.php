@@ -65,8 +65,8 @@
               </form>
               <p>
                 By creating an account you agree to our
-                <a href="terms-and-conditions.php">Terms & Conditions</a> and our
-                <a href="policy.php">Privacy Policy</a>
+                <a href="<?php echo site_url('terms-and-conditions');?>">Terms & Conditions</a> and our
+                <a href="<?php echo site_url('policy');?>">Privacy Policy</a>
               </p>
             </div>
           </div>

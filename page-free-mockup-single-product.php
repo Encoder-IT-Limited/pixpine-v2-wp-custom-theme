@@ -110,7 +110,7 @@ get_header();
                                     >As low as $0.14 a mockup</span
                                   >
                                   <a
-                                    href="subscription.php"
+                                    href="<?php echo site_url('get-subscription');?>"
                                     class="btn_primary _btn"
                                     >Get premium</a
                                   >
@@ -154,7 +154,7 @@ get_header();
                             <p>PSD</p>
                             <p>80 MB</p>
                             <p>4500 x 3200 - 300dpi</p>
-                            <p><a href="license.php">Personal & Commercial</a></p>
+                            <p><a href="<?php echo site_url('license');?>">Personal & Commercial</a></p>
                             <p>Pixpine</p>
                           </div>
                         </div>
@@ -168,7 +168,7 @@ get_header();
                     </div>
                     <a target="_blank"
                       class="_btn btn_primary"
-                      href="free-mockups-download-page.php"
+                      href="<?php echo site_url('free-mockups-download');?>"
                       >DOWNLOAD</a
                     >
                   </div>

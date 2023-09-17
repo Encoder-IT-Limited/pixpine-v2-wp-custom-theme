@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: User Dashboard Likes Premium Mockups
+Template Name: User Dashboard Liked Mockups
 */
 get_header();
 ?>

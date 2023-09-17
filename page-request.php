@@ -74,7 +74,7 @@ get_header();
                     <!-- <input type="checkbox" name="" id="" /> -->
                     <input type="checkbox" name="" id="checkbox" required />
                     <label for="checkbox"></label>
-                    <p>I accept the <a href="terms-and-conditions.php">terms and conditions</a></p>
+                    <p>I accept the <a href="<?php echo site_url('terms-and-conditions');?>">terms and conditions</a></p>
                   </div>
                   <input
                     class="_btn btn_primary"
@@ -88,7 +88,7 @@ get_header();
                   <h2><span>Get 30% Off</span> on customized mockups</h2>
                   <p>With yearly subscription</p>
                   <div class="text-center">
-                    <a class="_btn btn_black" href="subscription.php">
+                    <a class="_btn btn_black" href="<?php echo site_url('get-subscription');?>">
                       Get premium
                     </a>
                   </div>

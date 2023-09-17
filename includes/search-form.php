@@ -23,6 +23,6 @@
     </form>
   </div>
   <p class="need_text">
-    Couldn’t find what you need? <a href="request.php">Request</a>
+    Couldn’t find what you need? <a href="<?php echo site_url('request');?>">Request</a>
   </p>
 </div>

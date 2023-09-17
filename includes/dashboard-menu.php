@@ -4,25 +4,25 @@
 </div>
 <ul class="nav flex-column">
   <li class="nav-item">
-    <a class="nav-link <?php if($currentPage =='my__account'){echo 'active';}?>" href="user-dashboard-my-account.php">
+    <a class="nav-link <?php if($currentPage =='my__account'){echo 'active';}?>" href="<?php echo site_url('my-account');?>">
       My Account
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <?php if($currentPage =='billing__information'){echo 'active';}?>" href="user-dashboard-billing-information.php">
+    <a class="nav-link <?php if($currentPage =='billing__information'){echo 'active';}?>" href="<?php echo site_url('billing-information');?>">
       Billing Information
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <?php if($currentPage =='dashboard__downloads'){echo 'active';}?>" href="user-dashboard-downloads.php"> Downloads </a>
+    <a class="nav-link <?php if($currentPage =='dashboard__downloads'){echo 'active';}?>" href="<?php echo site_url('downloads');?>"> Downloads </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <?php if($currentPage =='dashboard__subscription'){echo 'active';}?>" href="user-dashboard-subscription-monthly.php">
+    <a class="nav-link <?php if($currentPage =='dashboard__subscription'){echo 'active';}?>" href="<?php echo site_url('subscription-monthly');?>">
       Subscription
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <?php if($currentPage =='dashboard__likes'){echo 'active';}?>" href="user-dashboard-likes-premium-mockups.php">
+    <a class="nav-link <?php if($currentPage =='dashboard__likes'){echo 'active';}?>" href="<?php echo site_url('liked-mockups');?>">
       Likes
     </a>
   </li>

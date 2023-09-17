@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: Subscription
+Template Name: Get Subscription
 */
 get_header();
 ?>
@@ -13,7 +13,7 @@ get_header();
               <h1 class="page_heading">PICK YOUR MEMBERSHIP PLAN</h1>
               <p class="sub_heading">
                 All subscriptions come with
-                <a href="license.php">Extended Commercial License</a> (limited time) at no
+                <a href="<?php echo site_url('license');?>">Extended Commercial License</a> (limited time) at no
                 extra cost, which means you can use our mockups unlimited times.
               </p>
             </div>
@@ -293,7 +293,7 @@ get_header();
                   <div class="accordion-body">
                     <p>
                       You can find complete information about our all licenses
-                      <a href="license.php">Here</a>
+                      <a href="<?php echo site_url('license');?>">Here</a>
                     </p>
                   </div>
                 </div>
@@ -357,7 +357,7 @@ get_header();
                         href="mailto:support@pixpine.com"
                       >
                         support@pixpine.com </a
-                      >) or fill out this <a href="subscription.php">Form</a>.
+                      >) or fill out this <a href="<?php echo site_url('get-subscription');?>">Form</a>.
                     </p>
                   </div>
                 </div>
@@ -413,7 +413,7 @@ get_header();
                   <div class="accordion-body">
                     <p>
                       Yes, you can still use the assets under our license which
-                      can find <a href="license.php">Here</a>.
+                      can find <a href="<?php echo site_url('license');?>">Here</a>.
                     </p>
                   </div>
                 </div>
@@ -496,7 +496,7 @@ get_header();
                       Yes, all mockups (Free, Premium, Bundle) available on our
                       website can be used for personal and commercial projects.
                       You can find more information about our licenses
-                      <a href="license.php">Here</a>.
+                      <a href="<?php echo site_url('license');?>">Here</a>.
                     </p>
                   </div>
                 </div>
@@ -605,7 +605,7 @@ get_header();
                     <p>
                       Yes, you may do, but you CAN NOT redistribute or sell by
                       providing a direct link to download. You can find complete
-                      information about our license <a href="license.php">Here</a>. We will
+                      information about our license <a href="<?php echo site_url('license');?>">Here</a>. We will
                       be glad if you can spread the word. You can share our
                       mockups by giving a backlink to pixpine.com
                     </p>
@@ -615,7 +615,7 @@ get_header();
               <div class="couldnt_ans">
                 <h3>
                   Couldn’t find your answer?
-                  <a class="primary_color" href="contact-us.php">Contact us</a>
+                  <a class="primary_color" href="<?php echo site_url('contact-us');?>">Contact us</a>
                 </h3>
               </div>
             </div>

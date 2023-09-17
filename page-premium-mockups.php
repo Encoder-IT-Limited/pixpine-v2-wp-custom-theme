@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: Premium Mockups
+Template Name: Premium Mockups Listing
 */
 get_header();
 ?>
@@ -37,7 +37,7 @@ get_header();
                         >
                       </h2>
                       <p class="primary_color">As low as $0.14 a mockup</p>
-                      <a href="subscription.php" class="btn_primary _btn"
+                      <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                         >Get premium</a
                       >
                     </div>

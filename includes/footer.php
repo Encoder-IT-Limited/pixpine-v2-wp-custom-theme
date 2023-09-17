@@ -13,25 +13,25 @@
             <div class="item">
               <h3>Legal</h3>
               <ul>
-                <li><a href="terms-and-conditions.php">Terms & Conditions</a></li>
-                <li><a href="policy.php">Privacy Policy</a></li>
-                <li><a href="license.php">Licenses</a></li>
+                <li><a href="<?php echo site_url('terms-and-conditions');?>">Terms & Conditions</a></li>
+                <li><a href="<?php echo site_url('policy');?>">Privacy Policy</a></li>
+                <li><a href="<?php echo site_url('license');?>">Licenses</a></li>
               </ul>
             </div>
             <div class="item">
               <h3>Mockups Categories</h3>
               <ul>
-                <li><a href="free-mockups.php">Free Mockups</a></li>
-                <li><a href="premium-mockups.php">Premium Mockup</a></li>
-                <li><a href="bundle-mockups.php">Bundle Mockups</a></li>
+                <li><a href="<?php echo site_url('free-mockups-listing');?>">Free Mockups</a></li>
+                <li><a href="<?php echo site_url('premium-mockups-listing');?>">Premium Mockup</a></li>
+                <li><a href="<?php echo site_url('bundle-mockups-listing');?>">Bundle Mockups</a></li>
               </ul>
             </div>
             <div class="item">
               <h3>Support</h3>
               <ul>
-                <li><a href="contact-us.php">Tutorials</a></li>
-                <li><a href="contact-us.php">Contact us</a></li>
-                <li><a href="subscription.php#faq">FAQ</a></li>
+                <li><a href="<?php echo site_url('contact-us');?>">Tutorials</a></li>
+                <li><a href="<?php echo site_url('contact-us');?>">Contact us</a></li>
+                <li><a href="<?php echo site_url('get-subscription');?>#faq">FAQ</a></li>
               </ul>
             </div>
             <div class="item subscribe_col">
@@ -42,7 +42,7 @@
                   class="btn_subscribe_cont d-flex justify-content-between align-items-center"
                 >
                   <span>$14.00/mo</span>
-                  <a class="btn_primary _btn" href="subscription.php">
+                  <a class="btn_primary _btn" href="<?php echo site_url('get-subscription');?>">
                     Get premium
                   </a>
                 </div>
@@ -55,11 +55,11 @@
         <div class="container">
           <div class="last_inner_container d-flex justify-content-between">
             <div class="copyright_text d-flex">
-              <a id="desktop_footer_logo" href="index.php">
+              <a id="desktop_footer_logo" href="<?php echo site_url();?>">
                 <img class="footer_logo" src="<?php echo get_template_directory_uri();?>/assets/images/footer_logo.png" alt="" />
               </a>
               <p>
-                ©2019 - 2023 <a href="index.php">Pixpine</a> - All rights
+                ©2019 - 2023 <a href="<?php echo site_url();?>">Pixpine</a> - All rights
                 reserved
               </p>
             </div>

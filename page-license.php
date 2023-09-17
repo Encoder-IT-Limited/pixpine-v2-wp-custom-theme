@@ -226,7 +226,7 @@ get_header();
               changes. Changes to this Privacy Policy are effective when they
               are posted on this page.<br />
               <br />
-              <a href="contact-us.php">CONTACT US</a><br />
+              <a href="<?php echo site_url('contact-us');?>">CONTACT US</a><br />
               If you have any questions about this Privacy Policy, please
               contact us by email:<br />
               <br />
@@ -368,7 +368,7 @@ get_header();
               update the “effective date” at the top of this Privacy Policy. You
               are advised to review this Privacy Policy periodically for any
               changes. Changes to this Privacy Policy are effective when they
-              are posted on this page.<br /><a href="contact-us.php">CONTACT US</a><br />If you have any
+              are posted on this page.<br /><a href="<?php echo site_url('contact-us');?>">CONTACT US</a><br />If you have any
               questions about this Privacy Policy, please contact us by
               email:<br /><a href="mailto:support@pixpine.com">support@pixpine.com</a>
             </p>

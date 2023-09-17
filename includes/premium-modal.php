@@ -355,7 +355,7 @@
                         <p>Get this for only $0.14 with unlimited downloads.</p>
                         <a
                           class="_btn btn_black text-center"
-                          href="subscription.php"
+                          href="<?php echo site_url('get-subscription');?>"
                           >Get premium</a
                         >
                       </div>
@@ -377,7 +377,7 @@
                           <li>
                             <p>
                               <span>License:</span>
-                              <a href="license.php">Commercial and Personal</a>
+                              <a href="<?php echo site_url('license');?>">Commercial and Personal</a>
                             </p>
                           </li>
                           <li>

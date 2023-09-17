@@ -155,3 +155,8 @@ add_action( 'wp_enqueue_scripts', 'pixpine_scripts' );
  * Admin functions
  */
 require get_template_directory() . '/admin/functions.php';
+
+/**
+ * Frontend functions
+ */
+// require get_template_directory() . '/admin/test.php';

@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: Free Mockups
+Template Name: Free Mockups Listing
 */
 get_header();
 ?>
@@ -209,7 +209,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.14 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -218,7 +218,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -233,7 +233,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -246,7 +246,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -259,7 +259,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -272,7 +272,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -285,7 +285,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -303,7 +303,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -316,7 +316,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -329,7 +329,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -342,7 +342,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -355,7 +355,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -373,7 +373,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -386,7 +386,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -459,7 +459,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -468,7 +468,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -481,7 +481,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -494,7 +494,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -507,7 +507,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -520,7 +520,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -533,7 +533,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -551,7 +551,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -564,7 +564,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -577,7 +577,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -590,7 +590,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -603,7 +603,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -681,7 +681,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -690,7 +690,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -703,7 +703,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -716,7 +716,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -729,7 +729,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -747,7 +747,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -760,7 +760,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -773,7 +773,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -791,7 +791,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -804,7 +804,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -877,7 +877,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -886,7 +886,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -899,7 +899,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -912,7 +912,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -925,7 +925,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -938,7 +938,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -951,7 +951,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -969,7 +969,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -982,7 +982,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -995,7 +995,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1008,7 +1008,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1021,7 +1021,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1039,7 +1039,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1052,7 +1052,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1125,7 +1125,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -1134,7 +1134,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1147,7 +1147,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1160,7 +1160,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1173,7 +1173,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1186,7 +1186,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1199,7 +1199,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1217,7 +1217,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1230,7 +1230,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1243,7 +1243,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1256,7 +1256,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1269,7 +1269,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1287,7 +1287,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1300,7 +1300,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1373,7 +1373,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -1382,7 +1382,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1395,7 +1395,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1408,7 +1408,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1421,7 +1421,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1434,7 +1434,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1447,7 +1447,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1460,7 +1460,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1533,7 +1533,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -1542,7 +1542,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1555,7 +1555,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1568,7 +1568,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1581,7 +1581,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1594,7 +1594,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1607,7 +1607,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1625,7 +1625,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1638,7 +1638,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1651,7 +1651,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1664,7 +1664,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1677,7 +1677,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1695,7 +1695,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1708,7 +1708,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1781,7 +1781,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -1790,7 +1790,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1803,7 +1803,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1816,7 +1816,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1829,7 +1829,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1842,7 +1842,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1855,7 +1855,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1873,7 +1873,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1886,7 +1886,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1899,7 +1899,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1912,7 +1912,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1925,7 +1925,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1943,7 +1943,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -1956,7 +1956,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2029,7 +2029,7 @@ get_header();
                           <span class="primary_color"
                             >As low as $0.56 a mockup</span
                           >
-                          <a href="subscription.php" class="btn_primary _btn"
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                             >Get premium</a
                           >
                         </div>
@@ -2038,7 +2038,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2051,7 +2051,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2064,7 +2064,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2077,7 +2077,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2090,7 +2090,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2103,7 +2103,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2121,7 +2121,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2134,7 +2134,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2152,7 +2152,7 @@ get_header();
                   </div>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -2165,7 +2165,7 @@ get_header();
                   </a>
                 </div>
                 <div class="card_item">
-                  <a href="free-mockup-product-page.php">
+                  <a href="<?php echo site_url('free-mockup-product');?>">
                     <div class="inner_col">
                       <div class="img_col pixpine_card_border">
                         <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />

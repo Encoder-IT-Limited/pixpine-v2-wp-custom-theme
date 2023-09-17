@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: Bundle Mockups
+Template Name: Bundle Mockups Listing
 */
 get_header();
 ?>
@@ -37,7 +37,7 @@ get_header();
                 <p class="primary_color">
                   Save big with our yearly subscription
                 </p>
-                <a href="subscription.php" class="btn_primary _btn"
+                <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                   >Get Premium</a
                 >
               </div>
