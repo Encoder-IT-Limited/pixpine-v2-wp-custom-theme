@@ -222,51 +222,41 @@
             </p>
           </div>
           <div class="card_container">
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
-            <div class="card_item">
-              <div class="inner_col pixpine_card_border">
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-              </div>
-            </div>
+            <?php
+              $args = array(
+                'post_type' => 'your_custom_post_type', // Replace with the name of your CPT
+                'posts_per_page' => 9, // Number of posts to display (adjust as needed)
+                'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+              );
+
+              $custom_query = new WP_Query($args);
+
+              if ($custom_query->have_posts()) {
+                while ($custom_query->have_posts()) {
+                  $custom_query->the_post();
+                  $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                  // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                ?>
+                  <div class="card_item">
+                    <div class="inner_col pixpine_card_border">
+                      <img src="<?php echo $thumbnail_url;?>" alt="" />
+                    </div>
+                  </div>
+                    
+
+                <?php
+                }
+
+                // Restore the global post object
+                wp_reset_postdata();
+              } else {
+                // No posts found
+                echo 'No posts found.';
+              }
+              ?>
+
+
+
           </div>
         </div>
       </section>
