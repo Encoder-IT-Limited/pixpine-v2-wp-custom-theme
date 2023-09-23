@@ -46,66 +46,37 @@ get_header();
         </div>
         <div class="card_container">
           <div class="row_d">
-            <div class="card_item">
-              <a href="">
-                <div class="card_inner pixpine_card_border">
-                  <p href="">Apparel</p>
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+          <?php
+          $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
+          $parent_category_slug = 'bundle-mockups'; // Replace with the slug of the parent category
+
+          // Define the tax_query to retrieve child terms of the specified parent category
+          $args = array(
+              'taxonomy' => $taxonomy,
+              'child_of' => 0, // Set to 0 to get top-level terms
+              'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID
+              'hide_empty' => false, // Set to false to retrieve even if they are empty
+          );
+
+          $subcategories = get_terms($args);
+
+          if (!empty($subcategories)) {
+            $count = 0;
+            $tmp_cat = [];
+            foreach ($subcategories as $subcategory) {
+              echo '<div class="card_item">
+                <a href="">
+                  <div class="card_inner pixpine_card_border">
+                    <p href="">'.$subcategory->name.'</p>
+                    <div class="img_col">
+                      <img src="'.get_template_directory_uri().'/assets/images/premium_img.png" alt="" />
+                    </div>
                   </div>
-                </div>
-              </a>
-            </div>
-            <div class="card_item">
-              <a href="">
-                <div class="card_inner pixpine_card_border">
-                  <p href="">Packaging Box</p>
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="card_item">
-              <a href="">
-                <div class="card_inner pixpine_card_border">
-                  <p href="">Food</p>
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="card_item">
-              <a href="">
-                <div class="card_inner pixpine_card_border">
-                  <p href="">Bags</p>
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="card_item">
-              <a href="">
-                <div class="card_inner pixpine_card_border">
-                  <p href="">Fabric</p>
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="card_item">
-              <a href="">
-                <div class="card_inner pixpine_card_border">
-                  <p href="">Stationery</p>
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                  </div>
-                </div>
-              </a>
-            </div>
+                </a>
+              </div>';
+            }
+          }
+          ?>
           </div>
         </div>
       </div>

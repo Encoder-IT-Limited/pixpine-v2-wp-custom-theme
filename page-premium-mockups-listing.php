@@ -183,7 +183,11 @@ get_header();
             <h2 class="section_heading">Recently Added Premium Mockups</h2>
           </div>
           <div class="tab_img_container">
-            <ul class="nav nav-tabs" role="tablist">
+            <?php 
+            $parent_category_slug = 'premium-mockups';
+            echo show_sub_cats_in_listing_page($parent_category_slug); 
+            ?>
+            <!-- <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
                   class="nav-link active"
@@ -331,7 +335,7 @@ get_header();
               </ul>
             </div>
               </li>
-            </ul>
+            </ul> -->
             <div class="tab-content">
               <div
                 class="tab-pane fade show active"

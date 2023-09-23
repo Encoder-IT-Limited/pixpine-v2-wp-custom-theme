@@ -4,6 +4,8 @@ Template Name: Free Mockups Listing
 */
 get_header();
 ?>
+
+
 <main>
   <section class="banner_section">
     <div class="container">
@@ -33,155 +35,12 @@ get_header();
         <div class="separetor"></div>
       </div>
       <div class="tab_img_container">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="business_cards_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#business_cards_free"
-              type="button"
-              role="tab"
-              aria-controls="business_cards_free"
-              aria-selected="true"
-            >
-              Business Cards
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="brochure_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#brochure_free"
-              type="button"
-              role="tab"
-              aria-controls="brochure_free"
-              aria-selected="false"
-            >
-              Brochure
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="flyers_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#flyers_free"
-              type="button"
-              role="tab"
-              aria-controls="flyers_free"
-              aria-selected="false"
-            >
-              Flyers
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="stationery_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#stationery_free"
-              type="button"
-              role="tab"
-              aria-controls="stationery_free"
-              aria-selected="false"
-            >
-              Stationery
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="boxes_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#boxes_free"
-              type="button"
-              role="tab"
-              aria-controls="boxes_free"
-              aria-selected="false"
-            >
-              Boxes
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="packaging_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#packaging_free"
-              type="button"
-              role="tab"
-              aria-controls="packaging_free"
-              aria-selected="false"
-            >
-              Packaging
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="books_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#books_free"
-              type="button"
-              role="tab"
-              aria-controls="books_free"
-              aria-selected="false"
-            >
-              Books
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="apparel_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#apparel_free"
-              type="button"
-              role="tab"
-              aria-controls="apparel_free"
-              aria-selected="false"
-            >
-              Apparel
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="billboard_tab_free"
-              data-bs-toggle="tab"
-              data-bs-target="#billboard_free"
-              type="button"
-              role="tab"
-              aria-controls="billboard_free"
-              aria-selected="false"
-            >
-              Billboard
-            </button>
-            <div class="dropdown">
-              <button
-                class="dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/tab_down_arrow.png" alt="" />
-              </button>
+          
+        <?php 
+        $parent_category_slug = 'free-mockups';
+        echo show_sub_cats_in_listing_page($parent_category_slug); 
+        ?>
 
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="">Cup</a></li>
-                <li><a class="dropdown-item" href="">Cosmetic</a></li>
-                <li><a class="dropdown-item" href="">Flyers</a></li>
-                <li><a class="dropdown-item" href="">Frame</a></li>
-                <li><a class="dropdown-item" href="">Packaging</a></li>
-                <li><a class="dropdown-item" href="">Poster</a></li>
-                <li><a class="dropdown-item" href="">Shopping Bag</a></li>
-                <li><a class="dropdown-item" href="">Stationery</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
         <div class="tab-content">
           <div
             class="tab-pane fade show active"
