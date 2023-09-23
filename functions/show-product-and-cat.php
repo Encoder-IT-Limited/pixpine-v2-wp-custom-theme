@@ -74,3 +74,53 @@ function show_sub_cats_in_listing_page($parent_category_slug){
     $html.= '</ul>';
     return $html;
 }
+
+
+function pagination($term_id, ){
+    // Replace these with your specific details
+    $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
+    // $term_id = 123; // Replace with the ID of the term you want to filter by
+    $post_type = 'your_custom_post_type'; // Replace with the name of your CPT
+    $posts_per_page = 10; // Number of posts per page
+    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
+
+    $args = array(
+        'post_type' => $post_type,
+        'posts_per_page' => $posts_per_page,
+        'paged' => $paged,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field' => 'term_id',
+                'terms' => $term_id,
+            ),
+        ),
+    );
+
+    $custom_query = new WP_Query($args);
+
+    if ($custom_query->have_posts()) {
+        while ($custom_query->have_posts()) {
+            $custom_query->the_post();
+
+            // Display post content or other information
+            the_title(); // Example: Display post title
+            the_content(); // Example: Display post content
+
+            // You can access other post data here as needed
+        }
+
+        // Pagination
+        echo paginate_links(array(
+            'total' => $custom_query->max_num_pages,
+            'current' => max(1, $paged),
+        ));
+
+        // Restore the global post object
+        wp_reset_postdata();
+    } else {
+        // No posts found
+        echo 'No posts found.';
+    }
+
+}
