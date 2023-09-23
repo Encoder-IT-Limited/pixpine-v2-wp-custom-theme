@@ -460,7 +460,7 @@
                       array(
                           'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                           'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
-                          'terms' => 'premium-mockup', // Replace with the slug of the custom category term you want to query
+                          'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
                       ),
                     ),
                   );
@@ -688,7 +688,7 @@
                       array(
                           'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                           'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
-                          'terms' => 'free-mockup', // Replace with the slug of the custom category term you want to query
+                          'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
                       ),
                     ),
                   );
@@ -778,7 +778,7 @@
                   array(
                       'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                       'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
-                      'terms' => 'free-mockup', // Replace with the slug of the custom category term you want to query
+                      'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
                   ),
                 ),
               );

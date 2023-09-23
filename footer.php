@@ -21,9 +21,9 @@
             <div class="item">
               <h3>Mockups Categories</h3>
               <ul>
-                <li><a href="<?php echo site_url('free-mockups-listing');?>">Free Mockups</a></li>
-                <li><a href="<?php echo site_url('premium-mockups-listing');?>">Premium Mockup</a></li>
-                <li><a href="<?php echo site_url('bundle-mockups-listing');?>">Bundle Mockups</a></li>
+                <li><a href="<?php echo site_url('free-mockups');?>">Free Mockups</a></li>
+                <li><a href="<?php echo site_url('premium-mockups');?>">Premium Mockup</a></li>
+                <li><a href="<?php echo site_url('bundle-mockups');?>">Bundle Mockups</a></li>
               </ul>
             </div>
             <div class="item">

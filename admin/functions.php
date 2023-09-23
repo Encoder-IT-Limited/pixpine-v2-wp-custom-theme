@@ -60,36 +60,6 @@ add_action( 'init', 'custom_product_post_type', 0 );
  * Register Custom Category For Product
  */
 function custom_product_taxonomy() {
-    $labels = array(
-        'name'                       => _x( 'General Categories', 'Taxonomy General Name', 'text_domain' ),
-        'singular_name'              => _x( 'General Category', 'Taxonomy Singular Name', 'text_domain' ),
-        'menu_name'                  => __( 'General Categories', 'text_domain' ),
-        'all_items'                  => __( 'All Categories', 'text_domain' ),
-        'payment_item'                => __( 'Payment Category', 'text_domain' ),
-        'payment_item_colon'          => __( 'Payment Category:', 'text_domain' ),
-        'new_item_name'              => __( 'New Category Name', 'text_domain' ),
-        'add_new_item'               => __( 'Add New Category', 'text_domain' ),
-        'edit_item'                  => __( 'Edit Category', 'text_domain' ),
-        'update_item'                => __( 'Update Category', 'text_domain' ),
-        'view_item'                  => __( 'View Category', 'text_domain' ),
-        'separate_items_with_commas' => __( 'Separate categories with commas', 'text_domain' ),
-        'add_or_remove_items'        => __( 'Add or remove categories', 'text_domain' ),
-        'choose_from_most_used'      => __( 'Choose from the most used', 'text_domain' ),
-        'popular_items'              => __( 'Popular Categories', 'text_domain' ),
-        'search_items'               => __( 'Search Categories', 'text_domain' ),
-        'not_found'                  => __( 'Not Found', 'text_domain' ),
-    );
-    $args = array(
-        'labels'                     => $labels,
-        'hierarchical'               => true,
-        'public'                     => true, // Set to true to display in post editor
-        'show_ui'                    => true, // Show the admin UI
-        'show_admin_column'          => true, // Show the admin column
-        'show_in_nav_menus'          => true, // Show in navigation menus
-        'show_tagcloud'              => true, // Show in tag cloud widget
-    );
-    register_taxonomy( 'general_category', array( 'product' ), $args );
-
 
     $labels = array(
         'name'                       => _x( 'Mockup Categories', 'Taxonomy General Name', 'text_domain' ),
