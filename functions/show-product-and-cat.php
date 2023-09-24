@@ -76,7 +76,7 @@ function show_sub_cats_in_listing_page($parent_category_slug){
 }
 
 
-function pagination($term_id, ){
+function pagination($term_id, $posts_per_page = 10, $page_no=1){
     // Replace these with your specific details
     $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
     // $term_id = 123; // Replace with the ID of the term you want to filter by
@@ -124,3 +124,20 @@ function pagination($term_id, ){
     }
 
 }
+
+function my_custom_action_callback() {
+    // Verify the nonce
+    if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+        // Nonce is valid, process the AJAX request
+        // Your PHP logic here
+        $response = 'Abir is the best.';
+        echo $response;
+    } else {
+        // Nonce is not valid, reject the request
+        echo 'Nonce verification failed.';
+    }
+
+    wp_die(); // This is required to end the AJAX request
+}
+add_action('wp_ajax_my_custom_action', 'my_custom_action_callback'); // For logged-in users
+add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_action_callback'); // For non-logged-in users

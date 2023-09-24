@@ -132,10 +132,21 @@ function pixpine_scripts() {
 	wp_enqueue_style( 'pixpine-main-style', get_template_directory_uri() . '/assets/styles/style.css', array(), _S_VERSION );
 	wp_enqueue_style( 'pixpine-home-style', get_template_directory_uri() . '/assets/styles/home-style.css', array(), _S_VERSION );
 
-	wp_enqueue_script( 'pixpine-slim-js', 'https://code.jquery.com/jquery-3.6.4.slim.js', array(), _S_VERSION, true );
+	wp_enqueue_script('jquery');
+	// wp_enqueue_script( 'pixpine-slim-js', 'https://code.jquery.com/jquery-3.6.4.slim.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'pixpine-slick-min', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'pixpine-navigation', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'pixpine-navigation', get_template_directory_uri() . '/assets/js/index.js', array(), _S_VERSION, true );
+
+	// custom ajax
+	
+    wp_enqueue_script('pixpine-custom-ajax', get_template_directory_uri() . '/assets/js/custom-ajax.js', array('jquery'), '1.0', true);
+    // Generate a nonce and pass it to the JavaScript file
+    $ajax_nonce = wp_create_nonce('ajax_nonce');
+    wp_localize_script('pixpine-custom-ajax', 'ajax_object', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'ajax_nonce' => $ajax_nonce, // Pass the nonce to JavaScript
+    ));
 
 }
 add_action( 'wp_enqueue_scripts', 'pixpine_scripts' );
