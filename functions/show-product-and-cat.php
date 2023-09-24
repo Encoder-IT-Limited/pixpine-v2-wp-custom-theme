@@ -76,23 +76,26 @@ function show_sub_cats_in_listing_page($parent_category_slug){
 }
 
 
-function pagination($term_id, $posts_per_page = 10, $page_no=1){
+function get_product_with_pagination(){
     // Replace these with your specific details
     $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
+    $post_type = 'product'; // Replace with the name of your CPT
     // $term_id = 123; // Replace with the ID of the term you want to filter by
-    $post_type = 'your_custom_post_type'; // Replace with the name of your CPT
-    $posts_per_page = 10; // Number of posts per page
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
+    // $posts_per_page = 10; // Number of posts per page
+    // $page_no = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
+    $term_slug = $_POST['term_slug'];
+    $posts_per_page = $_POST['posts_per_page'];
+    $page_no = $_POST['page_no'];
 
     $args = array(
         'post_type' => $post_type,
         'posts_per_page' => $posts_per_page,
-        'paged' => $paged,
+        'paged' => $page_no,
         'tax_query' => array(
             array(
                 'taxonomy' => $taxonomy,
-                'field' => 'term_id',
-                'terms' => $term_id,
+                'field' => 'slug',
+                'terms' => $term_slug,
             ),
         ),
     );
@@ -100,44 +103,49 @@ function pagination($term_id, $posts_per_page = 10, $page_no=1){
     $custom_query = new WP_Query($args);
 
     if ($custom_query->have_posts()) {
+        $post_array = [];
         while ($custom_query->have_posts()) {
             $custom_query->the_post();
 
-            // Display post content or other information
-            the_title(); // Example: Display post title
-            the_content(); // Example: Display post content
+            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+            $post_array[get_the_ID()] = ['title'=>get_the_title(), 'img'=>$thumbnail_url];
 
-            // You can access other post data here as needed
         }
-
-        // Pagination
-        echo paginate_links(array(
-            'total' => $custom_query->max_num_pages,
-            'current' => max(1, $paged),
-        ));
+        $output = [];
+        $output['product'] = $post_array;
+        $output['total_page'] = $custom_query->max_num_pages;
+        echo json_encode($output);
 
         // Restore the global post object
         wp_reset_postdata();
+
     } else {
-        // No posts found
-        echo 'No posts found.';
+        $output = [];
+        echo json_encode($output);
     }
-
+    die();
 }
+add_action('wp_ajax_get_product_with_pagination', 'get_product_with_pagination'); // For logged-in users
+add_action('wp_ajax_nopriv_get_product_with_pagination', 'get_product_with_pagination'); // For non-logged-in users
 
-function my_custom_action_callback() {
-    // Verify the nonce
-    if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
-        // Nonce is valid, process the AJAX request
-        // Your PHP logic here
-        $response = 'Abir is the best.';
-        echo $response;
-    } else {
-        // Nonce is not valid, reject the request
-        echo 'Nonce verification failed.';
-    }
 
-    wp_die(); // This is required to end the AJAX request
-}
-add_action('wp_ajax_my_custom_action', 'my_custom_action_callback'); // For logged-in users
-add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_action_callback'); // For non-logged-in users
+
+/**
+ * Ajax template 
+ */
+// function my_custom_action_callback() {
+//     // Verify the nonce
+//     if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+//         // Nonce is valid, process the AJAX request
+//         // Your PHP logic here
+//         $response = 'Abir is the best.';
+//         echo $response;
+//     } else {
+//         // Nonce is not valid, reject the request
+//         echo 'Nonce verification failed.';
+//     }
+
+//     wp_die(); // This is required to end the AJAX request
+// }
+// add_action('wp_ajax_my_custom_action', 'my_custom_action_callback'); // For logged-in users
+// add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_action_callback'); // For non-logged-in users
