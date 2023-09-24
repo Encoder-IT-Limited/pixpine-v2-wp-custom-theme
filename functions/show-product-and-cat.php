@@ -21,9 +21,9 @@ function show_sub_cats_in_listing_page($parent_category_slug){
             // term_id, slug
             $count++;
             if($count <=9){
-            $html.= '<li class="nav-item nav-link" role="presentation" cat-id="'.$subcategory->term_id.'">'.$subcategory->name.'</li>';                  
+            $html.= '<li class="nav-item nav-link get-product" role="presentation" cat-slug="'.$subcategory->slug.'">'.$subcategory->name.'</li>';                  
             }else{
-            $tmp_cat[$subcategory->term_id] = $subcategory->name;
+            $tmp_cat[$subcategory->slug] = $subcategory->name;
             }
         }
         if(count($tmp_cat)==1){
@@ -34,7 +34,7 @@ function show_sub_cats_in_listing_page($parent_category_slug){
             $count = 0;
             $html.= '
             <li class="nav-item" role="presentation">';
-            foreach ($tmp_cat as $cat_id => $cat_name) {
+            foreach ($tmp_cat as $cat_slug => $cat_name) {
             $count++;
             if($count==1){
                 $html.= '              <button

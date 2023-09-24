@@ -30,12 +30,15 @@ jQuery(document).ready(function($) {
                 // Add any other data you need to send
             },
             success: function(response) {
-                console.log(response);
-                return response;
+                
                 // Handle the response from the server
                 // alert('Response from server: ' + response);
             },
         });
     }
-    console.log(get_product_with_pagination('free-mockups', 10, 1));
+    $(document).on('click', '.get-product', function(){
+        console.log('ddddddddddd')
+        get_product_with_pagination('free-mockups', 10, 1, 'free-mockup');
+        console.log(paginated_product)
+    });
 });
