@@ -8,18 +8,15 @@ $msg = '';
 if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
     // Process the form data
-    $p_name = sanitize_email($_POST['p_name']);
+    $p_name = $_POST['p_name'];
     $p_email = sanitize_email($_POST['p_email']);
-    $p_instruction = sanitize_email($_POST['p_instruction']);
+    $p_instruction = $_POST['p_instruction'];
 
 
     // Email recipient (customize this)
     $to = 'mdshafayatul@gmail.com'; // Replace with the client's email address
-    $subject = 'From request';
-    $headers = array(
-        'From: ' . get_option('admin_email'),
-        'Content-Type: text/html; charset=UTF-8',
-    );
+    $subject = 'From request page';
+
 
     // Email body
     $message = '<html><body>';
@@ -28,40 +25,51 @@ if(isset($_POST['p_submit'])){
     $message .= '<p>Instruction: ' . $p_instruction . '</p>';
     $message .= '</body></html>';
 
-    // Handle file upload (you can customize this)
-    if (isset($_FILES['p_file']) && !empty($_FILES['p_file']['name'])) {
-        $file = $_FILES['p_file'];
+    
+  
+    $file_name = $_FILES['p_file']['name'];
+    $file_path = $_FILES['p_file']['tmp_name'];
 
-        // Generate a boundary for the email
-        $boundary = md5(time());
+    // Check if the file exists and is readable
+    if (file_exists($file_path) && is_readable($file_path)) {
+      // Read and encode the file content
+      $file_content_base64 = base64_encode(file_get_contents($file_path));
 
-        // Additional headers for attachment
-        $headers[] = "MIME-Version: 1.0";
-        $headers[] = "Content-Type: multipart/mixed; boundary=\"$boundary\"";
+      // Determine the MIME type of the file
+      $mime_type = mime_content_type($file_path);
 
-        // Create the email body
-        $message = "--$boundary\r\n";
-        $message .= "Content-Type: text/html; charset=\"UTF-8\"\r\n";
-        $message .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-        $message .= $message . "\r\n";
+      // Set the headers for the email attachment
+      $headers = array(
+          'Content-Type: ' . $mime_type,
+          'Content-Disposition: attachment; filename="' . $file_name . '"',
+          'MIME-Version: 1.0',
+          'Content-Type: text/html; charset=UTF-8',
+      );
 
-        // Read the file content and encode it
-        $file_contents = file_get_contents($file['tmp_name']);
-        $file_encoded = chunk_split(base64_encode($file_contents));
+      // Include the base64-encoded file content in the email message
+      $message .= '<p>Attachment: <a href="data:' . $mime_type . ';base64,' . $file_content_base64 . '" download="' . $file_name . '">Download Attachment</a></p>';
 
-        // Add the attachment
-        $message .= "--$boundary\r\n";
-        $message .= "Content-Type: application/octet-stream; name=\"" . $file['name'] . "\"\r\n";
-        $message .= "Content-Transfer-Encoding: base64\r\n";
-        $message .= "Content-Disposition: attachment; filename=\"" . $file['name'] . "\"\r\n\r\n";
-        $message .= $file_encoded . "\r\n";
-        $message .= "--$boundary--\r\n";
-    }
+      // Send the email with the attachment
+      $mailed = wp_mail($to, $subject, $message, $headers);
 
-    if (wp_mail($to, $subject, $message, $headers)) {
-      $msg = 'Message sent successful. We will contact you ASAP.';
+      if ($mailed) {
+          echo 'Email sent with attachment.';
+      } else {
+          echo 'Email sending failed.';
+      }
     } else {
-      $msg = 'Message sending failed.';
+        echo 'Error: File not found or not readable.';
+    }
+    }else{
+          // Create an array with the email headers
+        $headers = array(
+          'Content-Type: text/html; charset=UTF-8',
+        );
+      if (wp_mail($to, $subject, $message, $headers)) {
+        $msg = '22Message sent successful. We will contact you ASAP.';
+      } else {
+        $msg = 'Message sending failed.';
+      }      
     }
   } else {
       // Nonce verification failed, handle the error
