@@ -7,73 +7,46 @@ get_header();
 $msg = '';
 if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
-    // Process the form data
-    $p_name = $_POST['p_name'];
-    $p_email = sanitize_email($_POST['p_email']);
-    $p_instruction = $_POST['p_instruction'];
+    // Define recipient email address
+    $to = "innovawebdeveloper@gmail.com";
 
+    // Define email subject
+    $subject = "Form Request page";
 
-    // Email recipient (customize this)
-    $to = 'mdshafayatul@gmail.com'; // Replace with the client's email address
-    $subject = 'From request page';
+    // Define sender's email address
+    $from = $_POST["p_email"];
 
+    // Create email headers
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
 
-    // Email body
-    $message = '<html><body>';
-    $message .= '<p>Name: ' . $p_name . '</p>';
-    $message .= '<p>Email: ' . $p_email . '</p>';
-    $message .= '<p>Instruction: ' . $p_instruction . '</p>';
-    $message .= '</body></html>';
+    // Define the message body
+    $message = "--boundary\r\n";
+    $message .= "Content-type: text/plain; charset='UTF-8'\r\n\r\n";
+    $message .= "Name: " . $_POST["p_name"] . "\r\n";
+    $message .= "Email: " . $_POST["p_email"] . "\r\n";
+    $message .= "Instruction: " . $_POST["p_instruction"] . "\r\n\r\n";
+    $message .= "--boundary\r\n";
 
-    
-  
-    $file_name = $_FILES['p_file']['name'];
-    $file_path = $_FILES['p_file']['tmp_name'];
+    // Process the uploaded file
+    $file_name = $_FILES["p_file"]["name"];
+    $file_temp = $_FILES["p_file"]["tmp_name"];
+    $file_type = $_FILES["p_file"]["type"];
 
-    // Check if the file exists and is readable
-    if (file_exists($file_path) && is_readable($file_path)) {
-      // Read and encode the file content
-      $file_content_base64 = base64_encode(file_get_contents($file_path));
+    if ($file_name) {
+        $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
+        $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
+        $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
+        $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
+        $message .= "--boundary--";
+    }
 
-      // Determine the MIME type of the file
-      $mime_type = mime_content_type($file_path);
-
-      // Set the headers for the email attachment
-      $headers = array(
-          'Content-Type: ' . $mime_type,
-          'Content-Disposition: attachment; filename="' . $file_name . '"',
-          'MIME-Version: 1.0',
-          'Content-Type: text/html; charset=UTF-8',
-      );
-
-      // Include the base64-encoded file content in the email message
-      $message .= '<p>Attachment: <a href="data:' . $mime_type . ';base64,' . $file_content_base64 . '" download="' . $file_name . '">Download Attachment</a></p>';
-
-      // Send the email with the attachment
-      $mailed = wp_mail($to, $subject, $message, $headers);
-
-      if ($mailed) {
-          echo 'Email sent with attachment.';
-      } else {
-          echo 'Email sending failed.';
-      }
+    // Send the email
+    if (mail($to, $subject, $message, $headers)) {
+      $msg = 'success';
     } else {
-        echo 'Error: File not found or not readable.';
-    }
-    }else{
-          // Create an array with the email headers
-        $headers = array(
-          'Content-Type: text/html; charset=UTF-8',
-        );
-      if (wp_mail($to, $subject, $message, $headers)) {
-        $msg = '22Message sent successful. We will contact you ASAP.';
-      } else {
-        $msg = 'Message sending failed.';
-      }      
-    }
-  } else {
-      // Nonce verification failed, handle the error
-      wp_die('Security check failed.');
+      $msg = 'fail';
+    }   
   }
 }
 ?>
@@ -94,7 +67,23 @@ if(isset($_POST['p_submit'])){
               <div class="request_for_mockup_col">
                 <div class="heading_col">
                   <h1 class="page_heading">Request for Mockup</h1>
-                  <?php echo $msg;?>
+                  <?php 
+                    if($msg != ''){
+                      if($msg == 'success'){
+                        echo '
+                        <div class="alert alert-success" role="alert">
+                          Message sent successful. We will contact you ASAP.
+                        </div>
+                        ';
+                      }elseif($msg == 'fail'){
+                        echo '
+                        <div class="alert alert-warning" role="alert">
+                          Message sending failed.
+                        </div>
+                        ';
+                      }
+                    }
+                  ?>
                   <p>
                     This part of the website is made to submit your request for
                     your desired mockup however we don’t promise any timeframe
