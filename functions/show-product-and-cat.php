@@ -1,6 +1,7 @@
 <?php
-function show_sub_cats_in_listing_page($parent_category_slug){
-    $html='<ul class="nav nav-tabs" role="tablist">';
+function show_sub_cats_in_listing_page($parent_category_slug)
+{
+    $html = '<ul class="nav nav-tabs" role="tablist">';
     $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
     // $parent_category_slug = 'free-mockups'; // Replace with the slug of the parent category
 
@@ -20,25 +21,25 @@ function show_sub_cats_in_listing_page($parent_category_slug){
         foreach ($subcategories as $subcategory) {
             // term_id, slug
             $count++;
-            if($count <=9){
-            $html.= '<li class="nav-item nav-link get-product" role="presentation" cat-slug="'.$subcategory->slug.'">'.$subcategory->name.'</li>';                  
-            }else{
-            $tmp_cat[$subcategory->slug] = $subcategory->name;
+            if ($count <= 9) {
+                $html .= '<li class="nav-item nav-link get-product" page-no="1" role="presentation" cat-slug="' . $subcategory->slug . '">' . $subcategory->name . '</li>';
+            } else {
+                $tmp_cat[$subcategory->slug] = $subcategory->name;
             }
         }
-        if(count($tmp_cat)==1){
-            foreach ($tmp_cat as $cat_id => $cat_name) {
-            $html.= '<li class="nav-item nav-link" role="presentation">'.$cat_name.'</li>';  
+        if (count($tmp_cat) == 1) {
+            foreach ($tmp_cat as $cat_slug => $cat_name) {
+                $html .= '<li class="nav-item nav-link get-product" page-no="1" role="presentation" cat-slug="' . $cat_slug . '">' . $cat_name . '</li>';
             }
-        }elseif(count($tmp_cat)>1){
+        } elseif (count($tmp_cat) > 1) {
             $count = 0;
-            $html.= '
+            $html .= '
             <li class="nav-item" role="presentation">';
             foreach ($tmp_cat as $cat_slug => $cat_name) {
-            $count++;
-            if($count==1){
-                $html.= '              <button
-                class="nav-link"
+                $count++;
+                if ($count == 1) {
+                    $html .= '              <button
+                class="nav-link get-product" page-no="1"
                 id="billboard_tab_free"
                 data-bs-toggle="tab"
                 data-bs-target="#billboard_free"
@@ -46,8 +47,9 @@ function show_sub_cats_in_listing_page($parent_category_slug){
                 role="tab"
                 aria-controls="billboard_free"
                 aria-selected="false"
+                cat-slug="' . $cat_slug . '"
             >
-                '.$cat_name.'
+                ' . $cat_name . '
             </button>
             <div class="dropdown">
                 <button
@@ -56,73 +58,166 @@ function show_sub_cats_in_listing_page($parent_category_slug){
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 >
-                <img src="'.get_template_directory_uri().'/assets/images/tab_down_arrow.png" alt="" />
+                <img src="' . get_template_directory_uri() . '/assets/images/tab_down_arrow.png" alt="" />
                 </button>
 
                 <ul class="dropdown-menu dropdown-menu-end">';
-            }else{
-                $html.= '<li class="dropdown-item">'.$cat_name.'</li>';
-            } 
+                } else {
+                    $html .= '<li class="dropdown-item get-product" page-no="1" cat-slug="' . $cat_slug . '">' . $cat_name . '</li>';
+                }
             }
-            $html.= ' </ul>
+            $html .= ' </ul>
             </div>
         </li>';
         }
     } else {
-        $html.= 'No subcategories found for ' . $parent_category_slug;
+        $html .= 'No subcategories found for ' . $parent_category_slug;
     }
-    $html.= '</ul>';
+    $html .= '</ul>';
     return $html;
 }
 
 
-function get_product_with_pagination(){
-    // Replace these with your specific details
-    $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
-    $post_type = 'product'; // Replace with the name of your CPT
-    // $term_id = 123; // Replace with the ID of the term you want to filter by
-    // $posts_per_page = 10; // Number of posts per page
-    // $page_no = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
+function get_product_with_pagination()
+{
+
     $term_slug = $_POST['term_slug'];
     $posts_per_page = $_POST['posts_per_page'];
     $page_no = $_POST['page_no'];
-
-    $args = array(
-        'post_type' => $post_type,
-        'posts_per_page' => $posts_per_page,
-        'paged' => $page_no,
-        'tax_query' => array(
-            array(
-                'taxonomy' => $taxonomy,
-                'field' => 'slug',
-                'terms' => $term_slug,
+    $mockup_type = $_POST['mockup_type'];
+    $html = '';
+    if ($mockup_type == 'free-mockups') {
+        $html .= '<div class="card_container row_d justify-content-center">';
+        $args = array(
+            'post_type' => 'product', // Replace with the name of your CPT
+            'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
+            'paged' => $page_no,
+            'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                    'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                    'terms' => $term_slug, // Replace with the slug of the custom category term you want to query
+                ),
             ),
-        ),
-    );
+        );
 
-    $custom_query = new WP_Query($args);
+        $custom_query = new WP_Query($args);
 
-    if ($custom_query->have_posts()) {
-        $post_array = [];
-        while ($custom_query->have_posts()) {
-            $custom_query->the_post();
+        if ($custom_query->have_posts()) {
+            $count = 0;
+            while ($custom_query->have_posts()) {
+                $custom_query->the_post();
+                $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                $count++;
+                if ($count == 1) {
+                    $html .= '<div class="card_item get_off">
+                            <div class="inner_col">
+                            <div class="get_premium_mockups_section">
+                                <div
+                                class="premium_mockups_inner d-flex justify-content-between align-items-center"
+                                >
+                                <div class="premium_text">
+                                    <h2
+                                    class="section_heading section_heading_primary section_heading_bold"
+                                    >
+                                    Get 96% Off
+                                    <span class="section_heading_medium default_color"
+                                        >on premium mockups</span
+                                    >
+                                    </h2>
+                                    <span class="primary_color"
+                                    >As low as $0.14 a mockup</span
+                                    >
+                                    <a href="' . site_url('get-subscription') . '" class="btn_primary _btn"
+                                    >Get premium</a
+                                    >
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>';
+                } elseif ($count == 7) {
+                    $html .= '<div class="card_item ad">
+                                <div class="inner_col">
+                                <img src="' . get_template_directory_uri() . '/assets/images/google_ad.png" alt="" />
+                                </div>
+                            </div>';
+                } elseif ($count == 12) {
+                    $html .= '<div class="card_item ad">
+                                <div class="inner_col">
+                                <img src="' . get_template_directory_uri() . '/assets/images/affiliate_ad_second.png" alt="" />
+                                </div>
+                            </div>';
+                }
 
-            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
-            $post_array[get_the_ID()] = ['title'=>get_the_title(), 'img'=>$thumbnail_url];
-
+                $html .= '<div class="card_item">
+                            <a href="' . site_url('free-mockup-product') . '">
+                                <div class="inner_col">
+                                <div class="img_col pixpine_card_border">
+                                    <img src="' . $thumbnail_url . '" alt="" />
+                                </div>
+                                <div class="text_col">
+                                    <h4 class="default_color">' . get_the_title() . '</h4>
+                                    <p class="primary_color">Free</p>
+                                </div>
+                                </div>
+                            </a>
+                        </div>';
+            }
+            // Restore the global post object
+            wp_reset_postdata();
+        } else {
+            // No posts found
+            $html .= 'No product found.';
         }
-        $output = [];
-        $output['product'] = $post_array;
-        $output['total_page'] = $custom_query->max_num_pages;
-        echo json_encode($output);
 
-        // Restore the global post object
-        wp_reset_postdata();
+        $html .= '</div>';
 
-    } else {
-        $output = [];
-        echo json_encode($output);
+        $current_page = $page_no;
+        $total_page = $custom_query->max_num_pages;
+        if($total_page > 1){
+            $html .= '<nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">';
+            if ($current_page != 1) {
+                $html .= '<li class="page-item left_button get-product" cat-slug="'.$term_slug.'" page-no="'.($current_page-1).'">
+                            <span class="page-link" >
+                            <img src="' . get_template_directory_uri() . '/assets/images/pagination_left_icon.png" alt="" />
+                            </span>
+                        </li>';
+            }
+
+
+            for ($i = -3; $i <= 3; $i++) {
+                $page_no = $current_page + $i;
+                if (($page_no > 0) && ($page_no <= $total_page)) {
+                    $html .= '<li class="page-item get-product" cat-slug="'.$term_slug.'" page-no="' . $page_no . '">
+                                <span class="page-link" >' . $page_no . '</span>
+                            </li>';
+                }
+            }
+
+            if ($page_no < $total_page) {
+                $html .= '<li class="page-item get-product" cat-slug="'.$term_slug.'" page-no="' . $total_page . '">
+                            <span class="page-link" >...' . $total_page . '</span>
+                        </li>';
+            }
+
+            if ($current_page != $total_page) {
+                $html .= '
+                    <li class="page-item right_button get-product" cat-slug="'.$term_slug.'" page-no="' . ($current_page + 1) . '" >
+                        <span class="page-link" >
+                        <img src="' . get_template_directory_uri() . '/assets/images/pagination_right_icon.png" alt="" />
+                        </span>
+                    </li>';
+            }
+            $html .= '</ul>
+                    </nav>';            
+        }
+
     }
+    echo $html;
     die();
 }
 add_action('wp_ajax_get_product_with_pagination', 'get_product_with_pagination'); // For logged-in users

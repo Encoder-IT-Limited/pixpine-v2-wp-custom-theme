@@ -2215,3 +2215,7 @@ body.modal-open {
     margin-left: 10px;
   }
 }
+
+.get-product{
+  cursor:pointer;
+}

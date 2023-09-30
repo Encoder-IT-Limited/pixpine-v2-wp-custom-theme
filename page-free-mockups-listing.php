@@ -40,6 +40,9 @@ get_header();
         $parent_category_slug = 'free-mockups';
         echo show_sub_cats_in_listing_page($parent_category_slug); 
         ?>
+        <input type="hidden" id="mockup-type" value="free-mockups">
+        <input type="hidden" id="post-per-page" value="13">
+        <input type="hidden" id="html-output-class" value="free-mockup-paginated-products-and-pagination">
 
         <div class="tab-content">
           <div
@@ -48,7 +51,7 @@ get_header();
             role="tabpanel"
             aria-labelledby="business_cards_tab_free"
           >
-            <div class="tab_inner_content">
+            <div class="tab_inner_content free-mockup-paginated-products-and-pagination">
               <div class="card_container row_d justify-content-center">
                 <?php
                 $args = array(
@@ -144,13 +147,14 @@ get_header();
               <?php
                 $current_page = 1;
                 $total_page = $custom_query->max_num_pages;
+                if($total_page > 1){
               ?>
               <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                   <?php 
                   if($current_page != 1){
                   ?>
-                  <li class="page-item left_button" cat-slag="free-mockups" page-no="<?php echo $current_page-1;?>">
+                  <li class="page-item left_button get-product" cat-slug="free-mockups" page-no="<?php echo $current_page-1;?>">
                     <span class="page-link" >
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_left_icon.png" alt="" />
                     </span>
@@ -162,21 +166,21 @@ get_header();
                     $page_no = $current_page+$i;
                     if(($page_no>0) && ($page_no<=$total_page)){
                   ?>
-                  <li class="page-item" cat-slag="free-mockups" page-no="<?php echo $page_no;?>">
+                  <li class="page-item get-product" cat-slug="free-mockups" page-no="<?php echo $page_no;?>">
                     <span class="page-link" ><?php echo $page_no;?></span>
                   </li>
                   <?php } } ?>
                   <?php 
                   if($page_no < $total_page){ 
                   ?>
-                  <li class="page-item" cat-slag="free-mockups" page-no="<?php echo $total_page;?>">
+                  <li class="page-item get-product" cat-slug="free-mockups" page-no="<?php echo $total_page;?>">
                     <span class="page-link" >...<?php echo $total_page;?></span>
                   </li>
                   <?php } ?>
                   <?php 
                   if($current_page != $total_page){
                     ?>
-                  <li class="page-item right_button" cat-slag="free-mockups" page-no="<?php echo $current_page+1;?>">
+                  <li class="page-item right_button get-product" cat-slug="free-mockups" page-no="<?php echo $current_page+1;?>">
                     <span class="page-link" >
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_right_icon.png" alt="" />
                     </span>
@@ -184,6 +188,7 @@ get_header();
                   <?php } ?>
                 </ul>
               </nav>
+              <?php } ?>
             </div>
           </div>
         </div>
