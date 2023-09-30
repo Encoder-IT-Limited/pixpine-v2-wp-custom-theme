@@ -10,8 +10,11 @@ get_header();
           
           <!-- Banner search form -->
           <?php include get_template_directory() .'/includes/search-form.php';?>
+          <input type="hidden" id="mockup-type" value="premium-mockups">
+          <input type="hidden" id="post-per-page" value="20">
+          <input type="hidden" id="html-output-class" value="premium-mockup-paginated-products-and-pagination">
 
-          
+            
         </div>
       </section>
       <section class="collection_premium_section">
@@ -343,7 +346,7 @@ get_header();
                 role="tabpanel"
                 aria-labelledby="stationery_tab"
               >
-                <div class="tab_inner_content">
+                <div class="tab_inner_content premium-mockup-paginated-products-and-pagination">
                   <div class="card_container row_d justify-content-center">
 
                   <?php
@@ -401,38 +404,53 @@ get_header();
                   ?>
 
                   </div>
+                  <?php
+                    $current_page = 1;
+                    $total_page = $custom_query->max_num_pages;
+                    if($total_page > 1){
+                  ?>
                   <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                      <li class="page-item left_button">
-                        <a class="page-link" href="#">
+                      <?php 
+                      if($current_page != 1){
+                      ?>
+                      <li class="page-item left_button get-product" cat-slug="premium-mockups" page-no="<?php echo $current_page-1;?>">
+                        <span class="page-link" >
                           <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_left_icon.png" alt="" />
-                        </a>
+                        </span>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">1</a>
+                      <?php } ?>
+
+                      <?php
+                      for($i=-3; $i<=3; $i++){
+                        $page_no = $current_page+$i;
+                        if(($page_no>0) && ($page_no<=$total_page)){
+                      ?>
+                      <li class="page-item get-product" cat-slug="premium-mockups" page-no="<?php echo $page_no;?>">
+                        <span class="page-link" ><?php echo $page_no;?></span>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
+                      <?php } } ?>
+                      <?php 
+                      if($page_no < $total_page){ 
+                      ?>
+                      <li class="page-item get-product" cat-slug="premium-mockups" page-no="<?php echo $total_page;?>">
+                        <span class="page-link" >...<?php echo $total_page;?></span>
                       </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">...100</a>
-                      </li>
-                      <li class="page-item right_button">
-                        <a class="page-link" href="#">
+                      <?php } ?>
+                      <?php 
+                      if($current_page != $total_page){
+                        ?>
+                      <li class="page-item right_button get-product" cat-slug="premium-mockups" page-no="<?php echo $current_page+1;?>">
+                        <span class="page-link" >
                           <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_right_icon.png" alt="" />
-                        </a>
+                        </span>
                       </li>
+                      <?php } ?>
                     </ul>
                   </nav>
+                  <?php } ?>
+
+                  
                 </div>
               </div>
               <div

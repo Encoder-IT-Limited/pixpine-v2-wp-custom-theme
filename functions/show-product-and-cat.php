@@ -216,7 +216,101 @@ function get_product_with_pagination()
                     </nav>';            
         }
 
-    }
+    }elseif($mockup_type == 'premium-mockups'){
+        $html .= '<div class="card_container row_d justify-content-center">';
+        $args = array(
+            'post_type' => 'product', // Replace with the name of your CPT
+            'posts_per_page' => 20, // Number of posts to display (adjust as needed)
+            'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+            'tax_query' => array(
+            array(
+                'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                'terms' => $term_slug, // Replace with the slug of the custom category term you want to query
+            ),
+            ),
+        );
+
+        $custom_query = new WP_Query($args);
+
+        if ($custom_query->have_posts()) {
+            $count = 0;
+            while ($custom_query->have_posts()) {
+            $custom_query->the_post();
+            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+            // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+
+
+
+            $html .= '<div
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#premiumModal"
+            class="card_item"
+        >
+            <div class="item_a">
+            <div class="inner_col">
+                <div class="img_col pixpine_card_border">
+                <img src="'.$thumbnail_url.'" alt="" />
+                </div>
+                <div class="text_col">
+                <h4 class="default_color">'.get_the_title().'</h4>
+                <p class="primary_color">Premium</p>
+                </div>
+            </div>
+            </div>
+        </div>';
+
+        }
+        wp_reset_postdata();
+        } else {
+            $html .= 'No product found.';
+        }
+        
+
+        $html .= '</div>';
+
+        $current_page = 1;
+        $total_page = $custom_query->max_num_pages;
+        if($total_page > 1){
+
+            $html .= '<nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">';
+
+            if($current_page != 1){
+            
+                $html .= '<li class="page-item left_button get-product" cat-slug="premium-mockups" page-no="'.($current_page-1).'">
+            <span class="page-link" >
+                <img src="'.get_template_directory_uri().'/assets/images/pagination_left_icon.png" alt="" />
+            </span>
+            </li>';
+            }
+
+            
+            for($i=-3; $i<=3; $i++){
+            $page_no = $current_page+$i;
+            if(($page_no>0) && ($page_no<=$total_page)){
+                $html .= '<li class="page-item get-product" cat-slug="premium-mockups" page-no="'.$page_no.'">
+            <span class="page-link" >'.$page_no.'</span>
+            </li>';
+            } } 
+            if($page_no < $total_page){ 
+                $html .= '<li class="page-item get-product" cat-slug="premium-mockups" page-no="'.$total_page.'">
+            <span class="page-link" >...'.$total_page.'</span>
+            </li>';
+            } 
+            if($current_page != $total_page){
+                $html .= '<li class="page-item right_button get-product" cat-slug="premium-mockups" page-no="'.($current_page+1).'">
+            <span class="page-link" >
+                <img src="'.get_template_directory_uri().'/assets/images/pagination_right_icon.png" alt="" />
+            </span>
+            </li>';
+            }
+            $html .= '</ul>
+        </nav>';
+        } 
+    } 
+    
     echo $html;
     die();
 }
