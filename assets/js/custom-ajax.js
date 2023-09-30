@@ -47,4 +47,35 @@ jQuery(document).ready(function($) {
         console.log(term_slug, posts_per_page, page_no, mockup_type, html_output_class);
         get_product_with_pagination(term_slug, posts_per_page, page_no, mockup_type, html_output_class);
     });
+
+    $(document).on('click', '.submit-subscription', function(){
+        var sub_email = $("#subscription-email").val(); //free-mockups
+
+        if(emailValidate(sub_email)){
+            $.ajax({
+                url: ajax_object.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'save_subscription_email',
+                    nonce: ajax_object.ajax_nonce, // Include the nonce
+                    'sub_email' : sub_email
+                },
+                success: function(response) {
+                    alert(response);
+                    $("#subscription-email").val("");
+                },
+            });            
+        }else{
+            alert('This is not a valid email.');
+        }
+
+    });
+    function emailValidate(email){
+        var check = "" + email;
+        if((check.search('@')>=0)&&(check.search(/\./)>=0))
+            if(check.search('@')<check.split('@')[1].search(/\./)+check.search('@')) return true;
+            else return false;
+        else return false;
+    }
+
 });

@@ -8,8 +8,8 @@
         Subscribe for upcoming freebies, offers, and best deals
       </p>
       <form action="">
-        <input type="email" name="" id="" placeholder="Email" required />
-        <input class="btn_primary _btn" type="submit" value="SUBSCRIBE" />
+        <input type="email" name="" id="subscription-email" placeholder="Email" required />
+        <input class="btn_primary _btn submit-subscription" type="button" value="SUBSCRIBE" />
       </form>
     </div>
   </div>
