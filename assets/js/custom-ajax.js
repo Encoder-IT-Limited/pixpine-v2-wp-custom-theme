@@ -105,4 +105,32 @@ jQuery(document).ready(function($) {
 
     });
 
+    $(document).on('submit', '#signup-form', function(e){
+        e.preventDefault();
+
+        var signup_first_name = $("#signup-first-name").val();
+        var signup_last_name = $("#signup-last-name").val();
+        var signup_email = $("#signup-email").val();
+
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'pixpine_signup',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'signup_first_name' : signup_first_name,
+                'signup_last_name' : signup_last_name,
+                'signup_email' : signup_email,
+            },
+            success: function(response) {
+                if(response == 'success'){
+                    alert('Signup is successful. We have sent you password in your email.');
+                    window.location.reload();
+                }else{
+                    alert(response);
+                }
+            },
+        });    
+
+    });
 });

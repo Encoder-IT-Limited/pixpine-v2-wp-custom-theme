@@ -38,18 +38,18 @@
                   New in here? Create Free Account
                 </h2>
               </div>
-              <form action="">
+              <form action="" id="signup-form">
                 <input
                   type="text"
                   name=""
-                  id=""
+                  id="signup-first-name"
                   placeholder="First Name"
                   required
                 />
                 <input
                   type="text"
                   name=""
-                  id=""
+                  id="signup-last-name"
                   placeholder="Last Name"
                   required
                 />
@@ -57,7 +57,7 @@
                   <input
                     type="email"
                     name=""
-                    id=""
+                    id="signup-email"
                     placeholder="Email"
                     required
                   />
