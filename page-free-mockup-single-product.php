@@ -3,6 +3,23 @@
 Template Name: Free Mockup Product
 */
 get_header();
+
+$post_id = $_GET['id'];
+$post = get_post($post_id);
+
+$current_category_name = '';
+$taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+$custom_categories = wp_get_post_terms($post_id, $taxonomy);
+// Check if custom categories were found
+if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
+  // Loop through the custom categories and display them
+  foreach ($custom_categories as $category) {
+    if(esc_html($category->name) != "Free Mockups"){
+      $current_category_name = esc_html($category->name);
+    }
+  }
+}
+
 ?>
 
 <main>
@@ -31,17 +48,31 @@ get_header();
                   <div class="first_free_product_container">
                     <div class="row_d">
                       <div class="first_image_text_col">
-                        <div class="card_item">
+                        <?php $_custom_product_gallery = get_post_meta($post->ID, '_custom_product_gallery', true);
+                        $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+                        foreach ($_custom_product_gallery as $image_id) {
+                          $image_url = wp_get_attachment_image_src($image_id, 'full'); // 'full' is the image size, change it as needed
+                          if ($image_url) {
+                          ?>
+                            <div class="card_item">
+                              <div class="card_inner pixpine_card_border">
+                                <img src="<?php echo $image_url[0];?>" alt="" />
+                              </div>
+                            </div>
+                          <?php 
+                          } else {
+                              // Image not found or invalid image ID
+                              echo 'Image not found or invalid image ID.';
+                          }
+                        }
+                        ?>
+
+                        <!-- <div class="card_item">
                           <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                            <img src="<?php echo get_template_directory_uri();?>" alt="" />
                           </div>
-                        </div>
-                        <div class="card_item">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </div>
-                        <p>
+                        </div> -->
+                        <!-- <p>
                           We are <a href="">PIXPINE</a> where people can get high-quality
                           user-friendly mockups for their projects. Everything
                           we do is for the purpose that it delivers and drives
@@ -57,7 +88,8 @@ get_header();
                           perspective buyers’ situations. We are a group of
                           creative enthusiasts who work tirelessly to bring
                           something fresh and beneficial to the market.
-                        </p>
+                        </p> -->
+                        <?php echo $post->post_content;?>
                       </div>
                       <div class="first_card_col">
                         <div class="card_item">
@@ -182,76 +214,25 @@ get_header();
                   </div>
                   <div class="related_inner_col">
                     <div class="row_d">
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
+                      <?php
+                      $related_product = get_post_meta($post->ID, 'related_product', true);
+                      if($related_product != ''){
+                        $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($related_product)";
+                        $results = $wpdb->get_results($query);
+                        foreach ($results as $result) {
+                          $thumbnail_url = get_the_post_thumbnail_url($result->ID);
+                      ?>
+                        <div class="card_item">
+                          <a href="<?php echo site_url('free-mockup-product');?>?id=<?php echo $result->ID;?>">
+                            <div class="card_inner pixpine_card_border">
+                              <img src="<?php echo $thumbnail_url;?>" alt="" />
+                            </div>
+                          </a>
+                        </div>
+                      <?php
+                        }        
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -260,9 +241,9 @@ get_header();
             <div class="free_business_card_col right_col">
               <div class="heading_col">
                 <h1 class="page_heading">
-                  Free Business Card with Letterhead Mockup
+                  <?php echo $post->post_title;?>
                 </h1>
-                <p>Business Card</p>
+                <p><?php echo $current_category_name;?></p>
               </div>
               <div class="content_col">
                 <div class="google_add">
