@@ -172,3 +172,4 @@ require get_template_directory() . '/admin/functions.php';
  */
 require get_template_directory() . '/functions/show-product-and-cat.php';
 require get_template_directory() . '/functions/subcription.php';
+require get_template_directory() . '/functions/user.php';

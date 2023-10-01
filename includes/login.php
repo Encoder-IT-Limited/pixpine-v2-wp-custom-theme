@@ -38,11 +38,11 @@
                   Log in: Great to have you back!
                 </h2>
               </div>
-              <form action="">
+              <form action="" id="login-form">
                 <input
                   type="email"
                   name=""
-                  id=""
+                  id="login-email"
                   placeholder="Email"
                   required
                 />
@@ -50,7 +50,7 @@
                   <input
                     type="password"
                     name=""
-                    id=""
+                    id="login-password"
                     placeholder="Password"
                     required
                   />

@@ -78,4 +78,31 @@ jQuery(document).ready(function($) {
         else return false;
     }
 
+    $(document).on('submit', '#login-form', function(e){
+        e.preventDefault();
+
+        var user_email = $("#login-email").val();
+        var user_password = $("#login-password").val();
+
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'pixpine_login_user',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'user_email' : user_email,
+                'user_password' : user_password,
+            },
+            success: function(response) {
+                if(response == 'success'){
+                    alert('Login successful. Redirecting...');
+                    window.location.reload();
+                }else{
+                    alert(response);
+                }
+            },
+        });    
+
+    });
+
 });
