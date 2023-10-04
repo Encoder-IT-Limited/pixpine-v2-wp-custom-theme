@@ -20,6 +20,27 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
   }
 }
 
+/**
+ * find similar sub cat in premium category
+ */
+$same_cat_id_in_premium_cat = '';
+$parent_term_slug = 'premium-mockups'; // Replace with the actual parent term slug
+$taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
+$parent_term = get_term_by('slug', $parent_term_slug, $taxonomy);
+if ($parent_term && !is_wp_error($parent_term)) {
+  $args = array(
+      'taxonomy' => $taxonomy,
+      'child_of' => $parent_term->term_id,
+  );
+  $subcategories = get_terms($args);
+  if (!is_wp_error($subcategories) && !empty($subcategories)) {
+      foreach ($subcategories as $subcategory) {
+        if($subcategory->name == $current_category_name){
+          $same_cat_id_in_premium_cat = $subcategory->term_id;
+        }
+      }
+  }
+}
 ?>
 
 <main>
@@ -92,36 +113,93 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         <?php echo $post->post_content;?>
                       </div>
                       <div class="first_card_col">
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+
+                        <?php
+                        // Define the custom post type (CPT) you want to query
+                        $cpt_slug = 'product'; // Replace with your CPT slug
+                        $subcategory_id = $same_cat_id_in_premium_cat;
+                        $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+                        // Create a new WP_Query instance to retrieve CPTs
+                        $args = array(
+                            'post_type' => $cpt_slug,
+                            'orderby'   => 'rand', // Order randomly
+                            'posts_per_page' => 3, // Retrieve all posts in the category
+                            'tax_query' => array(
+                              array(
+                                  'taxonomy' => $taxonomy,
+                                  'field'    => 'term_id',
+                                  'terms'    => $subcategory_id,
+                              ),
+                          ),
+                        );
+
+                        $random_cpts = new WP_Query($args);
+
+                        // Check if there are posts found
+                        $cnt = 0;
+                        if ($random_cpts->have_posts()) {
+                          while ($random_cpts->have_posts()) {
+                            $cnt++;
+                            $random_cpts->the_post();
+                            $thumbnail_url = get_the_post_thumbnail_url($random_cpts->ID);
+                        ?>
+                              <div class="card_item">
+                                <a href="">
+                                  <div class="inner_col">
+                                    <div class="img_col pixpine_card_border">
+                                      <img src="<?php echo $thumbnail_url;?>" alt="<?php the_title();?>" />
+                                    </div>
+                                    <div class="text_col">
+                                      <h4 class="default_color">
+                                        <?php the_title();?>
+                                      </h4>
+                                      <p class="primary_color">Premium Mockups</p>
+                                    </div>
+                                  </div>
+                                </a>
                               </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Free Business Card with Letterhead Mockup
-                                </h4>
-                                <p class="primary_color">Premium Mockups</p>
+                              
+                        <?php
+                            if($cnt == 2){
+                        ?>
+                              <div class="card_item get_off">
+                                <div class="inner_col">
+                                  <div class="get_premium_mockups_section">
+                                    <div
+                                      class="premium_mockups_inner d-flex justify-content-between align-items-center"
+                                    >
+                                      <div class="premium_text text-center w-100">
+                                        <h2
+                                          class="section_heading section_heading_primary section_heading_bold"
+                                        >
+                                          Get 96% Off
+                                          <span
+                                            class="section_heading_medium default_color"
+                                            >on premium mockups</span
+                                          >
+                                        </h2>
+                                        <span class="primary_color"
+                                          >As low as $0.14 a mockup</span
+                                        >
+                                        <a
+                                          href="<?php echo site_url('get-subscription');?>"
+                                          class="btn_primary _btn"
+                                          >Get premium</a
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="primary_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
+                        <?php
+                            }
+                          }
+                          wp_reset_postdata(); // Restore the global post data
+                        } else {
+                            echo 'No CPTs found in this category.';
+                        }
+                        if($cnt <2){
+                        ?>
                         <div class="card_item get_off">
                           <div class="inner_col">
                             <div class="get_premium_mockups_section">
@@ -151,21 +229,9 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             </div>
                           </div>
                         </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="primary_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
+                        <?php
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
