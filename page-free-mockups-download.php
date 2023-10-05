@@ -43,7 +43,30 @@ $post_id = $_GET['id'];
                   </div>
                   <div class="related_inner_col">
                     <div class="row_d">
-                      <div class="card_item">
+                      <?php
+                      $value4 = get_post_meta($post_id, 'related_product', true);
+                      if($value4 != ''){
+                          $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value4)";
+                          $results = $wpdb->get_results($query);
+                          foreach ($results as $result) {
+                            $thumbnail_url = get_the_post_thumbnail_url($result->ID);
+                      ?>
+                            <div class="card_item">
+                              <a href="<?php echo site_url('free-mockup-product');?>id=<?php echo $result->ID;?>">
+                                <div class="card_inner pixpine_card_border">
+                                  <img src="<?php echo $thumbnail_url;?>" alt="" />
+                                </div>
+                              </a>
+                            </div>
+                      <?php
+                          }        
+                      }
+                      ?>
+
+
+
+
+                      <!-- <div class="card_item">
                         <a href="">
                           <div class="card_inner pixpine_card_border">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
@@ -91,14 +114,8 @@ $post_id = $_GET['id'];
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                           </div>
                         </a>
-                      </div>
-                      <div class="card_item">
-                        <a href="">
-                          <div class="card_inner pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                          </div>
-                        </a>
-                      </div>
+                      </div> -->
+
                     </div>
                   </div>
                 </div>
