@@ -266,7 +266,7 @@ if ($parent_term && !is_wp_error($parent_term)) {
                     </div>
                     <a target="_blank"
                       class="_btn btn_primary"
-                      href="<?php echo site_url('free-mockups-download');?>"
+                      href="<?php echo site_url('free-mockups-download');?>?id=<?php echo $post_id;?>"
                       >DOWNLOAD</a
                     >
                   </div>

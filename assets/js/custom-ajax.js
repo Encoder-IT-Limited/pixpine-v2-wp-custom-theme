@@ -133,4 +133,37 @@ jQuery(document).ready(function($) {
         });    
 
     });
+
+    // show download button after time
+    if ($("#hidden-post-id-free-mockup-download-page").length > 0) {
+
+        var downloadButton = '';
+        var postId = $("#hidden-post-id-free-mockup-download-page").val();
+    
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'pixpine_get_html_download_link',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'postId' : postId,
+            },
+            success: function(response) {
+                downloadButton = response;
+                // $(".free_download_btn_contianer").html(response);
+            },
+        });  
+
+        var tmpTime = 10;
+        var interval = setInterval(function() {
+            tmpTime--;
+            if(tmpTime>=0){
+                $("#time-count").html(tmpTime);
+            }else{
+                $(".free_download_btn_contianer").html(downloadButton);
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+    
 });

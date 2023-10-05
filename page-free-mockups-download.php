@@ -3,6 +3,7 @@
 Template Name: Free Mockups Download
 */
 get_header();
+$post_id = $_GET['id'];
 ?>
 
 <main>
@@ -11,7 +12,7 @@ get_header();
           
           <!-- Banner search form -->
           <?php include get_template_directory() .'/includes/search-form.php';?>
-
+          <input type="hidden" id="hidden-post-id-free-mockup-download-page" value="<?php echo $post_id;?>" >
           
         </div>
       </section>
@@ -25,8 +26,8 @@ get_header();
                     <img src="<?php echo get_template_directory_uri();?>/assets/images/google_ad_h117.png" alt="" />
                   </div>
                   <div class="free_download_btn_contianer text-center">
-                    <p>Your download link should be ready in 10 second</p>
-                    <button class="_btn btn_primary">DOWNLOAD</button>
+                    <p>Your download link should be ready in <span id="time-count">10</span> second</p>
+                    <!-- <button class="_btn btn_primary">DOWNLOAD</button> -->
                   </div>
                   <div class="google_ad">
                     <img src="<?php echo get_template_directory_uri();?>/assets/images/google_ad_h117.png" alt="" />

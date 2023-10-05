@@ -383,6 +383,26 @@ function get_pagination_html($current_page, $total_page, $term_slug){
     </nav>';
     return $html;
 }
+
+
+function pixpine_get_html_download_link() {
+    // Verify the nonce
+    if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+        // Nonce is valid, process the AJAX request
+        $post_id = $_POST['postId'];
+        $link = get_post_meta($post_id, 'download_link', true);
+        echo '<a href="'.$link.'" download="pixpine"><button class="_btn btn_primary">DOWNLOAD</button></a>';
+    } else {
+        // Nonce is not valid, reject the request
+        echo 'Nonce verification failed.';
+    }
+
+    wp_die(); // This is required to end the AJAX request
+}
+add_action('wp_ajax_pixpine_get_html_download_link', 'pixpine_get_html_download_link'); // For logged-in users
+add_action('wp_ajax_nopriv_pixpine_get_html_download_link', 'pixpine_get_html_download_link'); // For non-logged-in users
+
+
 /**
  * Ajax template 
  */
