@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+jQuery(document).ready(function($) {
 
     /* For Navbar button */
 
@@ -160,6 +160,6 @@ jQuery(document).ready(function () {
     jQuery(".mobule_nav_tabs_button").click(function () {
         jQuery(".tab_img_container , .dashboard_navbar").toggleClass("open_menu");
     });
-
+    
 
 });

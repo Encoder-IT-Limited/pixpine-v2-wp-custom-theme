@@ -403,10 +403,76 @@ add_action('wp_ajax_pixpine_get_html_download_link', 'pixpine_get_html_download_
 add_action('wp_ajax_nopriv_pixpine_get_html_download_link', 'pixpine_get_html_download_link'); // For non-logged-in users
 
 
+
+function pixpine_get_premium_mockup_product_details_by_id() {
+    $output = [];
+    if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+        // Nonce is valid, process the AJAX request
+        $post_id = $_POST['pId'];
+        $cpt = get_post($cpt_id);
+        $output['title'] = $cpt->ID;
+        $output['title'] = $cpt->post_title;
+        $output['thumbnail_url'] = get_the_post_thumbnail_url(get_the_ID());
+
+        // similar_product
+        $similar_product = [];
+        $value5 = get_post_meta($cpt->ID, 'similar_product', true);
+        if($value5 != ''){
+            $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
+            $results = $wpdb->get_results($query);
+            foreach ($results as $result) {
+                $tmp = [];
+                $tmp['thumbnail_url'] = $result->post_title;
+                $tmp['thumbnail_url'] = $result->ID;
+                $tmp['thumbnail_url'] = get_the_post_thumbnail_url(get_the_ID());
+                array_push($similar_product, $tmp);
+            } 
+        }
+        $output['similar_product'] = $similar_product;
+        
+        // related_product
+        $related_product = [];
+        $value5 = get_post_meta($cpt->ID, 'related_product', true);
+        if($value5 != ''){
+            $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
+            $results = $wpdb->get_results($query);
+            foreach ($results as $result) {
+                $tmp = [];
+                $tmp['thumbnail_url'] = $result->post_title;
+                $tmp['thumbnail_url'] = $result->ID;
+                $tmp['thumbnail_url'] = get_the_post_thumbnail_url(get_the_ID());
+                array_push($related_product, $tmp);
+            } 
+        }
+        $output['related_product'] = $related_product;
+
+        // tags
+        $tags = [];
+        $cpt_tags = get_the_tags($cpt->ID);
+        if ($cpt_tags) {
+            foreach ($cpt_tags as $tag) {
+                $single_tag =  '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
+                array_push($tags, $single_tag);
+            }
+        }
+        $output['tags'] = $tags;
+        
+        
+    } else {
+        // Nonce is not valid, reject the request
+        echo 'Nonce verification failed.';
+    }
+
+    wp_die(); // This is required to end the AJAX request
+}
+add_action('wp_ajax_pixpine_get_premium_mockup_product_details_by_id', 'pixpine_get_premium_mockup_product_details_by_id'); // For logged-in users
+add_action('wp_ajax_nopriv_pixpine_get_premium_mockup_product_details_by_id', 'pixpine_get_premium_mockup_product_details_by_id'); // For non-logged-in users
+
+
 /**
  * Ajax template 
  */
-// function my_custom_action_callback() {
+// function my_custom_action() {
 //     // Verify the nonce
 //     if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
 //         // Nonce is valid, process the AJAX request
@@ -420,5 +486,5 @@ add_action('wp_ajax_nopriv_pixpine_get_html_download_link', 'pixpine_get_html_do
 
 //     wp_die(); // This is required to end the AJAX request
 // }
-// add_action('wp_ajax_my_custom_action', 'my_custom_action_callback'); // For logged-in users
-// add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_action_callback'); // For non-logged-in users
+// add_action('wp_ajax_my_custom_action', 'my_custom_action'); // For logged-in users
+// add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_action'); // For non-logged-in users

@@ -165,5 +165,22 @@ jQuery(document).ready(function($) {
             }
         }, 1000);
     }
-    
+
+
+    jQuery(document).on('click', '.premium-mockup-single', function(){
+        var pId = $(this).attr('p-id');
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'pixpine_get_premium_mockup_product_details_by_id',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'pId' : pId,
+            },
+            success: function(response) {
+                downloadButton = response;
+                // $(".free_download_btn_contianer").html(response);
+            },
+        });  
+    });
 });

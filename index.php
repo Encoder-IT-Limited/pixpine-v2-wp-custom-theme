@@ -478,12 +478,8 @@
                       // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                     ?>
 
-                    <div
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#premiumModal"
-                      class="card_item"
-                    >
+                    <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
+                    <div type="button" class="card_item premium-mockup-single" p-id="<?php echo get_the_ID();?>">
                       <div class="item_a">
                         <div class="inner_col">
                           <div class="img_col pixpine_card_border">
