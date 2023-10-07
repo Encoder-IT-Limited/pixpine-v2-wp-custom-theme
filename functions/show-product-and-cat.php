@@ -473,6 +473,15 @@ function pixpine_get_premium_mockup_product_details_by_id() {
             }
         }
         $output['tags'] = $tags;
+
+        // gallery
+        $_custom_product_gallery = get_post_meta($post->ID, '_custom_product_gallery', true);
+        $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+        $gallery = [];
+        foreach ($_custom_product_gallery as $image_id) {
+            array_push($gallery, wp_get_attachment_image_url($image_id));
+        }
+        $output['gallery'] = $gallery;
         
     } else {
         // Nonce is not valid, reject the request

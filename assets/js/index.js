@@ -16,7 +16,39 @@ jQuery(document).ready(function($) {
         filename = this.files[0].name;
         console.log(filename);
     });
-
+    /* 06.10.2023 start */
+    /* Premium product page modal slider start */
+    jQuery('.premium_single_img_slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        autoplay: true,
+        asNavFor: '.premium_multiple_img_slider'
+    });
+    jQuery('.premium_multiple_img_slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        asNavFor: '.premium_single_img_slider',
+        dots: false,
+        arrows: false,
+        autoplay: true,
+        focusOnSelect: true,
+        responsive: [{
+                breakpoint: 1025,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 451,
+                settings: {
+                    slidesToShow: 2,
+                }
+            }
+        ]
+    });
+    /* Premium product page modal slider end */
 
     /* premium-mocups-product-page Slider*/
     $('.similar_slider, .related_slider').slick({

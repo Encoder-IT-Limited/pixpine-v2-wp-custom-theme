@@ -7,37 +7,150 @@
 >
   <div class="modal-dialog">
     <div class="modal-content">
-
-      <!-- Product page Menu Start  -->
-      <?php include get_template_directory() .'/includes/menu.php';?>
-      <!-- Product page Menu End  -->
-
       <main>
-        <section class="banner_section">
-          <div class="container">
-            <!-- Banner search form -->
-            <?php include get_template_directory() .'/includes/search-form.php';?>
-          </div>
-        </section>
         <section class="premium_product_page">
           <div class="container">
             <div class="section_width">
               <div class="row_d">
                 <div class="slider_product_about_column">
                   <div class="heading_col">
-                      <h1 class="page_heading">
+                      <h1 class="page_heading premium-module-content-title">
                         Simple Vertical Business Card Mockup
                       </h1>
                       <p>
-                        <span class="user_id">ID: 00000</span> in
-                        <span class="primary_color"
+                        <span class="user_id">ID: <span class="premium-module-content-id">00000</span></span> in
+                        <span class="primary_color premium-module-content-cat"
                           >Stationery & Business Card</span
                         >
                       </p>
                   </div>
+
+                  <!-- 06.10.2023 start -->
+                  <!-- Slider Start -->
                   <div class="slider_column">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/slider_product_page.png" alt="" />
+
+                    <!-- Single img slider -->
+                    <div class="premium_single_img_slider premium-module-content-gallery">
+                      <!-- 
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="">
+                          </div>
+                          <button class="slider__wishlist">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_1.jpeg" alt="">
+                          </div>
+                          <button class="slider__wishlist">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_2.jpeg" alt="">
+                          </div>
+                          <button class="slider__wishlist">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_3.jpeg" alt="">
+                          </div>
+                          <button class="slider__wishlist">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_4.jpeg" alt="">
+                          </div>
+                          <button class="slider__wishlist">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_5.jpeg" alt="">
+                          </div>
+                          <button class="slider__wishlist">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          </button>
+                        </div>
+                      </div> -->
+
+                    </div>
+                    <!-- Single img slider end -->
+
+
+
+                    <!-- Multiple img slider start -->
+                    <div class="premium_multiple_img_slider premium-module-content-gallery-thumnail">
+
+                      <!-- <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                        <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_1.jpeg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                        <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_2.jpeg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_3.jpeg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_4.jpeg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider__item">
+                        <div class="inner__slider">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_5.jpeg" alt="">
+                          </div>
+                        </div>
+                      </div> -->
+
+                    </div>
                   </div>
+                  <!-- Multiple img slider end -->
+
+                  <!-- Slider End -->
+                  <!-- 06.10.2023 end -->
+
                   <div class="about_product product">
                     <div class="d-flex justify-content-between">
                       <h2 class="section_heading">About Product</h2>
@@ -355,7 +468,7 @@
                         <p>Get this for only $0.14 with unlimited downloads.</p>
                         <a
                           class="_btn btn_black text-center"
-                          href="<?php echo site_url('get-subscription');?>"
+                          href="subscription.php"
                           >Get premium</a
                         >
                       </div>
@@ -377,7 +490,7 @@
                           <li>
                             <p>
                               <span>License:</span>
-                              <a href="<?php echo site_url('license');?>">Commercial and Personal</a>
+                              <a href="license.php">Commercial and Personal</a>
                             </p>
                           </li>
                           <li>
