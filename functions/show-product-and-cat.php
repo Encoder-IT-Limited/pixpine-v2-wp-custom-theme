@@ -407,12 +407,29 @@ add_action('wp_ajax_nopriv_pixpine_get_html_download_link', 'pixpine_get_html_do
 function pixpine_get_premium_mockup_product_details_by_id() {
     $output = [];
     if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+        global $wpdb;
         // Nonce is valid, process the AJAX request
         $post_id = $_POST['pId'];
-        $cpt = get_post($cpt_id);
-        $output['title'] = $cpt->ID;
+        $cpt = get_post($post_id);
+        $output['id'] = $cpt->ID;
         $output['title'] = $cpt->post_title;
-        $output['thumbnail_url'] = get_the_post_thumbnail_url(get_the_ID());
+        $output['content'] = $cpt->post_content;
+        $output['thumbnail_url'] = get_the_post_thumbnail_url($cpt->ID);
+
+        // get category
+        $current_category_name = '';
+        $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+        $custom_categories = wp_get_post_terms($post_id, $taxonomy);
+        // Check if custom categories were found
+        if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
+            // Loop through the custom categories and display them
+            foreach ($custom_categories as $category) {
+                if((esc_html($category->name) != "Premium Mockups") && (esc_html($category->name) != "Bundle Mockups")){
+                    $current_category_name = esc_html($category->name);
+                }
+            }
+        }
+        $output['category'] = $current_category_name;
 
         // similar_product
         $similar_product = [];
@@ -422,8 +439,8 @@ function pixpine_get_premium_mockup_product_details_by_id() {
             $results = $wpdb->get_results($query);
             foreach ($results as $result) {
                 $tmp = [];
-                $tmp['thumbnail_url'] = $result->post_title;
-                $tmp['thumbnail_url'] = $result->ID;
+                $tmp['title'] = $result->post_title;
+                $tmp['id'] = $result->ID;
                 $tmp['thumbnail_url'] = get_the_post_thumbnail_url(get_the_ID());
                 array_push($similar_product, $tmp);
             } 
@@ -438,8 +455,8 @@ function pixpine_get_premium_mockup_product_details_by_id() {
             $results = $wpdb->get_results($query);
             foreach ($results as $result) {
                 $tmp = [];
-                $tmp['thumbnail_url'] = $result->post_title;
-                $tmp['thumbnail_url'] = $result->ID;
+                $tmp['title'] = $result->post_title;
+                $tmp['id'] = $result->ID;
                 $tmp['thumbnail_url'] = get_the_post_thumbnail_url(get_the_ID());
                 array_push($related_product, $tmp);
             } 
@@ -457,12 +474,12 @@ function pixpine_get_premium_mockup_product_details_by_id() {
         }
         $output['tags'] = $tags;
         
-        
     } else {
         // Nonce is not valid, reject the request
         echo 'Nonce verification failed.';
     }
-
+    echo json_encode($output);
+    
     wp_die(); // This is required to end the AJAX request
 }
 add_action('wp_ajax_pixpine_get_premium_mockup_product_details_by_id', 'pixpine_get_premium_mockup_product_details_by_id'); // For logged-in users

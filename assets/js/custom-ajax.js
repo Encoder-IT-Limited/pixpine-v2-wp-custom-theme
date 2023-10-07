@@ -178,8 +178,10 @@ jQuery(document).ready(function($) {
                 'pId' : pId,
             },
             success: function(response) {
-                downloadButton = response;
-                // $(".free_download_btn_contianer").html(response);
+                $("#premiumModal").modal("show");
+                console.log('-------');
+                console.log(jQuery.parseJSON(response));
+                console.log('-------');
             },
         });  
     });
