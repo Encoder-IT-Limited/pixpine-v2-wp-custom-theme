@@ -240,12 +240,12 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                   <div class="sticky-top">
                     <div class="heading_col">
                       <h1 class="page_heading">
-                        Simple Vertical Business Card Mockup
+                      <?php echo $cpt->post_title;?>
                       </h1>
                       <p>
-                        <span class="user_id">ID: 00000</span> in
+                        <span class="user_id">ID: <?php echo $post_id;?></span> in
                         <span class="primary_color"
-                          >Stationery & Business Card</span
+                          ><?php echo $current_category_name;?></span
                         >
                       </p>
                     </div>
@@ -255,7 +255,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           class="d-flex justify-content-between align-items-center"
                         >
                           <h5>Price</h5>
-                          <h5>$3.00 USD</h5>
+                          <h5>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> USD</h5>
                         </div>
                         <button class="_btn btn_primary">Add to Cart</button>
                       </div>
