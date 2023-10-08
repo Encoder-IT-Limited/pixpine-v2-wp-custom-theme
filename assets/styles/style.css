@@ -2358,3 +2358,7 @@ body.modal-open {
     margin-left: 10px;
   }
 }
+
+.nav-item{
+  cursor: pointer;
+}

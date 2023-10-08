@@ -48,6 +48,51 @@ jQuery(document).ready(function($) {
         get_product_with_pagination(term_slug, posts_per_page, page_no, mockup_type, html_output_class);
     });
 
+
+    // home premium product
+    $(document).on('click', '.get-product-home-premium', function(){
+        var term_slug = $(this).attr('cat-slug');
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'get_product_home_premium',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'term_slug' : term_slug,
+                'posts_per_page' : 10,
+                'page_no' : 1,
+                // 'mockup_type' : mockup_type,
+                // Add any other data you need to send
+            },
+            success: function(response) {
+                $('.home-premium-products').html(response);
+            },
+        });
+    });
+
+    // home free product
+    $(document).on('click', '.get-product-home-free', function(){
+        var term_slug = $(this).attr('cat-slug');
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'get_product_home_free',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'term_slug' : term_slug,
+                'posts_per_page' : 8,
+                'page_no' : 1,
+                // 'mockup_type' : mockup_type,
+                // Add any other data you need to send
+            },
+            success: function(response) {
+                $('.home-free-products').html(response);
+            },
+        });
+    });
+
+
+    // email subscription
     $(document).on('click', '.submit-subscription', function(){
         var sub_email = $("#subscription-email").val(); //free-mockups
 
@@ -70,6 +115,7 @@ jQuery(document).ready(function($) {
         }
 
     });
+
     function emailValidate(email){
         var check = "" + email;
         if((check.search('@')>=0)&&(check.search(/\./)>=0))
@@ -78,6 +124,7 @@ jQuery(document).ready(function($) {
         else return false;
     }
 
+    // login
     $(document).on('submit', '#login-form', function(e){
         e.preventDefault();
 
@@ -105,6 +152,7 @@ jQuery(document).ready(function($) {
 
     });
 
+    // signup
     $(document).on('submit', '#signup-form', function(e){
         e.preventDefault();
 
@@ -166,7 +214,7 @@ jQuery(document).ready(function($) {
         }, 1000);
     }
 
-    
+    // show modal in single premium product page
     if ($("#hidden-show-premium-modal").length > 0) {
         $("#premiumModal").modal("show");
     }

@@ -1,5 +1,5 @@
 <?php
-function show_sub_cats_in_listing_page($parent_category_slug)
+function show_sub_cats_in_listing_page($parent_category_slug, $js_class='get-product')
 {
     $html = '<ul class="nav nav-tabs" role="tablist">';
     $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
@@ -22,14 +22,14 @@ function show_sub_cats_in_listing_page($parent_category_slug)
             // term_id, slug
             $count++;
             if ($count <= 9) {
-                $html .= '<li class="nav-item nav-link get-product" page-no="1" role="presentation" cat-slug="' . $subcategory->slug . '">' . $subcategory->name . '</li>';
+                $html .= '<li class="nav-item nav-link '.$js_class.'" page-no="1" role="presentation" cat-slug="' . $subcategory->slug . '">' . $subcategory->name . '</li>';
             } else {
                 $tmp_cat[$subcategory->slug] = $subcategory->name;
             }
         }
         if (count($tmp_cat) == 1) {
             foreach ($tmp_cat as $cat_slug => $cat_name) {
-                $html .= '<li class="nav-item nav-link get-product" page-no="1" role="presentation" cat-slug="' . $cat_slug . '">' . $cat_name . '</li>';
+                $html .= '<li class="nav-item nav-link '.$js_class.'" page-no="1" role="presentation" cat-slug="' . $cat_slug . '">' . $cat_name . '</li>';
             }
         } elseif (count($tmp_cat) > 1) {
             $count = 0;
@@ -39,7 +39,7 @@ function show_sub_cats_in_listing_page($parent_category_slug)
                 $count++;
                 if ($count == 1) {
                     $html .= '              <button
-                class="nav-link get-product" page-no="1"
+                class="nav-link '.$js_class.'" page-no="1"
                 id="billboard_tab_free"
                 data-bs-toggle="tab"
                 data-bs-target="#billboard_free"
@@ -63,7 +63,7 @@ function show_sub_cats_in_listing_page($parent_category_slug)
 
                 <ul class="dropdown-menu dropdown-menu-end">';
                 } else {
-                    $html .= '<li class="dropdown-item get-product" page-no="1" cat-slug="' . $cat_slug . '">' . $cat_name . '</li>';
+                    $html .= '<li class="dropdown-item '.$js_class.'" page-no="1" cat-slug="' . $cat_slug . '">' . $cat_name . '</li>';
                 }
             }
             $html .= ' </ul>
@@ -76,6 +76,113 @@ function show_sub_cats_in_listing_page($parent_category_slug)
     $html .= '</ul>';
     return $html;
 }
+
+function get_product_home_premium(){
+    $term_slug = $_POST['term_slug'];
+    $posts_per_page = $_POST['posts_per_page'];
+    $page_no = $_POST['page_no'];
+    $args = array(
+        'post_type' => 'product', // Replace with the name of your CPT
+        'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
+        'paged' => $page_no,
+        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                'terms' => $term_slug, // Replace with the slug of the custom category term you want to query
+            ),
+        ),
+    );
+    $custom_query = new WP_Query($args);
+
+    if ($custom_query->have_posts()) {
+        $html = '';
+        while ($custom_query->have_posts()) {
+            $custom_query->the_post();
+            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+        
+            $html .= '
+            <div type="button" class="card_item premium-mockup-single" p-id="'.get_the_ID().'">
+                <a href="'.site_url('premium-mockup-single-product').'?id='.get_the_ID().'">
+                    <div class="item_a">
+                        <div class="inner_col">
+                            <div class="img_col pixpine_card_border">
+                                <img src="'.$thumbnail_url.'" alt="" />
+                            </div>
+                            <div class="text_col">
+                                <h4 class="default_color">
+                                '.get_the_title().'
+                                </h4>
+                                <p class="primary_color">Premium</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>';
+        }
+    }else{
+        $html = 'No product found';
+    }
+    echo $html;
+    die();
+}
+add_action('wp_ajax_get_product_home_premium', 'get_product_home_premium'); // For logged-in users
+add_action('wp_ajax_nopriv_get_product_home_premium', 'get_product_home_premium'); // For non-logged-in users
+
+
+
+
+function get_product_home_free(){
+    $term_slug = $_POST['term_slug'];
+    $posts_per_page = $_POST['posts_per_page'];
+    $page_no = $_POST['page_no'];
+    $args = array(
+        'post_type' => 'product', // Replace with the name of your CPT
+        'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
+        'paged' => $page_no,
+        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                'terms' => $term_slug, // Replace with the slug of the custom category term you want to query
+            ),
+        ),
+    );
+    $custom_query = new WP_Query($args);
+
+    if ($custom_query->have_posts()) {
+        $html = '';
+        while ($custom_query->have_posts()) {
+            $custom_query->the_post();
+            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+        
+            $html .= '
+            <div class="card_item">
+                <a href="'.site_url('free-mockup-product').'?id='.get_the_ID().'">
+                    <div class="inner_col">
+                        <div class="img_col pixpine_card_border">
+                            <img src="'.$thumbnail_url.'" alt="" />
+                        </div>
+                        <div class="text_col">
+                            <h4 class="default_color">'.get_the_title().'</h4>
+                            <p class="primary_color">Free</p>
+                        </div>
+                    </div>
+                </a>
+            </div>';
+        }
+    }else{
+        $html = 'No product found';
+    }
+    echo $html;
+    die();
+}
+add_action('wp_ajax_get_product_home_free', 'get_product_home_free'); // For logged-in users
+add_action('wp_ajax_nopriv_get_product_home_free', 'get_product_home_free'); // For non-logged-in users
+
+
 
 
 function get_product_with_pagination()
