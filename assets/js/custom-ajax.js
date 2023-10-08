@@ -136,7 +136,7 @@ jQuery(document).ready(function($) {
 
     // show download button after time
     if ($("#hidden-post-id-free-mockup-download-page").length > 0) {
-
+        
         var downloadButton = '';
         var postId = $("#hidden-post-id-free-mockup-download-page").val();
     
@@ -166,23 +166,9 @@ jQuery(document).ready(function($) {
         }, 1000);
     }
 
-
-    jQuery(document).on('click', '.premium-mockup-single', function(){
-        var pId = $(this).attr('p-id');
-        $.ajax({
-            url: ajax_object.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'pixpine_get_premium_mockup_product_details_by_id',
-                nonce: ajax_object.ajax_nonce, // Include the nonce
-                'pId' : pId,
-            },
-            success: function(response) {
-                $("#premiumModal").modal("show");
-                console.log('-------');
-                console.log(jQuery.parseJSON(response));
-                console.log('-------');
-            },
-        });  
-    });
+    
+    if ($("#hidden-show-premium-modal").length > 0) {
+        $("#premiumModal").modal("show");
+    }
+    
 });

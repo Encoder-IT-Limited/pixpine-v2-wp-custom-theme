@@ -5,6 +5,29 @@
   aria-labelledby="premiumModalLabel"
   aria-hidden="true"
 >
+<?php
+global $wpdb;
+$post_id = $_GET['id'];
+$cpt = get_post($post_id);
+
+$output['thumbnail_url'] = get_the_post_thumbnail_url($cpt->ID);
+
+// get category
+$current_category_name = '';
+$taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+$custom_categories = wp_get_post_terms($post_id, $taxonomy);
+// Check if custom categories were found
+if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
+  // Loop through the custom categories and display them
+  foreach ($custom_categories as $category) {
+      if((esc_html($category->name) != "Premium Mockups") && (esc_html($category->name) != "Bundle Mockups")){
+          $current_category_name = esc_html($category->name);
+      }
+  }
+}
+
+?>
+<!-- <div class="modal fade premium_modal show" id="premiumModal" tabindex="-1" aria-labelledby="premiumModalLabel" aria-modal="true" role="dialog" style="display: block;"> -->
   <div class="modal-dialog">
     <div class="modal-content">
       <main>
@@ -14,13 +37,13 @@
               <div class="row_d">
                 <div class="slider_product_about_column">
                   <div class="heading_col">
-                      <h1 class="page_heading premium-module-content-title">
-                        Simple Vertical Business Card Mockup
+                      <h1 class="page_heading">
+                        <?php echo $cpt->post_title;?>
                       </h1>
                       <p>
-                        <span class="user_id">ID: <span class="premium-module-content-id">00000</span></span> in
-                        <span class="primary_color premium-module-content-cat"
-                          >Stationery & Business Card</span
+                        <span class="user_id">ID:<?php echo $cpt->ID;?></span> in
+                        <span class="primary_color"
+                          ><?php echo $current_category_name;?></span
                         >
                       </p>
                   </div>
@@ -30,68 +53,25 @@
                   <div class="slider_column">
 
                     <!-- Single img slider -->
-                    <div class="premium_single_img_slider premium-module-content-gallery">
-                      <!-- 
+                    <div class="premium_single_img_slider">
+                    <?php
+                      $_custom_product_gallery = get_post_meta($cpt->ID, '_custom_product_gallery', true);
+                      $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+                      foreach ($_custom_product_gallery as $image_id) {
+                      ?>
                       <div class="slider__item">
                         <div class="inner__slider">
                           <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="">
+                            <img src="<?php echo wp_get_attachment_image_url($image_id);?>" alt="">
                           </div>
                           <button class="slider__wishlist">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
                           </button>
                         </div>
                       </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_1.jpeg" alt="">
-                          </div>
-                          <button class="slider__wishlist">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
-                          </button>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_2.jpeg" alt="">
-                          </div>
-                          <button class="slider__wishlist">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
-                          </button>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_3.jpeg" alt="">
-                          </div>
-                          <button class="slider__wishlist">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
-                          </button>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_4.jpeg" alt="">
-                          </div>
-                          <button class="slider__wishlist">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
-                          </button>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_5.jpeg" alt="">
-                          </div>
-                          <button class="slider__wishlist">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
-                          </button>
-                        </div>
-                      </div> -->
+                      <?php
+                      }
+                    ?>
 
                     </div>
                     <!-- Single img slider end -->
@@ -99,51 +79,20 @@
 
 
                     <!-- Multiple img slider start -->
-                    <div class="premium_multiple_img_slider premium-module-content-gallery-thumnail">
-
-                      <!-- <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                        <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_1.jpeg" alt="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                        <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_2.jpeg" alt="">
-                          </div>
-                        </div>
-                      </div>
+                    <div class="premium_multiple_img_slider">
+                      <?php
+                      foreach ($_custom_product_gallery as $image_id) {
+                      ?>
                       <div class="slider__item">
                         <div class="inner__slider">
                           <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_3.jpeg" alt="">
+                            <img src="<?php echo wp_get_attachment_image_url($image_id);?>" alt="">
                           </div>
                         </div>
                       </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_4.jpeg" alt="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/product_5.jpeg" alt="">
-                          </div>
-                        </div>
-                      </div> -->
-
+                      <?php
+                      }
+                      ?>
                     </div>
                   </div>
                   <!-- Multiple img slider end -->
@@ -178,20 +127,23 @@
                       </ul>
                     </div>
                     <div class="text_col">
-                      <p>
-                        We are PIXPINE where people can get high-quality
-                        user-friendly mockups for their projects. Everything we
-                        do is for the purpose that it delivers and drives value
-                        for our customers. It’s a win-win scenario for all
-                        involved as we offer solutions to buyers’ / perspective
-                        buyers’ situations. We are a group of creative
-                        enthusiasts who work.
-                      </p>
+                      <?php echo $cpt->post_content;?>
                       <h4>Related Keywords</h4>
                       <p>
-                        Business card, stationery, branding, design, print,
-                        Logo, brand identity, display, showcase, Presentation,
-                        PSD, photoshop,
+                        <?php
+                        $cpt_tags = get_the_tags($cpt->ID);
+                        $html = '';
+                        if ($cpt_tags) {
+                            $last_key = array_key_last($cpt_tags);
+                            foreach ($cpt_tags as $key => $tag) {
+                              if ($key == $last_key) {
+                                echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
+                              } else {
+                                echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
+                              }
+                            }
+                        }
+                        ?>
                       </p>
                     </div>
                     <div class="separetor"></div>
@@ -200,108 +152,31 @@
                     <h2 class="column_heading">Similar Products</h2>
                     <div class="similar_products_slider">
                       <div class="similar_slider">
+                      <?php 
+                      $value5 = get_post_meta($cpt->ID, 'similar_product', true);
+                      if($value5 != ''){
+                        $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
+                        $results = $wpdb->get_results($query);
+                        foreach ($results as $result) {
+                        ?>
                         <div class="card_item">
-                          <a href="">
+                          <a href="<?php echo $result->ID;?>">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                                <img src="<?php echo get_the_post_thumbnail_url($result->ID);?>" alt="" />
                               </div>
                               <div class="text_col">
                                 <p class="default_color">
-                                  Simple Vertical Box Shape Business Card Mockup
+                                  <?php echo $result->post_title;?>
                                 </p>
                               </div>
                             </div>
                           </a>
                         </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <p class="default_color">
-                                  Simple Vertical Business Card Mockup
-                                </p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <p class="default_color">
-                                  Simple Vertical Business Card Mockup
-                                </p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
+                        <?php
+                        } 
+                      }
+                      ?>
                       </div>
                     </div>
                   </div>
@@ -310,111 +185,32 @@
                     <h2 class="column_heading">Related Products</h2>
                     <div class="related_products_slider">
                       <div class="related_slider">
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
+                      <?php
+                      $value5 = get_post_meta($cpt->ID, 'related_product', true);
+                      if($value5 != ''){
+                          $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
+                          $results = $wpdb->get_results($query);
+                          foreach ($results as $result) {
+                          ?>
+                            <div class="card_item">
+                              <a href="<?php echo $result->ID;?>">
+                                <div class="inner_col">
+                                  <div class="img_col pixpine_card_border">
+                                    <img src="<?php echo get_the_post_thumbnail_url($result->ID);?>" alt="" />
+                                  </div>
+                                  <div class="text_col">
+                                    <h4 class="default_color">
+                                      <?php echo $result->post_title;?>
+                                    </h4>
+                                    <p class="default_color">Premium Mockups</p>
+                                  </div>
+                                </div>
+                              </a>
                             </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="card_item">
-                          <a href="">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                              </div>
-                              <div class="text_col">
-                                <h4 class="default_color">
-                                  Business Card Mockup
-                                </h4>
-                                <p class="default_color">Premium Mockups</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
+                          <?php
+                          } 
+                      }
+                      ?>
                       </div>
                     </div>
                   </div>
