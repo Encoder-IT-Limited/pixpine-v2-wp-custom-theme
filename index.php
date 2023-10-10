@@ -489,7 +489,7 @@
                   array(
                       'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                       'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
-                      'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
+                      'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
                   ),
                 ),
               );
