@@ -42,9 +42,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </h1>
                       <p>
                         <span class="user_id">ID:<?php echo $cpt->ID;?></span> in
-                        <span class="primary_color"
-                          ><?php echo $current_category_name;?></span
-                        >
+                        <span class="primary_color"><?php echo $current_category_name;?></span>
                       </p>
                   </div>
 

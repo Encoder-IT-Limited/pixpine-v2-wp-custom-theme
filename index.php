@@ -503,15 +503,14 @@
                   // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                 ?>
                   <div class="card_item">
-                    <div
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#bundleModal"
-                    >
-                      <div class="inner_col pixpine_card_border">
-                        <img src="<?php echo $thumbnail_url;?>" alt="" />
+                    <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                      <div type="button" >
+                      <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
+                        <div class="inner_col pixpine_card_border">
+                          <img src="<?php echo $thumbnail_url;?>" alt="" />
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 <?php
                 }
@@ -519,7 +518,7 @@
                 wp_reset_postdata();
               } else {
                 // No posts found
-                echo 'No posts found.';
+                echo 'No product found.';
               }
               ?>
             </div>

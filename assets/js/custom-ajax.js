@@ -218,5 +218,83 @@ jQuery(document).ready(function($) {
     if ($("#hidden-show-premium-modal").length > 0) {
         $("#premiumModal").modal("show");
     }
+
+
+    // show modal in single bundle product page
+    if ($("#hidden-show-bundle-modal").length > 0) {
+        $("#bundleModal").modal("show");
+
+            /* Bundle product page modal slider start */
+    $('.bundle_single_img_slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        arrows: true,
+        autoplay: false,
+        asNavFor: '.bundle_multiple_img_slider'
+    });
+    $('.bundle_multiple_img_slider').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        asNavFor: '.bundle_single_img_slider',
+        dots: false,
+        arrows: false,
+        autoplay: false,
+        focusOnSelect: true,
+        responsive: [{
+                breakpoint: 1025,
+                settings: {
+                    slidesToShow: 4,
+                }
+            },
+            {
+                breakpoint: 451,
+                settings: {
+                    slidesToShow: 3,
+                }
+            }
+        ]
+    });
+    /* Bundle product page modal slider end */
+    /* 06.10.2023 end */
+
+        
+        /* bundle-mockups-product-page slider */
+
+        $('.bundle_related_slider').slick({
+            dots: true,
+            infinite: true,
+            arrows: false,
+            autoplay: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            responsive: [{
+                    breakpoint: 1201,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+    }
     
 });

@@ -2108,8 +2108,8 @@ get_header();
     </main>
 
 
-     <!-- Premium Modal -->
-     <?php include get_template_directory() .'/includes/premium-modal.php';?>
+    <!-- Premium Modal -->
+    <?php include get_template_directory() .'/includes/premium-modal.php';?>
     <input type="hidden" value="1" id="hidden-show-premium-modal">
 <!-- Footer -->
 <?php get_footer();?>
