@@ -104,7 +104,7 @@ jQuery("#files").change(function () {
 
 /* premium-mocups-product-page Slider*/
 
-$('.similar_slider, .related_slider').slick({
+jQuery('.similar_slider, .related_slider').slick({
     dots: true,
     infinite: true,
     arrows: false,
@@ -144,7 +144,7 @@ $('.similar_slider, .related_slider').slick({
 
 /* bundle-mockups-product-page slider */
 
-$('.bundle_related_slider').slick({
+jQuery('.bundle_related_slider').slick({
     dots: true,
     infinite: true,
     arrows: false,

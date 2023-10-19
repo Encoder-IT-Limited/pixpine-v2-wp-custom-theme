@@ -114,17 +114,35 @@ get_header();
               </div>
               <div class="card_container">
                 <div class="row_d">
-                  <div class="card_item">
-                    <a href="">
-                      <div class="card_inner pixpine_card_border">
-                        <p href="">Box Packaging Mockups</p>
-                        <div class="img_col">
-                          <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                  <?php
+                    $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
+                    $parent_category_slug = 'premium-mockups'; // Replace with the slug of the parent category
+                
+                    // Define the tax_query to retrieve child terms of the specified parent category
+                    $args = array(
+                        'taxonomy' => $taxonomy,
+                        'child_of' => 0, // Set to 0 to get top-level terms
+                        'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID
+                        'hide_empty' => false, // Set to false to retrieve even if they are empty
+                    );
+                
+                    $subcategories = get_terms($args);
+                    if (!empty($subcategories)) {
+                      foreach ($subcategories as $subcategory) {
+                        ?>
+                        <div class="card_item">
+                          <div class="card_inner pixpine_card_border get-product" cat-slug="<?=$subcategory->slug?>"  page-no="1">
+                            <p href=""><?=$subcategory->name?></p>
+                            <div class="img_col">
+                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="card_item">
+                        <?php
+                      }
+                    }
+                    ?>
+                  <!-- <div class="card_item">
                     <a href="">
                       <div class="card_inner pixpine_card_border">
                         <p href="">Apparel Mockups</p>
@@ -173,7 +191,7 @@ get_header();
                         </div>
                       </div>
                     </a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

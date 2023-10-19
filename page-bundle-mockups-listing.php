@@ -69,14 +69,12 @@ get_header();
             $tmp_cat = [];
             foreach ($subcategories as $subcategory) {
               echo '<div class="card_item">
-                <a href="">
-                  <div class="card_inner pixpine_card_border">
+                  <div class="card_inner pixpine_card_border get-product" cat-slug="'.$subcategory->slug.'" page-no="1">
                     <p href="">'.$subcategory->name.'</p>
                     <div class="img_col">
                       <img src="'.get_template_directory_uri().'/assets/images/premium_img.png" alt="" />
                     </div>
                   </div>
-                </a>
               </div>';
             }
           }
@@ -116,23 +114,21 @@ get_header();
         ?>
 
         <div class="card_item">
-          <div
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#bundleModal"
-          >
-            <div class="inner_col">
-              <div class="img_col pixpine_card_border">
-                <img src="<?php echo $thumbnail_url;?>" alt="" />
+          <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+            <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
+              <div class="inner_col">
+                <div class="img_col pixpine_card_border">
+                  <img src="<?php echo $thumbnail_url;?>" alt="" />
+                </div>
+                <div class="text_col">
+                  <h4 class="default_color">
+                  <?php echo get_the_title();?>
+                  </h4>
+                  <p class="primary_color">Bundle</p>
+                </div>
               </div>
-              <div class="text_col">
-                <h4 class="default_color">
-                <?php echo get_the_title();?>
-                </h4>
-                <p class="primary_color">Bundle</p>
-              </div>
-            </div>
-          </div>
+            <!-- </div> -->
+          </a>
         </div>
 
       <?php

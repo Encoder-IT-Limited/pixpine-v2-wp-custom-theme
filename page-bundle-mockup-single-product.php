@@ -69,14 +69,12 @@ get_header();
             $tmp_cat = [];
             foreach ($subcategories as $subcategory) {
               echo '<div class="card_item">
-                <a href="">
-                  <div class="card_inner pixpine_card_border">
+                  <div class="card_inner pixpine_card_border get-product" cat-slug="'.$subcategory->slug.'" page-no="1">
                     <p href="">'.$subcategory->name.'</p>
                     <div class="img_col">
                       <img src="'.get_template_directory_uri().'/assets/images/premium_img.png" alt="" />
                     </div>
                   </div>
-                </a>
               </div>';
             }
           }
