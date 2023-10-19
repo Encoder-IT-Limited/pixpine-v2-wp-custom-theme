@@ -114,11 +114,12 @@ get_header();
         ?>
 
         <div class="card_item">
-          <div
+          <!-- <div
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#bundleModal"
-          >
+          > -->
+          <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
                 <img src="<?php echo $thumbnail_url;?>" alt="" />
@@ -130,7 +131,8 @@ get_header();
                 <p class="primary_color">Bundle</p>
               </div>
             </div>
-          </div>
+          </a>
+          <!-- </div> -->
         </div>
 
       <?php
