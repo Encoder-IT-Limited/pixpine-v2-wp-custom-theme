@@ -1,21 +1,28 @@
 <div class="form_container_main">
   <div class="inner_col">
     <form class="search_form" action="">
+      <?php
+        $s_type = '';
+        if(isset($_GET['type'])){
+          $s_type = $_GET['type'];
+        }
+      ?>
       <div class="custom-select">
-        <select name="" id="">
-          <option value="all-categories">All Categories</option>
-          <option value="all-categories">All Categories</option>
-          <option value="free-mockup">Free Mockup</option>
-          <option value="premium-mockup">Premium Mockup</option>
-          <option value="bundle-mockups">Bundle Mockups</option>
+        <select name="type" id="">
+          <option value="all-categories" <?php echo ($s_type == 'all-categories')? 'selected':'';?> >All Categories</option>
+          <option value="all-categories" <?php echo ($s_type == 'all-categories')? 'selected':'';?>>All Categories</option>
+          <option value="free-mockup" <?php echo ($s_type == 'free-mockup')? 'selected':'';?>>Free Mockup</option>
+          <option value="premium-mockup" <?php echo ($s_type == 'premium-mockup')? 'selected':'';?>>Premium Mockup</option>
+          <option value="bundle-mockups" <?php echo ($s_type == 'bundle-mockups')? 'selected':'';?>>Bundle Mockups</option>
         </select>
       </div>
       <input
         type="text"
-        name=""
-        id="searchbox"
+        name="s"
+        id="s"
         class="placeholder_box"
         placeholder="Search for all categories"
+        value="<?php the_search_query(); ?>"
       />
       <button class="search_btn">
         <img src="<?php echo get_template_directory_uri();?>/assets/images/Search.png" alt="" />

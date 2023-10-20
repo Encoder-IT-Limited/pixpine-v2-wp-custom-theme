@@ -9,45 +9,225 @@
 
 get_header();
 ?>
+<!-- Header End -->
 
-	<main id="primary" class="site-main">
+<main>
+      <section class="banner_section">
+        <div class="container">
+          <!-- Banner search form -->
+          <?php include get_template_directory() .'/includes/search-form.php';?>
+        </div>
+      </section>
 
-		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'pixpine' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
+      <section id="premium_mockups" class="recently_added_premium_mockups">
+        <div class="container">
+          <div class="heading_col text-center">
+            <h2 class="section_heading">Recently Added Premium Mockups</h2>
+          </div>
+          <div class="tab_img_container">
+            <div class="tab-content">
+              <div
+                class="tab-pane fade show active"
+                id="business_cards"
+                role="tabpanel"
+                aria-labelledby="business_cards_tab"
+              >
+                <div class="tab_inner_content">
+                  <div class="card_container row_d justify-content-center home-premium-products">
+                  <?php
+                  $args = array(
+                    'post_type' => 'product', // Replace with the name of your CPT
+                    'posts_per_page' => 10, // Number of posts to display (adjust as needed)
+                    'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                    'tax_query' => array(
+                      array(
+                          'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                          'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                          'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
+                      ),
+                    ),
+                  );
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+                  $custom_query = new WP_Query($args);
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+                  if ($custom_query->have_posts()) {
+                    while ($custom_query->have_posts()) {
+                      $custom_query->the_post();
+                      $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                      // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                    ?>
 
-			endwhile;
+                    <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
+                      <div type="button" class="card_item premium-mockup-single" p-id="<?php echo get_the_ID();?>">
+                        <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                          <div class="item_a">
+                            <div class="inner_col">
+                              <div class="img_col pixpine_card_border">
+                                <img src="<?php echo $thumbnail_url;?>" alt="" />
+                              </div>
+                              <div class="text_col">
+                                <h4 class="default_color">
+                                <?php echo get_the_title();?>
+                                </h4>
+                                <p class="primary_color">Premium</p>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    <?php
+                    }
+                    // Restore the global post object
+                    wp_reset_postdata();
+                  } else {
+                    // No posts found
+                    echo 'No product found.';
+                  }
+                  ?>
+                  </div>
+                  <div class="text-end">
+                    <a class="btn_primary _btn" href="<?php echo site_url('premium-mockups');?>"
+                      >View All</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="free_mockups" class="recently_added_free_mockups">
+        <div class="container">
+          <div class="heading_col text-center">
+            <h2 class="section_heading">Recently Added Free Mockups</h2>
+          </div>
+          <div class="tab_img_container">
+            <div class="tab-content">
+              <div
+                class="tab-pane fade show active"
+                id="business_cards_free"
+                role="tabpanel"
+                aria-labelledby="business_cards_tab_free"
+              >
+                <div class="tab_inner_content">
+                  <div class="card_container row_d justify-content-center home-free-products">
+                  <?php
+                  $args = array(
+                    'post_type' => 'product', // Replace with the name of your CPT
+                    'posts_per_page' => 10, // Number of posts to display (adjust as needed)
+                    'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                    'tax_query' => array(
+                      array(
+                          'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                          'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                          'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
+                      ),
+                    ),
+                  );
 
-			the_posts_navigation();
+                  $custom_query = new WP_Query($args);
 
-		else :
+                  if ($custom_query->have_posts()) {
+                    while ($custom_query->have_posts()) {
+                      $custom_query->the_post();
+                      $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                      // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                    ?>
+                    <div class="card_item">
+                      <a href="<?php echo site_url('free-mockup-product');?>?id=<?php echo get_the_ID();?>">
+                        <div class="inner_col">
+                          <div class="img_col pixpine_card_border">
+                            <img src="<?php echo $thumbnail_url;?>" alt="" />
+                          </div>
+                          <div class="text_col">
+                            <h4 class="default_color"><?php echo get_the_title();?></h4>
+                            <p class="primary_color">Free</p>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <?php
+                    }
+                    // Restore the global post object
+                    wp_reset_postdata();
+                  } else {
+                    // No posts found
+                    echo 'No posts found.';
+                  }
+                  ?>
+                  </div>
+                  <div class="text-end">
+                    <a class="btn_primary _btn" href="<?php echo site_url('free-mockups');?>">View All</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="bundle_mockups" class="bundle_mockups_yearly_subscription recently_added_free_mockups ">
+        <div class="container">
+          <div class="heading_col text-center">
+            <h2 class="section_heading">Recently Added Bundle Mockups</h2>
+          </div>
+          <div class="inner_content">
+            <div
+              class="card_container row_d justify-content-center align-items-stretch"
+            >
 
-			get_template_part( 'template-parts/content', 'none' );
+              <?php
+              $args = array(
+                'post_type' => 'product', // Replace with the name of your CPT
+                'posts_per_page' => 10, // Number of posts to display (adjust as needed)
+                'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                'tax_query' => array(
+                  array(
+                      'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                      'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                      'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
+                  ),
+                ),
+              );
 
-		endif;
-		?>
+              $custom_query = new WP_Query($args);
 
-	</main><!-- #main -->
+              if ($custom_query->have_posts()) {
+                while ($custom_query->have_posts()) {
+                  $custom_query->the_post();
+                  $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                  // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                ?>
+                  <div class="card_item">
+                    <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                      <div type="button" >
+                      <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
+                        <div class="inner_col pixpine_card_border">
+                          <img src="<?php echo $thumbnail_url;?>" alt="" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                <?php
+                }
+                // Restore the global post object
+                wp_reset_postdata();
+              } else {
+                // No posts found
+                echo 'No product found.';
+              }
+              ?>
+            </div>
+            <div class="text-end">
+              <a class="btn_primary _btn" href="<?php echo site_url('bundle-mockups');?>">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<?php
-get_sidebar();
-get_footer();
+      <!-- Never miss out form section -->
+      <?php include 'includes/never-miss-out-form.php';?>
+    </main>
+
+<!-- Footer -->
+<?php get_footer();?>
