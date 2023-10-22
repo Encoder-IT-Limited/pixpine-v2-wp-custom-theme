@@ -17,6 +17,25 @@ jQuery(document).ready(function($) {
     //     },
     // });
 
+    // alter favorite product
+    $(document).on('click', '.alter-favorite', function(){
+        var pId = $(this).attr('p-id');
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'pixpine_alter_favorite',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'pId' : pId
+            },
+            success: function(response) {
+                console.log(response)
+            },
+        });
+    });
+
+
+
     function get_product_with_pagination(term_slug, posts_per_page, page_no, mockup_type, html_output_class){
         $.ajax({
             url: ajax_object.ajax_url,

@@ -1,5 +1,33 @@
 <?php
 
+function pixpine_alter_favorite(){
+    // User login credentials
+    $p_id = $_POST['pId'];
+    $user_id = get_current_user_id();
+    $old_ids = get_user_meta($user_id, 'pixpine_favorite', true);
+    if(!empty($old_ids)){
+        $old_ids = explode(',', $old_ids);
+        var_dump($old_ids);
+        if(in_array($p_id, $old_ids)){
+            $old_ids = array_diff($old_ids,[$p_id]);
+        }else{
+            array_push($old_ids, $p_id);
+        }
+    }else{
+        $old_ids = [];
+        array_push($old_ids, $p_id);
+    }
+
+    $old_ids = implode(',', $old_ids);
+    update_user_meta($user_id, 'pixpine_favorite', $old_ids);
+
+    echo 'success';
+
+    die();
+}
+add_action('wp_ajax_pixpine_alter_favorite', 'pixpine_alter_favorite'); // For logged-in users
+
+
 function pixpine_login_user(){
     // User login credentials
     $username = $_POST['user_email'];

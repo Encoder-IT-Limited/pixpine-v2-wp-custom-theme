@@ -62,7 +62,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           <div class="img_col pixpine_card_border">
                             <img src="<?php echo wp_get_attachment_image_url($image_id);?>" alt="">
                           </div>
-                          <button class="slider__wishlist">
+                          <button class="slider__wishlist alter-favorite" p-id="<?php echo $cpt->ID;?>">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
                           </button>
                         </div>
