@@ -109,16 +109,26 @@
                       />
                     </a>
                   </li>
+                  <?php if(is_user_logged_in()){ ?> 
                   <li class="nav-item">
                     <a
-                      type="button"
-                      class="nav-link"
-                      data-bs-toggle="modal"
-                      data-bs-target="#loginModal"
-                      >Log in</a
+                      class="nav-link user_icon"
+                      href="<?php echo site_url('my-account');?>"
                     >
+                      <img class="user_img" src="<?php echo get_template_directory_uri();?>/assets/images/user_icon-white.png" alt="" />
+                    </a>
                   </li>
-                  <li class="nav-item">
+                  <?php }else{ ?>
+                    <li class="nav-item">
+                    <a
+                    type="button"
+                    class="nav-link"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                    >Log in</a
+                    >
+                    </li>
+                    <li class="nav-item">
                     <a
                       type="button"
                       data-bs-toggle="modal"
@@ -127,9 +137,10 @@
                       >Sign up</a
                     >
                   </li>
+                  <?php } ?>
                 </ul>
               </div>
-            </div>
+              </div>
           </div>
         </nav>
       </header>

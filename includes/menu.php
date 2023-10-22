@@ -79,6 +79,7 @@
                 <img class="cart_img" src="<?php echo get_template_directory_uri();?>/assets/images/cart_icon.png" alt="" />
               </a>
             </li>
+            <?php if(is_user_logged_in()){ ?>
             <li class="nav-item">
               <a
                 class="nav-link user_icon"
@@ -87,24 +88,26 @@
                 <img class="user_img" src="<?php echo get_template_directory_uri();?>/assets/images/user_icon.png" alt="" />
               </a>
             </li>
-            <li class="nav-item">
-              <a
+            <?php }else{ ?>
+              <li class="nav-item">
+                <a
                 type="button"
                 class="nav-link"
                 data-bs-toggle="modal"
                 data-bs-target="#loginModal"
                 >Log in</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
+                >
+              </li>
+              <li class="nav-item">
+                <a
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#signupModal"
                 class="nav-link"
                 >Sign up</a
-              >
-            </li>
+                >
+              </li>
+              <?php } ?>
           </ul>
         </div>
       </div>
