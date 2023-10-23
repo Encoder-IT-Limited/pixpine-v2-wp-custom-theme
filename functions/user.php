@@ -7,7 +7,6 @@ function pixpine_alter_favorite(){
     $old_ids = get_user_meta($user_id, 'pixpine_favorite', true);
     if(!empty($old_ids)){
         $old_ids = explode(',', $old_ids);
-        var_dump($old_ids);
         if(in_array($p_id, $old_ids)){
             $old_ids = array_diff($old_ids,[$p_id]);
         }else{

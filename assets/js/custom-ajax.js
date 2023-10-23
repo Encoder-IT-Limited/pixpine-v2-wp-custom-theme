@@ -20,18 +20,40 @@ jQuery(document).ready(function($) {
     // alter favorite product
     $(document).on('click', '.alter-favorite', function(){
         var pId = $(this).attr('p-id');
-        $.ajax({
-            url: ajax_object.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'pixpine_alter_favorite',
-                nonce: ajax_object.ajax_nonce, // Include the nonce
-                'pId' : pId
-            },
-            success: function(response) {
-                console.log(response)
-            },
-        });
+        var isLoggedIn = $(this).attr('is-logged-in');
+        var isFavorite = $(this).attr('is-favorite');
+        var newFavorite = '1';
+        var imgSrc1 = $(this).attr('img-src-1');
+        var imgSrc0 = $(this).attr('img-src-0');
+
+        if(isLoggedIn == '1'){
+            $.ajax({
+                url: ajax_object.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'pixpine_alter_favorite',
+                    nonce: ajax_object.ajax_nonce, // Include the nonce
+                    'pId' : pId
+                },
+                success: function(response) {
+                    console.log(response)
+                    if(response == 'success'){
+                        // alter value
+                        if(isFavorite == '1'){
+                            newFavorite = '0';
+                            // change icon
+                            $('.fav-icon').attr('src', imgSrc0);
+                        }else{
+                            // change icon
+                            $('.fav-icon').attr('src', imgSrc1);
+                        }
+                        $('.alter-favorite').attr('is-favorite', newFavorite);
+                    }
+                },
+            });
+        }else{
+            alert('You have logged in to mark it as favorite.')
+        }
     });
 
 
