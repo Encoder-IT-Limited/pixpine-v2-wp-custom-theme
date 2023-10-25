@@ -65,248 +65,59 @@ get_header();
                   role="tabpanel"
                   aria-labelledby="premium_mockup_tab"
                 >
+
+
+
                   <div class="tab_inner_content">
                     <div class="card_container row_d justify-content-center">
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
+
+                      <?php
+                      $user_id = get_current_user_id();
+                      $old_ids = get_user_meta($user_id, 'pixpine_favorite_premium', true);
+                      $old_ids = explode(',', $old_ids);
+                      // Define the query arguments
+                      $args = array(
+                        'post_type'      => 'product', // Replace with your CPT slug
+                        'post__in'       => $old_ids, // Include posts with these IDs
+                        'post_status'    => 'publish', // Limit to published posts
+                        'posts_per_page' => -1, // Retrieve all matching posts
+                      );
+
+                      // Create a new WP_Query instance
+                      $custom_query = new WP_Query($args);
+                      // Check if there are posts
+                      if ($custom_query->have_posts()) {
+                        while ($custom_query->have_posts()) {
+                          $custom_query->the_post();
+                          // Access post data here
+                          $post_title = get_the_title();
+                          $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                      ?>
+                      <div type="button" class="card_item" >
+                        <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                              <img src="<?php echo $thumbnail_url;?>" alt="" />
                             </div>
                             <div class="text_col">
                               <h4 class="default_color">
-                                Business Card Mockup
+                                <?php echo $post_title;?>
                               </h4>
                               <p class="primary_color">Premium</p>
                             </div>
                           </div>
                         </div>
+                        </a>
                       </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#premiumModal"
-                        class="card_item"
-                      >
-                        <div class="item_a">
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Premium</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <?php
+                        }
+                        // Restore the global post data
+                        wp_reset_postdata();
+                      }else{
+                        echo 'No liked product';
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -318,159 +129,55 @@ get_header();
                 >
                   <div class="tab_inner_content">
                     <div class="card_container row_d justify-content-center">
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup te
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <?php
+                      $user_id = get_current_user_id();
+                      $old_ids = get_user_meta($user_id, 'pixpine_favorite_bundle', true);
+                      $old_ids = explode(',', $old_ids);
+                      // Define the query arguments
+                      $args = array(
+                        'post_type'      => 'product', // Replace with your CPT slug
+                        'post__in'       => $old_ids, // Include posts with these IDs
+                        'post_status'    => 'publish', // Limit to published posts
+                        'posts_per_page' => -1, // Retrieve all matching posts
+                      );
 
+                      // Create a new WP_Query instance
+                      $custom_query = new WP_Query($args);
+                      // Check if there are posts
+                      if ($custom_query->have_posts()) {
+                        while ($custom_query->have_posts()) {
+                          $custom_query->the_post();
+                          // Access post data here
+                          $post_title = get_the_title();
+                          $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                      ?>
                       <div class="card_item">
                         <div
                           type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
                         >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                          <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                            <div class="inner_col">
+                              <div class="img_col pixpine_card_border">
+                                <img src="<?php echo $thumbnail_url;?>" alt="" />
+                              </div>
+                              <div class="text_col">
+                                <h4 class="default_color">
+                                  <?php echo $post_title;?>
+                                </h4>
+                                <p class="primary_color">Bundle</p>
+                              </div>
                             </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
+                          </a>
                         </div>
                       </div>
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card_item">
-                        <div
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#bundleModal"
-                        >
-                          <div class="inner_col">
-                            <div class="img_col pixpine_card_border">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                            </div>
-                            <div class="text_col">
-                              <h4 class="default_color">
-                                Business Card Mockup
-                              </h4>
-                              <p class="primary_color">Bundle</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <?php
+                        }
+                        // Restore the global post data
+                        wp_reset_postdata();
+                      }else{
+                        echo 'No liked product';
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -482,12 +189,6 @@ get_header();
     </div>
   </section>
 </main>
-
-<!-- Bundle Modal -->
-<?php include get_template_directory() .'/includes/bundle-modal.php';?>
-
-<!-- Premium Modal -->
-<?php include get_template_directory() .'/includes/premium-modal.php';?>
 
 <!-- Footer -->
 <?php get_footer();?>
