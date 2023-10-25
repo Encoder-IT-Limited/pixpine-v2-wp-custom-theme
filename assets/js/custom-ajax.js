@@ -22,6 +22,7 @@ jQuery(document).ready(function($) {
         var pId = $(this).attr('p-id');
         var isLoggedIn = $(this).attr('is-logged-in');
         var isFavorite = $(this).attr('is-favorite');
+        var type = $(this).attr('type');
         var newFavorite = '1';
         var imgSrc1 = $(this).attr('img-src-1');
         var imgSrc0 = $(this).attr('img-src-0');
@@ -33,7 +34,8 @@ jQuery(document).ready(function($) {
                 data: {
                     action: 'pixpine_alter_favorite',
                     nonce: ajax_object.ajax_nonce, // Include the nonce
-                    'pId' : pId
+                    'pId' : pId,
+                    'type' : type,
                 },
                 success: function(response) {
                     console.log(response)

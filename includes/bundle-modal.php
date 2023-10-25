@@ -8,6 +8,23 @@
 <?php
 global $wpdb;
 $post_id = $_GET['id'];
+
+
+// favorite
+$is_logged_in = 0;
+$is_favorite = 0;
+if(is_user_logged_in()){
+  $is_logged_in = 1;
+  $user_id = get_current_user_id();
+  $old_ids = get_user_meta($user_id, 'pixpine_favorite_bundle', true);
+  if(!empty($old_ids)){
+    $old_ids = explode(',', $old_ids);
+    if(in_array($post_id, $old_ids)){
+      $is_favorite = 1;
+    }
+  }
+}
+
 $cpt = get_post($post_id);
 
 $output['thumbnail_url'] = get_the_post_thumbnail_url($cpt->ID);
@@ -61,8 +78,16 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           <div class="img_col pixpine_card_border">
                           <img src="<?php echo wp_get_attachment_image_url($image_id);?>" alt="">
                           </div>
-                          <button class="slider__wishlist">
-                            <img src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                          <button class="slider__wishlist alter-favorite" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" is-favorite="<?php echo $is_favorite;?>" 
+                          type="bundle" 
+                          img-src-1="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon-fill.png" 
+                          img-src-0="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" 
+                          >
+                            <?php if($is_favorite == 1){ ?>
+                              <img class="fav-icon" src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon-fill.png" alt="" />
+                            <?php }else{ ?>
+                              <img class="fav-icon" src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                            <?php } ?>
                           </button>
                         </div>
                       </div>

@@ -3,8 +3,10 @@
 function pixpine_alter_favorite(){
     // User login credentials
     $p_id = $_POST['pId'];
+    $type = $_POST['type'];
+    $meta_key = 'pixpine_favorite_'.$type;
     $user_id = get_current_user_id();
-    $old_ids = get_user_meta($user_id, 'pixpine_favorite', true);
+    $old_ids = get_user_meta($user_id, $meta_key, true);
     if(!empty($old_ids)){
         $old_ids = explode(',', $old_ids);
         if(in_array($p_id, $old_ids)){
@@ -18,7 +20,7 @@ function pixpine_alter_favorite(){
     }
 
     $old_ids = implode(',', $old_ids);
-    update_user_meta($user_id, 'pixpine_favorite', $old_ids);
+    update_user_meta($user_id, $meta_key, $old_ids);
 
     echo 'success';
 
