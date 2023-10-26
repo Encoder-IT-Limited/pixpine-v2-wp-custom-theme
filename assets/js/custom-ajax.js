@@ -17,6 +17,42 @@ jQuery(document).ready(function($) {
     //     },
     // });
 
+    // add to cart
+    
+    $(document).on('click', '.add-to-cart', function(){
+        var pId = $(this).attr('p-id');
+        var isLoggedIn = $(this).attr('is-logged-in');
+        var isCart = $(this).attr('in-cart');
+        var cartUrl = $(this).attr('cart-url');
+
+        if(isLoggedIn == '1'){
+            if(isCart == '0'){
+                $.ajax({
+                    url: ajax_object.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'pixpine_update_cart',
+                        nonce: ajax_object.ajax_nonce, // Include the nonce
+                        'pId' : pId,
+                        'isCart' : isCart,
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        if(response == 'success'){
+                            $('.add-to-cart').attr('in-cart', '1');
+                            $('.add-to-cart').text("View Cart");
+                        }
+                    },
+                });
+            }else{
+                window.location.href = cartUrl;
+            }
+        }else{
+            alert('You have logged in to mark it as favorite.')
+        }
+    });
+
+
     // alter favorite product
     $(document).on('click', '.alter-favorite', function(){
         var pId = $(this).attr('p-id');

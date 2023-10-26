@@ -25,6 +25,16 @@ if(is_user_logged_in()){
   }
 }
 
+// in cart
+$in_cart = 0;
+if($is_logged_in == 1){
+  $table_name = $wpdb->prefix . 'pixpine_carts';
+  $count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE user_id = '$user_id' AND product_id = '$post_id'");
+  if($count>0){
+    $in_cart = 1;
+  }
+}
+
 $cpt = get_post($post_id);
 
 $output['thumbnail_url'] = get_the_post_thumbnail_url($cpt->ID);
@@ -257,7 +267,9 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           <h5>Price</h5>
                           <h5>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> USD</h5>
                         </div>
-                        <button class="_btn btn_primary">Add to Cart</button>
+                        <button class="_btn btn_primary add-to-cart" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('carts');?>">
+                        <?php echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';?>
+                        </button>
                       </div>
                       <div class="save_unlimited_downloads">
                         <h2 class="primary_color text-uppercase">Save 50%</h2>

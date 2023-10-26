@@ -9,6 +9,8 @@
 global $wpdb;
 $post_id = $_GET['id'];
 
+
+
 // favorite
 $is_logged_in = 0;
 $is_favorite = 0;
@@ -21,6 +23,16 @@ if(is_user_logged_in()){
     if(in_array($post_id, $old_ids)){
       $is_favorite = 1;
     }
+  }
+}
+
+// in cart
+$in_cart = 0;
+if($is_logged_in == 1){
+  $table_name = $wpdb->prefix . 'pixpine_carts';
+  $count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE user_id = '$user_id' AND product_id = '$post_id'");
+  if($count>0){
+    $in_cart = 1;
   }
 }
 
@@ -279,7 +291,9 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           <h5>Price</h5>
                           <h5>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> USD</h5>
                         </div>
-                        <button class="_btn btn_primary">Add to Cart</button>
+                        <button class="_btn btn_primary add-to-cart" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('carts');?>">
+                        <?php echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';?>
+                        </button>
                       </div>
                       <div class="save_unlimited_downloads">
                         <h2 class="primary_color text-uppercase">Save 96%</h2>
