@@ -5,18 +5,21 @@ Template Name: User Dashboard Billing Information
 get_header();
 
 $user_id = get_current_user_id();
+$msg = '';
 
 if(isset($_POST['submit'])){
+
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
 
-    $billing_l_name = ($_POST['billing_l_name']);
-    $billing_email = ($_POST['billing_email']);
-    $billing_company = ($_POST['billing_company']);
-    $billing_country = ($_POST['billing_country']);
-    $billing_address = ($_POST['billing_address']);
-    $billing_city = ($_POST['billing_city']);
-    $billing_state = ($_POST['billing_state']);
-    $billing_zip = ($_POST['billing_zip']);
+    $billing_f_name = sanitize_text_field($_POST['billing_f_name']);
+    $billing_l_name = sanitize_text_field($_POST['billing_l_name']);
+    $billing_email = sanitize_email($_POST['billing_email']);
+    $billing_company = sanitize_text_field($_POST['billing_company']);
+    $billing_country = sanitize_text_field($_POST['billing_country']);
+    $billing_address = sanitize_text_field($_POST['billing_address']);
+    $billing_city = sanitize_text_field($_POST['billing_city']);
+    $billing_state = sanitize_text_field($_POST['billing_state']);
+    $billing_zip = sanitize_text_field($_POST['billing_zip']);
 
     update_user_meta($user_id, 'billing_f_name', $billing_f_name);
     update_user_meta($user_id, 'billing_l_name', $billing_l_name);
@@ -27,6 +30,8 @@ if(isset($_POST['submit'])){
     update_user_meta($user_id, 'billing_city', $billing_city);
     update_user_meta($user_id, 'billing_state', $billing_state);
     update_user_meta($user_id, 'billing_zip', $billing_zip);
+
+    $msg = 'success';
   }
 }
 $billing_f_name = get_user_meta($user_id, 'billing_f_name', true);
@@ -62,6 +67,23 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
           </div>
           <div class="content__column">
             <form action="#" method="post">
+              <?php
+                if($msg != ''){
+                  if($msg == 'success'){
+                    echo '
+                    <div class="alert alert-success" role="alert">
+                      Address saved successful.
+                    </div>
+                    ';
+                  }elseif($msg == 'fail'){
+                    echo '
+                    <div class="alert alert-warning" role="alert">
+                      Failed!! Try again later.
+                    </div>
+                    ';
+                  }
+                }
+              ?>
               <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
               <div class="full_width_container">
                 <div class="half_width input_group">
