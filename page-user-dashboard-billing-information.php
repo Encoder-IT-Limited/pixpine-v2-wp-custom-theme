@@ -4,29 +4,40 @@ Template Name: User Dashboard Billing Information
 */
 get_header();
 
+$user_id = get_current_user_id();
+
 if(isset($_POST['submit'])){
+  if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
 
-  $billing_f_name = $_POST['billing_f_name'];
-  $billing_l_name = $_POST['billing_l_name'];
-  $billing_email = $_POST['billing_email'];
-  $billing_company = $_POST['billing_company'];
-  $billing_country = $_POST['billing_country'];
-  $billing_address = $_POST['billing_address'];
-  $billing_city = $_POST['billing_city'];
-  $billing_state = $_POST['billing_state'];
-  $billing_zip = $_POST['billing_zip'];
+    $billing_l_name = ($_POST['billing_l_name']);
+    $billing_email = ($_POST['billing_email']);
+    $billing_company = ($_POST['billing_company']);
+    $billing_country = ($_POST['billing_country']);
+    $billing_address = ($_POST['billing_address']);
+    $billing_city = ($_POST['billing_city']);
+    $billing_state = ($_POST['billing_state']);
+    $billing_zip = ($_POST['billing_zip']);
 
-  update_user_meta($user_id, 'billing_f_name', $billing_f_name);
-  update_user_meta($user_id, 'billing_l_name', $billing_l_name);
-  update_user_meta($user_id, 'billing_email', $billing_email);
-  update_user_meta($user_id, 'billing_company', $billing_company);
-  update_user_meta($user_id, 'billing_country', $billing_country);
-  update_user_meta($user_id, 'billing_address', $billing_address);
-  update_user_meta($user_id, 'billing_city', $billing_city);
-  update_user_meta($user_id, 'billing_state', $billing_state);
-  update_user_meta($user_id, 'billing_zip', $billing_zip);
+    update_user_meta($user_id, 'billing_f_name', $billing_f_name);
+    update_user_meta($user_id, 'billing_l_name', $billing_l_name);
+    update_user_meta($user_id, 'billing_email', $billing_email);
+    update_user_meta($user_id, 'billing_company', $billing_company);
+    update_user_meta($user_id, 'billing_country', $billing_country);
+    update_user_meta($user_id, 'billing_address', $billing_address);
+    update_user_meta($user_id, 'billing_city', $billing_city);
+    update_user_meta($user_id, 'billing_state', $billing_state);
+    update_user_meta($user_id, 'billing_zip', $billing_zip);
+  }
 }
-
+$billing_f_name = get_user_meta($user_id, 'billing_f_name', true);
+$billing_l_name = get_user_meta($user_id, 'billing_l_name', true);
+$billing_email = get_user_meta($user_id, 'billing_email', true);
+$billing_company = get_user_meta($user_id, 'billing_company', true);
+$billing_country = get_user_meta($user_id, 'billing_country', true);
+$billing_address = get_user_meta($user_id, 'billing_address', true);
+$billing_city = get_user_meta($user_id, 'billing_city', true);
+$billing_state = get_user_meta($user_id, 'billing_state', true);
+$billing_zip = get_user_meta($user_id, 'billing_zip', true);
 ?>
 
 <main>
@@ -50,7 +61,8 @@ if(isset($_POST['submit'])){
 
           </div>
           <div class="content__column">
-            <form action="">
+            <form action="#" method="post">
+              <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
               <div class="full_width_container">
                 <div class="half_width input_group">
                   <label for="">First Name<span>*</span></label>
@@ -100,7 +112,7 @@ if(isset($_POST['submit'])){
                 </div>
               </div>
               <div class="form_btn_container">
-                <input class="_btn btn_primary" type="submit" value="Update">
+                <input class="_btn btn_primary" type="submit" name="submit" value="Update">
               </div>
             </form>
           </div>
