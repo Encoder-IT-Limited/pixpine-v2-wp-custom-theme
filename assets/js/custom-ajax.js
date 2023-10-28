@@ -17,8 +17,32 @@ jQuery(document).ready(function($) {
     //     },
     // });
 
-    // add to cart
+
+
     
+    // remove cart
+    $(document).on('click', '.remove-cart', function(){
+        var pId = $(this).attr('p-id');
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'pixpine_remove_cart',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'pId' : pId
+            },
+            success: function(response) {
+                console.log(response)
+                if(response == 'success'){
+                    $("#"+pId).remove();
+                }
+            },
+        });
+    });
+
+
+
+    // add to cart
     $(document).on('click', '.add-to-cart', function(){
         var pId = $(this).attr('p-id');
         var isLoggedIn = $(this).attr('is-logged-in');

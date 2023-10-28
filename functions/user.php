@@ -1,10 +1,30 @@
 <?php
 
+function pixpine_remove_cart(){
+    // User login credentials
+    $p_id = $_POST['pId'];
+    $user_id = get_current_user_id();
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'pixpine_carts';
+    if($isCart == 0 ){
+        $wpdb->delete($table_name, array(
+            'user_id' => $user_id,
+            'product_id' => $p_id
+        ));
+    }
+
+    echo 'success';
+
+    die();
+}
+add_action('wp_ajax_pixpine_remove_cart', 'pixpine_remove_cart'); // For logged-in users
+
 function pixpine_update_cart(){
     // User login credentials
     $p_id = $_POST['pId'];
     $isCart = $_POST['isCart'];
-    $meta_key = 'pixpine_favorite_'.$type;
+    // $meta_key = 'pixpine_favorite_'.$type;
     $user_id = get_current_user_id();
 
     global $wpdb;
