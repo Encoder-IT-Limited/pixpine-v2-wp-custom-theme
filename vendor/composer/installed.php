@@ -3,7 +3,7 @@
         'name' => 'automattic/underscores',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '17fff4e743ebec9f041fd76f8cd8751cdf464502',
+        'reference' => 'a72f3b018095b7aba49d2e1dc266f36f2892971a',
         'type' => 'wordpress-theme',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'automattic/underscores' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '17fff4e743ebec9f041fd76f8cd8751cdf464502',
+            'reference' => 'a72f3b018095b7aba49d2e1dc266f36f2892971a',
             'type' => 'wordpress-theme',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -219,6 +219,15 @@
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v13.1.0',
+            'version' => '13.1.0.0',
+            'reference' => '8971caa149b4689e67c1123d3604e387c79ab543',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/finder' => array(
             'pretty_version' => 'v6.0.19',

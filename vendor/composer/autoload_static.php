@@ -29,6 +29,7 @@ class ComposerStaticInite5246ef8c3ed05870f635ebaa74d1c91
         'S' => 
         array (
             'Symfony\\Component\\Finder\\' => 25,
+            'Stripe\\' => 7,
         ),
         'P' => 
         array (
@@ -76,14 +77,18 @@ class ComposerStaticInite5246ef8c3ed05870f635ebaa74d1c91
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
