@@ -1,5 +1,10 @@
 /* For Navbar button */
 jQuery(document).ready(function () {
+    jQuery(".show_billing_form").click(function () {
+        jQuery(".billing_form").removeClass("d-none");
+        jQuery(".billing_info").addClass("d-none")
+        jQuery(this).addClass("d-none")
+    });
     jQuery("button.dropdown-toggle").click(function () {
         jQuery("#dropdown").toggleClass("customclass");
     });

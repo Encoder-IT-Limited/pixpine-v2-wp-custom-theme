@@ -35,6 +35,11 @@ jQuery(document).ready(function($) {
                 console.log(response)
                 if(response == 'success'){
                     $("#"+pId).remove();
+                    var total_price = 0;
+                    $('.single-cart-price').each(function() {
+                        total_price += parseFloat($(this).text());
+                    });
+                    $(".total-cart-price").text(total_price)
                 }
             },
         });
