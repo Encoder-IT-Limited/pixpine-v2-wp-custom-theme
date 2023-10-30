@@ -160,6 +160,9 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                   $cpt_post = get_post($cpt_id, 'product');
                   $thumbnail_url = get_the_post_thumbnail_url($cpt_id);
                   $price = get_post_meta($cpt_id, 'personal_commercial_price', true);
+                  if(empty($price)){
+                    $price = 0;
+                  }
                   $total_price += $price;
                 ?>
                 <tr class="cart_item">
@@ -207,7 +210,24 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                 </tr>
             </tfoot>
           </table>
-        
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="YOUR_BUTTON_ID">
+              <!-- Specify the item name and price -->
+              <input type="hidden" name="item_name" value="Your Product Name">
+              <input type="hidden" name="amount" value="10.00">
+              <!-- Customize the button image -->
+              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Pay with PayPal">
+              <!-- Add a return URL after a successful payment -->
+              <input type="hidden" name="return" value="https://yourwebsite.com/success.php">
+              <!-- Add a cancel URL if the user cancels the payment -->
+              <input type="hidden" name="cancel_return" value="https://yourwebsite.com/cancel.php">
+              <!-- Specify the currency code -->
+              <input type="hidden" name="currency_code" value="USD">
+              <!-- Additional optional fields -->
+              <input type="hidden" name="custom" value="Your Custom Data">
+              <input type="hidden" name="tax" value="0.00">
+          </form>
 
         </div>
       </div>

@@ -24,6 +24,9 @@ get_header();
                 $cpt_post = get_post($cpt_id, 'product');
                 $thumbnail_url = get_the_post_thumbnail_url($cpt_id);
                 $price = get_post_meta($cpt_id, 'personal_commercial_price', true);
+                if(empty($price)){
+                  $price = 0;
+                }
                 $total_price += $price;
               ?>
                 <tr id="<?php echo $cpt_id;?>">
