@@ -567,6 +567,7 @@ header .navbar-nav {
 .get_premium_mockups_section .premium_img img {
   width: 100%;
   width: 215px;
+	max-width: 300px;
 }
 /* get_premium_mockups_section Endt */
 
@@ -688,7 +689,8 @@ header .navbar-nav {
 .bundle_mockups_yearly_subscription .card_item img,
 .pixpine_free_product_top .first_card_col .img_col img,
 .pixpine_free_product_top .first_image_text_col .card_inner img {
-  object-fit: contain;
+	object-fit: cover;
+	width: 100% !important;
 }
 
 /* premium_mockups hover effect start */
