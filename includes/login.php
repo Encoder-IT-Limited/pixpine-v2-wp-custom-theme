@@ -5,6 +5,7 @@
   aria-labelledby="loginModalLabel"
   aria-hidden="true"
 >
+    
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <main class="signup__login login_page">
@@ -16,18 +17,22 @@
               </h2>
             </div>
             <div class="login_signup_f_g_contianer">
-              <button>
+                <a href="<?php echo google_login_url();?>">
+                  <button>
                 <div class="btn_img">
                   <img src="<?php echo get_template_directory_uri();?>/assets/images/login_signup_g.png" alt="" />
                 </div>
                 <span>Log in with your Gmail</span>
               </button>
-              <button>
+                </a>
+            
+                <a href="<?php echo eil_code_fb_login();?>"><button>
                 <div class="btn_img">
                   <img src="<?php echo get_template_directory_uri();?>/assets/images/login_signup_f.png" alt="" />
                 </div>
                 <span>Log in with your Facebook</span>
-              </button>
+              </button></a> 
+              
             </div>
             <div class="separator">
               <p>or</p>

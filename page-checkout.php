@@ -199,8 +199,9 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
           Edit Billing Address
         </button>
       </div>
-
+   
       <div class="right_col">
+           <form method="post" action="">
         <div class="order__column">
           <h3 id="order_review_heading">Your order</h3>
           <div class="shop_table woocommerce-checkout-review-order-table">
@@ -272,21 +273,37 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
               </div>
               <div
                 class="order-total order-total-main"
-                data-total="17.84"
+                data-total="<?php echo $total_price;?>"
                 data-total-feeless="17.84"
                 data-total-blue="14.99"
               >
                 <div class="d-flex align-items-center justify-content-between">
                   <p>Order Total</p>
-                  <span class="amount">$1<?php echo $total_price;?></span>
+                  <span class="amount">$<?php echo $total_price;?></span>
                 </div>
               </div>
+                <div class="payment_option">
+                    <h5 class="product-title">Payment Method</h5>
+                    <div>
+                     <label>Stripe</label>
+                      <input type="radio" name="payment_method" value="Stripe">
+                         <input type="hidden" name="price" value="<?php echo $total_price;?>">
+                        <input type="hidden" name="placeOrder" value="1">
+                        <input type="hidden" name="proid" value="<?php echo $cpt_id;?>">
+                    </div>
+                <div>
+                     <label>Paypal</label>
+                      <input type="radio" name="payment_method" value="Paypal">
+                    </div>
+                </div>
+                <button class="_btn get_premium_btn btn_black_small btn_primary show_billing_form" type="submit">Place Order</button>
             </div>
           </div>
-          <form
+            
+   <!--       <form
             action="https://www.paypal.com/cgi-bin/webscr"
             method="post"
-            target="_top"
+            target="_top" class="paypal_getway d-none"
           >
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input
@@ -294,10 +311,10 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
               name="hosted_button_id"
               value="YOUR_BUTTON_ID"
             />
-            <!-- Specify the item name and price -->
+            
             <input type="hidden" name="item_name" value="Your Product Name" />
             <input type="hidden" name="amount" value="10.00" />
-            <!-- Customize the button image -->
+         
             <input
               class=""
               type="image"
@@ -306,26 +323,28 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
               name="submit"
               alt="Pay with PayPal"
             />
-            <!-- Add a return URL after a successful payment -->
+         
             <input
               type="hidden"
               name="return"
               value="https://yourwebsite.com/success.php"
             />
-            <!-- Add a cancel URL if the user cancels the payment -->
+     
             <input
               type="hidden"
               name="cancel_return"
               value="https://yourwebsite.com/cancel.php"
             />
-            <!-- Specify the currency code -->
+          
             <input type="hidden" name="currency_code" value="USD" />
-            <!-- Additional optional fields -->
+          
             <input type="hidden" name="custom" value="Your Custom Data" />
             <input type="hidden" name="tax" value="0.00" />
-          </form>
+          </form>-->
         </div>
+               </form>
       </div>
+        
     </div>
   </section>
 </main>
