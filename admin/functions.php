@@ -176,6 +176,39 @@ function custom_taxonomy_term_order($args) {
     }
     return $args;
 }
+function pixpine_subscription_details($subscription_id){
+     require_once get_template_directory() . '/stripe/StripeHelper.php'; 
+     $stripeHelper = new StripeHelper();
+    $stripe = $stripeHelper->stripeClient;
+    try {
+    // Use your $stripeHelper class to retrieve the subscription information
+    $subscription = $stripeHelper->retrieve($subscription_id);
+
+    if ($subscription) {
+        // Get the subscription's current period start and end dates
+        $start_date = date('Y-m-d', $subscription->current_period_start);
+        $end_date = date('Y-m-d', $subscription->current_period_end);
+
+        $data['start_date']=$start_date;
+       $data['end_date']= $end_date;
+    } else {
+        $data['error']= "Subscription not found or an error occurred.";
+    }
+} catch (\Stripe\Exception\CardException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\RateLimitException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\InvalidRequestException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\AuthenticationException $e) {
+   $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\ApiConnectionException $e) {
+   $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\ApiErrorException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+}
+    return $data;
+}
 /**
  * Drag and drop category - general_category - Ends
  */
@@ -230,6 +263,10 @@ function create_custom_table() {
         $sql = "CREATE TABLE $table_name (
             id INT(11) NOT NULL AUTO_INCREMENT,
             user_id INT(11) DEFAULT NULL,
+            item_number INT(11) DEFAULT NULL,
+            receiver_email VARCHAR(255) DEFAULT NULL,
+            payment_info longtext DEFAULT NULL,
+            payment_status VARCHAR(255) DEFAULT NULL,
             pixpine_payment_detail_id INT(11) DEFAULT NULL,
             total_price VARCHAR(255) DEFAULT NULL,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -253,6 +290,9 @@ function create_custom_table() {
             id INT(11) NOT NULL AUTO_INCREMENT,
             pixpine_order_id INT(11) DEFAULT NULL,
             product_id INT(11) DEFAULT NULL,
+            user_id INT(11) DEFAULT NULL,
+            price VARCHAR(255) DEFAULT NULL,
+            product_name VARCHAR(255) DEFAULT NULL,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id)
@@ -289,7 +329,11 @@ function create_custom_table() {
         $sql = "CREATE TABLE $table_name (
             id INT(11) NOT NULL AUTO_INCREMENT,
             user_id INT(11) DEFAULT NULL,
+            item_number INT(11) DEFAULT NULL,
             subscripton_plan VARCHAR(255) DEFAULT NULL,
+            status VARCHAR(255) DEFAULT NULL,
+            plan_id VARCHAR(255) DEFAULT NULL,
+            subscription_id VARCHAR(255) DEFAULT NULL,
             starting_date DATE DEFAULT NULL,
             end_date DATE DEFAULT NULL,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -289,12 +289,7 @@ function eil_code_social_login_func(){
            $client->authenticate($_GET['code']);
           $access_token = $client->getAccessToken();
         $client->setAccessToken($access_token);
-//print( $access_token);exit;
-       /* $client->setAccessToken($access_token);
-        $gmail = new Google_Service_Gmail($client);
-        $profile = $gmail->users->getProfile('me');
-        $email = $profile->getEmailAddress();
-*/
+
         $Oauth = new Google_Service_Oauth2($client);
         $info = $Oauth->userinfo->get();
         $email=$info->email;
@@ -367,6 +362,12 @@ function eil_payment_func(){
     if(isset($_GET['stripefailed']) && $_GET['stripefailed']){
       stripefailed(); 
     }
+     if(isset($_GET['sub_stripesuccess']) && $_GET['sub_stripesuccess']){
+       sub_stripesuccess(); 
+    }
+    if(isset($_GET['sub_stripefailed']) && $_GET['sub_stripefailed']){
+      sub_stripefailed(); 
+    }
 }
  function stripePayment($data){
    // echo 'yes';exit;
@@ -377,6 +378,10 @@ $appUrl = site_url();
 /**
  * Create product
  */
+global $current_user;
+ get_currentuserinfo();
+ 
+$user_id= $current_user->ID;  
 $order_id=$data['order_id'];
 $amount=$data['total_price'];
 $email=$data['email'];
@@ -391,26 +396,10 @@ $price = $stripeHelper->createProductPrice($product, $productPrice,'usd');
  * create checkout session and payment link
  */
 global $wpdb;
- $sql="insert into ".$wpdb->prefix."payments (receiver_email,item_number,txnid,payment_amount,payment_status,createdtime) values('$email','".$order_id."','0','".$amount."','Pending','".date('Y-m-d H:i:s')."')";
+ $sql="insert into ".$wpdb->prefix."pixpine_payment_details (receiver_email,item_number,payment_method,tnx_id,user_id,amount,payment_for,payment_info,payment_status) values('".$email."','".$order_id."','stripe','0','".$user_id."','".$amount."','product','N/A','Pending')";
        $wpdb->query($sql);
-     if($proid =='283'){
-         $stripeSession = $stripe->checkout->sessions->create(
-        array(
-        'success_url' => $appUrl . '/?stripesuccess=true&session_id={CHECKOUT_SESSION_ID}&order_id='.$order_id.'',
-        'cancel_url' => $appUrl . '/?stripefailed=true&session_id={CHECKOUT_SESSION_ID}&order_id='.$order_id.'',
-        'payment_method_types' => array('card'),
-        'customer_email' => $email,   
-        
-        'payment_method_types' => ['card'],
-         'subscription_data' => [
-            'items' => [['plan' => 'price_1O7zCcSCPnS6Hgf9e0CiHplS']],
-        ],   
-        'currency' => 'usd',
-       
-    )
-); 
-     }
-     else{
+   
+  
         $stripeSession = $stripe->checkout->sessions->create(
         array(
         'success_url' => $appUrl . '/?stripesuccess=true&session_id={CHECKOUT_SESSION_ID}&order_id='.$order_id.'',
@@ -426,17 +415,115 @@ global $wpdb;
                 'quantity' => 1,
             )
         )
-    )
-);  
-     }
+        )
+     );  
+     
     // price_1O7zCcSCPnS6Hgf9e0CiHplS
       
       wp_redirect($stripeSession->url);exit;
 
 
     }
- function stripesuccess(){
+add_action('wp_ajax_pixpine_subscribe', 'pixpine_subscribe');
+add_action('wp_ajax_nopriv_pixpine_subscribe', 'pixpine_subscribe');
+function pixpine_subscribe(){
+   // echo 'yes';exit;
+     $security = $_POST['nonce'];
+    if (!wp_verify_nonce($security, 'ajax_nonce')) {
+        $data['error']= 'Hei Dear, What are you looking for?';
+           echo json_encode($data);exit;
+    }
+require_once get_template_directory() . '/stripe/StripeHelper.php'; 
+$stripeHelper = new StripeHelper();
+$stripe = $stripeHelper->stripeClient;
+$appUrl = site_url();        
+global $current_user;
+get_currentuserinfo();
+$email= $current_user->user_email;  
+$data=array();
+$user_id=$current_user->ID;
+$order_id=time();    
+if(!$user_id){
+ $data['error']='Please login first';
+}
+    else{
+     $planid=$_POST['planid'];
+     $amount=$_POST['amount'];
+     $subscripton_plan=$_POST['subscripton_plan'];
+      global $wpdb;
+       $sql="insert into ".$wpdb->prefix."pixpine_payment_details (receiver_email,item_number,payment_method,tnx_id,user_id,amount,payment_for,payment_info,payment_status) values('$email','".$order_id."','stripe','0','".$user_id."','".$amount."','subscription','N/A','Pending')";
+       $wpdb->query($sql);
+        $pd_lastid = $wpdb->insert_id;
+       $sql="insert into ".$wpdb->prefix."pixpine_subscriptions (user_id,subscripton_plan,plan_id,item_number) values('$user_id','".$subscripton_plan."','".$planid."','".$order_id."')";
+       $wpdb->query($sql);
+        $s_lastid = $wpdb->insert_id;
+         $sql="insert into ".$wpdb->prefix."pixpine_subscription_payment (subscription_id,payment_detail_id	) values('$s_lastid','".$pd_lastid."')";
+          $wpdb->query($sql);
+        
+         $stripeSession = $stripe->checkout->sessions->create(
+        array(
+        'success_url' => $appUrl . '/?sub_stripesuccess=true&session_id={CHECKOUT_SESSION_ID}&order_id='.$order_id.'',
+        'cancel_url' => $appUrl . '/?sub_stripefailed=true&session_id={CHECKOUT_SESSION_ID}&order_id='.$order_id.'',
+        'payment_method_types' => array('card'),
+        'customer_email' => $email,   
+        
+        'payment_method_types' => ['card'],
+         'subscription_data' => [
+            'items' => [['plan' => $planid]],
+        ],   
+        'currency' => 'usd',
+       
+    )
+    );  
+     $data['success']=$stripeSession->url;   
+    }
+
+     
+   echo json_encode($data);exit;
+    // price_1O7zCcSCPnS6Hgf9e0CiHplS
+      
+      //return $stripeSession->url;
+
+
+    }
+function get_pixpine_subscription_details($subscription_id){
+     require_once get_template_directory() . '/stripe/StripeHelper.php'; 
+     $stripeHelper = new StripeHelper();
+    $stripe = $stripeHelper->stripeClient;
+    try {
+    // Use your $stripeHelper class to retrieve the subscription information
+    $subscription = $stripeHelper->retrieve($subscription_id);
+
+    if ($subscription) {
+        // Get the subscription's current period start and end dates
+        $start_date = date('Y-m-d', $subscription->current_period_start);
+        $end_date = date('Y-m-d', $subscription->current_period_end);
+
+        $data['start_date']=$start_date;
+       $data['end_date']= $end_date;
+    } else {
+        $data['error']= "Subscription not found or an error occurred.";
+    }
+} catch (\Stripe\Exception\CardException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\RateLimitException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\InvalidRequestException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\AuthenticationException $e) {
+   $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\ApiConnectionException $e) {
+   $data['error']= 'Error: ' . $e->getMessage();
+} catch (\Stripe\Exception\ApiErrorException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+}
+    return $data;
+}
+ function sub_stripesuccess(){
      global $wpdb;
+     global $current_user;
+     get_currentuserinfo();
+    $user_id= $current_user->ID;  
      require_once get_template_directory() . '/stripe/StripeHelper.php'; 
      $stripeHelper = new StripeHelper();
     $stripe = $stripeHelper->stripeClient;
@@ -445,11 +532,99 @@ global $wpdb;
      $checkoutSession = $stripeHelper->getSession($sessionId);
      $jsonData=json_encode($checkoutSession);
    //print_r($checkoutSession);exit;
-      $query = "UPDATE ".$wpdb->prefix."payments SET payment_status='Completed',payment_info='".$jsonData."',txnid='".$checkoutSession->payment_intent."' WHERE item_number='$order_id' ";
+      $query = "UPDATE ".$wpdb->prefix."pixpine_payment_details SET payment_status='Completed',payment_info='".$jsonData."',tnx_id='".$checkoutSession->subscription."' WHERE item_number='$order_id' ";
+     $wpdb->query($query);
+  
+     $subscriptioninfo=get_pixpine_subscription_details($checkoutSession->subscription);
+     
+     $query = "UPDATE ".$wpdb->prefix."pixpine_subscriptions SET subscription_id='".$checkoutSession->subscription."',starting_date='".$subscriptioninfo['start_date']."',status='Active',end_date='".$subscriptioninfo['end_date']."' WHERE item_number='$order_id' ";
+     
+      $wpdb->query($query);
+     
+       /*$pitem = $wpdb->get_row("SELECT * FROM ".$wpdb->prefix."pixpine_payment_details WHERE item_number='" . $order_id . "'", ARRAY_A);
+
+       $paymentid = (int)$pitem['id'];
+       $amount = $pitem['amount'];
+     $sql="insert into ".$wpdb->prefix."pixpine_orders (user_id,pixpine_payment_detail_id,total_price) values('$user_id','". $paymentid."','".$amount."')";
+       $wpdb->query($sql);
+     $dborderid = $wpdb->insert_id;
+     $table_name = $wpdb->prefix . 'pixpine_carts'; 
+     $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
+     $products =$wpdb->get_col($query);
+     $total_price = 0; 
+     
+     foreach($products as $cpt_id){ 
+         $cpt_post = get_post($cpt_id, 'product'); 
+          $name= $cpt_post->post_title
+          $price = get_post_meta($cpt_id,'personal_commercial_price', true); 
+           $sql="insert into ".$wpdb->prefix."pixpine_order_items(pixpine_order_id,product_id,user_id,product_name,price) values('$dborderid','".$cpt_id."','".$user_id."','".$user_id."','".$name."','".$price."')";
+           $wpdb->query($sql);
+     }*/
+                                                                 
+                                                                 
+  
+      $query = "DELETE from ".$wpdb->prefix."pixpine_carts  WHERE user_id='$user_id' ";
       $wpdb->query($query);
      
        $custom_page_url = site_url() . '/orderconfirmed/';
         $_SESSION['message'] = 'Successfully Paid';
+         wp_redirect($custom_page_url);exit;
+    }
+ function stripesuccess(){
+     global $wpdb;
+     global $current_user;
+    get_currentuserinfo();
+    $user_id= $current_user->ID;  
+     require_once get_template_directory() . '/stripe/StripeHelper.php'; 
+     $stripeHelper = new StripeHelper();
+    $stripe = $stripeHelper->stripeClient;
+     $sessionId = $_GET['session_id']; 
+     $order_id = $_GET['order_id'];  
+     $checkoutSession = $stripeHelper->getSession($sessionId);
+     $jsonData=json_encode($checkoutSession);
+   //print_r($checkoutSession);exit;
+      $query = "UPDATE ".$wpdb->prefix."pixpine_payment_details SET payment_status='Completed',payment_info='".$jsonData."',tnx_id='".$checkoutSession->payment_intent."' WHERE item_number='$order_id' ";
+      $wpdb->query($query);
+     $pitem = $wpdb->get_row("SELECT * FROM ".$wpdb->prefix."pixpine_payment_details WHERE item_number='" . $order_id . "'", ARRAY_A);
+
+       $paymentid = (int)$pitem['id'];
+       $amount = $pitem['amount'];
+       $sql="insert into ".$wpdb->prefix."pixpine_orders (user_id,pixpine_payment_detail_id,total_price) values('$user_id','". $paymentid."','".$amount."')";
+       $wpdb->query($sql);
+     $dborderid = $wpdb->insert_id;
+     $table_name = $wpdb->prefix . 'pixpine_carts'; 
+     $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
+     $products =$wpdb->get_col($query);
+     $total_price = 0; 
+     
+     foreach($products as $cpt_id){ 
+         $cpt_post = get_post($cpt_id, 'product'); 
+          $name= $cpt_post->post_title;
+          $price = get_post_meta($cpt_id,'personal_commercial_price', true); 
+           $sql="insert into ".$wpdb->prefix."pixpine_order_items (pixpine_order_id,product_id,user_id,product_name,price) values('$dborderid','".$cpt_id."','".$user_id."','".$name."','".$price."')";
+           $wpdb->query($sql);
+     }
+      $query = "DELETE from ".$wpdb->prefix."pixpine_carts  WHERE user_id='$user_id' ";
+      $wpdb->query($query);
+     
+       $custom_page_url = site_url() . '/orderconfirmed/';
+        $_SESSION['message'] = 'Successfully Paid';
+         wp_redirect($custom_page_url);exit;
+    }
+function sub_stripefailed(){
+     global $wpdb;
+     require_once get_template_directory() . '/stripe/StripeHelper.php'; 
+    $stripeHelper = new StripeHelper();
+    $stripe = $stripeHelper->stripeClient;
+    $sessionId = $_GET['session_id'];
+     $order_id = $_GET['order_id'];  
+    $checkoutSession = $stripeHelper->getSession($sessionId);
+  
+      $query = "UPDATE ".$wpdb->prefix."pixpine_payment_details SET payment_status='Failed', tnx_id='".$checkoutSession->subscription."' WHERE item_number='$order_id' ";
+      
+       $wpdb->query($query);
+          $custom_page_url = site_url() . '/orderfailed/';
+        $_SESSION['message'] = 'Something went wrong!';
          wp_redirect($custom_page_url);exit;
     }
     function stripefailed(){
@@ -461,13 +636,50 @@ global $wpdb;
      $order_id = $_GET['order_id'];  
     $checkoutSession = $stripeHelper->getSession($sessionId);
   
-      $query = "UPDATE ".$wpdb->prefix."payments SET payment_status='Failed', txnid='".$checkoutSession->payment_intent."' WHERE item_number='$order_id' ";
+      $query = "UPDATE ".$wpdb->prefix."pixpine_payment_details SET payment_status='Failed', tnx_id='".$checkoutSession->payment_intent."' WHERE item_number='$order_id' ";
       
        $wpdb->query($query);
           $custom_page_url = site_url() . '/orderfailed/';
         $_SESSION['message'] = 'Something went wrong!';
          wp_redirect($custom_page_url);exit;
     }
+
+//cancelsubscription
+add_action('wp_ajax_pixpine_subscribe_cancel', 'pixpine_subscribe_cancel');
+add_action('wp_ajax_nopriv_pixpine_subscribe_cancel', 'pixpine_subscribe_cancel');
+function pixpine_subscribe_cancel(){
+    $security = $_POST['nonce'];
+    if (!wp_verify_nonce($security, 'ajax_nonce')) {
+        $data['error']= 'Hei Dear, What are you looking for?';
+           echo json_encode($data);exit;
+    }
+    else{
+    $subscriptionid=$_POST['subscriptionid'];
+    require_once get_template_directory() . '/stripe/StripeHelper.php'; 
+     $stripeHelper = new StripeHelper();
+    $stripe = $stripeHelper->stripeClient;
+    try {
+    // Use your $stripeHelper class to retrieve the subscription information
+    $subscription = $stripeHelper->cancelSubscription($subscriptionid);
+
+    if ($subscription) {
+        // Get the subscription's current period start and end dates
+        
+     global $wpdb;
+     $query = "UPDATE ".$wpdb->prefix."pixpine_subscriptions SET status='Cancled' WHERE subscription_id='$subscriptionid' ";
+     
+      $wpdb->query($query);
+        
+        $data['success']= "Subscription successfully cancled.";
+    } else {
+        $data['error']= "Subscription not found or an error occurred.";
+    }
+} catch (\Stripe\Exception\CardException $e) {
+    $data['error']= 'Error: ' . $e->getMessage();
+  } 
+    echo json_encode($data);exit;
+    }
+}
 if (isset($_POST['placeOrder'])) {
  global $current_user;
 get_currentuserinfo();

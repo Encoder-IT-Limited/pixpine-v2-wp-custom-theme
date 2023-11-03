@@ -3,6 +3,12 @@
 Template Name: User Dashboard Subscription Monthly
 */
 get_header();
+global $current_user;
+get_currentuserinfo();
+$user_id= $current_user->ID; 
+$results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' and subscripton_plan='monthly'", ARRAY_A);
+ $results2 = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' and subscripton_plan='yearly'", ARRAY_A);
+
 ?>
 
 <main>
@@ -20,6 +26,10 @@ get_header();
             <!-- Dashboard inner menu -->
             <?php $currentPage = 'dashboard__subscription'; include get_template_directory() .'/includes/dashboard-menu.php';?>
           </div>
+            <?php if(!empty($results)) { 
+            foreach($results as $row){
+            
+            ?>
           <div class="content__column">
             <div class="subscription__description">
               <ul>
@@ -27,10 +37,10 @@ get_header();
                   <p>Subscription Type: <span>MONTHLY</span></p>
                 </li>
                 <li>
-                  <p>Subscription Date: <span>15 September 2023</span></p>
+                  <p>Subscription Date: <span><?php echo date('d F Y',strtotime($row['created_at']));?></span></p>
                 </li>
                 <li>
-                  <p>Subscription Expire: <span>15 October 2023</span></p>
+                  <p>Subscription Expire: <span><?php echo date('d F Y',strtotime($row['end_date']));?></span></p>
                 </li>
                 <li>
                   <p>Download Limit: <span>56</span></p>
@@ -38,13 +48,44 @@ get_header();
                 <li>
                   <p>Downloads Remaining: <span>35</span></p>
                 </li>
+                   <li>
+                  <p>Status: <span><?php echo $row['status']; ?></span></p>
+                </li>
               </ul>
             </div>
             <div class="btn_container">
-              <button class="_btn btn_primary">Browse Premium</button>
-              <button class="_btn btn_outline">Cancel Subscription</button>
+              <a class="_btn btn_primary" href="<?php echo site_url('/premium-mockups/');?>">Browse Premium</a>
+                <?php if( $row['status'] =='Active') {?>
+                 <button class="_btn btn_outline cancelSub" subscriptionid="<?php echo $row['subscription_id']; ?>">Cancel Subscription</button>
+                <?php } ?>
             </div>
           </div>
+            <?php } }?>
+              <?php if(!empty($results2)) { 
+            foreach($results2 as $row2){
+            
+            ?>
+          <div class="content__column">
+            <div class="subscription__description">
+              <ul>
+                <li><p>Subscription Type: <span>YEARLY</span></p></li>
+                <li><p>Subscription Date: <span><?php echo date('d F Y',strtotime($row2['created_at']));?></span></p></li>
+                <li><p>Subscription Expire: <span><?php echo date('d F Y',strtotime($row2['end_date']));?></span></p></li>
+                <li><p>Download Limit: <span>UNLIMITED</span></p></li>
+                <li><p>Downloads Remaining: <span>UNLIMITED</span></p></li>
+                   <li>
+                  <p>Status: <span><?php echo $row['status']; ?></span></p>
+                </li>
+              </ul>
+            </div>
+            <div class="btn_container">
+              <a class="_btn btn_primary" <?php echo site_url('/premium-mockups/');?>>Browse Premium</a>
+                  <?php if( $row2['status'] =='Active') {?>
+              <button class="_btn btn_outline cancelSub" subscriptionid="<?php echo $row2['subscription_id']; ?>">Cancel Subscription</button>
+                <?php } ?>
+            </div>
+          </div>
+            <?php } }?>
         </div>
       </div>
     </div>

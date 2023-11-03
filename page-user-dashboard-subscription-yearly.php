@@ -3,6 +3,11 @@
 Template Name: User Dashboard Subscription Yearly
 */
 get_header();
+
+global $current_user;
+
+$user_id= $current_user->ID; 
+$results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' and subscripton_plan='yearly'", ARRAY_A);
 ?>
 
 <main>
@@ -26,12 +31,16 @@ get_header();
           <?php $currentPage = 'dashboard__subscription'; include get_template_directory() .'/includes/dashboard-menu.php';?>
 
           </div>
+               <?php if(!empty($results)) { 
+            foreach($results as $row){
+            
+            ?>
           <div class="content__column">
             <div class="subscription__description">
               <ul>
                 <li><p>Subscription Type: <span>YEARLY</span></p></li>
-                <li><p>Subscription Date: <span>15 September 2023</span></p></li>
-                <li><p>Subscription Expire: <span>15 September 2024</span></p></li>
+                <li><p>Subscription Date: <span><?php echo date('d F Y',strtotime($row['created_at']));?></span></p></li>
+                <li><p>Subscription Expire: <span><?php echo date('d F Y',strtotime($row['end_date']));?></span></p></li>
                 <li><p>Download Limit: <span>UNLIMITED</span></p></li>
                 <li><p>Downloads Remaining: <span>UNLIMITED</span></p></li>
               </ul>
@@ -41,6 +50,7 @@ get_header();
               <button class="_btn btn_outline">Cancel Subscription</button>
             </div>
           </div>
+            <?php } }?>
         </div>
       </div>
     </div>

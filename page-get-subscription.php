@@ -64,7 +64,7 @@ get_header();
                   </ul>
                 </div>
                 <div class="btn_col text-center">
-                  <button class="_btn btn_primary">SUBSCRIBE</button>
+                  <button class="_btn btn_primary subscribe" subscripton_plan="monthly" amount="21" planid="price_1O7zCcSCPnS6Hgf9e0CiHplS">SUBSCRIBE</button>
                 </div>
               </div>
               <div class="subscriptions_package yearly__subscription">
@@ -122,7 +122,7 @@ get_header();
                   </ul>
                 </div>
                 <div class="btn_col text-center">
-                  <button class="_btn btn_black">SUBSCRIBE</button>
+                  <button class="_btn btn_black subscribe" amount="168" subscripton_plan="yearly" planid="price_1O7z81SCPnS6Hgf9nqsIfDdi">SUBSCRIBE</button>
                 </div>
               </div>
             </div>

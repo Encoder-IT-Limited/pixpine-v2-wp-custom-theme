@@ -45,8 +45,63 @@ jQuery(document).ready(function($) {
         });
     });
 
+ // Subscribe
+    $(document).on('click', '.subscribe', function(){
+        var pId = $(this).attr('planid');
+        var amount = $(this).attr('amount');
+        var subscripton_plan=$(this).attr('subscripton_plan');
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            dataType:'json',
+            data: {
+                action: 'pixpine_subscribe',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'planid' : pId,
+                'subscripton_plan':subscripton_plan,
+                'amount' : amount
+            },
+            success: function(response) {
+                console.log(response)
+                if(response.success){
+                   window.location.href = response.success;
+                }
+                else{
+                    alert(response.error);
+                }
+            }, 
+        });
+    });
 
-
+ $(document).on('click', '.cancelSub', function(){
+        var subscriptionid = $(this).attr('subscriptionid');
+        var thisbtn=$(this);
+        $.ajax({
+            url: ajax_object.ajax_url,
+            type: 'POST',
+            dataType:'json',
+            data: {
+                action: 'pixpine_subscribe_cancel',
+                nonce: ajax_object.ajax_nonce, // Include the nonce
+                'subscriptionid' : subscriptionid
+               
+            },
+            beforeSend:function(){
+            return confirm("Are you sure you want to cancel this subscription?");
+            },
+            success: function(response) {
+                console.log(response)
+                if(response.success){
+                    alert(response.success) ;
+                    thisbtn.remove();
+                    location.reload();
+                }
+                else{
+                    alert(response.error);
+                }
+            }, 
+        });
+    });
     // add to cart
     $(document).on('click', '.add-to-cart', function(){
         var pId = $(this).attr('p-id');

@@ -50,4 +50,19 @@ class StripeHelper
     {
         return $this->stripeClient->checkout->sessions->retrieve($sessionId);
     }
+     public function retrieve($subscription_id)
+    {
+        return   $this->stripeClient->subscriptions->retrieve(
+        $subscription_id,
+        []
+      );
+    }
+    public function cancelSubscription($subscriptionId){
+        return $canceledSubscription = $this->stripeClient->subscriptions->update(
+        $subscriptionId,
+        [
+            'cancel_at_period_end' => true
+        ]
+    );
+    }
 }
