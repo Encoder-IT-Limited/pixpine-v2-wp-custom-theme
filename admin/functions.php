@@ -881,7 +881,7 @@ function add_custom_taxonomy_image_field($taxonomy) {
     }
     echo '</ul>';
 }
-add_action('mockup_category_add_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
+// add_action('mockup_category_add_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
 add_action('mockup_category_edit_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
 
 // Save the custom taxonomy image
@@ -890,5 +890,5 @@ function save_custom_taxonomy_image($term_id) {
         update_term_meta($term_id, '_custom_product_gallery', sanitize_text_field($_POST['_custom_product_gallery']));
     }
 }
-add_action('created_mockup_category', 'save_custom_taxonomy_image', 10, 1);
+// add_action('created_mockup_category', 'save_custom_taxonomy_image', 10, 1);
 add_action('edited_mockup_category', 'save_custom_taxonomy_image', 10, 1);

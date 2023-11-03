@@ -165,15 +165,26 @@
           <div class="trending_col">
             <p>Explore Trending Products on Pixpine.com</p>
             <div class="trending_item_container">
-              <div class="trending_item">
-                <a href="#">
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-                  </div>
-                  <span>Boxes</span>
-                </a>
-              </div>
-              <div class="trending_item">
+              <?php
+              $home_cats = get_option('home_cat');
+              $pixpine_home_cat = explode(',', $home_cats);
+              foreach($pixpine_home_cat as $term_id){
+                $image_id = get_term_meta($term_id, '_custom_product_gallery', true);
+                $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
+                $term = get_term($term_id);
+              ?>
+                <div class="trending_item">
+                  <a href="#">
+                    <div class="img_col">
+                      <img src="<?php echo $image_url;?>" alt="" />
+                    </div>
+                    <span><?php echo $term->name;?></span>
+                  </a>
+                </div>
+              <?php
+              }
+              ?>
+              <!-- <div class="trending_item">
                 <a href="">
                   <div class="img_col">
                     <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
@@ -204,7 +215,7 @@
                   </div>
                   <span>Envelope</span>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
