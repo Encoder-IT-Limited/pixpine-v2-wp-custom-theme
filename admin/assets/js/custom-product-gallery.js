@@ -4,12 +4,20 @@ jQuery(document).ready(function($) {
      * search product
      */
     // related product
-    var relatedProduct = $("#related-product").val();
-    if(relatedProduct.length == 0){
-        var relatedProductArray = [];
-    }else{
-        var relatedProductArray = relatedProduct.split(',');
+    var relatedProductArray = [];
+    if($('#related-product').length){
+        var relatedProduct = $("#related-product").val();
+        if(relatedProduct.length != 0){
+            relatedProductArray = relatedProduct.split(',');
+        }
     }
+
+    // var relatedProduct = $("#related-product").val();
+    // if(relatedProduct.length == 0){
+    //     var relatedProductArray = [];
+    // }else{
+    //     var relatedProductArray = relatedProduct.split(',');
+    // }
 
     $(document).on('keyup click', "#related-product-search-input", function(){
         var search = $(this).val();
@@ -63,12 +71,14 @@ jQuery(document).ready(function($) {
     });
 
     // similar product
-    var similarProduct = $("#similar-product").val();
-    if(similarProduct.length == 0){
-        var similarProductArray = [];
-    }else{
-        var similarProductArray = similarProduct.split(',');
+    var similarProductArray = [];
+    if($('#similar-product').length){
+        var similarProduct = $("#similar-product").val();
+        if(similarProduct.length != 0){
+            similarProductArray = similarProduct.split(',');
+        }
     }
+
 
     $(document).on('keyup click', "#similar-product-search-input", function(){
         var search = $(this).val();
@@ -130,6 +140,11 @@ jQuery(document).ready(function($) {
 
     $('#custom_product_gallery_button').click(function(e) {
         e.preventDefault();
+
+        var isMultiple = false;
+        if($(this).attr('is-multiple') == "1"){
+            isMultiple = true;
+        }
      
         if((preSelectedImages.length==0)){
             var autoSelectedImages = [];
@@ -142,7 +157,7 @@ jQuery(document).ready(function($) {
             button: {
                 text: 'Add Images'
             },
-            multiple: true
+            multiple: isMultiple
         });
         
         // Open the media uploader
@@ -184,5 +199,4 @@ jQuery(document).ready(function($) {
 
         custom_uploader.open();
     });
-
 });

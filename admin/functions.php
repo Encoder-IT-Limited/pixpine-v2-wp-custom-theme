@@ -371,6 +371,7 @@ add_action( 'after_switch_theme', 'create_custom_table' );
 
 // Add custom admin menu
 function add_custom_admin_menu() {
+    create_admin_pages_for_home_categories();
     create_admin_pages_for_newsletter_subscribers();
     create_admin_pages_for_orders();
     create_admin_pages_for_payment();
@@ -416,6 +417,21 @@ function create_admin_pages_for_google_ads(){
         2                  // Menu position
     );
 }
+
+// Home Categories
+function create_admin_pages_for_home_categories(){
+    // list
+    add_menu_page(
+        'Home Categories',      // Page title
+        'Home Categories',      // Menu title
+        'manage_options',   // Capability required to access the menu
+        'home-cat',      // Menu slug
+        'home_cat_page', // Callback function to render the menu page
+        'dashicons-admin-generic', // Icon URL or dashicon class
+        2                  // Menu position
+    );
+}
+// Home Categories - Ends
 
 // Email Subscriber
 function create_admin_pages_for_newsletter_subscribers(){
@@ -553,6 +569,11 @@ function delete_email_subscriber_page(){
 }
 //  subscriber - Ends
 
+// home_cat
+function home_cat_page(){
+    require get_template_directory() . '/admin/home-cat/index.php';
+}
+// Order - Ends
 
 /**
  * Callback Functions for admin pages - Ends
@@ -609,7 +630,7 @@ function delete_email_subscriber_page(){
     $_custom_product_gallery = get_post_meta($post->ID, '_custom_product_gallery', true);
     echo '<input type="hidden" id="_custom_product_gallery" name="_custom_product_gallery" value="'.$_custom_product_gallery.'" >';
     $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
-    echo '<input type="button" class="button" value="Add Images" id="custom_product_gallery_button">';
+    echo '<input type="button" class="button" value="Add Images" is-multiple="1" id="custom_product_gallery_button">';
     echo '<ul id="custom_product_gallery_container"  class="side-by-side-list">';
     foreach ($_custom_product_gallery as $image_id) {
         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
@@ -729,13 +750,13 @@ add_action('save_post', 'save_custom_meta_box');
 
 
 function custom_product_gallery_enqueue_scripts($hook) {
-    if ('post.php' != $hook && 'post-new.php' != $hook) {
-        return;
-    }
+    // if ('post.php' != $hook && 'post-new.php' != $hook) {
+    //     return;
+    // }
 
-    if ('product' != get_post_type()) {
-        return;
-    }
+    // if ('product' != get_post_type()) {
+    //     return;
+    // }
 
     wp_enqueue_style('search-dropdown-css', get_template_directory_uri() . '/admin/assets/dropdown/jquery-multi-select.css', array(), '1.0', 'all');
 
@@ -837,3 +858,37 @@ add_action('wp_ajax_get_all_product', 'get_all_product');
 }
 
 add_filter('wp_unique_post_slug', 'custom_modify_post_slug', 10, 4);
+
+
+
+/**
+ * Feature image for category
+ */
+// Add custom image field to custom taxonomy
+function add_custom_taxonomy_image_field($taxonomy) {
+    wp_nonce_field('custom_product_gallery_nonce', 'custom_product_gallery_nonce');
+    $_custom_product_gallery = '';
+    if(isset($taxonomy->term_id)){
+        $_custom_product_gallery = get_term_meta($taxonomy->term_id, '_custom_product_gallery', true);
+    }
+
+    echo '<input type="hidden" id="_custom_product_gallery" name="_custom_product_gallery" value="'.$_custom_product_gallery.'" >';
+    $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+    echo '<input type="button" class="button" value="Add Image" is-multiple="0" id="custom_product_gallery_button">';
+    echo '<ul id="custom_product_gallery_container"  class="side-by-side-list">';
+    foreach ($_custom_product_gallery as $image_id) {
+        echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
+    }
+    echo '</ul>';
+}
+add_action('mockup_category_add_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
+add_action('mockup_category_edit_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
+
+// Save the custom taxonomy image
+function save_custom_taxonomy_image($term_id) {
+    if (isset($_POST['_custom_product_gallery'])) {
+        update_term_meta($term_id, '_custom_product_gallery', sanitize_text_field($_POST['_custom_product_gallery']));
+    }
+}
+add_action('created_mockup_category', 'save_custom_taxonomy_image', 10, 1);
+add_action('edited_mockup_category', 'save_custom_taxonomy_image', 10, 1);
