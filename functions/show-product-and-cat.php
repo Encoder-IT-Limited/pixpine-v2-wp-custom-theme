@@ -511,7 +511,47 @@ add_action('wp_ajax_nopriv_pixpine_get_html_download_link', 'pixpine_get_html_do
 
 
 
+// function paginate_search_product($type, $search_keyword, $cat_slug, $per_page, $page_no, $html_output_class, $current_page, $total_page){
+//     $html = '';
+//     if($total_page > 1){
 
+//         $html .= '<nav aria-label="Page navigation example">
+//             <ul class="pagination justify-content-center">';
+//             if($current_page != 1){
+//                 $html .= '<li class="page-item left_button get-product" cat-slug="free-mockups" page-no="'.($current_page-1).'">
+//                 <span class="page-link" >
+//                 <img src="'.get_template_directory_uri().'/assets/images/pagination_left_icon.png" alt="" >
+//                 </span>
+//             </li>';
+//         } 
+//         for($i=-3; $i<=3; $i++){
+//             $page_no = $current_page+$i;
+//             if(($page_no>0) && ($page_no<=$total_page)){
+//                 $html .= '<li class="page-item get-product" cat-slug="free-mockups" page-no="'.$page_no.'">
+//                             <span class="page-link" >'.$page_no.'</span>
+//                         </li>';
+//             } 
+//         }
+//         if($page_no < $total_page){ 
+
+//             $html .= '<li class="page-item get-product" cat-slug="free-mockups" page-no="'.$total_page.'">
+//                 <span class="page-link" >...'.$total_page.'</span>
+//             </li>';
+//         } 
+//       if($current_page != $total_page){
+
+//         $html .= '<li class="page-item right_button get-product" cat-slug="free-mockups" page-no="'.($current_page+1).'">
+//         <span class="page-link" >
+//           <img src="'.get_template_directory_uri().'/assets/images/pagination_right_icon.png" alt="" />
+//         </span>
+//       </li>';
+//       }
+//       $html .= '    </ul>
+//                 </nav>';
+//     } 
+//     echo $html;
+//     die();
+// }
 
 
 /**

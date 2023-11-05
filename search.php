@@ -88,6 +88,8 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
                       // No posts found
                       echo 'No product found.';
                     }
+
+                
                     ?>
                     </div>
                     <!-- <div class="text-end">

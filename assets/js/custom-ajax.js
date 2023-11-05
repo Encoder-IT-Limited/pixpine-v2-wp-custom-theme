@@ -211,6 +211,17 @@ jQuery(document).ready(function($) {
         get_product_with_pagination(term_slug, posts_per_page, page_no, mockup_type, html_output_class);
     });
 
+    // $(document).on('click', '.get-product-search', function(){
+    //     var mockup_type = $(this).attr("mockup-type"); //free-mockups
+    //     var posts_per_page = $(this).val("post-per-page"); 
+    //     var page_no = $(this).attr('page-no'); 
+    //     var term_slug = $(this).attr('cat-slug'); 
+    //     var search_keyword = $(this).attr('search-keyword'); 
+    //     var html_output_class = $(this).attr('html-output-class'); 
+    //     console.log(term_slug, posts_per_page, page_no, mockup_type, html_output_class);
+    //     get_product_with_pagination(term_slug, posts_per_page, page_no, mockup_type, html_output_class);
+    // });
+
 
     // home premium product
     $(document).on('click', '.get-product-home-premium', function(){
