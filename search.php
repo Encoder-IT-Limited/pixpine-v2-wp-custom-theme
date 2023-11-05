@@ -9,7 +9,8 @@
 
 get_header();
 $search_keyword = (isset($_GET['s'])) ? $_GET['s'] : '';
-$type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
+$cat = (isset($_GET['cat'])) ? $_GET['cat'] : 'all-categories';
+$type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
 ?>
 <!-- Header End -->
 <main>
@@ -21,12 +22,12 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
       </section>
 
       <?php
-      if($type == 'all-categories' || $type == 'premium-mockup'){
+      if($cat == 'all-categories' || $cat == 'premium-mockup'){
       ?>
         <section id="premium_mockups" class="recently_added_premium_mockups">
           <div class="container">
             <div class="heading_col text-center">
-              <h2 class="section_heading">Recently Added Premium Mockups</h2>
+              <h2 class="section_heading">Premium Mockups</h2>
             </div>
             <div class="tab_img_container">
               <div class="tab-content">
@@ -39,19 +40,62 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
                   <div class="tab_inner_content">
                     <div class="card_container row_d justify-content-center home-premium-products">
                     <?php
-                    $args = array(
-                      'post_type' => 'product', // Replace with the name of your CPT
-                      'posts_per_page' => -1, // Number of posts to display (adjust as needed)
-                      'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                      's'         => $search_keyword, 
-                      'tax_query' => array(
-                        array(
+                    if($type == 'search'){
+                      $args = array(
+                        'post_type' => 'product', // Replace with the name of your CPT
+                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                        's'         => $search_keyword, 
+                        'tax_query' => array(
+                          array(
+                              'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                              'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                              'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
+                          ),
+                        ),
+                      );                      
+                    }elseif($type == 'category'){
+                      $term_name = $_GET['term-name'];
+                      $args = array(
+                        'post_type' => 'product', // Replace with the name of your CPT
+                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                        'tax_query' => array(
+                          'relation' => 'AND',
+                          array(
                             'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                             'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
                             'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
+                          ),
+                          array(
+                              'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                              'field' => 'name', // You can use 'term_id', 'name', or 'slug'
+                              'terms' => $term_name, // Replace with the name of the custom category term you want to query
+                          ),
                         ),
-                      ),
-                    );
+                      );     
+                    }elseif($type == 'tag'){
+                      $tag = $_GET['tag-name'];
+                      $args = array(
+                        'post_type' => 'product', // Replace with the name of your CPT
+                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                        'tax_query' => array(
+                          'relation' => 'AND',
+                          array(
+                            'taxonomy' => 'post_tag', // The built-in 'post_tag' taxonomy for tags
+                            'field' => 'name', // You can use 'name' or 'slug' as needed
+                            'terms' => $tag, // Replace with the tag name
+                          ),
+                          array(
+                              'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                              'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                              'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
+                          ),
+                        ),
+                      );  
+                    }
+
 
                     $custom_query = new WP_Query($args);
 
@@ -105,12 +149,12 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
         </section>
       <?php
       }
-      if($type == 'all-categories' || $type == 'free-mockup'){
+      if($cat == 'all-categories' || $cat == 'free-mockup'){
       ?>            
         <section id="free_mockups" class="recently_added_free_mockups">
           <div class="container">
             <div class="heading_col text-center">
-              <h2 class="section_heading">Recently Added Free Mockups</h2>
+              <h2 class="section_heading">Free Mockups</h2>
             </div>
             <div class="tab_img_container">
               <div class="tab-content">
@@ -123,19 +167,61 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
                   <div class="tab_inner_content">
                     <div class="card_container row_d justify-content-center home-free-products">
                     <?php
-                    $args = array(
-                      'post_type' => 'product', // Replace with the name of your CPT
-                      'posts_per_page' => -1, // Number of posts to display (adjust as needed)
-                      'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                      's'         => $search_keyword, 
-                      'tax_query' => array(
-                        array(
+                    if($type == 'search'){
+                      $args = array(
+                        'post_type' => 'product', // Replace with the name of your CPT
+                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                        's'         => $search_keyword, 
+                        'tax_query' => array(
+                          array(
+                              'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                              'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                              'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
+                          ),
+                        ),
+                      );                      
+                    }elseif($type == 'category'){
+                      $term_name = $_GET['term-name'];
+                      $args = array(
+                        'post_type' => 'product', // Replace with the name of your CPT
+                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                        'tax_query' => array(
+                          'relation' => 'AND',
+                          array(
                             'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                             'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
                             'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
+                          ),
+                          array(
+                              'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                              'field' => 'name', // You can use 'term_id', 'name', or 'slug'
+                              'terms' => $term_name, // Replace with the name of the custom category term you want to query
+                          ),
                         ),
-                      ),
-                    );
+                      );     
+                    }elseif($type == 'tag'){
+                      $tag = $_GET['tag-name'];
+                      $args = array(
+                        'post_type' => 'product', // Replace with the name of your CPT
+                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                        'tax_query' => array(
+                          'relation' => 'AND',
+                          array(
+                              'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                              'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                              'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
+                          ),
+                          array(
+                            'taxonomy' => 'post_tag', // The built-in 'post_tag' taxonomy for tags
+                            'field' => 'name', // You can use 'name' or 'slug' as needed
+                            'terms' => $tag, // Replace with the tag name
+                          ),
+                        ),
+                      );  
+                    }
 
                     $custom_query = new WP_Query($args);
 
@@ -179,12 +265,12 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
         </section>
       <?php
       }
-      if($type == 'all-categories' || $type == 'bundle-mockups'){
+      if($cat == 'all-categories' || $cat == 'bundle-mockups'){
       ?>    
         <section id="bundle_mockups" class="bundle_mockups_yearly_subscription recently_added_free_mockups ">
           <div class="container">
             <div class="heading_col text-center">
-              <h2 class="section_heading">Recently Added Bundle Mockups</h2>
+              <h2 class="section_heading">Bundle Mockups</h2>
             </div>
             <div class="inner_content">
               <div
@@ -192,19 +278,61 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'all-categories';
               >
 
                 <?php
-                $args = array(
-                  'post_type' => 'product', // Replace with the name of your CPT
-                  'posts_per_page' => -1, // Number of posts to display (adjust as needed)
-                  'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                  's'         => $search_keyword, 
-                  'tax_query' => array(
-                    array(
+                if($type == 'search'){
+                  $args = array(
+                    'post_type' => 'product', // Replace with the name of your CPT
+                    'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                    'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                    's'         => $search_keyword, 
+                    'tax_query' => array(
+                      array(
+                          'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                          'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                          'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
+                      ),
+                    ),
+                  );                      
+                }elseif($type == 'category'){
+                  $term_name = $_GET['term-name'];
+                  $args = array(
+                    'post_type' => 'product', // Replace with the name of your CPT
+                    'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                    'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                    'tax_query' => array(
+                      'relation' => 'AND',
+                      array(
                         'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
                         'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
                         'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
+                      ),
+                      array(
+                          'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                          'field' => 'name', // You can use 'term_id', 'name', or 'slug'
+                          'terms' => $term_name, // Replace with the name of the custom category term you want to query
+                      ),
                     ),
-                  ),
-                );
+                  );     
+                }elseif($type == 'tag'){
+                  $tag = $_GET['tag-name'];
+                  $args = array(
+                    'post_type' => 'product', // Replace with the name of your CPT
+                    'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                    'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                    'tax_query' => array(
+                      'relation' => 'AND',
+                      array(
+                        'taxonomy' => 'post_tag', // The built-in 'post_tag' taxonomy for tags
+                        'field' => 'name', // You can use 'name' or 'slug' as needed
+                        'terms' => $tag, // Replace with the tag name
+                      ),
+                      array(
+                          'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                          'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                          'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
+                      ),
+                    ),
+                  );  
+                }
 
                 $custom_query = new WP_Query($args);
 

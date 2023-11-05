@@ -1,6 +1,7 @@
 <div class="form_container_main">
   <div class="inner_col">
     <form class="search_form" action="">
+      <input type="hidden" name="type" value="search">
       <?php
         $s_type = '';
         if(isset($_GET['type'])){

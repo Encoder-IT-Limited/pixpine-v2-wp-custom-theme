@@ -167,15 +167,21 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         $cpt_tags = get_the_tags($cpt->ID);
                         $html = '';
                         if ($cpt_tags) {
-                            $last_key = array_key_last($cpt_tags);
-                            foreach ($cpt_tags as $key => $tag) {
-                              if ($key == $last_key) {
-                                echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
-                              } else {
-                                echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
-                              }
+                          $last_key = array_key_last($cpt_tags);
+                          foreach ($cpt_tags as $key => $tag) {
+                            if ($key == $last_key) {
+                              // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
+                            ?>
+                              <a href="<?php echo site_url().'?cat=all-categories&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
+                            <?php
+                            } else {
+                              // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
+                            ?>
+                              <a href="<?php echo site_url().'?cat=all-categories&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
+                            <?php
                             }
-                        }
+                          }
+                      }
                         ?>
                       </p>
                     </div>
