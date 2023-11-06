@@ -220,7 +220,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </div>
                     </div>
                   </div>
-                  <div class="separetor"></div>
+                  <!-- <div class="separetor"></div>
                   <div class="comment_box_container">
                     <p>
                       You must be
@@ -252,7 +252,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         />
                       </div>
                     </form>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="simple_vertical_add_to_cart_column">
                   <div class="sticky-top">

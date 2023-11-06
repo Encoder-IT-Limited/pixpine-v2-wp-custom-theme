@@ -119,7 +119,7 @@ get_header();
             data-bs-toggle="modal"
             data-bs-target="#bundleModal"
           > -->
-          <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+          <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
                 <img src="<?php echo $thumbnail_url;?>" alt="" />

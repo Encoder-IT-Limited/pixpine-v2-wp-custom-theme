@@ -121,7 +121,7 @@ get_header();
                     <?php } ?>
       
                     <div class="card_item">
-                      <a href="<?php echo site_url('free-mockup-product');?>">
+                      <a href="<?php echo site_url('free-mockup-product').'?id='.get_the_ID();?>">
                         <div class="inner_col">
                           <div class="img_col pixpine_card_border">
                             <img src="<?php echo $thumbnail_url;?>" alt="" />

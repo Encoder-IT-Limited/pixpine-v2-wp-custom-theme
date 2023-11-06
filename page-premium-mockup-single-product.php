@@ -343,23 +343,20 @@ get_header();
                       ?>
 
 
-                    <div
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#premiumModal"
-                      class="card_item"
-                    >
-                      <div class="item_a">
-                        <div class="inner_col">
-                          <div class="img_col pixpine_card_border">
-                            <img src="<?php echo $thumbnail_url;?>" alt="" />
-                          </div>
-                          <div class="text_col">
-                            <h4 class="default_color"><?php echo get_the_title();?></h4>
-                            <p class="primary_color">Premium</p>
+                    <div class="card_item" >
+                      <a href="<?php echo site_url('premium-mockup-single-product ').'?id='.get_the_ID();?>">
+                        <div class="item_a">
+                          <div class="inner_col">
+                            <div class="img_col pixpine_card_border">
+                              <img src="<?php echo $thumbnail_url;?>" alt="" />
+                            </div>
+                            <div class="text_col">
+                              <h4 class="default_color"><?php echo get_the_title();?></h4>
+                              <p class="primary_color">Premium</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
 
                   <?php

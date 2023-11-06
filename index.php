@@ -354,8 +354,7 @@
 
                     <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
                       <div type="button" class="card_item premium-mockup-single" p-id="<?php echo get_the_ID();?>">
-                        <a href="
-                        ">
+                        <a href="<?php echo site_url('premium-mockup-single-product').'?id='.get_the_ID();?>">
                           <div class="item_a">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">

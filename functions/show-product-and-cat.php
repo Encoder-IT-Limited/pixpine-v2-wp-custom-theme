@@ -260,7 +260,7 @@ function get_product_with_pagination()
                 }
 
                 $html .= '<div class="card_item">
-                            <a href="' . site_url('free-mockup-product') . '">
+                            <a href="' . site_url('free-mockup-product').'?id='.get_the_ID().'">
                                 <div class="inner_col">
                                 <div class="img_col pixpine_card_border">
                                     <img src="' . $thumbnail_url . '" alt="" />
@@ -352,24 +352,21 @@ function get_product_with_pagination()
 
 
 
-            $html .= '<div
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#premiumModal"
-            class="card_item"
-        >
-            <div class="item_a">
-            <div class="inner_col">
-                <div class="img_col pixpine_card_border">
-                <img src="'.$thumbnail_url.'" alt="" />
-                </div>
-                <div class="text_col">
-                <h4 class="default_color">'.get_the_title().'</h4>
-                <p class="primary_color">Premium</p>
-                </div>
-            </div>
-            </div>
-        </div>';
+            $html .= '<div class="card_item">
+                        <a href="' . site_url('premium-mockup-single-product ').'?id='.get_the_ID().'">
+                            <div class="item_a">
+                                <div class="inner_col">
+                                    <div class="img_col pixpine_card_border">
+                                    <img src="'.$thumbnail_url.'" alt="" />
+                                    </div>
+                                    <div class="text_col">
+                                    <h4 class="default_color">'.get_the_title().'</h4>
+                                    <p class="primary_color">Premium</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>';
 
         }
         wp_reset_postdata();
@@ -411,24 +408,20 @@ function get_product_with_pagination()
             $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
             // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
             $html .= '<div class="card_item">
-            <div
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#bundleModal"
-            >
-              <div class="inner_col">
-                <div class="img_col pixpine_card_border">
-                  <img src="'.$thumbnail_url.'" alt="" />
-                </div>
-                <div class="text_col">
-                  <h4 class="default_color">
-                  '.get_the_title().'
-                  </h4>
-                  <p class="primary_color">Bundle</p>
-                </div>
-              </div>
-            </div>
-          </div>';
+                        <a href="' . site_url('bundle-mockup-single-product ').'?id='.get_the_ID().'">
+                            <div class="inner_col">
+                                <div class="img_col pixpine_card_border">
+                                <img src="'.$thumbnail_url.'" alt="" />
+                                </div>
+                                <div class="text_col">
+                                <h4 class="default_color">
+                                '.get_the_title().'
+                                </h4>
+                                <p class="primary_color">Bundle</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>';
           }
           // Restore the global post object
           wp_reset_postdata();
