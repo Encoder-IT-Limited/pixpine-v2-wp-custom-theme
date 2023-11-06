@@ -200,7 +200,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         foreach ($results as $result) {
                         ?>
                         <div class="card_item">
-                          <a href="<?php echo $result->ID;?>">
+                          <a href="<?php echo site_url('premium-mockup-single-product').'?id='.$result->ID;?>">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
                                 <img src="<?php echo get_the_post_thumbnail_url($result->ID);?>" alt="" />
@@ -233,7 +233,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           foreach ($results as $result) {
                           ?>
                             <div class="card_item">
-                              <a href="<?php echo $result->ID;?>">
+                            <a href="<?php echo site_url('premium-mockup-single-product').'?id='.$result->ID;?>">
                                 <div class="inner_col">
                                   <div class="img_col pixpine_card_border">
                                     <img src="<?php echo get_the_post_thumbnail_url($result->ID);?>" alt="" />
