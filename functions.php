@@ -17,7 +17,7 @@ define( 'fb_app_redirect', site_url().'/?fblogin=true' );
 define( 'GOOGLE_REDIRECT_URL', site_url().'/?glogin=true' );
 define( 'GOOGLE_CLIENT_ID', '517874441882-rmu95ov5eh75st0gisfa9aeb0lb7gdqe.apps.googleusercontent.com' );
 define( 'GOOGLE_CLIENT_SECRET', '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' );
-
+define('DISABLE_WP_CRON', false);
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -424,6 +424,18 @@ global $wpdb;
 
 
     }
+//checksubscribe or not
+function checksubscribePlan($user_id){
+    global $wpdb;
+    $sitem = $wpdb->get_row("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'", ARRAY_A);
+    if(!empty($sitem)){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
+}
 add_action('wp_ajax_pixpine_subscribe', 'pixpine_subscribe');
 add_action('wp_ajax_nopriv_pixpine_subscribe', 'pixpine_subscribe');
 function pixpine_subscribe(){
@@ -442,12 +454,17 @@ get_currentuserinfo();
 $email= $current_user->user_email;  
 $data=array();
 $user_id=$current_user->ID;
-$order_id=time();    
+$order_id=time();  
+$planid=$_POST['planid'];
+    $checkplan=checksubscribePlan($user_id);
 if(!$user_id){
  $data['error']='Please login first';
 }
-    else{
-     $planid=$_POST['planid'];
+    else if($checkplan){
+        $data['error']='Sorry you’re currently subscribed.';
+    }
+    else{ 
+     
      $amount=$_POST['amount'];
      $subscripton_plan=$_POST['subscripton_plan'];
       global $wpdb;
@@ -495,11 +512,14 @@ function get_pixpine_subscription_details($subscription_id){
     $subscription = $stripeHelper->retrieve($subscription_id);
 
     if ($subscription) {
+       //print_r($subscription);exit;
         // Get the subscription's current period start and end dates
         $start_date = date('Y-m-d', $subscription->current_period_start);
         $end_date = date('Y-m-d', $subscription->current_period_end);
-
+        $amount =  $subscription->plan->amount/100;
         $data['start_date']=$start_date;
+        $data['sub_id']=$subscription->id;
+        $data['amount']=$amount;
        $data['end_date']= $end_date;
     } else {
         $data['error']= "Subscription not found or an error occurred.";
@@ -693,3 +713,114 @@ if($payment_type=='Stripe'){
     stripePayment($data);
 }
 }
+//stripe cron functionality
+
+if ( ! wp_next_scheduled( 'eil_subscribe_cron_func' ) ) {
+    wp_schedule_event( time(), 'daily', 'eil_subscribe_cron_func' );
+     //wp_schedule_event( time(), '5min', 'eil_subscribe_cron_func' );
+}
+//update_upcoming_payment
+function update_upcoming_payment(){
+   global $wpdb;
+    $f_enddate=date("Y-m-d");
+    $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE status='Active' AND end_date < '".$f_enddate."' limit 50 ", ARRAY_A);
+     if(!empty($results)){
+          foreach($results as $sitem){
+               $dbid=$sitem['id'];
+              $subscribeid= $sitem['subscription_id'];
+              $details=get_pixpine_subscription_details($subscribeid);
+              $apistart_date=$details['start_date'];
+              $apiend_date=$details['end_date'];
+              $query = "UPDATE ".$wpdb->prefix."pixpine_subscriptions SET recheck_update='0',starting_date='".$apistart_date."',end_date='".$apiend_date."' WHERE id='$dbid' ";
+     
+              $wpdb->query($query);
+          }
+     }
+}
+add_action( 'eil_subscribe_cron_func', 'subscribe_cron_func' );
+
+function subscribe_cron_func() {
+    global $wpdb;
+    //global $current_user;
+     //get_currentuserinfo();
+    // $user_id= $current_user->ID; 
+      $f_startdate=date("Y-m-d", strtotime("-3 day"));
+       $f_enddate=date("Y-m-d", strtotime("+3 day"));
+       update_upcoming_payment();
+    
+      $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE status='Active' AND recheck_update='0'", ARRAY_A);
+    
+      if(!empty($results)){
+          foreach($results as $sitem){
+             // print_r($sitem);exit;
+          $subscribeid= $sitem['subscription_id'];
+          $details=get_pixpine_subscription_details($subscribeid);
+          $apistart_date=$details['start_date'];
+          $apiend_date=$details['end_date'];
+          $db_end_date=$sitem['end_date'];
+          $user_id= $sitem['user_id'];
+          $dbid=$sitem['id'];
+          $nextPaymentDate = $db_end_date;
+          $reminderDate = date('Y-m-d', strtotime($nextPaymentDate . ' - 3 days')); 
+          $earlier = new DateTime(date('Y-m-d'));
+           $later = new DateTime($db_end_date);
+           //send_remainder_email($user_id,$details) ;
+           $abs_diff = $later->diff($earlier)->format("%a");
+            $daydiff= $abs_diff;
+              if (date('Y-m-d') === $reminderDate || $daydiff < 3 && $daydiff > 1) {
+                  
+                   $sendemail=send_remainder_email($user_id,$details) ;
+                   if($sendemail){
+                   $query = "UPDATE ".$wpdb->prefix."pixpine_subscriptions SET recheck_update='1' WHERE id='$dbid' ";
+     
+                    $wpdb->query($query);   
+                  }
+                   
+              }
+              
+          }
+          
+           //print_r($details);exit;
+      }
+    
+         //$sql="insert into ".$wpdb->prefix."cron_check_test (status) values('1')";
+          // $wpdb->query($sql);
+    // Your task logic goes here
+}
+function send_remainder_email($user_id,$info){
+$subject = 'Pixpine Payment Remainder Email';
+
+  $user_info = get_userdata($user_id);
+  $username = $user_info->user_login;
+  $first_name = $user_info->first_name;
+  $last_name = $user_info->last_name;
+ 
+$to = $user_info->user_email;
+   
+$message = '<p>Hi '.$username.'</p><br>,
+
+<p>I hope you are doing well.</p><br>
+
+<p> '.bloginfo('name').' concerning the next payment date is '.$info['end_date'].'.Make sure in your account have available balance.your next payment amount is ($'.$info['amount'].')</p><br>
+
+
+
+<p>Thank You,</p><br>
+
+'.$username.'';
+
+
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        $is_mail_sent = wp_mail($to, $subject, $message, $headers);
+
+        if ($is_mail_sent) {
+            return true;
+        }
+       else{
+        return false;
+       }
+}
+//add_action( 'init', 'subscribe_cron_func' );
