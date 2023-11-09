@@ -332,6 +332,8 @@ function create_custom_table() {
             item_number INT(11) DEFAULT NULL,
             subscripton_plan VARCHAR(255) DEFAULT NULL,
             status VARCHAR(255) DEFAULT NULL,
+            	
+            recheck_update int(11) NOT NULL DEFAULT 0,
             plan_id VARCHAR(255) DEFAULT NULL,
             subscription_id VARCHAR(255) DEFAULT NULL,
             starting_date DATE DEFAULT NULL,
