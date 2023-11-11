@@ -128,6 +128,9 @@ function pixpine_signup(){
         } else {
             // Registration successful
             // echo 'Registration successful. User ID: ' . $user_id;
+            // send welcome email
+            $html = pixpine_welcome_email($username);
+            pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
             echo 'success';
         }
     } else {
