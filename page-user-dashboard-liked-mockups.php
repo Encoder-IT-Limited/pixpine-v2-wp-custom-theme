@@ -55,7 +55,7 @@ get_header();
                   </li>
                 </ul>
                 <div class="dislike__btn__container">
-                  <button class="_btn">Dislike All</button>
+                  <button class="_btn alter-favorite" p-id="*" is-logged-in="1" is-favorite="1" type="*">Dislike All</button>
                 </div>
               </div>
               <div class="tab-content">

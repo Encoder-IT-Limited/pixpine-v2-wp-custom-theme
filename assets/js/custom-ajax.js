@@ -159,6 +159,9 @@ jQuery(document).ready(function($) {
                 },
                 success: function(response) {
                     console.log(response)
+                    if(pId == "*"){
+                        location.reload();
+                    }
                     if(response == 'success'){
                         // alter value
                         if(isFavorite == '1'){

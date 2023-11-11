@@ -49,20 +49,26 @@ function pixpine_alter_favorite(){
     $meta_key = 'pixpine_favorite_'.$type;
     $user_id = get_current_user_id();
     $old_ids = get_user_meta($user_id, $meta_key, true);
-    if(!empty($old_ids)){
-        $old_ids = explode(',', $old_ids);
-        if(in_array($p_id, $old_ids)){
-            $old_ids = array_diff($old_ids,[$p_id]);
+
+    if($p_id == '*'){
+        update_user_meta($user_id, 'pixpine_favorite_premium', '');
+        update_user_meta($user_id, 'pixpine_favorite_bundle', '');
+    }else{
+        if(!empty($old_ids)){
+            $old_ids = explode(',', $old_ids);
+            if(in_array($p_id, $old_ids)){
+                $old_ids = array_diff($old_ids,[$p_id]);
+            }else{
+                array_push($old_ids, $p_id);
+            }
         }else{
+            $old_ids = [];
             array_push($old_ids, $p_id);
         }
-    }else{
-        $old_ids = [];
-        array_push($old_ids, $p_id);
+    
+        $old_ids = implode(',', $old_ids);
+        update_user_meta($user_id, $meta_key, $old_ids);
     }
-
-    $old_ids = implode(',', $old_ids);
-    update_user_meta($user_id, $meta_key, $old_ids);
 
     echo 'success';
 
