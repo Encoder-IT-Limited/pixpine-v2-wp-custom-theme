@@ -239,16 +239,24 @@
               Explore your creative side
             </h2>
             <p class="sub_heading">
-              with these carefully crafted mockups that stand out your work like
-              a pro.
+              with these carefully crafted mockups that stand out your work like a pro.
             </p>
           </div>
           <div class="card_container">
             <?php
+              $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
+              $parent_category_slug = 'premium-mockups'; // Replace with the slug of the parent 
               $args = array(
                 'post_type' => 'product', // Replace with the name of your CPT
                 'posts_per_page' => 9, // Number of posts to display (adjust as needed)
                 'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
+                'tax_query' => array(
+                  array(
+                      'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
+                      'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
+                      'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
+                  ),
+                ),
               );
 
               $custom_query = new WP_Query($args);
