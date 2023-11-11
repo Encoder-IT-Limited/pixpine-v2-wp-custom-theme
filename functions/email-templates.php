@@ -1840,6 +1840,7 @@ function pixpine_welcome_email($name){
   </body>
 </html>
 ';
+return $html;
 }
 
 
