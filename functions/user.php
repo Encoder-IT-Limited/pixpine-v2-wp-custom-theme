@@ -131,7 +131,6 @@ function pixpine_signup(){
             // send welcome email
             $html = pixpine_welcome_email($username);
             $log_entry = print_r($html, true);
-            // Write to the debug.log file
             error_log($log_entry);
             pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
             echo 'success';

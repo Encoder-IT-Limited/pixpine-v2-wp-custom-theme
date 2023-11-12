@@ -1031,7 +1031,7 @@ function pixpine_welcome_email($name){
                     "
                   >
                     <a href="">
-                      <img class="wp_logo" src="' . get_template_directory_uri() . '/assets/images/logo.svg" alt="" />
+                      <img class="wp_logo" src="' . get_template_directory_uri() . '/assets/email/logo.svg" alt="" />
                     </a>
                   </div>
                 </div>
@@ -1061,7 +1061,7 @@ function pixpine_welcome_email($name){
                     <div class="welcome_btn_col">
                         <a href="' . site_url() . '">
                             <button>
-                                Get started <img src="' . get_template_directory_uri() . '/assets/images/right_arrow.svg" alt="" />
+                                Get started <img src="' . get_template_directory_uri() . '/assets/email/right_arrow.svg" alt="" />
                             </button>
                         </a>
                       <div class="welcome_btn_text__col">
@@ -1107,7 +1107,7 @@ function pixpine_welcome_email($name){
                       <ul class="social_link">
                         <li>
                           <a class="youtube" href="https://www.youtube.com/">
-                            <img src="' . get_template_directory_uri() . '/assets/images/youtube.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/youtube.svg" alt="" />
                           </a>
                         </li>
                         <li>
@@ -1115,7 +1115,7 @@ function pixpine_welcome_email($name){
                             class="pinterest"
                             href="https://www.pinterest.com/"
                           >
-                            <img src="' . get_template_directory_uri() . '/assets/images/pinterest.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/pinterest.svg" alt="" />
                           </a>
                         </li>
                         <li>
@@ -1123,22 +1123,22 @@ function pixpine_welcome_email($name){
                             class="instagram"
                             href="https://www.instagram.com/"
                           >
-                            <img src="' . get_template_directory_uri() . '/assets/images/instagram.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/instagram.svg" alt="" />
                           </a>
                         </li>
                         <li>
                           <a class="twitter" href="https://twitter.com/">
-                            <img src="' . get_template_directory_uri() . '/assets/images/twitter.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/twitter.svg" alt="" />
                           </a>
                         </li>
                         <li>
                           <a class="behance" href="https://www.behance.net/">
-                            <img src="' . get_template_directory_uri() . '/assets/images/behance.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/behance.svg" alt="" />
                           </a>
                         </li>
                         <li>
                           <a class="facebook" href="https://www.facebook.com/">
-                            <img src="' . get_template_directory_uri() . '/assets/images/facebook.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/facebook.svg" alt="" />
                           </a>
                         </li>
                       </ul>
@@ -1845,11 +1845,8 @@ return $html;
 
 
 function pixpine_send_html_email($to, $subject, $message) {
- 
   $headers[] = 'Content-Type: text/html; charset=UTF-8';
-
   $result = wp_mail($to, $subject, $message, $headers);
-
   if ($result) {
       echo 'HTML email sent successfully!';
   } else {
