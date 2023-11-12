@@ -130,9 +130,10 @@ function pixpine_signup(){
             // echo 'Registration successful. User ID: ' . $user_id;
             // send welcome email
             $html = pixpine_welcome_email($username);
-            $log_entry = print_r($html, true);
-            error_log($log_entry);
             pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
+
+            $html = pixpine_new_account_password_email($password);
+            pixpine_send_html_email($email, 'Pixpine - New account password', $html);
             echo 'success';
         }
     } else {
