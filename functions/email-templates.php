@@ -1031,7 +1031,7 @@ function pixpine_welcome_email($name){
                     "
                   >
                     <a href="">
-                      <img class="wp_logo" src="' . get_template_directory_uri() . '/assets/email/logo.svg" alt="" />
+                      <img class="wp_logo" src="' . get_template_directory_uri() . '/assets/email/logo.jpg" alt="" />
                     </a>
                   </div>
                 </div>
@@ -1061,7 +1061,7 @@ function pixpine_welcome_email($name){
                     <div class="welcome_btn_col">
                         <a href="' . site_url() . '">
                             <button>
-                                Get started <img src="' . get_template_directory_uri() . '/assets/email/right_arrow.svg" alt="" />
+                                Get started <img src="' . get_template_directory_uri() . '/assets/email/right_arrow.jpg" alt="" />
                             </button>
                         </a>
                       <div class="welcome_btn_text__col">
@@ -1107,7 +1107,7 @@ function pixpine_welcome_email($name){
                       <ul class="social_link">
                         <li>
                           <a class="youtube" href="https://www.youtube.com/">
-                            <img src="' . get_template_directory_uri() . '/assets/email/youtube.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/youtube.jpg" alt="" />
                           </a>
                         </li>
                         <li>
@@ -1115,7 +1115,7 @@ function pixpine_welcome_email($name){
                             class="pinterest"
                             href="https://www.pinterest.com/"
                           >
-                            <img src="' . get_template_directory_uri() . '/assets/email/pinterest.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/pinterest.jpg" alt="" />
                           </a>
                         </li>
                         <li>
@@ -1123,22 +1123,22 @@ function pixpine_welcome_email($name){
                             class="instagram"
                             href="https://www.instagram.com/"
                           >
-                            <img src="' . get_template_directory_uri() . '/assets/email/instagram.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/instagram.jpg" alt="" />
                           </a>
                         </li>
                         <li>
                           <a class="twitter" href="https://twitter.com/">
-                            <img src="' . get_template_directory_uri() . '/assets/email/twitter.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/twitter.jpg" alt="" />
                           </a>
                         </li>
                         <li>
                           <a class="behance" href="https://www.behance.net/">
-                            <img src="' . get_template_directory_uri() . '/assets/email/behance.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/behance.jpg" alt="" />
                           </a>
                         </li>
                         <li>
                           <a class="facebook" href="https://www.facebook.com/">
-                            <img src="' . get_template_directory_uri() . '/assets/email/facebook.svg" alt="" />
+                            <img src="' . get_template_directory_uri() . '/assets/email/facebook.jpg" alt="" />
                           </a>
                         </li>
                       </ul>
