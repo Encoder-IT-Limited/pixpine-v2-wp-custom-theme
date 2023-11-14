@@ -11,6 +11,7 @@ get_header();
 $search_keyword = (isset($_GET['s'])) ? $_GET['s'] : '';
 $cat = (isset($_GET['cat'])) ? $_GET['cat'] : 'all-categories';
 $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
+$current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 ?>
 <!-- Header End -->
 <main>
@@ -23,6 +24,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
 
       <?php
       if($cat == 'all-categories' || $cat == 'premium-mockup'){
+        $post_per_page = 15;
       ?>
         <section id="premium_mockups" class="recently_added_premium_mockups">
           <div class="container">
@@ -43,7 +45,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                     if($type == 'search'){
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
-                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         's'         => $search_keyword, 
                         'tax_query' => array(
@@ -58,7 +60,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                       $term_name = $_GET['term-name'];
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
-                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -78,7 +80,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                       $tag = $_GET['tag-name'];
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
-                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -136,11 +138,11 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                 
                     ?>
                     </div>
-                    <!-- <div class="text-end">
-                      <a class="btn_primary _btn" href="<?php echo site_url('premium-mockups');?>"
+                    <div class="text-end">
+                      <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","premium-mockup",$current_link);?>"
                         >View All</a
                       >
-                    </div> -->
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,6 +152,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
       <?php
       }
       if($cat == 'all-categories' || $cat == 'free-mockup'){
+        $post_per_page = 12;
       ?>            
         <section id="free_mockups" class="recently_added_free_mockups">
           <div class="container">
@@ -170,7 +173,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                     if($type == 'search'){
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
-                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         's'         => $search_keyword, 
                         'tax_query' => array(
@@ -185,7 +188,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                       $term_name = $_GET['term-name'];
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
-                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -205,7 +208,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                       $tag = $_GET['tag-name'];
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
-                        'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                        'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -254,9 +257,9 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                     }
                     ?>
                     </div>
-                    <!-- <div class="text-end">
-                      <a class="btn_primary _btn" href="<?php echo site_url('free-mockups');?>">View All</a>
-                    </div> -->
+                    <div class="text-end">
+                      <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","free-mockup",$current_link);?>">View All</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -265,7 +268,8 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
         </section>
       <?php
       }
-      if($cat == 'all-categories' || $cat == 'bundle-mockups'){
+      if($cat == 'all-categories' || $cat == 'bundle-mockup'){
+        $post_per_page = 10;
       ?>    
         <section id="bundle_mockups" class="bundle_mockups_yearly_subscription recently_added_free_mockups ">
           <div class="container">
@@ -281,7 +285,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                 if($type == 'search'){
                   $args = array(
                     'post_type' => 'product', // Replace with the name of your CPT
-                    'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                    'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     's'         => $search_keyword, 
                     'tax_query' => array(
@@ -296,7 +300,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                   $term_name = $_GET['term-name'];
                   $args = array(
                     'post_type' => 'product', // Replace with the name of your CPT
-                    'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                    'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
                       'relation' => 'AND',
@@ -316,7 +320,7 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                   $tag = $_GET['tag-name'];
                   $args = array(
                     'post_type' => 'product', // Replace with the name of your CPT
-                    'posts_per_page' => -1, // Number of posts to display (adjust as needed)
+                    'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
                       'relation' => 'AND',
@@ -362,9 +366,9 @@ $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
                 }
                 ?>
               </div>
-              <!-- <div class="text-end">
-                <a class="btn_primary _btn" href="<?php echo site_url('bundle-mockups');?>">View All</a>
-              </div> -->
+              <div class="text-end">
+                <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","bundle-mockup",$current_link);?>">View All</a>
+              </div>
             </div>
           </div>
         </section>

@@ -3644,9 +3644,9 @@ return $html;
 function pixpine_send_html_email($to, $subject, $message) {
   $headers[] = 'Content-Type: text/html; charset=UTF-8';
   $result = wp_mail($to, $subject, $message, $headers);
-  if ($result) {
-      echo 'HTML email sent successfully!';
-  } else {
-      echo 'Failed to send HTML email.';
-  }
+  // if ($result) {
+  //     echo 'HTML email sent successfully!';
+  // } else {
+  //     echo 'Failed to send HTML email.';
+  // }
 }
