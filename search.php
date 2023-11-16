@@ -11,7 +11,10 @@ get_header();
 $search_keyword = (isset($_GET['s'])) ? $_GET['s'] : '';
 $cat = (isset($_GET['cat'])) ? $_GET['cat'] : 'all-categories';
 $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
+$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$current_link_without_page_no = explode('?', $current_link)[0].'?type='.$type.'&cat='.$cat.'&s='.$search_keyword.'&page=';
+
 ?>
 <!-- Header End -->
 <main>
@@ -46,6 +49,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                        'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         's'         => $search_keyword, 
                         'tax_query' => array(
@@ -61,6 +65,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                        'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -81,6 +86,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                        'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -139,9 +145,19 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                     ?>
                     </div>
                     <div class="text-end">
-                      <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","premium-mockup",$current_link);?>"
-                        >View All</a
-                      >
+                      <?php 
+                      if($cat == 'all-categories'){
+                      ?>
+                        <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","premium-mockup",$current_link);?>">View All</a>
+                      <?php
+                      }else{
+                        $current_page = $page;
+                        $total_page = $custom_query->max_num_pages;
+                        if($total_page > 1){
+                          show_pagination_search_page($current_page, $total_page, $current_link_without_page_no);
+                        } 
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -174,6 +190,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                        'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         's'         => $search_keyword, 
                         'tax_query' => array(
@@ -189,6 +206,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                        'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -209,6 +227,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                       $args = array(
                         'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                        'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                         'tax_query' => array(
                           'relation' => 'AND',
@@ -257,8 +276,21 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                     }
                     ?>
                     </div>
+
                     <div class="text-end">
-                      <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","free-mockup",$current_link);?>">View All</a>
+                      <?php 
+                      if($cat == 'all-categories'){
+                      ?>
+                        <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","free-mockup",$current_link);?>">View All</a>
+                      <?php
+                      }else{
+                        $current_page = $page;
+                        $total_page = $custom_query->max_num_pages;
+                        if($total_page > 1){
+                          show_pagination_search_page($current_page, $total_page, $current_link_without_page_no);
+                        } 
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -286,6 +318,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                   $args = array(
                     'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                    'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     's'         => $search_keyword, 
                     'tax_query' => array(
@@ -301,6 +334,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                   $args = array(
                     'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                    'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
                       'relation' => 'AND',
@@ -321,6 +355,7 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                   $args = array(
                     'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
+                    'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
                       'relation' => 'AND',
@@ -366,8 +401,21 @@ $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HT
                 }
                 ?>
               </div>
+
               <div class="text-end">
-                <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","bundle-mockup",$current_link);?>">View All</a>
+                <?php 
+                if($cat == 'all-categories'){
+                ?>
+                  <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","bundle-mockup",$current_link);?>">View All</a>
+                <?php
+                }else{
+                  $current_page = $page;
+                  $total_page = $custom_query->max_num_pages;
+                  if($total_page > 1){
+                    show_pagination_search_page($current_page, $total_page, $current_link_without_page_no);
+                  } 
+                }
+                ?>
               </div>
             </div>
           </div>

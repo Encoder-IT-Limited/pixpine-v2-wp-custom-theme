@@ -566,3 +566,56 @@ add_action('wp_ajax_nopriv_pixpine_get_html_download_link', 'pixpine_get_html_do
 // }
 // add_action('wp_ajax_my_custom_action', 'my_custom_action'); // For logged-in users
 // add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_action'); // For non-logged-in users
+
+
+function show_pagination_search_page($current_page, $total_page, $current_link_without_page_no){
+    ?>
+    <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <?php 
+      if($current_page != 1){
+      ?>
+      <a href="<?php echo $current_link_without_page_no.($current_page-1);?>">
+        <li class="page-item left_button get-product" cat-slug="free-mockups" page-no="<?php echo $current_page-1;?>">
+          <span class="page-link" >
+            <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_left_icon.png" alt="" />
+          </span>
+        </li>
+      </a>
+      <?php } ?>
+
+      <?php
+      for($i=-3; $i<=3; $i++){
+        $page_no = $current_page+$i;
+        if(($page_no>0) && ($page_no<=$total_page)){
+      ?>
+      <a href="<?php echo $current_link_without_page_no.$page_no;?>">
+        <li class="page-item get-product" cat-slug="free-mockups" page-no="<?php echo $page_no;?>">
+          <span class="page-link" ><?php echo $page_no;?></span>
+        </li>
+      </a>
+      <?php } } ?>
+      <?php 
+      if($page_no < $total_page){ 
+      ?>
+      <a href="<?php echo $current_link_without_page_no.$total_page;?>">
+        <li class="page-item get-product" cat-slug="free-mockups" page-no="<?php echo $total_page;?>">
+          <span class="page-link" >...<?php echo $total_page;?></span>
+        </li>
+      </a>
+      <?php } ?>
+      <?php 
+      if($current_page != $total_page){
+      ?>
+      <a href="<?php echo $current_link_without_page_no.($current_page+1);?>">
+        <li class="page-item right_button get-product" cat-slug="free-mockups" page-no="<?php echo $current_page+1;?>">
+          <span class="page-link" >
+            <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_right_icon.png" alt="" />
+          </span>
+        </li>
+      </a>
+      <?php } ?>
+    </ul>
+  </nav>
+  <?php
+}
