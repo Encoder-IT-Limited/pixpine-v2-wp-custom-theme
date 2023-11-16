@@ -129,12 +129,14 @@ get_header();
                     $subcategories = get_terms($args);
                     if (!empty($subcategories)) {
                       foreach ($subcategories as $subcategory) {
+                        $image_id = get_term_meta($subcategory->term_id, '_custom_product_gallery', true);
+                        $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
                         ?>
                         <div class="card_item">
                           <div class="card_inner pixpine_card_border get-product" cat-slug="<?=$subcategory->slug?>"  page-no="1">
                             <p href=""><?=$subcategory->name?></p>
                             <div class="img_col">
-                              <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
+                              <img src="<?php echo $image_url;?>" alt="" />
                             </div>
                           </div>
                         </div>
