@@ -111,65 +111,68 @@ if(!empty($profile_image_id)){
                 }
               ?>
               <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
-              <div class="full_width_container">
-                <div class="full_width input_group">
-                  <label for="">First Name</label>
-                  <input type="text" name="first_name" value="<?php echo $first_name;?>"  id="" required />
+              <div class="_left">
+                <div class="full_width_container">
+                  <div class="full_width input_group">
+                    <label for="">First Name</label>
+                    <input type="text" name="first_name" value="<?php echo $first_name;?>"  id="" required />
+                  </div>
                 </div>
-              </div>
-              <div class="full_width_container">
-                <div class="full_width input_group">
-                  <label for="">Last Name</label>
-                  <input type="text" name="last_name" value="<?php echo $last_name;?>"  id="" required />
+                <div class="full_width_container">
+                  <div class="full_width input_group">
+                    <label for="">Last Name</label>
+                    <input type="text" name="last_name" value="<?php echo $last_name;?>"  id="" required />
+                  </div>
                 </div>
-              </div>
-              <div class="full_width_container">
-                <div class="full_width input_group">
-                  <label for="">Email</label>
-                  <input type="email" id="" value="<?php echo $user->user_email;?>" readonly/>
-                  <!-- <p class="verified_text">
-                    <span>Your email is not verified,</span> send verification
-                    email
-                  </p> -->
+                <div class="full_width_container">
+                  <div class="full_width input_group">
+                    <label for="">Email</label>
+                    <input type="email" id="" value="<?php echo $user->user_email;?>" readonly/>
+                    <!-- <p class="verified_text">
+                      <span>Your email is not verified,</span> send verification
+                      email
+                    </p> -->
+                  </div>
                 </div>
               </div>
 
-              <h3 class="reset_password">Reset Password</h3>
-              <div class="full_width_container">
-                <div class="full_width input_group">
-                  <label for="">New Password</label>
-                  <input type="password" name="new_password" id="" />
-                </div>
-              </div>
-              <div class="full_width_container">
-                <div class="full_width input_group">
-                  <label for="">Confirm New Password</label>
-                  <input type="password" name="confirm_password" id="" />
-                </div>
-              </div>
-              <div class="form_btn_container">
-                <input class="_btn btn_primary" type="submit" name="submit" value="Update" />
-              </div>
-            
-              <div class="user_profile_photo">
-                <div class="d-flex align-items-center">
-                  <div class="user_img_column">
-                    <img src="<?php echo $img;?>" alt="" />
+              <div class="_right">
+                <h3 class="reset_password">Reset Password</h3>
+                <div class="full_width_container">
+                  <div class="full_width input_group">
+                    <label for="">New Password</label>
+                    <input type="password" name="new_password" id="" />
                   </div>
-                  <div class="upload_btn_column">
-                    <div class="d-flex">
-                      <label class="_btn" for="files" class="btn">
-                        Change Image
-                      </label>
-                      <input
-                        id="files"
-                        style="visibility: hidden; width: 10px"
-                        type="file"
-                        name="profile_image"
-                      />
+                </div>
+                <div class="full_width_container">
+                  <div class="full_width input_group">
+                    <label for="">Confirm New Password</label>
+                    <input type="password" name="confirm_password" id="" />
+                  </div>
+                </div>
+                <div class="user_profile_photo">
+                  <div class="d-flex align-items-center">
+                    <div class="user_img_column">
+                      <img src="<?php echo $img;?>" alt="" />
                     </div>
-                    <p>JPEG, GIF or PNG, 200х200 pixels. Max 1MB</p>
+                    <div class="upload_btn_column">
+                      <div class="d-flex">
+                        <label class="_btn" for="files" class="btn">
+                          Change Image
+                        </label>
+                        <input
+                          id="files"
+                          style="visibility: hidden; width: 10px"
+                          type="file"
+                          name="profile_image"
+                        />
+                      </div>
+                      <p>JPEG, GIF or PNG, 200х200 pixels. Max 1MB</p>
+                    </div>
                   </div>
+                </div>
+                <div class="form_btn_container">
+                  <input class="_btn btn_primary" type="submit" name="submit" value="Update" />
                 </div>
               </div>
             </form>

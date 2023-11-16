@@ -1073,15 +1073,16 @@ body.modal-open {
 }
 .collection_premium_section .card_inner img {
   width: 100%;
-  max-width: 105px;
-  object-fit: contain;
+  /* max-width: 105px; */
+  object-fit: cover;
   margin: 0 auto;
-  height: auto;
-  margin-top: 60px;
+  height: 100%;
+  /* margin-top: 60px; */
 }
 .collection_premium_section .card_inner .img_col {
   /* margin-bottom: 53px; */
   height: 100%;
+  overflow: hidden;
 }
 .collection_premium_section .section_width {
   max-width: 1270px;
@@ -1661,8 +1662,8 @@ body.modal-open {
   margin-top: 8px;
 }
 .bundle_page_collection_premium .card_inner img {
-  max-width: 66px;
-  margin-top: 28px;
+  /* max-width: 66px;
+  margin-top: 28px; */
 }
 .bundle_page_collection_premium .card_inner p {
   padding: 12px 14px;
@@ -1879,13 +1880,18 @@ body.modal-open {
 .my__account .section_width {
   max-width: 1085px;
 }
+.my__account .user_profile_photo {
+  /* margin-top: 35px; */
+}
+.my__account .form_btn_container {
+  margin-top: 20px;
+}
 .my__account .reset_password {
   font-size: 16px;
   line-height: 22px;
   font-weight: 700;
   color: #033333;
   margin-bottom: 14px;
-  margin-top: 55px;
 }
 .my__account .verified_text {
   font-size: 13px;
@@ -1901,8 +1907,16 @@ body.modal-open {
   margin-top: 5px;
 }
 .my__account .content__column form {
-  max-width: 280px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.my__account .content__column form ._left {
   margin-right: 50px;
+  margin-top: 35px;
+}
+.my__account .content__column form ._left,
+.my__account .content__column form ._right {
+  max-width: 280px;
 }
 .my__account .content__column {
   display: flex;
@@ -2380,7 +2394,17 @@ body.modal-open {
     margin-right: 15px;
   }
   .my__account .content__column form {
+    margin-right: 0;
+    max-width: 550px;
+    width: 100%;
+  }
+  .my__account .content__column form ._left {
     margin-right: 40px;
+  }
+  .my__account .content__column form ._left,
+  .my__account .content__column form ._right {
+    width: calc(50% - 20px);
+    max-width: 100%;
   }
   .dashboard_section {
     min-height: unset;
@@ -2472,6 +2496,9 @@ body.modal-open {
   .checkout_row .right_col {
     width: 100%;
   }
+  .my__account .content__column form {
+    max-width: 100%;
+  }
 }
 @media only screen and (max-width: 520px) {
   /* ==========================================
@@ -2495,7 +2522,16 @@ body.modal-open {
   .my__account .content__column form {
     max-width: 100%;
     margin-right: 0;
-    margin-top: 35px;
+    margin-top: 0;
+    width: 100%;
+  }
+  .my__account .content__column form ._left {
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
+  .my__account .content__column form ._left,
+  .my__account .content__column form ._right {
     width: 100%;
   }
   .dashboard_section .nav-tabs .nav-link,
