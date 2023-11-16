@@ -59,7 +59,7 @@
                 <img class="footer_logo" src="<?php echo get_template_directory_uri();?>/assets/images/footer_logo.png" alt="" />
               </a>
               <p>
-                ©2019 - 2023 <a href="<?php echo site_url();?>">Pixpine</a> - All rights
+                ©2019 - <?php echo date('Y');?> <a href="<?php echo site_url();?>">Pixpine</a> - All rights
                 reserved
               </p>
             </div>

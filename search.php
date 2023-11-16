@@ -13,7 +13,15 @@ $cat = (isset($_GET['cat'])) ? $_GET['cat'] : 'all-categories';
 $type = (isset($_GET['type'])) ? $_GET['type'] : 'search';
 $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 $current_link = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-$current_link_without_page_no = explode('?', $current_link)[0].'?type='.$type.'&cat='.$cat.'&s='.$search_keyword.'&page=';
+if($type == 'search'){
+  $current_link_without_page_no = explode('?', $current_link)[0].'?type='.$type.'&cat='.$cat.'&s='.$search_keyword.'&page=';
+}elseif($type == 'category'){
+  $term_name = $_GET['term-name'];
+  $current_link_without_page_no = explode('?', $current_link)[0].'?type='.$type.'&cat='.$cat.'&s=&term-name='.$term_name.'&page=';
+}elseif($type == 'tag'){
+  $tag_name = $_GET['tag-name'];
+  $current_link_without_page_no = explode('?', $current_link)[0].'?type='.$type.'&cat='.$cat.'&s=&tag-name='.$tag_name.'&page=';
+}
 
 ?>
 <!-- Header End -->
