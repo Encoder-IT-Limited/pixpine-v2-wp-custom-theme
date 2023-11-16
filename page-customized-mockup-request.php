@@ -3,6 +3,52 @@
 Template Name: Customized Mockup Request
 */
 get_header();
+$msg = '';
+if(isset($_POST['p_submit'])){
+  if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
+    // Define recipient email address
+    $to = "innovawebdeveloper@gmail.com";
+
+    // Define email subject
+    $subject = "Form Customized Mockup page";
+
+    // Define sender's email address
+    $from = $_POST["p_email"];
+
+    // Create email headers
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
+
+    // Define the message body
+    $message = "--boundary\r\n";
+    $message .= "Content-type: text/plain; charset='UTF-8'\r\n\r\n";
+    $message .= "Name: " . $_POST["p_name"] . "\r\n";
+    $message .= "Email: " . $_POST["p_email"] . "\r\n";
+    $message .= "License Type: " . $_POST["p_license_type"] . "\r\n\r\n";
+    $message .= "Details: " . $_POST["p_details"] . "\r\n\r\n";
+    $message .= "--boundary\r\n";
+
+    // Process the uploaded file
+    $file_name = $_FILES["p_file"]["name"];
+    $file_temp = $_FILES["p_file"]["tmp_name"];
+    $file_type = $_FILES["p_file"]["type"];
+
+    if ($file_name) {
+        $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
+        $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
+        $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
+        $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
+        $message .= "--boundary--";
+    }
+
+    // Send the email
+    if (mail($to, $subject, $message, $headers)) {
+      $msg = 'success';
+    } else {
+      $msg = 'fail';
+    }   
+  }
+}
 ?>
     <main>
       <section class="banner_section">
@@ -39,18 +85,36 @@ get_header();
                     with the reference images.
                   </p>
                 </div>
-                <form action="">
+                <form action="" method="post" enctype="multipart/form-data">
+                <?php 
+                    if($msg != ''){
+                      if($msg == 'success'){
+                        echo '
+                        <div class="alert alert-success" role="alert">
+                          Message sent successful. We will contact you ASAP.
+                        </div>
+                        ';
+                      }elseif($msg == 'fail'){
+                        echo '
+                        <div class="alert alert-warning" role="alert">
+                          Message sending failed.
+                        </div>
+                        ';
+                      }
+                    }
+                  ?>
+                  <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
                   <div class="input_group half_width">
                     <label for="">First Name</label>
-                    <input type="text" name="" id="" required />
+                    <input type="text" name="p_name" id="" required />
                   </div>
                   <div class="input_group half_width">
                     <label for="">Email</label>
-                    <input type="email" name="" id="" required />
+                    <input type="email" name="p_email" id="" required />
                   </div>
                   <div class="input_group half_width">
                     <label for="">Select License Type</label>
-                    <select name="" id="">
+                    <select name="p_license_type" id="">
                       <option value="standard">Standard</option>
                       <option value="exclusive">Exclusive</option>
                     </select>
@@ -58,7 +122,7 @@ get_header();
 
                   <div class="input_group">
                     <label for="">Details</label>
-                    <textarea name="" id="" cols="" rows="" required></textarea>
+                    <textarea name="p_details" id="" cols="" rows="" required></textarea>
                   </div>
                   <!--  <input
                     class="_btn btn_black btn_helvetica"
@@ -86,7 +150,8 @@ get_header();
                           id="files"
                           style="visibility: hidden; width: 10px"
                           type="file"
-                          required
+                          name="p_file"
+                          
                         />
                       </div>
                       <p>Upload reference images.</p>
@@ -95,6 +160,7 @@ get_header();
                       <input
                         class="_btn btn_primary btn_helvetica"
                         type="submit"
+                        name="p_submit"
                         value="Submit"
                       />
                     </div>
