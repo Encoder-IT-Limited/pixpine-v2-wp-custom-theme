@@ -3,6 +3,14 @@
 Template Name: User Dashboard Downloads
 */
 get_header();
+global $wpdb;
+$user_id = get_current_user_id();
+$table_name = $wpdb->prefix . 'pixpine_subscriptions';
+$subscription_ids = $wpdb->get_col( "SELECT id FROM $table_name WHERE user_id = '$user_id'" );
+$subscription_ids = implode(',', $subscription_ids);
+$table_name = $wpdb->prefix . 'pixpine_subscription_payment';
+$payment_ids = $wpdb->get_col( "SELECT payment_detail_id FROM $table_name WHERE subscription_id IN ('$subscription_ids')" );
+var_dump($blog_ids);
 ?>
 
 <main>
