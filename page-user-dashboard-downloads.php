@@ -5,12 +5,21 @@ Template Name: User Dashboard Downloads
 get_header();
 global $wpdb;
 $user_id = get_current_user_id();
+// order payment detail
+$table_name = $wpdb->prefix . 'pixpine_orders';
+$order_id = $wpdb->get_col( "SELECT id FROM $table_name WHERE user_id = '$user_id'" );
+$order_id = implode(',', $order_id);
+$table_name = $wpdb->prefix . 'pixpine_order_items';
+$product_ids = $wpdb->get_col( "SELECT product_id FROM $table_name WHERE pixpine_order_id IN ($order_id)" );
+// subscrition payment detail
 $table_name = $wpdb->prefix . 'pixpine_subscriptions';
 $subscription_ids = $wpdb->get_col( "SELECT id FROM $table_name WHERE user_id = '$user_id'" );
 $subscription_ids = implode(',', $subscription_ids);
 $table_name = $wpdb->prefix . 'pixpine_subscription_payment';
-$payment_ids = $wpdb->get_col( "SELECT payment_detail_id FROM $table_name WHERE subscription_id IN ('$subscription_ids')" );
-var_dump($blog_ids);
+$payment_ids = $wpdb->get_col( "SELECT payment_detail_id FROM $table_name WHERE subscription_id IN ($subscription_ids)" );
+$payment_ids = implode(',', $payment_ids);
+$table_name = $wpdb->prefix . 'pixpine_payment_details';
+$payment_history = $wpdb->get_results( "SELECT * FROM $table_name WHERE id IN ($payment_ids)" );
 ?>
 
 <main>
@@ -85,91 +94,17 @@ var_dump($blog_ids);
                 >
                   <div class="tab_inner_content">
                     <ul>
+                      <?php
+                      foreach($payment_history as $val){
+                      ?>
+                      
                       <li>
                         <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
+                          Subscription payment - Date: <?=$val->created_at?>
                         </p>
                       </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
-                      <li>
-                        <p>
-                          Premium Business Card Mockup - Personal & Commercial License - ID: 03214 
-                        </p>
-                      </li>
+                      <?php } ?>
+             
                     </ul>
                   </div>
                 </div>
@@ -180,7 +115,32 @@ var_dump($blog_ids);
                   aria-labelledby="premium_mockup_tab"
                 >
                   <div class="tab_inner_content">
-                    <h6>No data found.</h6>
+                    <?php 
+                    $args = array(
+                      'post_type' => 'product',  // Replace 'your_custom_post_type' with your actual CPT slug
+                      'post__in' => $product_ids,
+                      'orderby' => 'post__in',  // Preserve the order of the IDs in the post__in array
+                  );
+                  
+                  $query = new WP_Query($args);
+                    if ($query->have_posts()) :
+                      while ($query->have_posts()) : $query->the_post();
+                          echo '
+                            <li>
+                              <p>
+                                '.get_the_title().'
+                              </p>
+                            </li>
+                          ';
+                      endwhile;
+                  
+                      wp_reset_postdata();  // Reset the post data to the main query
+                  else :
+                      // No posts found
+                      echo '<h6>No data found.</h6>';
+                  endif;
+                  ?>
+                    
                   </div>
                 </div>
                 <div
@@ -190,7 +150,31 @@ var_dump($blog_ids);
                   aria-labelledby="bundle_mockups_tab"
                 >
                   <div class="tab_inner_content">
-                    <h6>No data found.</h6>
+                  <?php 
+                    $args = array(
+                      'post_type' => 'product',  // Replace 'your_custom_post_type' with your actual CPT slug
+                      'post__in' => $product_ids,
+                      'orderby' => 'post__in',  // Preserve the order of the IDs in the post__in array
+                  );
+                  
+                  $query = new WP_Query($args);
+                    if ($query->have_posts()) :
+                      while ($query->have_posts()) : $query->the_post();
+                          echo '
+                            <li>
+                              <p>
+                                '.get_the_title().'
+                              </p>
+                            </li>
+                          ';
+                      endwhile;
+                  
+                      wp_reset_postdata();  // Reset the post data to the main query
+                  else :
+                      // No posts found
+                      echo '<h6>No data found.</h6>';
+                  endif;
+                  ?>
                   </div>
                 </div>
               </div>
