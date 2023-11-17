@@ -296,7 +296,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                       <input type="radio" name="payment_method" value="Paypal">
                     </div>
                 </div>
-                <button class="_btn get_premium_btn btn_black_small btn_primary show_billing_form" type="submit">Place Order</button>
+                <button class="_btn get_premium_btn btn_black_small btn_primary" type="submit">Place Order</button>
             </div>
           </div>
             
