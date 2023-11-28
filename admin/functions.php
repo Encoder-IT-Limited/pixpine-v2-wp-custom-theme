@@ -373,6 +373,7 @@ add_action( 'after_switch_theme', 'create_custom_table' );
 
 // Add custom admin menu
 function add_custom_admin_menu() {
+    create_admin_pages_for_home_special_product();
     create_admin_pages_for_home_categories();
     create_admin_pages_for_newsletter_subscribers();
     create_admin_pages_for_orders();
@@ -434,6 +435,31 @@ function create_admin_pages_for_home_categories(){
     );
 }
 // Home Categories - Ends
+
+
+// Home Special Product
+function create_admin_pages_for_home_special_product(){
+    // list
+    add_menu_page(
+        'Home Special Product',      // Page title
+        'Home Special Product',      // Menu title
+        'manage_options',   // Capability required to access the menu
+        'home-special-product',      // Menu slug
+        'home_special_product_page', // Callback function to render the menu page
+        'dashicons-admin-generic', // Icon URL or dashicon class
+        2                  // Menu position
+    );
+    // detail
+    add_submenu_page(
+        'home-special-product',      // Payment menu slug
+        'Create',          // Page title
+        'Create',          // Menu title
+        'manage_options',   // Capability required to access the submenu
+        'create-home-special-product',   // Submenu slug
+        'create_home_special_product_page' // Callback function to render the submenu page
+    );
+}
+// Home Special Product - Ends
 
 // Email Subscriber
 function create_admin_pages_for_newsletter_subscribers(){
@@ -576,6 +602,15 @@ function home_cat_page(){
     require get_template_directory() . '/admin/home-cat/index.php';
 }
 // Order - Ends
+
+// home-special-product
+function home_special_product_page(){
+    require get_template_directory() . '/admin/home-special-product/index.php';
+}
+function create_home_special_product_page(){
+    require get_template_directory() . '/admin/home-special-product/create.php';
+}
+// home-special-product - Ends
 
 /**
  * Callback Functions for admin pages - Ends

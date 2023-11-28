@@ -244,43 +244,30 @@
           </div>
           <div class="card_container">
             <?php
-              $taxonomy = 'mockup_category'; // Replace with your custom taxonomy name
-              $parent_category_slug = 'premium-mockups'; // Replace with the slug of the parent 
-              $args = array(
-                'post_type' => 'product', // Replace with the name of your CPT
-                'posts_per_page' => 9, // Number of posts to display (adjust as needed)
-                'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                'tax_query' => array(
-                  array(
-                      'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
-                      'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
-                      'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
-                  ),
-                ),
-              );
-
-              $custom_query = new WP_Query($args);
-
-              if ($custom_query->have_posts()) {
-                while ($custom_query->have_posts()) {
-                  $custom_query->the_post();
-                  $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
-                  // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
-                ?>
-                  <div class="card_item">
-                    <div class="inner_col pixpine_card_border">
-                      <img src="<?php echo $thumbnail_url;?>" alt="" />
-                    </div>
-                  </div>
-                <?php
-                }
-                // Restore the global post object
-                wp_reset_postdata();
-              } else {
-                // No posts found
-                echo 'No posts found.';
-              }
+              for($i=1; $i<=7; $i++){
+                $p_id = get_option('home_special_product_'.$i.'_product_id', 'No product selected');
+                if($p_id != 'No product selected'){
+                  $img_url = get_option('home_special_product_'.$i.'_image_url', '');
+                  $product_url = '';
+                  if(get_option('home_special_product_'.$i.'_product_main_cat') == "Free Mockups"){
+                    $product_url = site_url('free-mockup-product').'/?id='.$p_id;
+                  }elseif(get_option('home_special_product_'.$i.'_product_main_cat') == "Bundle Mockups"){
+                    $product_url = site_url('premium-mockup-single-product').'/?id='.$p_id;                    
+                  }elseif(get_option('home_special_product_'.$i.'_product_main_cat') == "Premium Mockups"){
+                    $product_url = site_url('bundle-mockup-single-product').'/?id='.$p_id;
+                  }
               ?>
+                <div class="card_item">
+                  <a href="<?php echo $product_url;?>" >
+                    <div class="inner_col pixpine_card_border">
+                      <img src="<?php echo $img_url;?>" alt="" />
+                    </div>
+                  </a>
+                </div>
+              <?php
+                }
+              }
+            ?>
 
 
 

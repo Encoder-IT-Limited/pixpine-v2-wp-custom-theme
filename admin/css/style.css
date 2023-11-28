@@ -235,3 +235,10 @@ ul li {
   font-weight: 500;
 }
 
+.single-product-row{
+  margin-bottom: 50px;
+  background-color: lightgray;
+  border-radius: 5px;
+  padding: 10px;
+}
+

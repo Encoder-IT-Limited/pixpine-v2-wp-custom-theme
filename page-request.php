@@ -17,7 +17,7 @@ if(isset($_POST['p_submit'])){
     $from = $_POST["p_email"];
 
     // Create email headers
-    $headers .= "MIME-Version: 1.0\r\n";
+    $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
 
     // Define the message body
@@ -42,7 +42,7 @@ if(isset($_POST['p_submit'])){
     }
 
     // Send the email
-    if (mail($to, $subject, $message, $headers)) {
+    if (wp_mail($to, $subject, $message, $headers)) {
       $msg = 'success';
     } else {
       $msg = 'fail';

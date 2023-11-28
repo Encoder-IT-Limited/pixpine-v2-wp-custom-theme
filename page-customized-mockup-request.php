@@ -42,7 +42,7 @@ if(isset($_POST['p_submit'])){
     }
 
     // Send the email
-    if (mail($to, $subject, $message, $headers)) {
+    if (wp_mail($to, $subject, $message, $headers)) {
       $msg = 'success';
     } else {
       $msg = 'fail';
