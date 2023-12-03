@@ -134,28 +134,33 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                   <!-- Slider End -->
                   <!-- 06.10.2023 end -->
 
-
+                  <?php
+                  $currentUrl = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                  $facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($currentUrl);
+                  $twitterShareUrl = 'https://twitter.com/intent/tweet?url=' . urlencode($currentUrl);
+                  $pinterestShareUrl = 'https://www.pinterest.com/pin/create/button/?url=' . urlencode($currentUrl).'&media='.get_the_post_thumbnail_url($post_id).'&description='.get_the_title($post_id);
+                  ?>
                   <div class="about_product product">
                     <div class="d-flex justify-content-between">
                       <h2 class="section_heading">About Product</h2>
                       <ul class="d-flex social_link">
                         <li>
-                          <a target="_blank" href="https://www.pinterest.com/">
+                          <a target="_blank" href="<?php echo $pinterestShareUrl;?>">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/pinterest.png" alt="" />
                           </a>
                         </li>
                         <li>
-                          <a target="_blank" href="https://www.instagram.com/">
+                          <a target="_blank" href="instagram://camera">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/instagram.png" alt="" />
                           </a>
                         </li>
                         <li>
-                          <a target="_blank" href="https://twitter.com/">
+                          <a target="_blank" href="<?php echo $twitterShareUrl;?>">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/twitter.png" alt="" />
                           </a>
                         </li>
                         <li>
-                          <a target="_blank" href="https://www.facebook.com/">
+                          <a target="_blank" href="<?php echo $facebookShareUrl;?>">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/facebook.png" alt="" />
                           </a>
                         </li>

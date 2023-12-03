@@ -220,7 +220,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
               $wpdb->get_col($query); $total_price = 0; foreach($products as
               $cpt_id){ $cpt_post = get_post($cpt_id, 'product'); $thumbnail_url
               = get_the_post_thumbnail_url($cpt_id); $price =
-              get_post_meta($cpt_id, 'personal_commercial_price', true);
+              get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
               if(empty($price)){ $price = 0; } $total_price += $price; ?>
               <div class="cart_item">
                 <div class="product-name">
