@@ -2576,6 +2576,6 @@ body.modal-open {
   }
 }
 
-.nav-item {
+.nav-item, .get-product{
   cursor: pointer;
 }

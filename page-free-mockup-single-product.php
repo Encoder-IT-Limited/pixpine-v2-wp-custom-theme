@@ -281,7 +281,7 @@ if ($parent_term && !is_wp_error($parent_term)) {
                   <div class="related_inner_col">
                     <div class="row_d">
                       <?php
-                      $related_product = get_post_meta($post->ID, 'related_product', true);
+                      $related_product = get_post_meta($post_id, 'related_product', true);
                       if($related_product != ''){
                         $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($related_product)";
                         $results = $wpdb->get_results($query);
@@ -309,7 +309,11 @@ if ($parent_term && !is_wp_error($parent_term)) {
                 <h1 class="page_heading">
                   <?php echo $post->post_title;?>
                 </h1>
-                <p><?php echo $current_category_name;?></p>
+                <a href="<?php echo site_url();?>?cat=free-mockup&type=category&term-name=<?php echo $current_category_name;?>&s=">
+                  <p>
+                    <?php echo $current_category_name;?>
+                  </p>
+                </a>
               </div>
               <div class="content_col">
                 <div class="google_add">

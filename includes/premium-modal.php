@@ -70,7 +70,9 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </h1>
                       <p>
                         <span class="user_id">ID:<?php echo $cpt->ID;?></span> in
-                        <span class="primary_color"><?php echo $current_category_name;?></span>
+                        <a href="<?php echo site_url();?>?cat=premium-mockup&type=category&term-name=<?php echo $current_category_name;?>&s=">
+                          <span class="primary_color"><?php echo $current_category_name;?></span>
+                        </a>
                       </p>
                   </div>
 
@@ -173,7 +175,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                               if ($key == $last_key) {
                                 // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
                               ?>
-                                <a href="<?php echo site_url().'?cat=all-categories&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
+                                <a href="<?php echo site_url().'?cat=all-categories&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>
                               <?php
                               } else {
                                 // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
@@ -284,9 +286,9 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </h1>
                       <p>
                         <span class="user_id">ID: <?php echo $post_id;?></span> in
-                        <span class="primary_color"
-                          ><?php echo $current_category_name;?></span
-                        >
+                        <a href="<?php echo site_url();?>?cat=premium-mockup&type=category&term-name=<?php echo $current_category_name;?>&s=">
+                          <span class="primary_color"><?php echo $current_category_name;?></span>
+                        </a>
                       </p>
                     </div>
                     <div class="price_product_specs_container">
