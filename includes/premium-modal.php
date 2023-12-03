@@ -297,7 +297,10 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           class="d-flex justify-content-between align-items-center"
                         >
                           <h5>Price</h5>
-                          <h5>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> USD</h5>
+                          <h5>
+                            <del>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> </del>
+                            $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
+                          </h5>
                         </div>
                         <button class="_btn btn_primary add-to-cart" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
                         <?php echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';?>
