@@ -174,12 +174,12 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             if ($key == $last_key) {
                               // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
                             ?>
-                              <a href="<?php echo site_url().'?cat=all-categories&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>
+                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>
                             <?php
                             } else {
                               // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
                             ?>
-                              <a href="<?php echo site_url().'?cat=all-categories&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
+                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
                             <?php
                             }
                           }

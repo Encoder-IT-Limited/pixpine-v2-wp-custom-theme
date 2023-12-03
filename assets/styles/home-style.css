@@ -673,7 +673,7 @@ header .navbar-nav {
   margin-top: 13px;
 }
 .pixpine_card_border {
-  border: 1px solid #707070;
+  /* border: 1px solid #707070; */
   display: flex;
   justify-content: center;
   text-align: center;
