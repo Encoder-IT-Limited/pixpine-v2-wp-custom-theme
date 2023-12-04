@@ -2,6 +2,7 @@
 /*
 Template Name: Checkout
 */
+die('11');
 get_header();
 $user_id = get_current_user_id();
 $msg = '';
@@ -43,7 +44,6 @@ $billing_city = get_user_meta($user_id, 'billing_city', true);
 $billing_state = get_user_meta($user_id, 'billing_state', true);
 $billing_zip = get_user_meta($user_id, 'billing_zip', true);
 ?>
-
 <main>
   <section class="dashboard_section dashboard__downloads">
     <div class="container">
@@ -293,54 +293,131 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                     </div>
                 <div>
                      <label>Paypal</label>
-                      <input type="radio" name="payment_method" value="Paypal">
+                      <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
+                      <!-- Your HTML content -->
+                      <div id="paypal-button-container"></div>
                     </div>
                 </div>
                 <button class="_btn get_premium_btn btn_black_small btn_primary" type="submit">Place Order</button>
             </div>
           </div>
             
-   <!--       <form
-            action="https://www.paypal.com/cgi-bin/webscr"
-            method="post"
-            target="_top" class="paypal_getway d-none"
-          >
-            <input type="hidden" name="cmd" value="_s-xclick" />
-            <input
-              type="hidden"
-              name="hosted_button_id"
-              value="YOUR_BUTTON_ID"
-            />
+    
+   
+    <!-- Include PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=<?=ENCODER_IT_PAYPAL_CLIENT?>&currency=USD&disable-funding=paylater"></script>
+    <script>
+
+      jQuery(document).ready(function(){
+        let total_price = 0;
+        let person_number=0;
+        let temp_price_on_service_check=0;
+        let payment_method='';
+        let paypal_tansaction_id='';
+        let paypal_transaction_status='';
+        let paypal_transaction_name='';
+        let paypal_transaction_details='';
+
+        document.getElementById('paypal-button-container').style.display='none'; 
+
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '10.00',
+                            currency_code: 'USD',
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                  //const result=JSON.stringify(details,null,2);
+                 // console.log(details.purchase_units[0].payments.captures[0].id , details.purchase_units[0].payments.captures[0].status);
+                  let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
+                  let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
+                  let paypal_transaction_name=details.payer.name.given_name;
+                  if(paypal_transaction_status == "COMPLETED")
+                  {
+
+                    var service=document.getElementsByClassName("encoder_it_custom_services");
+                    var sumbit_service=[];
+                    var sumbit_file=[];
+                    
+                    
+                    for(var i=0;i<service.length;i++)
+                    {
+                      if(service[i].checked)
+                      {
+                        sumbit_service.push(service[i].value)
+                        }
+                    }
+                    var description=document.getElementById('description').value;
+                    var person_number=document.getElementById('person_number').value;
             
-            <input type="hidden" name="item_name" value="Your Product Name" />
-            <input type="hidden" name="amount" value="10.00" />
-         
-            <input
-              class=""
-              type="image"
-              src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
-              border="0"
-              name="submit"
-              alt="Pay with PayPal"
-            />
-         
-            <input
-              type="hidden"
-              name="return"
-              value="https://yourwebsite.com/success.php"
-            />
-     
-            <input
-              type="hidden"
-              name="cancel_return"
-              value="https://yourwebsite.com/cancel.php"
-            />
-          
-            <input type="hidden" name="currency_code" value="USD" />
-          
-            <input type="hidden" name="custom" value="Your Custom Data" />
-            <input type="hidden" name="tax" value="0.00" />
-          </form>-->
+                    var formdata = new FormData();
+                    formdata.append('paymentMethodId',paypal_tansaction_id);
+                    formdata.append('sumbit_service',sumbit_service);
+                    formdata.append('description',description);
+                    formdata.append('person_number',person_number);
+                    var custom_file=document.getElementsByClassName("file_add");
+                    for(var i=0;i<custom_file.length;i++){
+                      formdata.append('file_array[]', custom_file[i].files[0]);
+                    }
+
+                    formdata.append('total_price',total_price);
+                    formdata.append('payment_method',payment_method);
+                    formdata.append('paymentMethodId',paypal_tansaction_id);
+                    formdata.append('paypal_transaction_name',paypal_transaction_name);
+                    formdata.append('action','enoderit_custom_form_submit');
+                    formdata.append('nonce','<?php echo wp_create_nonce('admin_ajax_nonce_encoderit_custom_form') ?>')
+                    jQuery.ajax({
+                            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                            type: 'post',
+                            processData: false,
+                            contentType: false,
+                            processData: false,
+                            data: formdata,
+                            success: function(data) {
+                              const obj = JSON.parse(data);
+                              console.log(obj);
+
+                                if (obj.success == "success") {
+              
+                                  
+                                    window.location.href='<?=admin_url() .'/admin.php.?page=encoderit-custom-cases-user'?>'
+                                }
+                                if(obj.success == "error")
+                                {
+                                  let message_arr=obj.message.split(';')
+                                  let html='';
+                                  for(let index=0;index<message_arr.length;index++)
+                                  {
+                                      var temp=message_arr[index]+"\n";
+                                      html = html+temp;
+                                  }
+                                }
+                            }
+                              });
+                          }
+                      });
+                  },
+                    onError: function(err) {
+                        console.log('Error:', err);
+                        // Implement logic to handle errors
+                    }
+                  }).render('#paypal-button-container');
+
+
+        jQuery("#payment-paypal").click(function(){
+          document.getElementById('paypal-button-container').style.display='none'; 
+          document.getElementById('paypal-button-container').style.display='block';
+        })
+      });
+
+  </script>
         </div>
                </form>
       </div>
@@ -348,6 +425,8 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
     </div>
   </section>
 </main>
-
 <!-- Footer -->
 <?php get_footer();?>
+<script>
+    alert('ddd')
+</script>

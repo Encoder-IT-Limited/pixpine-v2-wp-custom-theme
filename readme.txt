@@ -40,3 +40,6 @@ PixPine includes support for WooCommerce and for Infinite Scroll in Jetpack.
 
 CAT
 <a href="<?php echo site_url();?>?cat=free-mockup&type=category&term-name=<?php echo $current_category_name;?>&s=">
+
+checksubscribePlan
+stripePayment($data){

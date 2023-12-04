@@ -17,8 +17,6 @@ jQuery(document).ready(function($) {
     //     },
     // });
 
-
-
     
     // remove cart
     $(document).on('click', '.remove-cart', function(){
