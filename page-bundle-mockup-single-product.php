@@ -1,11 +1,3 @@
-<?php 
-/*
-Template Name: Bundle Mockup Single Product
-*/
-get_header();
-?>
-<!-- Header End -->
-
 <main>
   <section class="banner_section">
     <div class="container">
@@ -202,8 +194,3 @@ get_header();
 <!-- Bundle Modal -->
 <?php include get_template_directory() .'/includes/bundle-modal.php';?>
 <input type="hidden" value="1" id="hidden-show-bundle-modal">
-
-
-
-<!-- Footer -->
-<?php get_footer();?>

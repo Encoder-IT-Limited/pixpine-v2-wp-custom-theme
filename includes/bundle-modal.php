@@ -7,7 +7,7 @@
 >
 <?php
 global $wpdb;
-$post_id = $_GET['id'];
+$post_id = get_the_ID();
 
 
 // favorite

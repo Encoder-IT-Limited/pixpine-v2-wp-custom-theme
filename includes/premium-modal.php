@@ -7,7 +7,7 @@
 >
 <?php
 global $wpdb;
-$post_id = $_GET['id'];
+$post_id = get_the_ID();
 
 
 
@@ -207,7 +207,8 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         foreach ($results as $result) {
                         ?>
                         <div class="card_item">
-                          <a href="<?php echo site_url('premium-mockup-single-product').'?id='.$result->ID;?>">
+                        
+                          <a href="<?php echo get_the_permalink($result->ID);?>">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
                                 <img src="<?php echo get_the_post_thumbnail_url($result->ID);?>" alt="" />
@@ -240,7 +241,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           foreach ($results as $result) {
                           ?>
                             <div class="card_item">
-                            <a href="<?php echo site_url('premium-mockup-single-product').'?id='.$result->ID;?>">
+                            <a href="<?php echo get_the_permalink($result->ID);?>">
                                 <div class="inner_col">
                                   <div class="img_col pixpine_card_border">
                                     <img src="<?php echo get_the_post_thumbnail_url($result->ID);?>" alt="" />
@@ -316,7 +317,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         <p>Get this for only $0.14 with unlimited downloads.</p>
                         <a
                           class="_btn btn_black text-center"
-                          href="subscription.php"
+                          href="<?php echo site_url('subscription');?>"
                           >Get premium</a
                         >
                       </div>
@@ -338,7 +339,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           <li>
                             <p>
                               <span>License:</span>
-                              <a href="license.php">Commercial and Personal</a>
+                              <a href="<?php echo site_url('license');?>">Commercial and Personal</a>
                             </p>
                           </li>
                           <li>

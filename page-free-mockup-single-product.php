@@ -1,10 +1,5 @@
-<?php 
-/*
-Template Name: Free Mockup Product
-*/
-get_header();
-
-$post_id = $_GET['id'];
+<?php
+$post_id = get_the_ID();
 $post = get_post($post_id);
 
 $current_category_name = '';
@@ -330,6 +325,3 @@ if ($parent_term && !is_wp_error($parent_term)) {
         </div>
       </section>
     </main>
-
-<!-- Footer -->
-<?php get_footer();?>

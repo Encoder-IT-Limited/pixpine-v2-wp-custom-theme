@@ -1,9 +1,3 @@
-<?php 
-/*
-Template Name: Premium Mockup Single Product
-*/
-get_header();
-?>
     <main>
       <section class="banner_section">
         <div class="container">
@@ -133,7 +127,7 @@ get_header();
                         ?>
                         <div class="card_item">
                           <div class="card_inner pixpine_card_border get-product" cat-slug="<?=$subcategory->slug?>"  page-no="1">
-                            <p href=""><?=$subcategory->name?></p>
+                            <a href="<?php echo site_url();?>?cat=premium-mockup&type=category&term-name=<?php echo $subcategory->name;?>&s="><?=$subcategory->name?></a>
                             <div class="img_col">
                               <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
                             </div>
@@ -320,7 +314,7 @@ get_header();
 
                   <?php
                     $args = array(
-                      'post_type' => 'product', // Replace with the name of your CPT
+                      'post_type' => 'post', // Replace with the name of your CPT
                       'posts_per_page' => 20, // Number of posts to display (adjust as needed)
                       'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                       'tax_query' => array(
@@ -344,7 +338,7 @@ get_header();
 
 
                     <div class="card_item" >
-                      <a href="<?php echo site_url('premium-mockup-single-product ').'?id='.get_the_ID();?>">
+                      <a href="<?php echo get_the_permalink();?>">
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
@@ -432,5 +426,3 @@ get_header();
     <!-- Premium Modal -->
     <?php include get_template_directory() .'/includes/premium-modal.php';?>
     <input type="hidden" value="1" id="hidden-show-premium-modal">
-<!-- Footer -->
-<?php get_footer();?>
