@@ -20,7 +20,7 @@
             <div id="mobile_cart_btn">
               <ul class="d-flex align-items-center">
                 <li class="nav-item">
-                  <a class="nav-link cart_icon" href="">
+                  <a class="nav-link cart_icon" href="<?php echo site_url('cart');?>">
                     <img
                       class="cart_img"
                       src="<?php echo get_template_directory_uri();?>/assets/images/home_cart_icon.png"
@@ -101,7 +101,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link cart_icon" href="">
+                    <a class="nav-link cart_icon" href="<?php echo site_url('cart');?>">
                       <img
                         class="cart_img"
                         src="<?php echo get_template_directory_uri();?>/assets/images/home_cart_icon.png"

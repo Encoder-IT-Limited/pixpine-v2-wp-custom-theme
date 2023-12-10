@@ -2,7 +2,6 @@
 /*
 Template Name: Checkout
 */
-die('11');
 get_header();
 $user_id = get_current_user_id();
 $msg = '';
@@ -286,7 +285,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                     <h5 class="product-title">Payment Method</h5>
                     <div>
                      <label>Stripe</label>
-                      <input type="radio" name="payment_method" value="Stripe">
+                      <input type="radio" name="payment_method" id="payment-stripe" value="Stripe">
                          <input type="hidden" name="price" value="<?php echo $total_price;?>">
                         <input type="hidden" name="placeOrder" value="1">
                         <input type="hidden" name="proid" value="<?php echo $cpt_id;?>">
@@ -294,11 +293,12 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                 <div>
                      <label>Paypal</label>
                       <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
+                      <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
                       <!-- Your HTML content -->
                       <div id="paypal-button-container"></div>
                     </div>
                 </div>
-                <button class="_btn get_premium_btn btn_black_small btn_primary" type="submit">Place Order</button>
+                <button style="display: none;" class="_btn get_premium_btn btn_black_small btn_primary payment-submit" type="submit">Place Order</button>
             </div>
           </div>
             
@@ -309,14 +309,10 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
     <script>
 
       jQuery(document).ready(function(){
-        let total_price = 0;
-        let person_number=0;
-        let temp_price_on_service_check=0;
-        let payment_method='';
-        let paypal_tansaction_id='';
-        let paypal_transaction_status='';
-        let paypal_transaction_name='';
-        let paypal_transaction_details='';
+        var total_price = <?php echo $total_price;?>;
+        var paypal_tansaction_id='';
+      
+      
 
         document.getElementById('paypal-button-container').style.display='none'; 
 
@@ -326,7 +322,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '10.00',
+                            value: '<?php echo $total_price;?>',
                             currency_code: 'USD',
                         }
                     }]
@@ -334,86 +330,31 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
             },
             onApprove: function(data, actions) {
               return actions.order.capture().then(function(details) {
-                  //const result=JSON.stringify(details,null,2);
-                 // console.log(details.purchase_units[0].payments.captures[0].id , details.purchase_units[0].payments.captures[0].status);
-                  let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
-                  let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
-                  let paypal_transaction_name=details.payer.name.given_name;
-                  if(paypal_transaction_status == "COMPLETED")
-                  {
-
-                    var service=document.getElementsByClassName("encoder_it_custom_services");
-                    var sumbit_service=[];
-                    var sumbit_file=[];
-                    
-                    
-                    for(var i=0;i<service.length;i++)
-                    {
-                      if(service[i].checked)
-                      {
-                        sumbit_service.push(service[i].value)
-                        }
-                    }
-                    var description=document.getElementById('description').value;
-                    var person_number=document.getElementById('person_number').value;
-            
-                    var formdata = new FormData();
-                    formdata.append('paymentMethodId',paypal_tansaction_id);
-                    formdata.append('sumbit_service',sumbit_service);
-                    formdata.append('description',description);
-                    formdata.append('person_number',person_number);
-                    var custom_file=document.getElementsByClassName("file_add");
-                    for(var i=0;i<custom_file.length;i++){
-                      formdata.append('file_array[]', custom_file[i].files[0]);
-                    }
-
-                    formdata.append('total_price',total_price);
-                    formdata.append('payment_method',payment_method);
-                    formdata.append('paymentMethodId',paypal_tansaction_id);
-                    formdata.append('paypal_transaction_name',paypal_transaction_name);
-                    formdata.append('action','enoderit_custom_form_submit');
-                    formdata.append('nonce','<?php echo wp_create_nonce('admin_ajax_nonce_encoderit_custom_form') ?>')
-                    jQuery.ajax({
-                            url: '<?php echo admin_url('admin-ajax.php'); ?>',
-                            type: 'post',
-                            processData: false,
-                            contentType: false,
-                            processData: false,
-                            data: formdata,
-                            success: function(data) {
-                              const obj = JSON.parse(data);
-                              console.log(obj);
-
-                                if (obj.success == "success") {
-              
-                                  
-                                    window.location.href='<?=admin_url() .'/admin.php.?page=encoderit-custom-cases-user'?>'
-                                }
-                                if(obj.success == "error")
-                                {
-                                  let message_arr=obj.message.split(';')
-                                  let html='';
-                                  for(let index=0;index<message_arr.length;index++)
-                                  {
-                                      var temp=message_arr[index]+"\n";
-                                      html = html+temp;
-                                  }
-                                }
-                            }
-                              });
-                          }
-                      });
-                  },
-                    onError: function(err) {
-                        console.log('Error:', err);
-                        // Implement logic to handle errors
-                    }
-                  }).render('#paypal-button-container');
-
+                //const result=JSON.stringify(details,null,2);
+                // console.log(details.purchase_units[0].payments.captures[0].id , details.purchase_units[0].payments.captures[0].status);
+                let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
+                let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
+                let paypal_transaction_name=details.payer.name.given_name;
+                if(paypal_transaction_status == "COMPLETED"){
+                  var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tax_id='+paypal_tansaction_id+'&amount='+total_price;
+                  window.location.href = paypalSuccessUrl;
+              }
+            });
+          },
+          onError: function(err) {
+              console.log('Error:', err);
+              // Implement logic to handle errors
+          }
+        }).render('#paypal-button-container');
 
         jQuery("#payment-paypal").click(function(){
+          jQuery(".payment-submit").hide();
           document.getElementById('paypal-button-container').style.display='none'; 
           document.getElementById('paypal-button-container').style.display='block';
+        })
+        jQuery("#payment-stripe").click(function(){
+          jQuery(".payment-submit").show();
+          document.getElementById('paypal-button-container').style.display='none'; 
         })
       });
 
@@ -427,6 +368,3 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
 </main>
 <!-- Footer -->
 <?php get_footer();?>
-<script>
-    alert('ddd')
-</script>

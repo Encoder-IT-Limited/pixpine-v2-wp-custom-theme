@@ -139,7 +139,7 @@ function pixpine_scripts() {
 	wp_enqueue_style( 'pixpine-home-style', get_template_directory_uri() . '/assets/styles/home-style.css', array(), _S_VERSION );
 
 	wp_enqueue_script('jquery');
-	// wp_enqueue_script( 'pixpine-paypal', 'https://www.paypal.com/sdk/js?client-id=AVT1TGV_xT-FR1XRXZdKgsyoXIhHf_N4-j26F0W6bYXgLcv4r2jJLu7Bsa1aabiU-0pVGrDFUIdOpvrQ&currency=USD&disable-funding=paylater', array(), _S_VERSION, true );
+	// wp_enqueue_script( 'pixpine-paypal', 'https://www.paypal.com/sdk/js?client-id=AVT1TGV_xT-FR1XRXZdKgsyoXIhHf_N4-j26F0W6bYXgLcv4r2jJLu7Bsa1aabiU-0pVGrDFUIdOpvrQ&currency=USD&disable-funding=paylater', array(), _S_VERSION, false );
 	wp_enqueue_script( 'pixpine-slick-min', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'pixpine-navigation', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'pixpine-custom-js', get_template_directory_uri() . '/assets/js/index.js', array(), _S_VERSION, true );
@@ -372,50 +372,52 @@ function eil_payment_func(){
 }
 
 
+// add_action('wp_ajax_paypal_paymant', 'pixpine_paypal_paymant'); // For logged-in users
 
-function paypalPayment(){
+// function pixpine_paypal_paymant(){
+//     global $wpdb;
+//     global $current_user;
+//     get_currentuserinfo();
+//     $user_id= $current_user->ID;  
+//     $amount = $pitem['amount'];
+//     $tnx_id = $pitem['tnx_id'];
+//     $payment_for = 'product';
 
-    global $wpdb;
-    global $current_user;
-    get_currentuserinfo();
-    $user_id= $current_user->ID;  
-    $amount = $pitem['amount'];
-    $tnx_id = $pitem['tnx_id'];
-    $payment_for = 'product';
-
-    $query = "INSERT INTO ".$wpdb->prefix."pixpine_payment_details SET 
-    (`tnx_id`, `user_id`, `amount`, `payment_for`, `payment_info`, `payment_status`) 
-    VALUES ()";
-    $wpdb->query($query);
-    $payment_details_id = $wpdb->insert_id;
+//     $query = "INSERT INTO ".$wpdb->prefix."pixpine_payment_details SET 
+//     (`tnx_id`, `user_id`, `amount`, `payment_for`, `payment_info`, `payment_status`) 
+//     VALUES ()";
+//     $wpdb->query($query);
+//     $payment_details_id = $wpdb->insert_id;
 
 
-    $sql="insert into ".$wpdb->prefix.
-    "pixpine_orders (user_id,pixpine_payment_detail_id,total_price) 
-    values('$user_id','". $payment_details_id."','".$amount."')";
-    $wpdb->query($sql);
-    $order_id = $wpdb->insert_id;
+//     $sql="insert into ".$wpdb->prefix.
+//     "pixpine_orders (user_id,pixpine_payment_detail_id,total_price) 
+//     values('$user_id','". $payment_details_id."','".$amount."')";
+//     $wpdb->query($sql);
+//     $order_id = $wpdb->insert_id;
 
 
     
 
-    // get from cart
-    $table_name = $wpdb->prefix . 'pixpine_carts'; 
-    $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
-    $products =$wpdb->get_col($query);
-    $total_price = 0; 
-    // add in order item table
-    foreach($products as $cpt_id){ 
-        $cpt_post = get_post($cpt_id, 'product'); 
-        $name= $cpt_post->post_title;
-        $price = get_post_meta($cpt_id,'personal_commercial_sale_price', true); 
-        $sql="insert into ".$wpdb->prefix."pixpine_order_items (pixpine_order_id,product_id,user_id,product_name,price) values('$order_id','".$cpt_id."','".$user_id."','".$name."','".$price."')";
-        $wpdb->query($sql);
-    }
-    // delete from cart
-    $query = "DELETE from ".$wpdb->prefix."pixpine_carts  WHERE user_id='$user_id' ";
-    $wpdb->query($query);
-}
+//     // get from cart
+//     $table_name = $wpdb->prefix . 'pixpine_carts'; 
+//     $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
+//     $products =$wpdb->get_col($query);
+//     $total_price = 0; 
+//     // add in order item table
+//     foreach($products as $cpt_id){ 
+//         $cpt_post = get_post($cpt_id, 'product'); 
+//         $name= $cpt_post->post_title;
+//         $price = get_post_meta($cpt_id,'personal_commercial_sale_price', true); 
+//         $sql="insert into ".$wpdb->prefix."pixpine_order_items (pixpine_order_id,product_id,user_id,product_name,price) values('$order_id','".$cpt_id."','".$user_id."','".$name."','".$price."')";
+//         $wpdb->query($sql);
+//     }
+//     // delete from cart
+//     $query = "DELETE from ".$wpdb->prefix."pixpine_carts  WHERE user_id='$user_id' ";
+//     $wpdb->query($query);
+//     echo 'success';
+//     die();
+// }
 
 
 
