@@ -1,167 +1,12 @@
 <?php
-/**
- * Register CPT For Product
- */
-function custom_product_post_type() {
-    $labels = array(
-        'name'                  => _x( 'Products', 'Post Type General Name', 'text_domain' ),
-        'singular_name'         => _x( 'Product', 'Post Type Singular Name', 'text_domain' ),
-        'menu_name'             => __( 'Products', 'text_domain' ),
-        'name_admin_bar'        => __( 'Product', 'text_domain' ),
-        'archives'              => __( 'Product Archives', 'text_domain' ),
-        'attributes'            => __( 'Product Attributes', 'text_domain' ),
-        'payment_item_colon'     => __( 'Payment Product:', 'text_domain' ),
-        'all_items'             => __( 'All Products', 'text_domain' ),
-        'add_new_item'          => __( 'Add New Product', 'text_domain' ),
-        'add_new'               => __( 'Add New', 'text_domain' ),
-        'new_item'              => __( 'New Product', 'text_domain' ),
-        'edit_item'             => __( 'Edit Product', 'text_domain' ),
-        'update_item'           => __( 'Update Product', 'text_domain' ),
-        'view_item'             => __( 'View Product', 'text_domain' ),
-        'view_items'            => __( 'View Products', 'text_domain' ),
-        'search_items'          => __( 'Search Product', 'text_domain' ),
-        'not_found'             => __( 'Not found', 'text_domain' ),
-        'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
-        'featured_image'        => __( 'Featured Image', 'text_domain' ),
-        'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
-        'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
-        'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
-        'insert_into_item'      => __( 'Insert into product', 'text_domain' ),
-        'uploaded_to_this_item' => __( 'Uploaded to this product', 'text_domain' ),
-        'items_list'            => __( 'Products list', 'text_domain' ),
-        'items_list_navigation' => __( 'Products list navigation', 'text_domain' ),
-        'filter_items_list'     => __( 'Filter products list', 'text_domain' ),
-    );
-    $args = array(
-        'label'                 => __( 'Product', 'text_domain' ),
-        'description'           => __( 'Custom post type for products', 'text_domain' ),
-        'labels'                => $labels,
-        'supports'              => array( 'title', 'editor', 'thumbnail', 'tags' ),
-        'taxonomies'            => array( 'post_tag' ),
-        'hierarchical'          => false,
-        'public'                => true,
-        'show_ui'               => true,
-        'show_in_menu'          => true,
-        'menu_position'         => 5,
-        'menu_icon'             => 'dashicons-cart', // You can change the icon
-        'show_in_admin_bar'     => true,
-        'show_in_nav_menus'     => true,
-        'can_export'            => true,
-        'has_archive'           => true,
-        'exclude_from_search'   => false,
-        'publicly_queryable'    => true,
-        'capability_type'       => 'post',
-    );
-    register_post_type( 'product', $args );
-}
-add_action( 'init', 'custom_product_post_type', 0 );
-
-/**
- * Register Custom Category For Product
- */
-function custom_product_taxonomy() {
-
-    $labels = array(
-        'name'                       => _x( 'Mockup Categories', 'Taxonomy General Name', 'text_domain' ),
-        'singular_name'              => _x( 'Mockup Category', 'Taxonomy Singular Name', 'text_domain' ),
-        'menu_name'                  => __( 'Mockup Categories', 'text_domain' ),
-        'all_items'                  => __( 'Mockup Categories', 'text_domain' ),
-        'payment_item'                => __( 'Payment Category', 'text_domain' ),
-        'payment_item_colon'          => __( 'Payment Category:', 'text_domain' ),
-        'new_item_name'              => __( 'New Category Name', 'text_domain' ),
-        'add_new_item'               => __( 'Add New Category', 'text_domain' ),
-        'edit_item'                  => __( 'Edit Category', 'text_domain' ),
-        'update_item'                => __( 'Update Category', 'text_domain' ),
-        'view_item'                  => __( 'View Category', 'text_domain' ),
-        'separate_items_with_commas' => __( 'Separate categories with commas', 'text_domain' ),
-        'add_or_remove_items'        => __( 'Add or remove categories', 'text_domain' ),
-        'choose_from_most_used'      => __( 'Choose from the most used', 'text_domain' ),
-        'popular_items'              => __( 'Popular Categories', 'text_domain' ),
-        'search_items'               => __( 'Search Categories', 'text_domain' ),
-        'not_found'                  => __( 'Not Found', 'text_domain' ),
-    );
-    $args = array(
-        'labels'                     => $labels,
-        'hierarchical'               => true,
-        'public'                     => true, // Set to true to display in post editor
-        'show_ui'                    => true, // Show the admin UI
-        'show_admin_column'          => true, // Show the admin column
-        'show_in_nav_menus'          => true, // Show in navigation menus
-        'show_tagcloud'              => true, // Show in tag cloud widget
-    );
-    register_taxonomy( 'mockup_category', array( 'product' ), $args );
-
-
-}
-add_action( 'init', 'custom_product_taxonomy', 0 );
 
 
 
-/**
- * Drag and drop category - general_category
- */
-// Add custom JavaScript for drag-and-drop sorting
-function custom_admin_scripts() {
-    global $pagenow;
 
-    // Check if we're on the categories editing page
-    if ($pagenow === 'edit-tags.php' && isset($_GET['taxonomy']) && $_GET['taxonomy'] === 'general_category') {
-        wp_enqueue_script('jquery-ui-sortable');
-    }
-}
 
-add_action('admin_enqueue_scripts', 'custom_admin_scripts');
 
-// Add custom JavaScript to handle drag-and-drop sorting
-function custom_category_sorting_script() {
-    ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $('#the-list').sortable({
-                axis: 'y',
-                cursor: 'move',
-                update: function(event, ui) {
-                    var data = {
-                        action: 'update_category_order',
-                        order: $('#the-list').sortable('serialize')
-                    };
 
-                    $.post(ajaxurl, data);
-                }
-            });
-        });
-    </script>
-    <?php
-}
 
-add_action('admin_footer', 'custom_category_sorting_script');
-
-// Handle the category order update via AJAX
-function update_category_order() {
-    parse_str($_POST['order'], $category_order);
-    $categories = $category_order['tag'];
-
-    // Update the category order
-    foreach ($categories as $position => $cat_id) {
-        // wp_update_term($cat_id, 'term_order', array('term_order' => $position + 1));
-        // update_term_meta($cat_id, 'term_order', $position + 1);
-        // update_term_meta($cat_id, 'term_order', $position + 1);
-        // update_term_meta($, 'category_order', array('term_order' => $position + 1));
-        // wp_update_term($cat_id, 'category', array(
-        //     'term_order' => $position+1,
-        // ));
-        wp_update_term($cat_id, 'general_category', array(
-            'term_order' => $position+1,
-        ));
-        // wp_update_term($cat_id, 'general_category', array(
-        //     'term_order' => $position + 1, // Add 1 to position to account for zero-based index
-        // ));
-    }
-
-    die();
-}
-
-add_action('wp_ajax_update_category_order', 'update_category_order');
 
 // Admin panel
 // Hook into the wp_terms_checklist_args filter
@@ -735,7 +580,7 @@ function create_home_special_product_page(){
 }
 
 function add_custom_meta_box() {
-    add_meta_box('custom_meta_box', 'Custom Field', 'custom_meta_box_markup', 'product', 'normal', 'high');
+    add_meta_box('custom_meta_box', 'Custom Field', 'custom_meta_box_markup', 'post', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'add_custom_meta_box');
 
@@ -749,7 +594,7 @@ function save_custom_meta_box($post_id) {
         return $post_id;
     }
 
-    if ('product' === $_POST['post_type']) {
+    if ('post' === $_POST['post_type']) {
         if (current_user_can('edit_post', $post_id)) {
             $new_value = sanitize_text_field($_POST['personal_commercial_price']);
             update_post_meta($post_id, 'personal_commercial_price', $new_value);
@@ -833,7 +678,7 @@ function search_product() {
 
     global $wpdb;
 
-    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish' AND post_title LIKE '%$search%' ";
+    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' AND post_title LIKE '%$search%' ";
     if($expect_product_id != ''){
         $query .= " AND  ID NOT IN ($expect_product_id)";
 
@@ -858,7 +703,7 @@ function get_all_product() {
 
     global $wpdb;
 
-    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'product' AND post_status = 'publish'";
+    $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish'";
     
     $results = $wpdb->get_results($query);
     
@@ -885,12 +730,13 @@ add_action('wp_ajax_get_all_product', 'get_all_product');
 
   function custom_modify_post_slug($slug, $post_ID, $post_status, $post_type) {
     // Check if the post type is the one you're interested in
-    if ($post_type === 'product') {
+    if ($post_type === 'post') {
         // Append the post ID to the proposed slug
         if (!str_contains($slug, '-'.$post_ID)) { 
             $slug .= '-' . $post_ID;
         }
     }
+
     return $slug;
 }
 
@@ -929,3 +775,43 @@ function save_custom_taxonomy_image($term_id) {
 }
 // add_action('created_mockup_category', 'save_custom_taxonomy_image', 10, 1);
 add_action('edited_mockup_category', 'save_custom_taxonomy_image', 10, 1);
+
+
+/**
+ * Register Custom Category For Product
+ */
+function custom_product_taxonomy() {
+
+    $labels = array(
+        'name'                       => _x( 'Mockup Categories', 'Taxonomy General Name', 'text_domain' ),
+        'singular_name'              => _x( 'Mockup Category', 'Taxonomy Singular Name', 'text_domain' ),
+        'menu_name'                  => __( 'Mockup Categories', 'text_domain' ),
+        'all_items'                  => __( 'Mockup Categories', 'text_domain' ),
+        'payment_item'                => __( 'Payment Category', 'text_domain' ),
+        'payment_item_colon'          => __( 'Payment Category:', 'text_domain' ),
+        'new_item_name'              => __( 'New Category Name', 'text_domain' ),
+        'add_new_item'               => __( 'Add New Category', 'text_domain' ),
+        'edit_item'                  => __( 'Edit Category', 'text_domain' ),
+        'update_item'                => __( 'Update Category', 'text_domain' ),
+        'view_item'                  => __( 'View Category', 'text_domain' ),
+        'separate_items_with_commas' => __( 'Separate categories with commas', 'text_domain' ),
+        'add_or_remove_items'        => __( 'Add or remove categories', 'text_domain' ),
+        'choose_from_most_used'      => __( 'Choose from the most used', 'text_domain' ),
+        'popular_items'              => __( 'Popular Categories', 'text_domain' ),
+        'search_items'               => __( 'Search Categories', 'text_domain' ),
+        'not_found'                  => __( 'Not Found', 'text_domain' ),
+    );
+    $args = array(
+        'labels'                     => $labels,
+        'hierarchical'               => true,
+        'public'                     => true, // Set to true to display in post editor
+        'show_ui'                    => true, // Show the admin UI
+        'show_admin_column'          => true, // Show the admin column
+        'show_in_nav_menus'          => true, // Show in navigation menus
+        'show_tagcloud'              => true, // Show in tag cloud widget
+    );
+    register_taxonomy( 'mockup_category', array( 'post' ), $args );
+
+
+}
+add_action( 'init', 'custom_product_taxonomy', 0 );
