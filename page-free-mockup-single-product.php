@@ -111,12 +111,12 @@ if ($parent_term && !is_wp_error($parent_term)) {
 
                         <?php
                         // Define the custom post type (CPT) you want to query
-                        $cpt_slug = 'product'; // Replace with your CPT slug
+                        // $cpt_slug = 'product'; // Replace with your CPT slug
                         $subcategory_id = $same_cat_id_in_premium_cat;
                         $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
                         // Create a new WP_Query instance to retrieve CPTs
                         $args = array(
-                            'post_type' => $cpt_slug,
+                            // 'post_type' => $cpt_slug,
                             'orderby'   => 'rand', // Order randomly
                             'posts_per_page' => 3, // Retrieve all posts in the category
                             'tax_query' => array(
@@ -139,7 +139,7 @@ if ($parent_term && !is_wp_error($parent_term)) {
                             $thumbnail_url = get_the_post_thumbnail_url($random_cpts->ID);
                         ?>
                               <div class="card_item">
-                                <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php the_ID();?>">
+                                <a href="<?php echo get_the_permalink();?>">
                                   <div class="inner_col">
                                     <div class="img_col pixpine_card_border">
                                       <img src="<?php echo $thumbnail_url;?>" alt="<?php the_title();?>" />

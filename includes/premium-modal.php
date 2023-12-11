@@ -9,8 +9,6 @@
 global $wpdb;
 $post_id = get_the_ID();
 
-
-
 // favorite
 $is_logged_in = 0;
 $is_favorite = 0;

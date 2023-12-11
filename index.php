@@ -248,17 +248,9 @@
                 $p_id = get_option('home_special_product_'.$i.'_product_id', 'No product selected');
                 if($p_id != 'No product selected'){
                   $img_url = get_option('home_special_product_'.$i.'_image_url', '');
-                  $product_url = '';
-                  if(get_option('home_special_product_'.$i.'_product_main_cat') == "Free Mockups"){
-                    $product_url = site_url('free-mockup-product').'/?id='.$p_id;
-                  }elseif(get_option('home_special_product_'.$i.'_product_main_cat') == "Bundle Mockups"){
-                    $product_url = site_url('premium-mockup-single-product').'/?id='.$p_id;                    
-                  }elseif(get_option('home_special_product_'.$i.'_product_main_cat') == "Premium Mockups"){
-                    $product_url = site_url('bundle-mockup-single-product').'/?id='.$p_id;
-                  }
               ?>
                 <div class="card_item">
-                  <a href="<?php echo $product_url;?>" >
+                  <a href="<?php echo get_the_permalink($p_id);?>" >
                     <div class="inner_col pixpine_card_border">
                       <img src="<?php echo $img_url;?>" alt="" />
                     </div>
@@ -326,7 +318,7 @@
                   <div class="card_container row_d justify-content-center home-premium-products">
                   <?php
                   $args = array(
-                    'post_type' => 'product', // Replace with the name of your CPT
+                    // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => 10, // Number of posts to display (adjust as needed)
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
@@ -349,7 +341,7 @@
 
                     <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
                       <div type="button" class="card_item premium-mockup-single" p-id="<?php echo get_the_ID();?>">
-                        <a href="<?php echo site_url('premium-mockup-single-product').'?id='.get_the_ID();?>">
+                        <a href="<?php echo get_the_permalink();?>">
                           <div class="item_a">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
@@ -409,7 +401,7 @@
                   <div class="card_container row_d justify-content-center home-free-products">
                   <?php
                   $args = array(
-                    'post_type' => 'product', // Replace with the name of your CPT
+                    // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => 10, // Number of posts to display (adjust as needed)
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
@@ -430,7 +422,7 @@
                       // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                     ?>
                     <div class="card_item">
-                      <a href="<?php echo site_url('free-mockup-product');?>?id=<?php echo get_the_ID();?>">
+                      <a href="<?php echo get_the_permalink();?>">
                         <div class="inner_col">
                           <div class="img_col pixpine_card_border">
                             <img src="<?php echo $thumbnail_url;?>" alt="" />
@@ -499,7 +491,7 @@
 
               <?php
               $args = array(
-                'post_type' => 'product', // Replace with the name of your CPT
+                // 'post_type' => 'product', // Replace with the name of your CPT
                 'posts_per_page' => 10, // Number of posts to display (adjust as needed)
                 'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                 'tax_query' => array(
@@ -520,7 +512,7 @@
                   // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                 ?>
                   <div class="card_item">
-                    <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                    <a href="<?php echo get_the_permalink();?>">
                       <div type="button" >
                       <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
                         <div class="inner_col pixpine_card_border">
@@ -551,10 +543,10 @@
     </main>
 
     <!-- Premium Modal -->
-    <?php include 'includes/premium-modal.php';?>
+    <?php //include 'includes/premium-modal.php';?>
 
     <!-- Bundle Modal -->
-    <?php include 'includes/bundle-modal.php';?>
+    <?php //include 'includes/bundle-modal.php';?>
 
     <!-- Footer -->
     <?php include 'includes/footer.php';?>

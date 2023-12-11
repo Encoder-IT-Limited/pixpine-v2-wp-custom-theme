@@ -371,7 +371,7 @@ get_header();
 
                   <?php
                     $args = array(
-                      'post_type' => 'product', // Replace with the name of your CPT
+                      // 'post_type' => 'product', // Replace with the name of your CPT
                       'posts_per_page' => 20, // Number of posts to display (adjust as needed)
                       'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                       'tax_query' => array(
@@ -401,7 +401,7 @@ get_header();
                       class="card_item"
                     > -->
                     <div class="card_item">
-                      <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                      <a href="<?php echo get_the_permalink();?>">
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">

@@ -82,7 +82,7 @@ function get_product_home_premium(){
     $posts_per_page = $_POST['posts_per_page'];
     $page_no = $_POST['page_no'];
     $args = array(
-        'post_type' => 'product', // Replace with the name of your CPT
+        // 'post_type' => 'product', // Replace with the name of your CPT
         'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
         'paged' => $page_no,
         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -104,7 +104,7 @@ function get_product_home_premium(){
         
             $html .= '
             <div type="button" class="card_item premium-mockup-single" p-id="'.get_the_ID().'">
-                <a href="'.site_url('premium-mockup-single-product').'?id='.get_the_ID().'">
+                <a href="'.get_the_permalink().'">
                     <div class="item_a">
                         <div class="inner_col">
                             <div class="img_col pixpine_card_border">
@@ -138,7 +138,7 @@ function get_product_home_free(){
     $posts_per_page = $_POST['posts_per_page'];
     $page_no = $_POST['page_no'];
     $args = array(
-        'post_type' => 'product', // Replace with the name of your CPT
+        // 'post_type' => 'product', // Replace with the name of your CPT
         'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
         'paged' => $page_no,
         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -160,7 +160,7 @@ function get_product_home_free(){
         
             $html .= '
             <div class="card_item">
-                <a href="'.site_url('free-mockup-product').'?id='.get_the_ID().'">
+                <a href="'.get_the_permalink().'">
                     <div class="inner_col">
                         <div class="img_col pixpine_card_border">
                             <img src="'.$thumbnail_url.'" alt="" />
@@ -196,7 +196,7 @@ function get_product_with_pagination()
     if ($mockup_type == 'free-mockups') {
         $html .= '<div class="card_container row_d justify-content-center">';
         $args = array(
-            'post_type' => 'product', // Replace with the name of your CPT
+            // 'post_type' => 'product', // Replace with the name of your CPT
             'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
             'paged' => $page_no,
             'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -260,7 +260,7 @@ function get_product_with_pagination()
                 }
 
                 $html .= '<div class="card_item">
-                            <a href="' . site_url('free-mockup-product').'?id='.get_the_ID().'">
+                            <a href="' . get_the_permalink().'">
                                 <div class="inner_col">
                                 <div class="img_col pixpine_card_border">
                                     <img src="' . $thumbnail_url . '" alt="" />
@@ -328,7 +328,7 @@ function get_product_with_pagination()
     }elseif($mockup_type == 'premium-mockups'){
         $html .= '<div class="card_container row_d justify-content-center">';
         $args = array(
-            'post_type' => 'product', // Replace with the name of your CPT
+            // 'post_type' => 'product', // Replace with the name of your CPT
             'posts_per_page' => 20, // Number of posts to display (adjust as needed)
             'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
             'paged'=>$page_no,
@@ -353,7 +353,7 @@ function get_product_with_pagination()
 
 
             $html .= '<div class="card_item">
-                        <a href="' . site_url('premium-mockup-single-product ').'?id='.get_the_ID().'">
+                        <a href="' . get_the_permalink().'">
                             <div class="item_a">
                                 <div class="inner_col">
                                     <div class="img_col pixpine_card_border">
@@ -386,7 +386,7 @@ function get_product_with_pagination()
         $html .= '<div class="card_container row_d">';
 
         $args = array(
-          'post_type' => 'product', // Replace with the name of your CPT
+        //   'post_type' => 'product', // Replace with the name of your CPT
           'posts_per_page' => 20, // Number of posts to display (adjust as needed)
           'paged' => $page_no,
           'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -408,7 +408,7 @@ function get_product_with_pagination()
             $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
             // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
             $html .= '<div class="card_item">
-                        <a href="' . site_url('bundle-mockup-single-product ').'?id='.get_the_ID().'">
+                        <a href="' . get_the_permalink().'">
                             <div class="inner_col">
                                 <div class="img_col pixpine_card_border">
                                 <img src="'.$thumbnail_url.'" alt="" />

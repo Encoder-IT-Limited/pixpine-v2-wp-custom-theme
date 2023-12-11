@@ -60,11 +60,13 @@
             $count = 0;
             $tmp_cat = [];
             foreach ($subcategories as $subcategory) {
+              $image_id = get_term_meta($subcategory->term_id, '_custom_product_gallery', true);
+              $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
               echo '<div class="card_item">
                   <div class="card_inner pixpine_card_border get-product" cat-slug="'.$subcategory->slug.'" page-no="1">
                     <p href="">'.$subcategory->name.'</p>
                     <div class="img_col">
-                      <img src="'.get_template_directory_uri().'/assets/images/premium_img.png" alt="" />
+                      <img src="'.$image_url.'" alt="" />
                     </div>
                   </div>
               </div>';
@@ -83,7 +85,7 @@
 
       <?php
       $args = array(
-        'post_type' => 'product', // Replace with the name of your CPT
+        // 'post_type' => 'product', // Replace with the name of your CPT
         'posts_per_page' => 20, // Number of posts to display (adjust as needed)
         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
         'tax_query' => array(
@@ -111,7 +113,7 @@
             data-bs-toggle="modal"
             data-bs-target="#bundleModal"
           > -->
-          <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+          <a href="<?php echo get_the_permalink();?>">
             <div class="inner_col">
               <div class="img_col pixpine_card_border">
                 <img src="<?php echo $thumbnail_url;?>" alt="" />
