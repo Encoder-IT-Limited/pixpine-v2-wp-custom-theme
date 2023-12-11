@@ -336,7 +336,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                 let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
                 let paypal_transaction_name=details.payer.name.given_name;
                 if(paypal_transaction_status == "COMPLETED"){
-                  var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tax_id='+paypal_tansaction_id+'&amount='+total_price;
+                  var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tnx_id='+paypal_tansaction_id+'&amount='+total_price;
                   window.location.href = paypalSuccessUrl;
               }
             });
