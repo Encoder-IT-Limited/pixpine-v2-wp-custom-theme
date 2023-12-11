@@ -55,7 +55,7 @@ if($type == 'search'){
                     <?php
                     if($type == 'search'){
                       $args = array(
-                        'post_type' => 'product', // Replace with the name of your CPT
+                        // 'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -71,7 +71,7 @@ if($type == 'search'){
                     }elseif($type == 'category'){
                       $term_name = $_GET['term-name'];
                       $args = array(
-                        'post_type' => 'product', // Replace with the name of your CPT
+                        // 'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -92,7 +92,7 @@ if($type == 'search'){
                     }elseif($type == 'tag'){
                       $tag = $_GET['tag-name'];
                       $args = array(
-                        'post_type' => 'product', // Replace with the name of your CPT
+                        // 'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -196,7 +196,7 @@ if($type == 'search'){
                     <?php
                     if($type == 'search'){
                       $args = array(
-                        'post_type' => 'product', // Replace with the name of your CPT
+                        // 'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -212,7 +212,7 @@ if($type == 'search'){
                     }elseif($type == 'category'){
                       $term_name = $_GET['term-name'];
                       $args = array(
-                        'post_type' => 'product', // Replace with the name of your CPT
+                        // 'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -233,7 +233,7 @@ if($type == 'search'){
                     }elseif($type == 'tag'){
                       $tag = $_GET['tag-name'];
                       $args = array(
-                        'post_type' => 'product', // Replace with the name of your CPT
+                        // 'post_type' => 'product', // Replace with the name of your CPT
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -324,7 +324,7 @@ if($type == 'search'){
                 <?php
                 if($type == 'search'){
                   $args = array(
-                    'post_type' => 'product', // Replace with the name of your CPT
+                    // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -340,7 +340,7 @@ if($type == 'search'){
                 }elseif($type == 'category'){
                   $term_name = $_GET['term-name'];
                   $args = array(
-                    'post_type' => 'product', // Replace with the name of your CPT
+                    // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
@@ -361,7 +361,7 @@ if($type == 'search'){
                 }elseif($type == 'tag'){
                   $tag = $_GET['tag-name'];
                   $args = array(
-                    'post_type' => 'product', // Replace with the name of your CPT
+                    // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
