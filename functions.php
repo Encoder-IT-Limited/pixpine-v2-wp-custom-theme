@@ -178,10 +178,23 @@ require get_template_directory() . '/admin/functions.php';
 /**
  * Frontend functions
  */
-require get_template_directory() . '/functions/email-templates.php';
+// require get_template_directory() . '/functions/email-templates.php';
 require get_template_directory() . '/functions/show-product-and-cat.php';
 require get_template_directory() . '/functions/subcription.php';
 require get_template_directory() . '/functions/user.php';
+
+// Emails
+require get_template_directory() . '/functions/email-templates/welcome.php';
+function pixpine_send_html_email($to, $subject, $message) {
+    $headers[] = 'Content-Type: text/html; charset=UTF-8';
+    $result = wp_mail($to, $subject, $message, $headers);
+    if ($result) {
+        echo 'HTML email sent successfully!';
+    } else {
+        echo 'Failed to send HTML email.';
+    }
+}
+
 
 //Nadim Dev working on facebook login
 //add_action( 'login_form', 'ayecode_fb_login' );
