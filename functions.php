@@ -183,16 +183,22 @@ require get_template_directory() . '/functions/show-product-and-cat.php';
 require get_template_directory() . '/functions/subcription.php';
 require get_template_directory() . '/functions/user.php';
 
-// Emails
+/**
+ * Emails
+ */
+// calling templates 
 require get_template_directory() . '/functions/email-templates/welcome.php';
+require get_template_directory() . '/functions/email-templates/new_account_password.php';
+
+// send email function
 function pixpine_send_html_email($to, $subject, $message) {
     $headers[] = 'Content-Type: text/html; charset=UTF-8';
     $result = wp_mail($to, $subject, $message, $headers);
-    if ($result) {
-        echo 'HTML email sent successfully!';
-    } else {
-        echo 'Failed to send HTML email.';
-    }
+    // if ($result) {
+    //     echo 'HTML email sent successfully!';
+    // } else {
+    //     echo 'Failed to send HTML email.';
+    // }
 }
 
 

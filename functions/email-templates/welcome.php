@@ -716,9 +716,9 @@ $html = '<!DOCTYPE html>
                     >
                       <a href="">
                         <img
-                          style="max-width: 100%"
+                          style="width: 171px; hight: auto"
                           class="wp_logo"
-                          src="./images/logo.svg"
+                          src="'.get_template_directory_uri().'/assets/email/logo.jpg"
                           alt=""
                         />
                       </a>
@@ -790,10 +790,11 @@ $html = '<!DOCTYPE html>
                               text-decoration: none;
                             "
                           >
+                          <a style="text-decoration: none; color:inherit;" href="'.site_url().'">
                             Get started
                             <img
-                              style="max-width: 100%; margin-left: 12px"
-                              src="'.get_template_directory_uri().'/assets/email/right_arrow.svg"
+                              style="width: 17px; margin-left: 12px"
+                              src="'.get_template_directory_uri().'/assets/email/right_arrow.jpg"
                               alt=""
                             />
                           </button>
@@ -815,6 +816,7 @@ $html = '<!DOCTYPE html>
                               text-align: left;
                             "
                           >
+                          <a style="text-decoration: none; color:inherit;" href="'.site_url('get-subscription').'"
                             <h3
                               style="
                                 font-size: 14px;
@@ -829,6 +831,7 @@ $html = '<!DOCTYPE html>
                               </span>
                               on premium mockups
                             </h3>
+                          </a>
                             <p
                               style="
                                 font-size: 13px;
@@ -882,7 +885,9 @@ $html = '<!DOCTYPE html>
                                     $custom_query->the_post();
                                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
                                     
-                                      $html .='<div
+                                      $html .='
+                                      <a style="text-decoration: none; color:inherit;" href="'.get_the_permalink().'">
+                                      <div
                                         class="card_item"
                                         style="
                                           border: 1px solid #707070;
@@ -910,7 +915,8 @@ $html = '<!DOCTYPE html>
                                           src="'.$thumbnail_url.'"
                                           alt=""
                                         />
-                                      </div>';
+                                      </div>
+                                      </a>';
                                       
                                 }
                               }
@@ -934,8 +940,8 @@ $html = '<!DOCTYPE html>
                         <li style="display: inline-block; margin: 0 13px">
                           <a class="youtube" href="https://www.youtube.com/">
                             <img
-                              style="max-width: 100%"
-                              src="./images/youtube.svg"
+                              style="width: 25px; height: 18px;"
+                              src="'.get_template_directory_uri().'/assets/email/youtube.jpg"
                               alt=""
                             />
                           </a>
@@ -946,8 +952,8 @@ $html = '<!DOCTYPE html>
                             href="https://www.pinterest.com/"
                           >
                             <img
-                              style="max-width: 100%"
-                              src="./images/pinterest.svg"
+                              style="width: 20px; height: 21px;"
+                              src="'.get_template_directory_uri().'/assets/email/pinterest.jpg"
                               alt=""
                             />
                           </a>
@@ -958,8 +964,8 @@ $html = '<!DOCTYPE html>
                             href="https://www.instagram.com/"
                           >
                             <img
-                              style="max-width: 100%"
-                              src="./images/instagram.svg"
+                              style="width: 19px; height: 19px;"
+                              src="'.get_template_directory_uri().'/assets/email/instagram.jpg"
                               alt=""
                             />
                           </a>
@@ -967,8 +973,8 @@ $html = '<!DOCTYPE html>
                         <li style="display: inline-block; margin: 0 13px">
                           <a class="twitter" href="https://twitter.com/">
                             <img
-                              style="max-width: 100%"
-                              src="./images/twitter.svg"
+                              style="width: 19px; height: 20px;"
+                              src="'.get_template_directory_uri().'/assets/email/twitter.jpg"
                               alt=""
                             />
                           </a>
@@ -976,8 +982,8 @@ $html = '<!DOCTYPE html>
                         <li style="display: inline-block; margin: 0 13px">
                           <a class="behance" href="https://www.behance.net/">
                             <img
-                              style="max-width: 100%"
-                              src="./images/behance.svg"
+                              style="width: 26px; height: 16px;"
+                              src="'.get_template_directory_uri().'/assets/email/behance.jpg"
                               alt=""
                             />
                           </a>
@@ -985,8 +991,8 @@ $html = '<!DOCTYPE html>
                         <li style="display: inline-block; margin: 0 13px">
                           <a class="facebook" href="https://www.facebook.com/">
                             <img
-                              style="max-width: 100%"
-                              src="./images/facebook.svg"
+                              style="width: 10px; height: 19px;"
+                              src="'.get_template_directory_uri().'/assets/email/facebook.jpg"
                               alt=""
                             />
                           </a>

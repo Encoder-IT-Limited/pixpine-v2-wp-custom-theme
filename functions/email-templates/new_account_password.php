@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+function pixpine_new_account_password_email($password){
+  $html = '';
+  $html .= '
+  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -680,7 +684,7 @@
                   margin: 0 auto;
                   padding: 0;
                   color: #333;
-                  font-family: 'Roboto', 'Open Sans', 'Helvetica Neue',
+                  font-family: \'Roboto\', \'Open Sans\', \'Helvetica Neue\',
                     Helvetica, Arial, sans-serif;
                   font-size: 14px;
                   overflow: hidden;
@@ -713,9 +717,9 @@
                     >
                       <a href="">
                         <img
-                          style="max-width: 100%"
+                          style="width: 171px; hight: auto"
                           class="wp_logo"
-                          src="./images/logo.svg"
+                          src="'.get_template_directory_uri().'/assets/email/logo.jpg"
                           alt=""
                         />
                       </a>
@@ -746,7 +750,7 @@
                           Thank you for creating a new account on Pixpine, your
                           account password is auto-generated
                           <span style="font-weight: 700; color: #333333">
-                            2Xgexe@4q2
+                            '.$password.'
                           </span>
                         </p>
                       </div>
@@ -766,7 +770,7 @@
                             color: #005aff;
                             text-decoration: none;
                           "
-                          href="https://chonburiinterww.com/pixpine/"
+                          href="'.site_url().'"
                         >
                           login
                         </a>
@@ -787,66 +791,66 @@
                         class="social_link"
                         style="text-align: center; margin: 0; padding: 0"
                       >
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="youtube" href="https://www.youtube.com/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/youtube.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a
-                            class="pinterest"
-                            href="https://www.pinterest.com/"
-                          >
-                            <img
-                              style="max-width: 100%"
-                              src="./images/pinterest.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a
-                            class="instagram"
-                            href="https://www.instagram.com/"
-                          >
-                            <img
-                              style="max-width: 100%"
-                              src="./images/instagram.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="twitter" href="https://twitter.com/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/twitter.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="behance" href="https://www.behance.net/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/behance.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="facebook" href="https://www.facebook.com/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/facebook.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                      <a class="youtube" href="https://www.youtube.com/">
+                        <img
+                          style="width: 25px; height: 18px;"
+                          src="'.get_template_directory_uri().'/assets/email/youtube.jpg"
+                          alt=""
+                        />
+                      </a>
+                    </li>
+                    <li style="display: inline-block; margin: 0 13px">
+                      <a
+                        class="pinterest"
+                        href="https://www.pinterest.com/"
+                      >
+                        <img
+                          style="width: 20px; height: 21px;"
+                          src="'.get_template_directory_uri().'/assets/email/pinterest.jpg"
+                          alt=""
+                        />
+                      </a>
+                    </li>
+                    <li style="display: inline-block; margin: 0 13px">
+                      <a
+                        class="instagram"
+                        href="https://www.instagram.com/"
+                      >
+                        <img
+                          style="width: 19px; height: 19px;"
+                          src="'.get_template_directory_uri().'/assets/email/instagram.jpg"
+                          alt=""
+                        />
+                      </a>
+                    </li>
+                    <li style="display: inline-block; margin: 0 13px">
+                      <a class="twitter" href="https://twitter.com/">
+                        <img
+                          style="width: 19px; height: 20px;"
+                          src="'.get_template_directory_uri().'/assets/email/twitter.jpg"
+                          alt=""
+                        />
+                      </a>
+                    </li>
+                    <li style="display: inline-block; margin: 0 13px">
+                      <a class="behance" href="https://www.behance.net/">
+                        <img
+                          style="width: 26px; height: 16px;"
+                          src="'.get_template_directory_uri().'/assets/email/behance.jpg"
+                          alt=""
+                        />
+                      </a>
+                    </li>
+                    <li style="display: inline-block; margin: 0 13px">
+                      <a class="facebook" href="https://www.facebook.com/">
+                        <img
+                          style="width: 10px; height: 19px;"
+                          src="'.get_template_directory_uri().'/assets/email/facebook.jpg"
+                          alt=""
+                        />
+                      </a>
+                    </li>
                       </ul>
                       <div class="footer_menu" style="margin: 8px 0">
                         <ul style="text-align: center; margin: 0; padding: 0">
@@ -1640,3 +1644,8 @@
     </div>
   </body>
 </html>
+  ';
+  return $html;
+}
+
+

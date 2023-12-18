@@ -123,9 +123,11 @@ function pixpine_signup(){
         $user_id = wp_create_user($username, $password, $email);
 
         if (is_wp_error($user_id)) {
+            error_log(print_r('11111111', true));
             // Registration failed
             echo 'Registration failed: ' . $user_id->get_error_message();
         } else {
+            error_log(print_r('222222', true));
             // Registration successful
             // echo 'Registration successful. User ID: ' . $user_id;
             // send welcome email
