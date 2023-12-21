@@ -575,7 +575,48 @@ function create_home_special_product_page(){
     echo '<br>';
 
 
+    $value6 = get_post_meta($post->ID, 'application', true);
+    echo '<label for="application">Application:</label>';
+    echo '<br>';
+    echo '<input type="text" id="application" name="application" value="' . esc_attr($value6) . '" />';
+    echo '<br>';
+    echo '<br>';
 
+
+    $value7 = get_post_meta($post->ID, 'file_type', true);
+    echo '<label for="file_type">File Type:</label>';
+    echo '<br>';
+    echo '<input type="text" id="file_type" name="file_type" value="' . esc_attr($value7) . '" />';
+    echo '<br>';
+    echo '<br>';
+
+    $value8 = get_post_meta($post->ID, 'file_size', true);
+    echo '<label for="file_size">File Size:</label>';
+    echo '<br>';
+    echo '<input type="text" id="file_size" name="file_size" value="' . esc_attr($value8) . '" />';
+    echo '<br>';
+    echo '<br>';
+
+    $value9 = get_post_meta($post->ID, 'dimension', true);
+    echo '<label for="dimension">Dimension:</label>';
+    echo '<br>';
+    echo '<input type="text" id="dimension" name="dimension" value="' . esc_attr($value9) . '" />';
+    echo '<br>';
+    echo '<br>';
+
+    $value10 = get_post_meta($post->ID, 'license', true);
+    echo '<label for="license">License:</label>';
+    echo '<br>';
+    echo '<input type="text" id="license" name="license" value="' . esc_attr($value10) . '" />';
+    echo '<br>';
+    echo '<br>';
+
+    $value11 = get_post_meta($post->ID, 'author', true);
+    echo '<label for="author">Author:</label>';
+    echo '<br>';
+    echo '<input type="text" id="author" name="author" value="' . esc_attr($value11) . '" />';
+    echo '<br>';
+    echo '<br>';
 
 }
 
@@ -620,6 +661,24 @@ function save_custom_meta_box($post_id) {
             
             $new_value = sanitize_text_field($_POST['_custom_product_gallery']);
             update_post_meta($post_id, '_custom_product_gallery', $new_value);
+
+            $new_value = sanitize_text_field($_POST['application']);
+            update_post_meta($post_id, 'application', $new_value);
+
+            $new_value = sanitize_text_field($_POST['file_type']);
+            update_post_meta($post_id, 'file_type', $new_value);
+
+            $new_value = sanitize_text_field($_POST['file_size']);
+            update_post_meta($post_id, 'file_size', $new_value);
+
+            $new_value = sanitize_text_field($_POST['dimension']);
+            update_post_meta($post_id, 'dimension', $new_value);
+
+            $new_value = sanitize_text_field($_POST['license']);
+            update_post_meta($post_id, 'license', $new_value);
+
+            $new_value = sanitize_text_field($_POST['author']);
+            update_post_meta($post_id, 'author', $new_value);
             
         }
     }
