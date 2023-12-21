@@ -178,6 +178,8 @@ jQuery(document).ready(function($) {
             for (var i = 0; i < attachments.length; i++) {
                 imageIds.push(attachments[i].id);
             }
+
+            var C = autoSelectedImages.filter(element => imageIds.includes(element));
             
             $('#custom_product_gallery_container').html('');
             
@@ -187,11 +189,11 @@ jQuery(document).ready(function($) {
                 data: {
                     action: 'save_custom_product_gallery',
                     nonce: $('#custom_product_gallery_nonce').val(),
-                    imageIds: imageIds
+                    imageIds: C
                 },
                 success: function(response) {
-                    preSelectedImages = imageIds.toString();
-                    $("#_custom_product_gallery").val(imageIds.toString());
+                    preSelectedImages = C.toString();
+                    $("#_custom_product_gallery").val(C.toString());
                     $('#custom_product_gallery_container').html(response);
                 }
             });
