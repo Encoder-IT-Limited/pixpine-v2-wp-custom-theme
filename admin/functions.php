@@ -737,6 +737,10 @@ add_action('wp_ajax_get_all_product', 'get_all_product');
             if (!str_contains($slug, '-'.$post_ID)) { 
                 $slug .= '-' . $post_ID;
             }
+        }else{
+            if (!str_contains($slug, 'product/')) { 
+                $slug = 'product/' . $slug;
+            }
         }
     }
 

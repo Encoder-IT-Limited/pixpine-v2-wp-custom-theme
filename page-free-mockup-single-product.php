@@ -105,7 +105,10 @@ if ($parent_term && !is_wp_error($parent_term)) {
                           creative enthusiasts who work tirelessly to bring
                           something fresh and beneficial to the market.
                         </p> -->
-                        <?php echo $post->post_content;?>
+                        <?php 
+                        // echo $post->post_content;
+                        echo apply_filters('the_content', $post->post_content);
+                        ?>
                       </div>
                       <div class="first_card_col">
 
