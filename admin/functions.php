@@ -732,8 +732,11 @@ add_action('wp_ajax_get_all_product', 'get_all_product');
     // Check if the post type is the one you're interested in
     if ($post_type === 'post') {
         // Append the post ID to the proposed slug
-        if (!str_contains($slug, '-'.$post_ID)) { 
-            $slug .= '-' . $post_ID;
+        
+        if(explode('-', $slug)[0] != 'free'){
+            if (!str_contains($slug, '-'.$post_ID)) { 
+                $slug .= '-' . $post_ID;
+            }
         }
     }
 
