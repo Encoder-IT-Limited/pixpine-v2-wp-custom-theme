@@ -618,6 +618,20 @@ function create_home_special_product_page(){
     echo '<br>';
     echo '<br>';
 
+    $value12 = get_post_meta($post->ID, 'compatible_with', true);
+    echo '<label for="compatible_with">Compatible with:</label>';
+    echo '<br>';
+    echo '<input type="text" id="compatible_with" name="compatible_with" value="' . esc_attr($value12) . '" />';
+    echo '<br>';
+    echo '<br>';
+
+    $value13 = get_post_meta($post->ID, 'extended_license', true);
+    echo '<label for="extended_license">Extended License:</label>';
+    echo '<br>';
+    echo '<input type="text" id="extended_license" name="extended_license" value="' . esc_attr($value13) . '" />';
+    echo '<br>';
+    echo '<br>';
+
 }
 
 function add_custom_meta_box() {
@@ -679,6 +693,12 @@ function save_custom_meta_box($post_id) {
 
             $new_value = sanitize_text_field($_POST['author']);
             update_post_meta($post_id, 'author', $new_value);
+
+            $new_value = sanitize_text_field($_POST['compatible_with']);
+            update_post_meta($post_id, 'compatible_with', $new_value);
+
+            $new_value = sanitize_text_field($_POST['extended_license']);
+            update_post_meta($post_id, 'extended_license', $new_value);
             
         }
     }
@@ -791,20 +811,25 @@ add_action('wp_ajax_get_all_product', 'get_all_product');
     // Check if the post type is the one you're interested in
     if ($post_type === 'post') {
         // Append the post ID to the proposed slug
-        error_log('---------------------');
-        error_log('Slug');
-        error_log($slug);
 
-
-        if((explode('-', $slug)[0] != 'free') && !str_contains($slug, 'product/') ){
+        if(!str_contains($slug, 'free-')){
             if (!str_contains($slug, '-'.$post_ID)) { 
                 $slug .= '-' . $post_ID;
             }
-        }else{
-            if (!str_contains($slug, 'product/')) { 
-                $slug = 'product/' . $slug;
-            }
         }
+
+        // if(!str_contains($slug, 'free-') && !str_contains($slug, 'product')){
+        //     if (!str_contains($slug, '-'.$post_ID)) { 
+        //         $slug .= '-' . $post_ID;
+        //     }
+        // }else{
+        //     if (!str_contains($slug, 'product/')) { 
+        //         $slug = 'product/' . $slug;
+        //     }
+        // }
+        // if(str_contains($slug, 'product-free-')){
+        //     $slug = str_replace('product-', '', $slug);
+        // }
     }
 
     return $slug;

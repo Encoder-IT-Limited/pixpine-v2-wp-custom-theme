@@ -302,30 +302,30 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         <h3>Product Specs.</h3>
                         <ul>
                           <li>
-                            <p><span>Compatible with:</span>Adobe Photoshop</p>
+                            <p><span>Compatible with:</span><?php echo get_post_meta($post_id, 'compatible_with', true);?></p>
                           </li>
                           <li>
-                            <p><span>File Type:</span>Layered PSD</p>
+                            <p><span>File Type:</span><?php echo get_post_meta($post_id, 'file_type', true);?></p>
                           </li>
                           <li>
-                            <p><span>File Size:</span>150 MB</p>
+                            <p><span>File Size:</span><?php echo get_post_meta($post_id, 'file_size', true);?></p>
                           </li>
                           <li>
-                            <p><span>Dimension:</span>4000 x 3000 Pixels</p>
+                            <p><span>Dimension:</span><?php echo get_post_meta($post_id, 'dimension', true);?></p>
                           </li>
                           <li>
                             <p>
                               <span>License:</span>
-                              <a href="license.php">Commercial and Personal</a>
+                              <a href="<?php echo site_url('license');?>"> <?php echo get_post_meta($post_id, 'license', true);?></a>
                             </p>
                           </li>
                           <li>
                             <p>
-                              <span>Extended License:</span>Free (Limited Time)
+                              <span>Extended License:</span> <?php echo get_post_meta($post_id, 'extended_license', true);?>
                             </p>
                           </li>
                           <li>
-                            <p><span>Author:</span>Pixpine</p>
+                            <p><span>Author:</span><?php echo get_post_meta($post_id, 'author', true);?></p>
                           </li>
                         </ul>
                       </div>

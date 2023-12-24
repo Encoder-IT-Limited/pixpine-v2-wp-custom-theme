@@ -1,5 +1,33 @@
 <?php
-$post_id = get_the_ID();
+/*
+Template Name: Free Mockup Single With URL product
+*/
+// Get the path
+$path = $_SERVER['REQUEST_URI'];
+
+// Get the segments of the path
+$pathSegments = explode('/', trim($path, '/'));
+
+// Get the last segment
+$post_slug = end($pathSegments);
+$post_id = get_page_by_path($post_slug, OBJECT, 'post')->ID;
+
+get_header();
+
+$current_category_name = '';
+$taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+$custom_categories = wp_get_post_terms($post_id, $taxonomy);
+// Check if custom categories were found
+if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
+  // Loop through the custom categories and display them
+  foreach ($custom_categories as $category) {
+      if((esc_html($category->name) == "Premium Mockups") || (esc_html($category->name) == "Bundle Mockups") || (esc_html($category->name) == "Free Mockups")){
+          $current_category_name = esc_html($category->name);
+      }
+  }
+}
+?>
+<?php
 $post = get_post($post_id);
 
 $current_category_name = '';
@@ -257,15 +285,6 @@ if ($parent_term && !is_wp_error($parent_term)) {
                             </p>
                             <p><?php echo get_post_meta($post_id, 'author', true);?></p>
                           </div>
-
-                          <!-- <div class="values_col">
-                            <p>Photoshop</p>
-                            <p>PSD</p>
-                            <p>80 MB</p>
-                            <p>4500 x 3200 - 300dpi</p>
-                            <p><a href="<?php echo site_url('license');?>">Personal & Commercial</a></p>
-                            <p>Pixpine</p>
-                          </div> -->
                         </div>
                       </div>
                       <div class="application_photoshop_img google_ad">
@@ -341,3 +360,5 @@ if ($parent_term && !is_wp_error($parent_term)) {
         </div>
       </section>
     </main>
+<?php
+get_footer();

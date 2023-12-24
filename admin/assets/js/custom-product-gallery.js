@@ -145,11 +145,15 @@ jQuery(document).ready(function($) {
         if($(this).attr('is-multiple') == "1"){
             isMultiple = true;
         }
-     
+
         if((preSelectedImages.length==0)){
             var autoSelectedImages = [];
         }else{
-            var autoSelectedImages = preSelectedImages.split(",");;
+            var autoSelectedImages = preSelectedImages.split(",");
+            var numberArray = autoSelectedImages.map(function(element) {
+                return Number(element);
+            });
+            autoSelectedImages = numberArray;
         }
 
         var custom_uploader = wp.media({
@@ -179,7 +183,18 @@ jQuery(document).ready(function($) {
                 imageIds.push(attachments[i].id);
             }
 
-            var C = autoSelectedImages.filter(element => imageIds.includes(element));
+            if((preSelectedImages.length !=0 )){
+                console.log('autoSelectedImages', autoSelectedImages)
+                console.log('imageIds', imageIds)
+                var tmp1 = autoSelectedImages.filter(element => imageIds.includes(element));
+                var tmp2 = imageIds.filter(function (element) {
+                    return !autoSelectedImages.includes(element);
+                });
+                var C = [...tmp1, ...tmp2]
+            }else{
+                var C = imageIds;
+            }
+            console.log('c', C)
             
             $('#custom_product_gallery_container').html('');
             

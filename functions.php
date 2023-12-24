@@ -869,3 +869,13 @@ function send_remainder_email($user_id, $info)
 
 
 define('ENCODER_IT_PAYPAL_CLIENT', 'AVT1TGV_xT-FR1XRXZdKgsyoXIhHf_N4-j26F0W6bYXgLcv4r2jJLu7Bsa1aabiU-0pVGrDFUIdOpvrQ');
+
+function custom_rewrite_rules() {
+    add_rewrite_rule(
+        '^product/([^/]+)/?$',
+        'index.php?pagename=product&custom_param=$matches[1]',
+        'top'
+    );
+}
+
+add_action('init', 'custom_rewrite_rules');
