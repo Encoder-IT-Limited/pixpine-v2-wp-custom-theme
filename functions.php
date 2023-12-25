@@ -879,3 +879,32 @@ function custom_rewrite_rules() {
 }
 
 add_action('init', 'custom_rewrite_rules');
+
+
+
+
+
+/**
+ * Removes output from Yoast SEO on the frontend for a specific PRODUCT PAGE
+ */
+function remove_wpseo() {
+    if ( is_page ( 518 ) ) {
+        $front_end = YoastSEO()->classes->get( Yoast\WP\SEO\Integrations\Front_End_Integration::class );
+        
+        remove_action( 'wpseo_head', [ $front_end, 'present_head' ], -9999 );
+    }
+}
+add_action( 'template_redirect', 'remove_wpseo' );
+
+
+function get_free_product_post_id(){
+    // Get the path
+    $path = $_SERVER['REQUEST_URI'];
+
+    // Get the segments of the path
+    $pathSegments = explode('/', trim($path, '/'));
+
+    // Get the last segment
+    $post_slug = end($pathSegments);
+    return $post_id = get_page_by_path($post_slug, OBJECT, 'post')->ID;
+}

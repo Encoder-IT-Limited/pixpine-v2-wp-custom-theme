@@ -281,7 +281,9 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         >
                           <h5>Price</h5>
                           <h5>
-                            <del>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> </del>
+                            <?php if(!empty(get_post_meta($post_id, 'personal_commercial_price', true))){ ?>
+                              <del>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> </del>
+                            <?php } ?>
                             $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
                           </h5>
                         </div>

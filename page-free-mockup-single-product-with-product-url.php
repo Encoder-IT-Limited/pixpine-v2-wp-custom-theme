@@ -3,16 +3,18 @@
 Template Name: Free Mockup Single With URL product
 */
 // Get the path
-$path = $_SERVER['REQUEST_URI'];
+// $path = $_SERVER['REQUEST_URI'];
 
-// Get the segments of the path
-$pathSegments = explode('/', trim($path, '/'));
+// // Get the segments of the path
+// $pathSegments = explode('/', trim($path, '/'));
 
-// Get the last segment
-$post_slug = end($pathSegments);
-$post_id = get_page_by_path($post_slug, OBJECT, 'post')->ID;
+// // Get the last segment
+// $post_slug = end($pathSegments);
+// $post_id = get_page_by_path($post_slug, OBJECT, 'post')->ID;
 
-get_header();
+$post_id = get_free_product_post_id();
+
+get_header('product');
 
 $current_category_name = '';
 $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
