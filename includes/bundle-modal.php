@@ -167,7 +167,11 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </ul>
                     </div>
                     <div class="text_col">
-                      <?php echo $cpt->post_content;?>
+                      <?php // echo $cpt->post_content;?>
+                      <?php 
+                        // echo $post->post_content;
+                        echo apply_filters('the_content', $cpt->post_content);
+                        ?>
                       <h4>Related Keywords</h4>
                       <p>
                       <?php

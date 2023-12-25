@@ -321,7 +321,7 @@ if ($parent_term && !is_wp_error($parent_term)) {
                           $thumbnail_url = get_the_post_thumbnail_url($result->ID);
                       ?>
                         <div class="card_item">
-                          <a href="<?php echo site_url('free-mockup-product');?>?id=<?php echo $result->ID;?>">
+                        <a href="<?php echo get_the_permalink($result->ID);?>">
                             <div class="card_inner pixpine_card_border">
                               <img src="<?php echo $thumbnail_url;?>" alt="" />
                             </div>

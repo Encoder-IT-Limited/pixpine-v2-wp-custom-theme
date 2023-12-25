@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     }
     $pixpine_home_cat = implode(',', $_POST['home_cat']);
     if($msg==''){
-        add_option( 'home_cat', $pixpine_home_cat);
+        update_option( 'home_cat', $pixpine_home_cat);
         $msg = '
                 <div class="alert alert-success" role="alert">
                 Successfully saved.

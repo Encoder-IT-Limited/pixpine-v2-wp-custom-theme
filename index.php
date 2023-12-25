@@ -248,6 +248,7 @@
                 $p_id = get_option('home_special_product_'.$i.'_product_id', 'No product selected');
                 if($p_id != 'No product selected'){
                   $img_url = get_option('home_special_product_'.$i.'_image_url', '');
+                  $img_url = str_replace('-150x150', '', $img_url);
               ?>
                 <div class="card_item">
                   <a href="<?php echo get_the_permalink($p_id);?>" >

@@ -888,7 +888,7 @@ add_action('init', 'custom_rewrite_rules');
  * Removes output from Yoast SEO on the frontend for a specific PRODUCT PAGE
  */
 function remove_wpseo() {
-    if ( is_page ( 518 ) ) {
+    if ( is_page ( 'product' ) ) {
         $front_end = YoastSEO()->classes->get( Yoast\WP\SEO\Integrations\Front_End_Integration::class );
         
         remove_action( 'wpseo_head', [ $front_end, 'present_head' ], -9999 );
