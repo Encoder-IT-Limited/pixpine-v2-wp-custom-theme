@@ -858,6 +858,20 @@ function add_custom_taxonomy_image_field($taxonomy) {
         echo '<li>' . wp_get_attachment_image($image_id, 'thumbnail') . '</li>';
     }
     echo '</ul>';
+
+    $val = get_term_meta($taxonomy->term_id, '_custom_is_show_cat', true);
+    if($val == 1){
+        $is_checked = 'checked';
+    }else{
+        $is_checked = '';
+    }
+    echo '
+    <div class="form-check">
+    <input '.$is_checked.' class="form-check-input" type="checkbox" value="1"  name="_custom_is_show_cat" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+        Show it in the top 6
+    </label>
+    </div>';
 }
 // add_action('mockup_category_add_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
 add_action('mockup_category_edit_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
@@ -866,6 +880,12 @@ add_action('mockup_category_edit_form_fields', 'add_custom_taxonomy_image_field'
 function save_custom_taxonomy_image($term_id) {
     if (isset($_POST['_custom_product_gallery'])) {
         update_term_meta($term_id, '_custom_product_gallery', sanitize_text_field($_POST['_custom_product_gallery']));
+        if(isset($_POST['_custom_is_show_cat']) && ($_POST['_custom_is_show_cat'] == 1)){
+            update_term_meta($term_id, '_custom_is_show_cat', 1);
+        }else{
+            update_term_meta($term_id, '_custom_is_show_cat', 0);
+        }
+        
     }
 }
 // add_action('created_mockup_category', 'save_custom_taxonomy_image', 10, 1);

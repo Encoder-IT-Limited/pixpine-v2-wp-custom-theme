@@ -120,7 +120,6 @@ get_header();
                 
                     // Define the tax_query to retrieve child terms of the specified parent category
                     $args = array(
-                      'number'      => 6,
                         'taxonomy' => $taxonomy,
                         'child_of' => 0, // Set to 0 to get top-level terms
                         'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID
@@ -130,18 +129,20 @@ get_header();
                     $subcategories = get_terms($args);
                     if (!empty($subcategories)) {
                       foreach ($subcategories as $subcategory) {
-                        $image_id = get_term_meta($subcategory->term_id, '_custom_product_gallery', true);
-                        $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
-                        ?>
-                        <div class="card_item">
-                          <div class="card_inner pixpine_card_border get-product" cat-slug="<?=$subcategory->slug?>"  page-no="1">
-                            <p href=""><?=$subcategory->name?></p>
-                            <div class="img_col">
-                              <img src="<?php echo $image_url;?>" alt="" />
+                        if(get_term_meta($subcategory->term_id, '_custom_is_show_cat', true) == 1){
+                          $image_id = get_term_meta($subcategory->term_id, '_custom_product_gallery', true);
+                          $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
+                          ?>
+                          <div class="card_item">
+                            <div class="card_inner pixpine_card_border get-product" cat-slug="<?=$subcategory->slug?>"  page-no="1">
+                              <p href=""><?=$subcategory->name?></p>
+                              <div class="img_col">
+                                <img src="<?php echo $image_url;?>" alt="" />
+                              </div>
                             </div>
                           </div>
-                        </div>
                         <?php
+                        }
                       }
                     }
                     ?>
