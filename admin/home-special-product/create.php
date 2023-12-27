@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
           }
         }
         update_option('home_special_product_'.$id.'_image_id', $image_id);
-        update_option('home_special_product_'.$id.'_image_url', wp_get_attachment_image_url($image_id, 'thumbnail'));
+        update_option('home_special_product_'.$id.'_image_url', wp_get_attachment_image_url($image_id, 'full'));
         update_option('home_special_product_'.$id.'_product_id', $product_id);
         update_option('home_special_product_'.$id.'_product_main_cat', $current_category_name);
         update_option('home_special_product_'.$id.'_cat_slug', $current_category_slug);

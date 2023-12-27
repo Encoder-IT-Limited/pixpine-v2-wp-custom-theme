@@ -349,7 +349,9 @@ function get_product_with_pagination()
             $custom_query->the_post();
             $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
             // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
-
+            $_custom_product_gallery = get_post_meta(get_the_ID(), '_custom_product_gallery', true);
+            $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+            $thumbnail_url2 = wp_get_attachment_image_url( $_custom_product_gallery[0],'full');
 
 
             $html .= '<div class="card_item">
@@ -357,7 +359,11 @@ function get_product_with_pagination()
                             <div class="item_a">
                                 <div class="inner_col">
                                     <div class="img_col pixpine_card_border">
-                                    <img src="'.$thumbnail_url.'" alt="" />
+                                    <img src="'.$thumbnail_url.'" 
+                                    img1="'.$thumbnail_url.'" 
+                                    img2="'.$thumbnail_url2.'" 
+                                    class="premium-img-hover-effect" 
+                                    alt="" />
                                     </div>
                                     <div class="text_col">
                                     <h4 class="default_color">'.get_the_title().'</h4>

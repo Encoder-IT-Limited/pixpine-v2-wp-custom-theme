@@ -475,28 +475,28 @@ function create_home_special_product_page(){
     $value1 = get_post_meta($post->ID, 'personal_commercial_price', true);
     echo '<label for="personal_commercial_price">Personal & Commercial Price:</label>';
     echo '<br>';
-    echo '<input type="number" id="personal_commercial_price" name="personal_commercial_price" value="' . esc_attr($value1) . '" />';
+    echo '<input type="text" id="personal_commercial_price" name="personal_commercial_price" value="' . esc_attr($value1) . '" />';
     echo '<br>';
     echo '<br>';
            
     $value1 = get_post_meta($post->ID, 'personal_commercial_sale_price', true);
     echo '<label for="personal_commercial_sale_price">Personal & Commercial Sale Price:</label>';
     echo '<br>';
-    echo '<input type="number" id="personal_commercial_sale_price" name="personal_commercial_sale_price" value="' . esc_attr($value1) . '" />';
+    echo '<input type="text" id="personal_commercial_sale_price" name="personal_commercial_sale_price" value="' . esc_attr($value1) . '" />';
     echo '<br>';
     echo '<br>';
     
     $value2 = get_post_meta($post->ID, 'extended_license_price', true);
     echo '<label for="extended_license_price">Extended License Price:</label>';
     echo '<br>';
-    echo '<input type="number" id="extended_license_price" name="extended_license_price" value="' . esc_attr($value2) . '" />';
+    echo '<input type="text" id="extended_license_price" name="extended_license_price" value="' . esc_attr($value2) . '" />';
     echo '<br>';
     echo '<br>';
     
     $value2 = get_post_meta($post->ID, 'extended_license_sale_price', true);
     echo '<label for="extended_license_sale_price">Extended License Sale Price:</label>';
     echo '<br>';
-    echo '<input type="number" id="extended_license_sale_price" name="extended_license_sale_price" value="' . esc_attr($value2) . '" />';
+    echo '<input type="text" id="extended_license_sale_price" name="extended_license_sale_price" value="' . esc_attr($value2) . '" />';
     echo '<br>';
     echo '<br>';
     

@@ -88,7 +88,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       <div class="slider__item">
                         <div class="inner__slider">
                           <div class="img_col pixpine_card_border">
-                          <img src="<?php echo wp_get_attachment_image_url($image_id);?>" alt="">
+                          <img src="<?php echo wp_get_attachment_image_url($image_id, 'full');?>" alt="">
                           </div>
                           <button class="slider__wishlist alter-favorite" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" is-favorite="<?php echo $is_favorite;?>" 
                           type="bundle" 
@@ -120,7 +120,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       <div class="slider__item">
                         <div class="inner__slider">
                           <div class="img_col pixpine_card_border">
-                          <img src="<?php echo wp_get_attachment_image_url($image_id);?>" alt="">
+                          <img src="<?php echo wp_get_attachment_image_url($image_id, 'full');?>" alt="">
                           </div>
                         </div>
                       </div>
@@ -286,7 +286,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           <h5>Price</h5>
                           <h5>
                             <?php if(!empty(get_post_meta($post_id, 'personal_commercial_price', true))){ ?>
-                              <del>$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> </del>
+                              <del class="mx-2">$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> </del>
                             <?php } ?>
                             $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
                           </h5>

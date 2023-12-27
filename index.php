@@ -248,7 +248,6 @@
                 $p_id = get_option('home_special_product_'.$i.'_product_id', 'No product selected');
                 if($p_id != 'No product selected'){
                   $img_url = get_option('home_special_product_'.$i.'_image_url', '');
-                  $img_url = str_replace('-150x150', '', $img_url);
               ?>
                 <div class="card_item">
                   <a href="<?php echo get_the_permalink($p_id);?>" >
@@ -337,7 +336,9 @@
                     while ($custom_query->have_posts()) {
                       $custom_query->the_post();
                       $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
-                      // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                      $_custom_product_gallery = get_post_meta(get_the_ID(), '_custom_product_gallery', true);
+                      $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+                      $thumbnail_url2 = wp_get_attachment_image_url( $_custom_product_gallery[0],'full');
                     ?>
 
                     <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
@@ -346,7 +347,11 @@
                           <div class="item_a">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
-                                <img src="<?php echo $thumbnail_url;?>" alt="" />
+                                <img src="<?php echo $thumbnail_url;?>" 
+                                img1="<?php echo $thumbnail_url;?>" 
+                                img2="<?php echo $thumbnail_url2;?>" 
+                                class="premium-img-hover-effect"
+                                alt="" />
                               </div>
                               <div class="text_col">
                                 <h4 class="default_color">

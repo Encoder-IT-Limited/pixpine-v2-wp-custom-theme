@@ -1284,6 +1284,8 @@ body.modal-open {
 .premium_product_page {
   padding-top: 30px;
   padding-bottom: 60px;
+  max-height: 1000px;
+  overflow: auto;
 }
 .premium_product_page .slider_product_about_column {
   width: 51.9%;

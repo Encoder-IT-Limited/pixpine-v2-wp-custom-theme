@@ -115,6 +115,7 @@
                 
                     // Define the tax_query to retrieve child terms of the specified parent category
                     $args = array(
+                      'number'      => 6,
                         'taxonomy' => $taxonomy,
                         'child_of' => 0, // Set to 0 to get top-level terms
                         'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID

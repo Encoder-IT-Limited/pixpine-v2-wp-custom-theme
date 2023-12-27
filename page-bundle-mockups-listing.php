@@ -56,6 +56,10 @@ get_header();
 
           // Define the tax_query to retrieve child terms of the specified parent category
           $args = array(
+
+            'number'      => 6,
+            //  'order'       => 'ASC', // Order ascending
+    // 'orderby'     => 'rand', // Order randomly
               'taxonomy' => $taxonomy,
               'child_of' => 0, // Set to 0 to get top-level terms
               'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID
@@ -63,7 +67,6 @@ get_header();
           );
 
           $subcategories = get_terms($args);
-
           if (!empty($subcategories)) {
             $count = 0;
             $tmp_cat = [];
