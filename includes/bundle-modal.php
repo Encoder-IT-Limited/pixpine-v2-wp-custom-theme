@@ -47,9 +47,9 @@ $custom_categories = wp_get_post_terms($post_id, $taxonomy);
 if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
   // Loop through the custom categories and display them
   foreach ($custom_categories as $category) {
-      if((esc_html($category->name) != "Premium Mockups") && (esc_html($category->name) != "Bundle Mockups")){
-          $current_category_name = esc_html($category->name);
-      }
+    if((esc_html($category->slug) != "premium-mockups") && (esc_html($category->slug) != "bundle-mockups")){
+        $current_category_name = esc_html($category->name);
+    }
   }
 }
 

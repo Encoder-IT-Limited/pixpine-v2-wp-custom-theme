@@ -184,38 +184,6 @@
               <?php
               }
               ?>
-              <!-- <div class="trending_item">
-                <a href="">
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-                  </div>
-                  <span>Glass Jar</span>
-                </a>
-              </div>
-              <div class="trending_item">
-                <a href="">
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-                  </div>
-                  <span>T-Shirt</span>
-                </a>
-              </div>
-              <div class="trending_item">
-                <a href="">
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-                  </div>
-                  <span>Bottle</span>
-                </a>
-              </div>
-              <div class="trending_item">
-                <a href="">
-                  <div class="img_col">
-                    <img src="<?php echo get_template_directory_uri();?>/assets/images/trending_img.png" alt="" />
-                  </div>
-                  <span>Envelope</span>
-                </a>
-              </div> -->
             </div>
           </div>
         </div>

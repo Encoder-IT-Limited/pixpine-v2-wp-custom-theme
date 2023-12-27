@@ -124,7 +124,7 @@ if($type == 'search'){
 
                       <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
                         <div type="button" class="card_item premium-mockup-single" p-id="<?php echo get_the_ID();?>">
-                          <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                          <a href="<?php echo get_the_permalink();?>">
                             <div class="item_a">
                               <div class="inner_col">
                                 <div class="img_col pixpine_card_border">
@@ -262,7 +262,7 @@ if($type == 'search'){
                         // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                       ?>
                       <div class="card_item">
-                        <a href="<?php echo site_url('free-mockup-product');?>?id=<?php echo get_the_ID();?>">
+                        <a href="<?php echo get_the_permalink();?>">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
                               <img src="<?php echo $thumbnail_url;?>" alt="" />
@@ -390,7 +390,7 @@ if($type == 'search'){
                     // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                   ?>
                     <div class="card_item">
-                      <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                      <a href="<?php echo get_the_permalink();?>">
                         <div type="button" >
                         <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
                           <div class="inner_col pixpine_card_border">
