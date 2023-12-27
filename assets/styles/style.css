@@ -1058,7 +1058,7 @@ body.modal-open {
   margin: 0 22px;
   margin-bottom: 36px;
   flex-direction: column;
-  height: 320px;
+  /* height: 320px; */
   justify-content: space-between;
   align-items: stretch;
 }
