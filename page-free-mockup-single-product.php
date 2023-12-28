@@ -139,12 +139,19 @@ if ($parent_term && !is_wp_error($parent_term)) {
                           foreach ($results as $result) {
                             $cnt++;
                             $thumbnail_url = get_the_post_thumbnail_url($result->ID, 'full');
+                            $_custom_product_gallery = get_post_meta(get_the_ID(), '_custom_product_gallery', true);
+                            $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+                            $thumbnail_url2 = wp_get_attachment_image_url( $_custom_product_gallery[0],'full');
                         ?>
                               <div class="card_item">
                                 <a href="<?php echo get_the_permalink($result->ID);?>">
                                   <div class="inner_col">
                                     <div class="img_col pixpine_card_border">
-                                      <img src="<?php echo $thumbnail_url;?>" alt="<?php echo get_the_title($result->ID);?>" />
+                                      <img src="<?php echo $thumbnail_url;?>" 
+                                      img1="<?php echo $thumbnail_url;?>" 
+                                      img2="<?php echo $thumbnail_url2;?>" 
+                                      class="premium-img-hover-effect"
+                                      alt="<?php echo get_the_title($result->ID);?>" />
                                     </div>
                                     <div class="text_col">
                                       <h4 class="default_color">

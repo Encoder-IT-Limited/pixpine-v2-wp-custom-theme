@@ -1,6 +1,6 @@
 <div class="form_container_main">
   <div class="inner_col">
-    <form class="search_form" action="">
+    <form class="search_form" action="<?php echo site_url();?>">
       <input type="hidden" name="type" value="search">
       <?php
         $s_type = '';

@@ -145,37 +145,46 @@ if ($parent_term && !is_wp_error($parent_term)) {
                         <?php
                         // Define the custom post type (CPT) you want to query
                         // $cpt_slug = 'product'; // Replace with your CPT slug
-                        $subcategory_id = $same_cat_id_in_premium_cat;
-                        $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
-                        // Create a new WP_Query instance to retrieve CPTs
-                        $args = array(
-                            // 'post_type' => $cpt_slug,
-                            'orderby'   => 'rand', // Order randomly
-                            'posts_per_page' => 3, // Retrieve all posts in the category
-                            'tax_query' => array(
-                              array(
-                                  'taxonomy' => $taxonomy,
-                                  'field'    => 'term_id',
-                                  'terms'    => $subcategory_id,
-                              ),
-                          ),
-                        );
+                        // $subcategory_id = $same_cat_id_in_premium_cat;
+                        // $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+                        // // Create a new WP_Query instance to retrieve CPTs
+                        // $args = array(
+                        //     // 'post_type' => $cpt_slug,
+                        //     'orderby'   => 'rand', // Order randomly
+                        //     'posts_per_page' => 3, // Retrieve all posts in the category
+                        //     'tax_query' => array(
+                        //       array(
+                        //           'taxonomy' => $taxonomy,
+                        //           'field'    => 'term_id',
+                        //           'terms'    => $subcategory_id,
+                        //       ),
+                        //   ),
+                        // );
 
-                        $random_cpts = new WP_Query($args);
+                        // $random_cpts = new WP_Query($args);
 
                         // Check if there are posts found
+                        $value5 = get_post_meta($post_id, 'similar_product', true);
                         $cnt = 0;
-                        if ($random_cpts->have_posts()) {
-                          while ($random_cpts->have_posts()) {
+                        if($value5 != ''){
+                          $query = "SELECT ID, post_title FROM {$wpdb->posts} WHERE ID IN ($value5)";
+                          $results = $wpdb->get_results($query);
+                          foreach ($results as $result) {
                             $cnt++;
-                            $random_cpts->the_post();
-                            $thumbnail_url = get_the_post_thumbnail_url($random_cpts->ID);
+                            $thumbnail_url = get_the_post_thumbnail_url($result->ID, 'full');
+                            $_custom_product_gallery = get_post_meta(get_the_ID(), '_custom_product_gallery', true);
+                            $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
+                            $thumbnail_url2 = wp_get_attachment_image_url( $_custom_product_gallery[0],'full');
                         ?>
                               <div class="card_item">
                                 <a href="<?php echo get_the_permalink();?>">
                                   <div class="inner_col">
                                     <div class="img_col pixpine_card_border">
-                                      <img src="<?php echo $thumbnail_url;?>" alt="<?php the_title();?>" />
+                                      <img src="<?php echo $thumbnail_url;?>" 
+                                      img1="<?php echo $thumbnail_url;?>" 
+                                      img2="<?php echo $thumbnail_url2;?>" 
+                                      class="premium-img-hover-effect" 
+                                      alt="<?php the_title();?>" />
                                     </div>
                                     <div class="text_col">
                                       <h4 class="default_color">

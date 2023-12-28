@@ -173,7 +173,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         echo apply_filters('the_content', $cpt->post_content);
                         ?>
                       <h4>Related Keywords</h4>
-                      <p>
+                      <p class="related-key-words-tags">
                       <?php
                         $cpt_tags = get_the_tags($cpt->ID);
                         $html = '';
@@ -183,12 +183,12 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             if ($key == $last_key) {
                               // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
                             ?>
-                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>
+                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"> <?php echo $tag->name;?> </a>
                             <?php
                             } else {
                               // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
                             ?>
-                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
+                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>,
                             <?php
                             }
                           }

@@ -394,7 +394,7 @@ get_header();
                         $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
                         $_custom_product_gallery = get_post_meta(get_the_ID(), '_custom_product_gallery', true);
                         $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
-                        $thumbnail_url2 = wp_get_attachment_image_url( $_custom_product_gallery[0],'full')
+                        $thumbnail_url2 = wp_get_attachment_image_url( $_custom_product_gallery[0],'full');
                         // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                       ?>
 

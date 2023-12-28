@@ -2557,3 +2557,6 @@ body.modal-open {
 .get-product {
   cursor: pointer;
 }
+.related-key-words-tags, .related-key-words-tags a{
+  color: gray;
+}
