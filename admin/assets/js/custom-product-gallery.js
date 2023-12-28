@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
                     var html = '';
                     // var html = '<div p-id="5" class="related-product-option"><strong>This is good</strong></div>';
                     $.each( obj, function( key, value ) {
-                        html += '<div p-id="'+key+'" p-name="'+value+'" class="related-product-option"><strong>'+value+'</strong></div>';
+                        html += '<div p-id="'+key+'" p-name="'+value+'" class="related-product-option"><strong>'+value+' (ID: '+key+')</strong></div>';
                     });
                     $("#related-product-options").html(html)
                 }
@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.related-product-option', function(){
         var pId = $(this).attr('p-id');
         var pName = $(this).attr('p-name');
-        var html2 = '<li id="r-p-'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-related-product remoove-product">remove</span></li>';
+        var html2 = '<li id="r-p-'+pId+'">'+pName+' (ID: '+pId+')<span r-id="'+pId+'" class="remove-related-product remoove-product">remove</span></li>';
         $(".selected-related-product").append(html2);
         $(this).remove();
         relatedProductArray.push(pId);
@@ -98,7 +98,7 @@ jQuery(document).ready(function($) {
                     var html = '';
                     // var html = '<div p-id="5" class="similar-product-option"><strong>This is good</strong></div>';
                     $.each( obj, function( key, value ) {
-                        html += '<div p-id="'+key+'" p-name="'+value+'" class="similar-product-option"><strong>'+value+'</strong></div>';
+                        html += '<div p-id="'+key+'" p-name="'+value+'" class="similar-product-option"><strong>'+value+' (ID: '+key+')</strong></div>';
                     });
                     $("#similar-product-options").html(html)
                 }
@@ -110,7 +110,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.similar-product-option', function(){
         var pId = $(this).attr('p-id');
         var pName = $(this).attr('p-name');
-        var html2 = '<li id="s-p-'+pId+'">'+pName+'<span r-id="'+pId+'" class="remove-similar-product remoove-product">remove</span></li>';
+        var html2 = '<li id="s-p-'+pId+'">'+pName+' (ID: '+pId+')<span r-id="'+pId+'" class="remove-similar-product remoove-product">remove</span></li>';
         $(".selected-similar-product").append(html2);
         $(this).remove();
         similarProductArray.push(pId);

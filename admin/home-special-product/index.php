@@ -100,7 +100,7 @@ class School_Table extends WP_List_Table
     private function table_data()
     {
         global $wpdb;
-        for($i=1; $i<=7; $i++){
+        for($i=1; $i<=8; $i++){
             $data[] = array(
                 'ID'                                    => $i,
                 'Selected Product'                      => get_option('home_special_product_'.$i.'_product_id', 'No product selected'),

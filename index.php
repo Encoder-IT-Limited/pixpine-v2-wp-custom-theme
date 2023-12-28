@@ -212,7 +212,7 @@
           </div>
           <div class="card_container">
             <?php
-              for($i=1; $i<=7; $i++){
+              for($i=1; $i<=8; $i++){
                 $p_id = get_option('home_special_product_'.$i.'_product_id', 'No product selected');
                 if($p_id != 'No product selected'){
                   $img_url = get_option('home_special_product_'.$i.'_image_url', '');
