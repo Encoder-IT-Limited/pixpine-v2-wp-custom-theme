@@ -1188,6 +1188,9 @@ body.modal-open {
 }
 .premium_product_page .slider_column .slider__wishlist img {
   max-width: 20px;
+  margin-left: 2px;
+  margin-top: 2px;
+  object-fit: contain;
 }
 .premium_single_img_slider .slick-dots {
   bottom: 25px;
@@ -1284,7 +1287,7 @@ body.modal-open {
 .premium_product_page {
   padding-top: 30px;
   padding-bottom: 60px;
-  max-height: 1000px;
+  max-height: 100vh;
   overflow: auto;
 }
 .premium_product_page .slider_product_about_column {
@@ -2324,6 +2327,85 @@ body.modal-open {
   margin-right: 5%;
 }
 /* 30.10.2023 end */
+.bundle_single_img_slider,
+.premium_single_img_slider {
+  position: relative;
+  overflow: hidden;
+}
+.premium_product_page .img_showproduct {
+  display: flex;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+.premium_product_page .img_showproduct img {
+  min-width: 100%;
+}
+.bundle_multiple_img_slider,
+.premium_multiple_img_slider {
+  display: flex;
+  margin: 0 -9px;
+  justify-content: center;
+}
+
+.premium_product_page .slider__item {
+  margin: 0 9px;
+}
+
+.premium_product_page .slider__item:hover {
+  opacity: 0.8;
+}
+
+.premium_product_page .dot-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.premium_product_page .dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.premium_product_page .dot.active {
+  background-color: #333;
+}
+
+/* Added styles for dot container */
+.premium_product_page .dot-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.premium_product_page .slider_arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 9;
+  background-color: transparent;
+}
+.premium_product_page .slider_arrow img {
+  height: 30px;
+  width: 20px;
+  object-fit: contain;
+}
+.premium_product_page .slider_arrow-left {
+  left: 0;
+}
+.premium_product_page .slider_arrow-right {
+  right: 0;
+}
 /*
 
   *
@@ -2557,6 +2639,7 @@ body.modal-open {
 .get-product {
   cursor: pointer;
 }
+
 .related-key-words-tags, .related-key-words-tags a{
   color: gray;
 }

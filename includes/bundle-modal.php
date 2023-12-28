@@ -79,41 +79,56 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                   <div class="slider_column">
 
                     <!-- Single img slider -->
+
                     <div class="bundle_single_img_slider">
+                      <button
+                        class="slider_arrow slider_arrow-left"
+                        onclick="prevImage()"
+                      >
+                        <img
+                          src="<?php echo get_template_directory_uri();?>/assets/images/pagination_left_icon.png"
+                          alt=""
+                        />
+                      </button>
+                      <div class="img_showproduct">
                       <?php
                       $_custom_product_gallery = get_post_meta($cpt->ID, '_custom_product_gallery', true);
                       $_custom_product_gallery = !empty($_custom_product_gallery) ? explode(',', $_custom_product_gallery) : array();
                       foreach ($_custom_product_gallery as $image_id) {
                       ?>
-                      <div class="slider__item">
-                        <div class="inner__slider">
-                          <div class="img_col pixpine_card_border">
-                          <img src="<?php echo wp_get_attachment_image_url($image_id, 'full');?>" alt="">
-                          </div>
-                          <button class="slider__wishlist alter-favorite" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" is-favorite="<?php echo $is_favorite;?>" 
-                          type="bundle" 
-                          img-src-1="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon-fill.png" 
-                          img-src-0="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" 
-                          >
-                            <?php if($is_favorite == 1){ ?>
-                              <img class="fav-icon" src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon-fill.png" alt="" />
-                            <?php }else{ ?>
-                              <img class="fav-icon" src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
-                            <?php } ?>
-                          </button>
-                        </div>
+                        <img
+                          src="<?php echo wp_get_attachment_image_url($image_id, 'full');?>"
+                          alt="shoe image"
+                        />
+                      <?php } ?>
                       </div>
-                      <?php
-                      }
-                    ?>
-
+                        <button class="slider__wishlist alter-favorite" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" is-favorite="<?php echo $is_favorite;?>" 
+                            type="bundle" 
+                            img-src-1="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon-fill.png" 
+                            img-src-0="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" 
+                            >
+                              <?php if($is_favorite == 1){ ?>
+                                <img class="fav-icon" src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon-fill.png" alt="" />
+                              <?php }else{ ?>
+                                <img class="fav-icon" src="<?php echo get_template_directory_uri();?>/assets/images/wishlist_icon.png" alt="" />
+                              <?php } ?>
+                            </button>
+                      <button
+                        class="slider_arrow slider_arrow-right"
+                        onclick="nextImage()"
+                      >
+                        <img
+                          src="<?php echo get_template_directory_uri();?>/assets/images/pagination_right_icon.png"
+                          alt=""
+                        />
+                      </button>
                     </div>
                     <!-- Single img slider end -->
 
 
 
                     <!-- Multiple img slider start -->
-                    <div class="bundle_multiple_img_slider">
+                    <!-- <div class="bundle_multiple_img_slider">
                       <?php
                       foreach ($_custom_product_gallery as $image_id) {
                       ?>
@@ -125,6 +140,24 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         </div>
                       </div>
                       <?php
+                      }
+                      ?>
+                    </div> -->
+                    <div class="bundle_multiple_img_slider">
+                    <?php
+                    $cnt=1;
+                      foreach ($_custom_product_gallery as $image_id) {
+                      ?>
+                      <div class="slider__item">
+                        <a href="#" data-id="<?php echo $cnt;?>">
+                          <img
+                            src="<?php echo wp_get_attachment_image_url($image_id, 'full');?>"
+                            alt="shoe image"
+                          />
+                        </a>
+                      </div>
+                      <?php 
+                      $cnt++;
                       }
                       ?>
                     </div>
@@ -173,7 +206,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         echo apply_filters('the_content', $cpt->post_content);
                         ?>
                       <h4>Related Keywords</h4>
-                      <p class="related-key-words-tags">
+                      <p>
                       <?php
                         $cpt_tags = get_the_tags($cpt->ID);
                         $html = '';
@@ -183,12 +216,12 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             if ($key == $last_key) {
                               // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
                             ?>
-                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"> <?php echo $tag->name;?> </a>
+                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>
                             <?php
                             } else {
                               // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
                             ?>
-                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>,
+                              <a href="<?php echo site_url().'?cat=bundle-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"><?php echo $tag->name;?></a>;
                             <?php
                             }
                           }
