@@ -130,7 +130,9 @@
                         ?>
                         <div class="card_item">
                           <div class="card_inner pixpine_card_border get-product" cat-slug="<?=$subcategory->slug?>"  page-no="1">
-                            <a href="<?php echo site_url();?>?cat=premium-mockup&type=category&term-name=<?php echo $subcategory->name;?>&s="><?=$subcategory->name?></a>
+                            <p>
+                              <a href="<?php echo site_url();?>?cat=premium-mockup&type=category&term-name=<?php echo $subcategory->name;?>&s="><?=$subcategory->name?></a>
+                            </p>
                             <div class="img_col">
                               <img src="<?php echo $image_url;?>" alt="" />
                             </div>

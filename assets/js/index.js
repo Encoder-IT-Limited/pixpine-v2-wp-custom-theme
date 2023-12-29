@@ -104,8 +104,8 @@ jQuery(document).ready(function () {
       arrows: false,
       autoplay: false,
       speed: 300,
-      slidesToShow: 2,
-      slidesToScroll: 2,
+      slidesToShow: 3,
+      slidesToScroll: 3,
       responsive: [{
           breakpoint: 1024,
           settings: {
