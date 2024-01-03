@@ -505,8 +505,5 @@ get_header();
     </main>
 
 
-     <!-- Premium Modal -->
-     <?php include get_template_directory() .'/includes/premium-modal.php';?>
-
 <!-- Footer -->
 <?php get_footer();?>

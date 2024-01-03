@@ -205,10 +205,5 @@ get_header();
 </main>
 
 
-<!-- Bundle Modal -->
-<?php include get_template_directory() .'/includes/bundle-modal.php';?>
-
-
-
 <!-- Footer -->
 <?php get_footer();?>
