@@ -311,16 +311,12 @@ if($type == 'search'){
       if($cat == 'all-categories' || $cat == 'bundle-mockup'){
         $post_per_page = 10;
       ?>    
-        <section id="bundle_mockups" class="bundle_mockups_yearly_subscription recently_added_free_mockups ">
-          <div class="container">
-            <div class="heading_col text-center">
+        <section class="bundle_mockups ">
+          <div class="container  bundle-mockup-paginated-products-and-pagination">
+            <div class="heading_col text-center recently_added_free_mockups ">
               <h2 class="section_heading">Bundle Mockups</h2>
             </div>
-            <div class="inner_content">
-              <div
-                class="card_container row_d justify-content-center align-items-stretch"
-              >
-
+            <div class="card_container row_d">
                 <?php
                 if($type == 'search'){
                   $args = array(
@@ -389,16 +385,25 @@ if($type == 'search'){
                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
                     // $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
                   ?>
-                    <div class="card_item">
-                      <a href="<?php echo get_the_permalink();?>">
-                        <div type="button" >
-                        <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
-                          <div class="inner_col pixpine_card_border">
+
+                  <div class="card_item">
+                    <a href="<?php echo get_the_permalink();?>">
+                      <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#bundleModal"> -->
+                        <div class="inner_col">
+                          <div class="img_col pixpine_card_border">
                             <img src="<?php echo $thumbnail_url;?>" alt="" />
                           </div>
+                          <div class="text_col">
+                            <h4 class="default_color">
+                            <?php echo get_the_title();?>
+                            </h4>
+                            <p class="primary_color">Bundle</p>
+                          </div>
                         </div>
-                      </a>
-                    </div>
+                      <!-- </div> -->
+                    </a>
+                  </div>
+
                   <?php
                   }
                   // Restore the global post object
