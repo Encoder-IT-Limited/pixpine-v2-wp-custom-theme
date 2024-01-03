@@ -72,10 +72,12 @@ get_header();
                 $image_url = wp_get_attachment_image_src($image_id, 'full')[0];
                 echo '<div class="card_item">
                     <div class="card_inner pixpine_card_border get-product" cat-slug="'.$subcategory->slug.'" page-no="1">
-                      <p href="">'.$subcategory->name.'</p>
+                    <a href="'.site_url('bundle-mockups').'?cat-slug='.$subcategory->slug.'">
+                      <p>'.$subcategory->name.'</p>
                       <div class="img_col">
                         <img src="'.$image_url.'" alt="" />
                       </div>
+                    </a>
                     </div>
                 </div>';
               }
@@ -93,6 +95,11 @@ get_header();
 
 
       <?php
+      if(isset($_GET['cat-slug'])){
+        $cat_slug = $_GET['cat-slug'];
+      }else{
+        $cat_slug = 'bundle-mockups';
+      }
       $args = array(
         // 'post_type' => 'product', // Replace with the name of your CPT
         'posts_per_page' => 20, // Number of posts to display (adjust as needed)
@@ -101,7 +108,7 @@ get_header();
           array(
               'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
               'field' => 'slug', // You can use 'term_id', 'name', or 'slug'
-              'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
+              'terms' => $cat_slug, // Replace with the slug of the custom category term you want to query
           ),
         ),
       );
@@ -155,7 +162,7 @@ get_header();
           <?php 
           if($current_page != 1){
           ?>
-          <li class="page-item left_button get-product" cat-slug="bundle-mockups" page-no="<?php echo $current_page-1;?>">
+          <li class="page-item left_button get-product" cat-slug="<?php echo $cat_slug;?>" page-no="<?php echo $current_page-1;?>">
             <span class="page-link" >
               <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_left_icon.png" alt="" />
             </span>
@@ -167,21 +174,21 @@ get_header();
             $page_no = $current_page+$i;
             if(($page_no>0) && ($page_no<=$total_page)){
           ?>
-          <li class="page-item get-product" cat-slug="bundle-mockups" page-no="<?php echo $page_no;?>">
+          <li class="page-item get-product" cat-slug="<?php echo $cat_slug;?>" page-no="<?php echo $page_no;?>">
             <span class="page-link" ><?php echo $page_no;?></span>
           </li>
           <?php } } ?>
           <?php 
           if($page_no < $total_page){ 
           ?>
-          <li class="page-item get-product" cat-slug="bundle-mockups" page-no="<?php echo $total_page;?>">
+          <li class="page-item get-product" cat-slug="<?php echo $cat_slug;?>" page-no="<?php echo $total_page;?>">
             <span class="page-link" >...<?php echo $total_page;?></span>
           </li>
           <?php } ?>
           <?php 
           if($current_page != $total_page){
             ?>
-          <li class="page-item right_button get-product" cat-slug="bundle-mockups" page-no="<?php echo $current_page+1;?>">
+          <li class="page-item right_button get-product" cat-slug="<?php echo $cat_slug;?>" page-no="<?php echo $current_page+1;?>">
             <span class="page-link" >
               <img src="<?php echo get_template_directory_uri();?>/assets/images/pagination_right_icon.png" alt="" />
             </span>
