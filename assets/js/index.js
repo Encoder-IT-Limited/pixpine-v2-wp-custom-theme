@@ -4,6 +4,11 @@ jQuery(document).ready(function () {
     var img2 = jQuery(this).attr('img2');
     jQuery(this).attr('src', img2)
   });
+  
+  jQuery(document).on('mouseenter', '.premium-img-hover-effect', function () {
+    var img2 = jQuery(this).attr('img2');
+    jQuery(this).attr('src', img2)
+  });
   jQuery(document).on('mouseleave', '.premium-img-hover-effect', function () {
     var img1 = jQuery(this).attr('img1');
     jQuery(this).attr('src', img1)

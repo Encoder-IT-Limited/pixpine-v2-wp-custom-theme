@@ -85,31 +85,34 @@ if(!empty($profile_image_id)){
   </section>
   <section class="dashboard_section my__account">
     <div class="container">
+
       <div class="section_width">
+      <?php
+    if($msg != ''){
+      if($msg == 'success'){
+        echo '
+        <div class="alert alert-success" role="alert">
+          Data saved successfully.
+        </div>
+        ';
+      }else{
+        echo '
+        <div class="alert alert-warning" role="alert">
+          '.$msg.'
+        </div>
+        ';
+      }
+    }
+  ?>
         <div class="dashboard_main d-flex">
+          
           <div class="dashboard_navbar">
             <!-- Dashboard inner menu -->
             <?php $currentPage = 'my__account'; include get_template_directory() .'/includes/dashboard-menu.php';?>
           </div>
           <div class="content__column">
             <form action="" method="post" enctype="multipart/form-data" >
-              <?php
-                if($msg != ''){
-                  if($msg == 'success'){
-                    echo '
-                    <div class="alert alert-success" role="alert">
-                      Data saved successfully.
-                    </div>
-                    ';
-                  }else{
-                    echo '
-                    <div class="alert alert-warning" role="alert">
-                      '.$msg.'
-                    </div>
-                    ';
-                  }
-                }
-              ?>
+
               <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
               <div class="_left">
                 <div class="full_width_container">
