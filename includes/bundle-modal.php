@@ -206,7 +206,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         echo apply_filters('the_content', $cpt->post_content);
                         ?>
                       <h4>Related Keywords</h4>
-                      <p>
+                      <p class="related-key-words-tags">
                       <?php
                         $cpt_tags = get_the_tags($cpt->ID);
                         $html = '';

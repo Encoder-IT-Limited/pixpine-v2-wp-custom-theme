@@ -175,6 +175,7 @@ if($type == 'search'){
         </section>
       <?php
       }
+      if(!isset($_GET['hide'])){
       if($cat == 'all-categories' || $cat == 'free-mockup'){
         $post_per_page = 12;
       ?>            
@@ -307,6 +308,7 @@ if($type == 'search'){
           </div>
         </section>
       <?php
+        }
       }
       if($cat == 'all-categories' || $cat == 'bundle-mockup'){
         $post_per_page = 10;

@@ -174,7 +174,7 @@
                 $term = get_term($term_id);
               ?>
                 <div class="trending_item">
-                  <a href="<?php echo site_url().'?cat=all-categories&type=category&term-name='.$term->name.'&s=';?>" >
+                  <a href="<?php echo site_url().'?cat=all-categories&type=category&term-name='.$term->name.'&hide=free&s=';?>" >
                     <div class="img_col">
                       <img src="<?php echo $image_url;?>" alt="" />
                     </div>
