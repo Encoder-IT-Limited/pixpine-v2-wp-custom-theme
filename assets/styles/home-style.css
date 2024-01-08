@@ -204,6 +204,13 @@ header .navbar-nav {
 #mobile_cart_btn .nav-link .user_img {
   max-width: 23px;
 }
+#mobile_cart_btn .nav-link .user_img_custom {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  max-width: 30px;
+}
 #mobile_cart_btn .nav-link {
   display: none;
 }
@@ -224,6 +231,13 @@ header .navbar-nav {
 }
 #login_signup .nav-link .user_img {
   max-width: 23px;
+}
+#login_signup .nav-link .user_img_custom {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  max-width: 30px;
 }
 #login_signup .nav-item .get_premium_btn,
 #mobile__btn__container .get_premium_btn {

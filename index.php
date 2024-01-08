@@ -118,12 +118,14 @@
                       <?php 
                       $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
                       if(!empty($profile_image_id)){
+                        $class_name = 'user_img_custom';
                         $menu_user_img = wp_get_attachment_url($profile_image_id);
                       }else{
-                        $menu_user_img = get_template_directory_uri()."/assets/images/user_icon.png";
+                        $class_name = 'user_img';
+                        $menu_user_img = get_template_directory_uri()."/assets/images/user_icon-white.png";
                       }
                       ?>
-                      <img class="user_img" src="<?php echo $menu_user_img;?>" alt="" />
+                      <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
                     </a>
                   </li>
                   <?php }else{ ?>
