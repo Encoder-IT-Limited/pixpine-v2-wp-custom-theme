@@ -88,22 +88,22 @@ if(!empty($profile_image_id)){
 
       <div class="section_width">
       <?php
-    if($msg != ''){
-      if($msg == 'success'){
-        echo '
-        <div class="alert alert-success" role="alert">
-          Data saved successfully.
-        </div>
-        ';
-      }else{
-        echo '
-        <div class="alert alert-warning" role="alert">
-          '.$msg.'
-        </div>
-        ';
-      }
-    }
-  ?>
+          if($msg != ''){
+            if($msg == 'success'){
+              echo '
+              <div class="alert alert-success" role="alert">
+                Data saved successfully.
+              </div>
+              ';
+            }else{
+              echo '
+              <div class="alert alert-warning" role="alert">
+                '.$msg.'
+              </div>
+              ';
+            }
+          }
+        ?>
         <div class="dashboard_main d-flex">
           
           <div class="dashboard_navbar">

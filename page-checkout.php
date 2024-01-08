@@ -42,6 +42,12 @@ $billing_address = get_user_meta($user_id, 'billing_address', true);
 $billing_city = get_user_meta($user_id, 'billing_city', true);
 $billing_state = get_user_meta($user_id, 'billing_state', true);
 $billing_zip = get_user_meta($user_id, 'billing_zip', true);
+$form_class_name = 'd-none';
+$info_class_name = '';
+if($billing_email == '') {
+  $form_class_name = '';
+  $info_class_name = 'd-none';
+}
 ?>
 <main>
   <section class="dashboard_section dashboard__downloads">
@@ -63,7 +69,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
           Failed!! Try again later.
         </div>
         '; } } ?>
-        <div class="content__column billing_form d-none">
+        <div class="content__column billing_form <?php echo $form_class_name;?>">
           <form action="#" method="post">
             <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
             <div class="full_width_container">
@@ -174,7 +180,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
           </form>
         </div>
 
-        <div class="billing_info">
+        <div class="billing_info <?php echo $info_class_name;?>">
           <p>
             First Name:
             <?php echo $billing_f_name;?>
@@ -193,7 +199,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
           </p>
         </div>
         <button
-          class="_btn get_premium_btn btn_black_small btn_primary show_billing_form"
+          class="_btn get_premium_btn btn_black_small btn_primary show_billing_form <?php echo $info_class_name;?>"
         >
           Edit Billing Address
         </button>
@@ -214,13 +220,14 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
               <?php
                 global $wpdb;
                 $user_id = get_current_user_id();
-                $table_name = $wpdb->prefix . 'pixpine_carts'; $query = "SELECT
-              product_id FROM $table_name WHERE user_id='$user_id'"; $products =
-              $wpdb->get_col($query); $total_price = 0; foreach($products as
-              $cpt_id){ $cpt_post = get_post($cpt_id, 'product'); $thumbnail_url
-              = get_the_post_thumbnail_url($cpt_id); $price =
-              get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
-              if(empty($price)){ $price = 0; } $total_price += $price; ?>
+                $table_name = $wpdb->prefix . 'pixpine_carts'; 
+                $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
+                $products = $wpdb->get_col($query); $total_price = 0; 
+                foreach($products as $cpt_id){ 
+                  $cpt_post = get_post($cpt_id); 
+                  $thumbnail_url = get_the_post_thumbnail_url($cpt_id); 
+                  $price = get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
+                  if(empty($price)){ $price = 0; } $total_price += $price; ?>
               <div class="cart_item">
                 <div class="product-name">
                   <h5 class="product-title">
@@ -235,12 +242,12 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                     </div>
                     <span class="variation-Dimensions">Dimensions:</span>
                     <div class="variation-Dimensions">
-                      <p>6000x6000px</p>
+                      <p><?php echo get_post_meta($cpt_id, 'dimension', true);?></p>
                     </div>
                     <div class="d-flex item">
                       <span class="variation-Filetype">File type:</span>
                       <span class="variation-Filetype">
-                        <p>PSD Mockup</p>
+                        <p><?php echo get_post_meta($cpt_id, 'file_type', true);?></p>
                       </span>
                     </div>
                     <!-- <dt class="variation-License">License:</dt>
@@ -281,7 +288,7 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                   <span class="amount">$<?php echo $total_price;?></span>
                 </div>
               </div>
-                <div class="payment_option">
+                  <div class="payment_option <?php echo $info_class_name;?>">
                     <h5 class="product-title">Payment Method</h5>
                     <div>
                      <label>Stripe</label>
@@ -289,14 +296,14 @@ $billing_zip = get_user_meta($user_id, 'billing_zip', true);
                          <input type="hidden" name="price" value="<?php echo $total_price;?>">
                         <input type="hidden" name="placeOrder" value="1">
                         <input type="hidden" name="proid" value="<?php echo $cpt_id;?>">
-                    </div>
-                <div>
-                     <label>Paypal</label>
-                      <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
-                      <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
-                      <!-- Your HTML content -->
-                      <div id="paypal-button-container"></div>
-                    </div>
+                  </div>
+                  <div class="<?php echo $info_class_name;?>">
+                    <label>Paypal</label>
+                    <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
+                    <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
+                    <!-- Your HTML content -->
+                    <div id="paypal-button-container"></div>
+                  </div>
                 </div>
                 <button style="display: none;" class="_btn get_premium_btn btn_black_small btn_primary payment-submit" type="submit">Place Order</button>
             </div>

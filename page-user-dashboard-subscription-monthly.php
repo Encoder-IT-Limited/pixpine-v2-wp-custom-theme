@@ -6,9 +6,13 @@ get_header();
 global $current_user;
 get_currentuserinfo();
 $user_id= $current_user->ID; 
-$results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' and subscripton_plan='monthly'", ARRAY_A);
- $results2 = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' and subscripton_plan='yearly'", ARRAY_A);
-
+$results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' ORDER BY id DESC", ARRAY_A);
+// $results2 = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscriptions WHERE user_id='" . $user_id . "' and subscripton_plan='yearly' ORDER BY id DESC", ARRAY_A);
+if(isset($results[0]['status'])){
+  if($results[0]['status'] == 'Active'){
+    $sub_plan = $results[0]['subscripton_plan'];
+  }
+}
 ?>
 
 <main>
@@ -21,20 +25,35 @@ $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscripti
   <section class="dashboard_section dashboard__subscription">
     <div class="container">
       <div class="section_width">
+      <?php
+
+            if(isset($_GET['type'])){
+              if($_GET['type'] == 'new-subcription'){
+                echo '
+                <div class="alert alert-success" role="alert">
+                Thank you for subscribing to '.ucfirst($sub_plan).' Subscription.
+                </div>
+                ';                
+              }
+
+            }
+        ?>
+      
         <div class="dashboard_main d-flex">
           <div class="dashboard_navbar">
             <!-- Dashboard inner menu -->
             <?php $currentPage = 'dashboard__subscription'; include get_template_directory() .'/includes/dashboard-menu.php';?>
           </div>
-            <?php if(!empty($results)) { 
+
+          <div class="content__column">
+          <?php if(!empty($results)) { 
             foreach($results as $row){
             
             ?>
-          <div class="content__column">
             <div class="subscription__description">
               <ul>
                 <li>
-                  <p>Subscription Type: <span>MONTHLY</span></p>
+                  <p>Subscription Type: <span><?php echo $row['subscripton_plan'];?></span></p>
                 </li>
                 <li>
                   <p>Subscription Date: <span><?php echo date('d F Y',strtotime($row['created_at']));?></span></p>
@@ -54,38 +73,14 @@ $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."pixpine_subscripti
               </ul>
             </div>
             <div class="btn_container">
-              <a class="_btn btn_primary" href="<?php echo site_url('/premium-mockups/');?>">Browse Premium</a>
-                <?php if( $row['status'] =='Active') {?>
+              <?php if( $row['status'] =='Active') {?>
+                <a class="_btn btn_primary" href="<?php echo site_url('/premium-mockups/');?>">Browse Premium</a>
                  <button class="_btn btn_outline cancelSub" subscriptionid="<?php echo $row['subscription_id']; ?>">Cancel Subscription</button>
                 <?php } ?>
             </div>
-          </div>
             <?php } }?>
-              <?php if(!empty($results2)) { 
-            foreach($results2 as $row2){
+          </div>
             
-            ?>
-          <div class="content__column">
-            <div class="subscription__description">
-              <ul>
-                <li><p>Subscription Type: <span>YEARLY</span></p></li>
-                <li><p>Subscription Date: <span><?php echo date('d F Y',strtotime($row2['created_at']));?></span></p></li>
-                <li><p>Subscription Expire: <span><?php echo date('d F Y',strtotime($row2['end_date']));?></span></p></li>
-                <li><p>Download Limit: <span>UNLIMITED</span></p></li>
-                <li><p>Downloads Remaining: <span>UNLIMITED</span></p></li>
-                   <li>
-                  <p>Status: <span><?php echo $row['status']; ?></span></p>
-                </li>
-              </ul>
-            </div>
-            <div class="btn_container">
-              <a class="_btn btn_primary" <?php echo site_url('/premium-mockups/');?>>Browse Premium</a>
-                  <?php if( $row2['status'] =='Active') {?>
-              <button class="_btn btn_outline cancelSub" subscriptionid="<?php echo $row2['subscription_id']; ?>">Cancel Subscription</button>
-                <?php } ?>
-            </div>
-          </div>
-            <?php } }?>
         </div>
       </div>
     </div>

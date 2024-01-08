@@ -617,7 +617,7 @@ function sub_stripesuccess()
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
 
-    $custom_page_url = site_url() . '/orderconfirmed/';
+    $custom_page_url = site_url() . '/subscription-monthly?type=new-subcription';
     $_SESSION['message'] = 'Successfully Paid';
     wp_redirect($custom_page_url);
     exit;
@@ -660,7 +660,7 @@ function stripesuccess()
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
 
-    $custom_page_url = site_url() . '/orderconfirmed/';
+    $custom_page_url = site_url() . '/subscription-monthly?type=new-subcription';
     $_SESSION['message'] = 'Successfully Paid';
     wp_redirect($custom_page_url);
     exit;
