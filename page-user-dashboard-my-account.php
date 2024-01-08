@@ -156,7 +156,7 @@ if(!empty($profile_image_id)){
                 <div class="user_profile_photo">
                   <div class="d-flex align-items-center">
                     <div class="user_img_column">
-                      <img src="<?php echo $img;?>" alt="" />
+                      <img class="profile-image-preview" src="<?php echo $img;?>" alt="" />
                     </div>
                     <div class="upload_btn_column">
                       <div class="d-flex">
@@ -168,6 +168,7 @@ if(!empty($profile_image_id)){
                           style="visibility: hidden; width: 10px"
                           type="file"
                           name="profile_image"
+                          class="profile-image-input"
                         />
                       </div>
                       <p>JPEG, GIF or PNG, 200х200 pixels. Max 1MB</p>

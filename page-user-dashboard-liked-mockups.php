@@ -77,7 +77,7 @@ get_header();
                       $old_ids = explode(',', $old_ids);
                       // Define the query arguments
                       $args = array(
-                        'post_type'      => 'product', // Replace with your CPT slug
+                        // 'post_type'      => 'product', // Replace with your CPT slug
                         'post__in'       => $old_ids, // Include posts with these IDs
                         'post_status'    => 'publish', // Limit to published posts
                         'posts_per_page' => -1, // Retrieve all matching posts
@@ -135,7 +135,7 @@ get_header();
                       $old_ids = explode(',', $old_ids);
                       // Define the query arguments
                       $args = array(
-                        'post_type'      => 'product', // Replace with your CPT slug
+                        // 'post_type'      => 'product', // Replace with your CPT slug
                         'post__in'       => $old_ids, // Include posts with these IDs
                         'post_status'    => 'publish', // Limit to published posts
                         'posts_per_page' => -1, // Retrieve all matching posts

@@ -7,7 +7,7 @@ $msg = '';
 if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
     // Define recipient email address
-    $to = "innovawebdeveloper@gmail.com";
+    $to = "custommockups@pixpine.site, innovawebdeveloper@gmail.com";
 
     // Define email subject
     $subject = "Form Customized Mockup page";

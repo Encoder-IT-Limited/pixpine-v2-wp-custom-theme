@@ -1,9 +1,27 @@
 jQuery(document).ready(function () {
 
-  jQuery(document).on('mouseenter', '.premium-img-hover-effect', function () {
-    var img2 = jQuery(this).attr('img2');
-    jQuery(this).attr('src', img2)
-  });
+//////////////////////////////////////////////
+// Attach an event listener to the file input field
+jQuery('.profile-image-input').on('change', function () {
+  // Check if any file is selected
+  if (this.files && this.files[0]) {
+    // Create a FileReader object
+    const reader = new FileReader();
+
+    // Set up the FileReader to load the selected image
+    reader.onload = function (e) {
+        // Set the source of the image preview to the loaded image
+        jQuery('.profile-image-preview').attr('src', e.target.result);
+
+        // Display the image preview
+        // imagePreview.show();
+    };
+
+    // Read the selected image as a data URL
+    reader.readAsDataURL(this.files[0]);
+  }
+});
+//////////////////////////////////////////////
   
   jQuery(document).on('mouseenter', '.premium-img-hover-effect', function () {
     var img2 = jQuery(this).attr('img2');
