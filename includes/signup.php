@@ -16,18 +16,22 @@
               </h2>
             </div>
             <div class="login_signup_f_g_contianer">
+                 <a href="<?php echo google_login_url();?>">
               <button>
                 <div class="btn_img">
                   <img src="<?php echo get_template_directory_uri();?>/assets/images/login_signup_g.png" alt="" />
                 </div>
                 <span>Sign up with your Gmail</span>
               </button>
+              </a>
+              <a href="<?php echo eil_code_fb_login();?>">
               <button>
                 <div class="btn_img">
                   <img src="<?php echo get_template_directory_uri();?>/assets/images/login_signup_f.png" alt="" />
                 </div>
                 <span>Sign up with your Facebook</span>
               </button>
+              </a>
             </div>
             <div class="separator">
               <p>or</p>
