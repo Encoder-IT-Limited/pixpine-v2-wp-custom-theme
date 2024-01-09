@@ -154,13 +154,16 @@ if($type == 'search'){
                     </div>
                     <div class="text-end">
                       <?php 
+                      $current_page = $page;
+                      $total_page = $custom_query->max_num_pages;
                       if($cat == 'all-categories'){
+                        if($total_page > 1){
                       ?>
                         <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","premium-mockup",$current_link);?>">View All</a>
                       <?php
+                        }
                       }else{
-                        $current_page = $page;
-                        $total_page = $custom_query->max_num_pages;
+                        
                         if($total_page > 1){
                           show_pagination_search_page($current_page, $total_page, $current_link_without_page_no);
                         } 
@@ -281,20 +284,22 @@ if($type == 'search'){
                       wp_reset_postdata();
                     } else {
                       // No posts found
-                      echo 'No posts found.';
+                      echo 'No product found.';
                     }
                     ?>
                     </div>
 
                     <div class="text-end">
                       <?php 
+                      $current_page = $page;
+                      $total_page = $custom_query->max_num_pages;
                       if($cat == 'all-categories'){
+                        if($total_page > 1){
                       ?>
                         <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","free-mockup",$current_link);?>">View All</a>
                       <?php
+                        }
                       }else{
-                        $current_page = $page;
-                        $total_page = $custom_query->max_num_pages;
                         if($total_page > 1){
                           show_pagination_search_page($current_page, $total_page, $current_link_without_page_no);
                         } 
@@ -419,13 +424,15 @@ if($type == 'search'){
 
               <div class="text-end">
                 <?php 
+                $current_page = $page;
+                $total_page = $custom_query->max_num_pages;
                 if($cat == 'all-categories'){
+                  if($total_page > 1){
                 ?>
                   <a class="btn_primary _btn" href="<?php echo str_replace("all-categories","bundle-mockup",$current_link);?>">View All</a>
                 <?php
+                  }
                 }else{
-                  $current_page = $page;
-                  $total_page = $custom_query->max_num_pages;
                   if($total_page > 1){
                     show_pagination_search_page($current_page, $total_page, $current_link_without_page_no);
                   } 

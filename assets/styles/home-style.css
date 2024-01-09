@@ -226,7 +226,7 @@ header .navbar-nav {
   margin-left: 0;
 }
 #login_signup .nav-link.user_icon {
-  margin-right: 31px;
+  /* margin-right: 31px; */
   margin-left: 12px;
 }
 #login_signup .nav-link .user_img {
@@ -805,6 +805,7 @@ header .navbar-nav {
   width: 100%;
   /* width: 90px; */
 }
+.bundle_mockups .btn_primary,
 .bundle_mockups_yearly_subscription .inner_content .btn_primary {
   font-size: 16px;
   line-height: 19px;
@@ -1514,6 +1515,7 @@ footer .menu_inner_col .item:nth-child(3) {
   .dashboard__likes .tab-content .likes__bundle__mockups .card_item {
     width: 50%;
   }
+  .bundle_mockups .btn_primary,
   .bundle_mockups_yearly_subscription .inner_content .btn_primary,
   .tab-content .btn_primary {
     display: flex;
@@ -1949,6 +1951,8 @@ footer .menu_inner_col .item:nth-child(3) {
   .premium_modal .modal-dialog,
   .bundle_modal .modal-dialog {
     max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
   }
   .recently_added_free_mockups .tab-content .img_col {
     margin-bottom: 4px;
@@ -1965,6 +1969,12 @@ footer .menu_inner_col .item:nth-child(3) {
   }
 }
 @media only screen and (max-width: 520px) {
+  header .navbar-toggler,
+  .navbar-brand,
+  #mobile_cart_btn {
+    width: max-content;
+  }
+
   .get_mockup_section .get_mockup {
     flex-direction: column;
   }

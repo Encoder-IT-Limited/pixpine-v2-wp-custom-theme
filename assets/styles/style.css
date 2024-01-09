@@ -1287,7 +1287,7 @@ body.modal-open {
 .premium_product_page {
   padding-top: 30px;
   padding-bottom: 60px;
-  max-height: 100vh;
+  max-height: calc(100vh - 3.5rem);
   overflow: auto;
 }
 .premium_product_page .slider_product_about_column {
@@ -1572,6 +1572,13 @@ body.modal-open {
 }
 .bundle_product_page .slider_product_about_column .about_product {
   margin-top: 60px;
+}
+.about_product .text_col h2 {
+  font-size: 19px;
+  line-height: 23px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  margin-top: 15px;
 }
 .bundle_product_page .about_product .section_heading {
   font-size: 19px;
@@ -1975,11 +1982,16 @@ body.modal-open {
 .dashboard__downloads .tab_inner_content ul li:last-child {
   margin-bottom: 0;
 }
+.dashboard__downloads .tab_inner_content p,
+.dashboard__downloads .tab_inner_content a,
 .dashboard__downloads .tab_inner_content ul p {
   font-size: 13px;
   line-height: 17px;
   font-weight: 400;
   color: #033333;
+}
+.dashboard__downloads .tab_inner_content a:hover {
+  color: var(--primary-color);
 }
 .dashboard_section .nav-tabs .nav-link.active {
   position: relative;
@@ -2559,6 +2571,13 @@ body.modal-open {
     max-width: 100%;
   }
 }
+
+@media only screen and (max-width: 575px) {
+  .premium_product_page {
+    max-height: calc(100vh - 2rem);
+  }
+}
+
 @media only screen and (max-width: 520px) {
   /* ==========================================
     ============ Dashboard Css Start ============
@@ -2639,7 +2658,7 @@ body.modal-open {
 .get-product {
   cursor: pointer;
 }
-
-.related-key-words-tags, .related-key-words-tags a{
+.related-key-words-tags,
+.related-key-words-tags a {
   color: gray;
 }
