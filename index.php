@@ -371,9 +371,9 @@
                   ?>
                   </div>
                   <div class="text-end">
-                    <a class="btn_primary _btn" href="<?php echo site_url('premium-mockups');?>"
-                      >View All</a
-                    >
+                    <a class="btn_primary _btn" href="<?php echo site_url('premium-mockups');?>">
+                    View All
+                    </a>
                   </div>
                 </div>
               </div>
