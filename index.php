@@ -29,6 +29,24 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                <?php if(is_user_logged_in()){ ?> 
+                  <a
+                      class="nav-link user_icon"
+                      href="<?php echo site_url('my-account');?>"
+                    >
+                      <?php 
+                      $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
+                      if(!empty($profile_image_id)){
+                        $class_name = 'user_img_custom';
+                        $menu_user_img = wp_get_attachment_url($profile_image_id);
+                      }else{
+                        $class_name = 'user_img';
+                        $menu_user_img = get_template_directory_uri()."/assets/images/user_icon-white.png";
+                      }
+                      ?>
+                      <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
+                    </a>
+                <?php }else{ ?> 
                   <a
                     type="button"
                     class="nav-link"
@@ -37,6 +55,7 @@
                   >
                     Log in
                   </a>
+                <?php } ?> 
                 </li>
               </ul>
             </div>
