@@ -20,15 +20,14 @@ get_header();
             $products = $wpdb->get_col($query);
             $total_price = 0;
             foreach ($products as $cpt_id) {
-              $cpt_post = get_post($cpt_id, 'product');
-              $thumbnail_url =
-                get_the_post_thumbnail_url($cpt_id);
-              $price = get_post_meta($cpt_id,
-                'personal_commercial_sale_price', true);
+              $cpt_post = get_post($cpt_id);
+              $thumbnail_url = get_the_post_thumbnail_url($cpt_id);
+              $price = get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
               if (empty($price)) {
                 $price = 0;
               }
-              $total_price += $price; ?>
+              $total_price += $price; 
+            ?>
               <div class="cart_item" id="<?php echo $cpt_id; ?>">
                 <div class="img_text_cont">
                   <div class="product_img">
@@ -48,7 +47,7 @@ get_header();
                 </div>
                 <div class="">
                   $<span class="single-cart-price">
-                    <?php echo $price; ?>
+                    <?php echo number_format($price, 2); ?>
                   </span>
                 </div>
                 <div class="remove-cart" p-id="<?php echo $cpt_id; ?>">
@@ -68,7 +67,7 @@ get_header();
               <p>Cart Subtotal</p>
               <p>
                 $<span class="total-cart-price">
-                  <?php echo $total_price; ?>
+                  <?php echo number_format($total_price, 2); ?>
                 </span>
               </p>
             </div>
@@ -76,7 +75,7 @@ get_header();
               <p>Order Total</p>
               <p>
                 $<span class="total-cart-price">
-                  <?php echo $total_price; ?>
+                  <?php echo number_format($total_price, 2); ?>
                 </span>
               </p>
             </div>

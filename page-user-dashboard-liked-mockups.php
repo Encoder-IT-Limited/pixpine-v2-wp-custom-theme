@@ -94,7 +94,7 @@ get_header();
                           $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
                       ?>
                       <div type="button" class="card_item" >
-                        <a href="<?php echo site_url('premium-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                        <a href="<?php echo get_the_permalink();?>">
                         <div class="item_a">
                           <div class="inner_col">
                             <div class="img_col pixpine_card_border">
@@ -155,7 +155,7 @@ get_header();
                         <div
                           type="button"
                         >
-                          <a href="<?php echo site_url('bundle-mockup-single-product');?>?id=<?php echo get_the_ID();?>">
+                          <a href="<?php echo get_the_permalink();?>">
                             <div class="inner_col">
                               <div class="img_col pixpine_card_border">
                                 <img src="<?php echo $thumbnail_url;?>" alt="" />

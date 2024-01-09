@@ -257,7 +257,7 @@ if($billing_email == '') {
                   </div>
                 </div>
                 <div class="product-total">
-                  <span class="amount">$<?php echo $price;?></span>
+                  <span class="amount">$<?php echo number_format($price, 2);?></span>
                 </div>
               </div>
               <?php
@@ -268,7 +268,7 @@ if($billing_email == '') {
               <div class="cart-subtotal">
                 <div class="d-flex align-items-center justify-content-between">
                   <p>Cart Subtotal</p>
-                  <span class="amount">$<?php echo $total_price;?></span>
+                  <span class="amount">$<?php echo number_format($total_price, 2);?></span>
                 </div>
               </div>
               <div class="tax-rate tax-rate-de-vat-1">
@@ -285,7 +285,7 @@ if($billing_email == '') {
               >
                 <div class="d-flex align-items-center justify-content-between">
                   <p>Order Total</p>
-                  <span class="amount">$<?php echo $total_price;?></span>
+                  <span class="amount">$<?php echo number_format($total_price, 2);?></span>
                 </div>
               </div>
                   <div class="payment_option <?php echo $info_class_name;?>">
