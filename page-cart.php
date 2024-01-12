@@ -3,22 +3,25 @@
 Template Name: Cart
 */
 get_header();
+
+global $wpdb;
+$user_id = get_current_user_id();
+$table_name = $wpdb->prefix . 'pixpine_carts';
+$query = "SELECT product_id
+FROM $table_name WHERE user_id='$user_id'";
+$products = $wpdb->get_col($query);
+$total_price = 0;
 ?>
 
 <main>
   <section class="dashboard_section dashboard__downloads">
     <div class="container">
+      <?php if(count($products)>0){ ?>
       <div class="row_d cart__page">
         <div class="mockups_cart_item_column">
+
           <div class="table__cart">
             <?php
-            global $wpdb;
-            $user_id = get_current_user_id();
-            $table_name = $wpdb->prefix . 'pixpine_carts';
-            $query = "SELECT product_id
-            FROM $table_name WHERE user_id='$user_id'";
-            $products = $wpdb->get_col($query);
-            $total_price = 0;
             foreach ($products as $cpt_id) {
               $cpt_post = get_post($cpt_id);
               $thumbnail_url = get_the_post_thumbnail_url($cpt_id);
@@ -60,6 +63,7 @@ get_header();
             ?>
           </div>
         </div>
+        
         <div class="checkout_cart_btn_column">
           <div class="inner_col">
             <p><strong>CART TOTALS</strong></p>
@@ -85,7 +89,18 @@ get_header();
             </a>
           </div>
         </div>
+
       </div>
+      <?php }else{ ?>
+        <div class="row">
+        <div class="col-md-8 mx-auto">
+        <h1 class="page_heading text-center">Your cart is empty, browse our Premium Mockups</h1>
+          <p class="mt-5 text-center">
+            <a class="_btn btn_primary" href="<?php echo site_url('/premium-mockups/');?>">Browse Premium</a>
+          </p>
+        </div>
+        </div>
+        <?php } ?>
     </div>
   </section>
 </main>

@@ -169,7 +169,10 @@ jQuery(document).ready(function ($) {
           },
         });
       } else {
-        alert("You have logged in to mark it as favorite.");
+        // <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#">Log in</a>
+        jQuery('#premiumModal').modal('hide');
+        jQuery('#loginModal').modal('show');
+        console.log("You have logged in to mark it as favorite333.");
       }
     });
   

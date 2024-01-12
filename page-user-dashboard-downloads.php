@@ -110,8 +110,8 @@ $premium_cat_id = get_term_by('name', 'Premium Mockups', 'mockup_category')->ter
                           echo '
                               <li>
                                 <p>
-                                  <a href="' . get_the_permalink() . '">
-                                  ' . get_the_title() . '
+                                <a href="' . get_post_meta(get_the_ID(), 'download_link', true) . '">
+                                  ' . get_the_title() . ' (ID: '.get_the_ID().')
                                   </a>
                                 </p>
                               </li>
@@ -153,8 +153,8 @@ $premium_cat_id = get_term_by('name', 'Premium Mockups', 'mockup_category')->ter
                           echo '
                             <li>
                               <p>
-                                <a href="' . get_the_permalink() . '">
-                                ' . get_the_title() . '
+                                <a href="' . get_post_meta(get_the_ID(), 'download_link', true) . '">
+                                ' . get_the_title() . ' (ID: '.get_the_ID().')
                                 </a>
                               </p>
                             </li>

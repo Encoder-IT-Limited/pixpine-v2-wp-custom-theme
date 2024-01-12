@@ -908,3 +908,11 @@ function get_free_product_post_id(){
     $post_slug = end($pathSegments);
     return $post_id = get_page_by_path($post_slug, OBJECT, 'post')->ID;
 }
+
+
+add_action('after_setup_theme', 'remove_admin_bar');
+function remove_admin_bar() {
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+}

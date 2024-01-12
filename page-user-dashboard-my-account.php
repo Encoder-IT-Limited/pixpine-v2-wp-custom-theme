@@ -74,6 +74,12 @@ if(!empty($profile_image_id)){
   $img = wp_get_attachment_url($profile_image_id);
 }
 
+if($first_name == ''){
+  $first_name = get_user_meta($user_id, 'billing_f_name', true);
+}
+if($last_name == ''){
+  $last_name = get_user_meta($user_id, 'billing_l_name', true);
+}
 ?>
 
 <main>

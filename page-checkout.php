@@ -48,6 +48,13 @@ if($billing_email == '') {
   $form_class_name = '';
   $info_class_name = 'd-none';
 }
+
+if($billing_f_name == ''){
+  $billing_f_name = get_user_meta($user_id, 'first_name', true);
+}
+if($billing_l_name == ''){
+  $billing_l_name = get_user_meta($user_id, 'last_name', true);
+}
 ?>
 <main>
   <section class="dashboard_section dashboard__downloads">

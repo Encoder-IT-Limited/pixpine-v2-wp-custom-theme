@@ -43,6 +43,14 @@ $billing_address = get_user_meta($user_id, 'billing_address', true);
 $billing_city = get_user_meta($user_id, 'billing_city', true);
 $billing_state = get_user_meta($user_id, 'billing_state', true);
 $billing_zip = get_user_meta($user_id, 'billing_zip', true);
+
+
+if($billing_f_name == ''){
+  $billing_f_name = get_user_meta($user_id, 'first_name', true);
+}
+if($billing_l_name == ''){
+  $billing_l_name = get_user_meta($user_id, 'last_name', true);
+}
 ?>
 
 <main>
