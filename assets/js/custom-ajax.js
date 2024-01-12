@@ -331,7 +331,7 @@ jQuery(document).ready(function ($) {
         },
         success: function (response) {
           if (response == "success") {
-            alert("Login successful. Redirecting...");
+            // alert("Login successful. Redirecting...");
             window.location.reload();
           } else {
             alert(response);
@@ -361,7 +361,7 @@ jQuery(document).ready(function ($) {
         success: function (response) {
           if (response == "success") {
             alert(
-              "Signup is successful. We have sent you password in your email."
+              "Sign up is successful. We have sent the password to your registered email."
             );
             window.location.reload();
           } else {

@@ -31,11 +31,10 @@ if(isset($results[0]['status'])){
               if($_GET['type'] == 'new-subcription'){
                 echo '
                 <div class="alert alert-success" role="alert">
-                Thank you for subscribing to '.ucfirst($sub_plan).' Subscription.
+                Thank you for your recent purchase, Your '.ucfirst($sub_plan).' Subscription is activated.
                 </div>
                 ';                
               }
-
             }
         ?>
       
@@ -79,6 +78,19 @@ if(isset($results[0]['status'])){
                 <?php } ?>
             </div>
             <?php } }?>
+
+              <div id="warning_message">
+                <div class="">
+                  <div class="">
+                    <div class="text-center">
+                      <h5>Important Message</h5>
+                      <p>
+                        After canceling your subscription, your download list will no longer be available after your subscription expiry.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
             
         </div>
@@ -86,9 +98,8 @@ if(isset($results[0]['status'])){
     </div>
   </section>
 
-  <div id="warning_message" class="modal fade" role="dialog">
+  <!-- <div id="warning_message" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
-      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-body text-center">
           <h5>Important Message</h5>
@@ -98,7 +109,7 @@ if(isset($results[0]['status'])){
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

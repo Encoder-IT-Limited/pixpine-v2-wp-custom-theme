@@ -157,10 +157,12 @@ if ($parent_term && !is_wp_error($parent_term)) {
                                       <h4 class="default_color">
                                       <?php echo get_the_title($result->ID);?>
                                       </h4>
+                                </a>
+                                      <a href="<?php echo site_url('premium-mockups');?>">
                                       <p class="primary_color">Premium Mockups</p>
+                                      </a>
                                     </div>
                                   </div>
-                                </a>
                               </div>
                               
                         <?php

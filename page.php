@@ -14,25 +14,25 @@
 
 get_header();
 ?>
+<main>
+      <section class="banner_section">
+        <div class="container">
+          <!-- Banner search form -->
+          <?php include get_template_directory() .'/includes/search-form.php';?>
 
-	<main id="primary" class="site-main">
+          
+        </div>
+      </section>
+      <section class="request_for_mockup_section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+				<?php echo get_the_content();?>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', 'page' );
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
-get_footer();
+<!-- Footer -->
+<?php get_footer();?>

@@ -340,25 +340,29 @@
 
                     <!-- <div type="button" data-bs-toggle="modal" data-bs-target="#premiumModal" class="card_item" > -->
                       <div type="button" class="card_item premium-mockup-single" p-id="<?php echo get_the_ID();?>">
-                        <a href="<?php echo get_the_permalink();?>">
-                          <div class="item_a">
-                            <div class="inner_col">
-                              <div class="img_col pixpine_card_border">
-                                <img src="<?php echo $thumbnail_url;?>" 
-                                img1="<?php echo $thumbnail_url;?>" 
-                                img2="<?php echo $thumbnail_url2;?>" 
-                                class="premium-img-hover-effect"
-                                alt="" />
-                              </div>
+                        <div class="item_a">
+                          <div class="inner_col">
+                              <a href="<?php echo get_the_permalink();?>">
+                                <div class="img_col pixpine_card_border">
+                                  <img src="<?php echo $thumbnail_url;?>" 
+                                  img1="<?php echo $thumbnail_url;?>" 
+                                  img2="<?php echo $thumbnail_url2;?>" 
+                                  class="premium-img-hover-effect"
+                                  alt="" />
+                                </div>
                               <div class="text_col">
-                                <h4 class="default_color">
-                                <?php echo get_the_title();?>
-                                </h4>
-                                <p class="primary_color">Premium</p>
+                                  <h4 class="default_color">
+                                    <?php echo get_the_title();?>
+                                  </h4>
+                                </a>
+                                <a href="<?php echo site_url('premium-mockups');?>">
+                                <p class="primary_color">
+                                  Premium
+                                </p>
+                                </a>
                               </div>
                             </div>
                           </div>
-                        </a>
                       </div>
                     <?php
                     }
@@ -432,10 +436,12 @@
                           </div>
                           <div class="text_col">
                             <h4 class="default_color"><?php echo get_the_title();?></h4>
+                          </a>
+                            <a href="<?php echo site_url('free-mockups');?>">
                             <p class="primary_color">Free</p>
+                            </a>
                           </div>
                         </div>
-                      </a>
                     </div>
                     <?php
                     }

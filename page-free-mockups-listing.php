@@ -128,10 +128,11 @@ get_header();
                           </div>
                           <div class="text_col">
                             <h4 class="default_color"><?php echo get_the_title();?></h4>
+                            <a href="<?php echo site_url('free-mockups');?>">
                             <p class="primary_color">Free</p>
+                            </a>
                           </div>
                         </div>
-                      </a>
                     </div>
 
                 <?php

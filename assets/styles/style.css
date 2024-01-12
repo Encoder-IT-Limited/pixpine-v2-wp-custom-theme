@@ -81,7 +81,7 @@ body.modal-open {
 }
 .login_signup_f_g_contianer button:last-child img {
   height: 20px;
-  width: 10.44px;
+  /* width: 10.44px; */
   object-fit: contain;
 }
 .login_signup_f_g_contianer button:first-child {
@@ -2138,14 +2138,15 @@ body.modal-open {
 .dashboard__likes .tab-content .likes__bundle__mockups .card_container {
   margin: 0 -17px;
 }
-#warning_message .modal-content {
+#warning_message {
   /* min-height: 144px; */
+  background-color: white;
   border-radius: 0 !important;
 }
-#warning_message .modal-dialog {
+#warning_message{
   max-width: 530px;
 }
-#warning_message .modal-content .modal-body {
+#warning_message {
   padding: 34px 23px;
 }
 #warning_message h5 {

@@ -660,7 +660,7 @@ function stripesuccess()
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
 
-    $custom_page_url = site_url() . '/subscription-monthly?type=new-subcription';
+    $custom_page_url = site_url() . '/thank-you';
     $_SESSION['message'] = 'Successfully Paid';
     wp_redirect($custom_page_url);
     exit;
@@ -725,11 +725,11 @@ function pixpine_subscribe_cancel()
                 // Get the subscription's current period start and end dates
 
                 global $wpdb;
-                $query = "UPDATE " . $wpdb->prefix . "pixpine_subscriptions SET status='Cancled' WHERE subscription_id='$subscriptionid' ";
+                $query = "UPDATE " . $wpdb->prefix . "pixpine_subscriptions SET status='Canceled' WHERE subscription_id='$subscriptionid' ";
 
                 $wpdb->query($query);
 
-                $data['success'] = "Subscription successfully cancled.";
+                $data['success'] = "Subscription successfully canceled.";
             } else {
                 $data['error'] = "Subscription not found or an error occurred.";
             }

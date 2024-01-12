@@ -134,11 +134,13 @@ get_header();
                   <h4 class="default_color">
                   <?php echo get_the_title();?>
                   </h4>
+                </a>
+                  <a href="<?php echo site_url('bundle-mockups');?>">
                   <p class="primary_color">Bundle</p>
+                  </a>
                 </div>
               </div>
             <!-- </div> -->
-          </a>
         </div>
 
       <?php

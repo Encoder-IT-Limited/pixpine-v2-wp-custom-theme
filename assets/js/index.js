@@ -1,5 +1,14 @@
 jQuery(document).ready(function () {
 
+  jQuery('#customized-mockup-form').submit(function (event) {
+    // Check if the checkbox is not checked
+    if (!jQuery('.customized-mockup-terms').is(':checked')) {
+        // Show the error message
+        alert("Please accept our terms and conditions before submitting the form.")
+        // Prevent form submission
+        event.preventDefault();
+    }
+  });  
 //////////////////////////////////////////////
 // Attach an event listener to the file input field
 jQuery('.profile-image-input').on('change', function () {
@@ -46,7 +55,7 @@ jQuery('.profile-image-input').on('change', function () {
   });
 
   /* Dashboard popup message */
-  jQuery("#warning_message").modal("show");
+  // jQuery("#warning_message").modal("show");
 
   jQuery(".mobule_nav_tabs_button").click(function () {
     jQuery(".tab_img_container , .dashboard_navbar").toggleClass("open_menu");

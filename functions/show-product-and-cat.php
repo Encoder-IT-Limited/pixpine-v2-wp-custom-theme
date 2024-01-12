@@ -120,11 +120,13 @@ function get_product_home_premium(){
                                 <h4 class="default_color">
                                 '.get_the_title().'
                                 </h4>
+                </a>
+                                <a href="'.site_url('premium-mockups').'">
                                 <p class="primary_color">Premium</p>
+                                </a>
                             </div>
                         </div>
                     </div>
-                </a>
             </div>';
         }
     }else{
@@ -173,10 +175,12 @@ function get_product_home_free(){
                         </div>
                         <div class="text_col">
                             <h4 class="default_color">'.get_the_title().'</h4>
+                </a>
+                            <a href="'.site_url('free-mockups').'">
                             <p class="primary_color">Free</p>
+                            </a>
                         </div>
                     </div>
-                </a>
             </div>';
         }
     }else{
@@ -273,10 +277,12 @@ function get_product_with_pagination()
                                 </div>
                                 <div class="text_col">
                                     <h4 class="default_color">' . get_the_title() . '</h4>
-                                    <p class="primary_color">Free</p>
-                                </div>
-                                </div>
                             </a>
+                                    <a href="'.site_url('free-mockups').'">
+                                    <p class="primary_color">Free</p>
+                                    </a>
+                                </div>
+                                </div>
                         </div>';
             }
             // Restore the global post object
@@ -373,11 +379,13 @@ function get_product_with_pagination()
                                     </div>
                                     <div class="text_col">
                                     <h4 class="default_color">'.get_the_title().'</h4>
+                        </a>
+                                    <a href="'.site_url('premium-mockups').'">
                                     <p class="primary_color">Premium</p>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
-                        </a>
                     </div>';
 
         }
@@ -429,10 +437,12 @@ function get_product_with_pagination()
                                 <h4 class="default_color">
                                 '.get_the_title().'
                                 </h4>
+                        </a>
+                                <a href="'.site_url('bundle-mockups').'">
                                 <p class="primary_color">Bundle</p>
+                                </a>
                                 </div>
                             </div>
-                        </a>
                     </div>';
           }
           // Restore the global post object

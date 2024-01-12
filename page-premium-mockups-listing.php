@@ -426,11 +426,13 @@ get_header();
                             </div>
                             <div class="text_col">
                               <h4 class="default_color"><?php echo get_the_title();?></h4>
+                            </a>
+                              <a href="<?php echo site_url('premium-mockups');?>">
                               <p class="primary_color">Premium</p>
+                              </a>
                             </div>
                           </div>
                         </div>
-                      </a>
                     </div>
 
                   <?php
