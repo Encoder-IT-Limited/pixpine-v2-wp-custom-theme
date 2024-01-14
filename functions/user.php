@@ -147,3 +147,5 @@ function pixpine_signup(){
 }
 add_action('wp_ajax_pixpine_signup', 'pixpine_signup'); // For logged-in users
 add_action('wp_ajax_nopriv_pixpine_signup', 'pixpine_signup'); // For non-logged-in users
+
+

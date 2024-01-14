@@ -59,6 +59,7 @@
                     placeholder="Password"
                     required
                   />
+                  <p class="login-form-error"></p>
                   <label class="forgot_password" for=""
                     >Forgot password <a href="">click here</a></label
                   >

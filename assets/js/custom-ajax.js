@@ -337,7 +337,8 @@ jQuery(document).ready(function ($) {
             // alert("Login successful. Redirecting...");
             window.location.reload();
           } else {
-            alert(response);
+            console.log(response);
+            $(".login-form-error").html(response);
           }
         },
       });
