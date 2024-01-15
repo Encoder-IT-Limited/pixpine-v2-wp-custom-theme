@@ -113,7 +113,7 @@ function pixpine_signup(){
     // User registration data
     $username = $signup_first_name.' '.$signup_last_name;
     $email = $_POST['signup_email'];
-    $password = '12345678';
+    $password = randomPassword();
 
     // Check if the user already exists by email
     $user_exists = email_exists($email);
@@ -123,11 +123,9 @@ function pixpine_signup(){
         $user_id = wp_create_user($username, $password, $email);
 
         if (is_wp_error($user_id)) {
-            error_log(print_r('11111111', true));
             // Registration failed
             echo 'Registration failed: ' . $user_id->get_error_message();
         } else {
-            error_log(print_r('222222', true));
             // Registration successful
             // echo 'Registration successful. User ID: ' . $user_id;
             // send welcome email
@@ -149,3 +147,27 @@ add_action('wp_ajax_pixpine_signup', 'pixpine_signup'); // For logged-in users
 add_action('wp_ajax_nopriv_pixpine_signup', 'pixpine_signup'); // For non-logged-in users
 
 
+function randomPassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
+
+
+function wpdocs_my_login_redirect( $url, $request, $user ) {
+    if ( $user && is_object( $user ) && is_a( $user, 'WP_User' ) ) {
+        if ( $user->has_cap( 'administrator' ) ) {
+            $url = admin_url();
+        } else {
+            $url = home_url();
+        }
+    }
+    return $url;
+}
+ 
+add_filter( 'login_redirect', 'wpdocs_my_login_redirect', 10, 3 );

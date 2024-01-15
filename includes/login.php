@@ -61,7 +61,7 @@
                   />
                   <p class="login-form-error"></p>
                   <label class="forgot_password" for=""
-                    >Forgot password <a href="">click here</a></label
+                    >Forgot password <a href="<?php echo site_url().'/wp-login.php?action=lostpassword';?>">click here</a></label
                   >
                 </div>
                 <input class="input_btn" type="submit" value="Log in" />
