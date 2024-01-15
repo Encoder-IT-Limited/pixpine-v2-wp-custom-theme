@@ -64,7 +64,7 @@ if(isset($results[0]['status'])){
                   <p>Download Limit: <span>56</span></p>
                 </li>
                 <li>
-                  <p>Downloads Remaining: <span>35</span></p>
+                  <p>Downloads Remaining: <span><?php echo get_user_meta($user_id, 'available_download', true);?></span></p>
                 </li>
                    <li>
                   <p>Status: <span><?php echo $row['status']; ?></span></p>

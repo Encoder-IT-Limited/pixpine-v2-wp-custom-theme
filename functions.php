@@ -490,7 +490,7 @@ function pixpine_subscribe()
     if (!$user_id) {
         $data['error'] = 'Please login first';
     } else if ($checkplan) {
-        $data['error'] = 'Sorry you’re currently subscribed.';
+        $data['error'] = 'Sorry you’re already subscribed.';
     } else {
 
         $amount = $_POST['amount'];
@@ -592,6 +592,22 @@ function sub_stripesuccess()
 
     $wpdb->query($query);
 
+    $subscription_plan = $wpdb->get_var("SELECT subscripton_plan FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id=' $checkoutSession->subscription'");
+    error_log( print_r($subscription_plan) );
+    if($subscription_plan == 'monthly'){
+        $download_per_month = 56;
+        $available_download = get_user_meta($user_id, 'available_download', true);
+        error_log( print_r($available_download) );
+
+        if($available_download == ''){
+            $available_download = $download_per_month;
+        }else{
+            $available_download += $download_per_month;
+        }
+        error_log( print_r($available_download) );
+        update_user_meta($user_id, 'available_download', $available_download);
+    }
+
     /*$pitem = $wpdb->get_row("SELECT * FROM ".$wpdb->prefix."pixpine_payment_details WHERE item_number='" . $order_id . "'", ARRAY_A);
 
     $paymentid = (int)$pitem['id'];
@@ -612,7 +628,7 @@ function sub_stripesuccess()
         $wpdb->query($sql);
   }*/
 
-
+die('abc');
 
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
