@@ -28,11 +28,11 @@
                     />
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                 <?php if(is_user_logged_in()){ ?> 
                   <a
                       class="nav-link user_icon"
-                      href="<?php echo site_url('my-account');?>"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"
                     >
                       <?php 
                       $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
@@ -46,6 +46,10 @@
                       ?>
                       <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                        <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
+                    </ul>
                 <?php }else{ ?> 
                   <a
                     type="button"
@@ -129,10 +133,10 @@
                     </a>
                   </li>
                   <?php if(is_user_logged_in()){ ?> 
-                  <li class="nav-item">
+                  <li class="nav-item dropdown">
                     <a
                       class="nav-link user_icon"
-                      href="<?php echo site_url('my-account');?>"
+                      type="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"
                     >
                       <?php 
                       $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
@@ -146,6 +150,10 @@
                       ?>
                       <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                        <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
+                    </ul>
                   </li>
                   <?php }else{ ?>
                     <li class="nav-item">

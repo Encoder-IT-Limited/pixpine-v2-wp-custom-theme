@@ -11,20 +11,33 @@
               <img class="cart_img" src="<?php echo get_template_directory_uri();?>/assets/images/cart_icon.png" alt="" />
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link user_icon" href="<?php echo site_url('my-account');?>">
-            <?php 
-                $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
-                if(!empty($profile_image_id)){
-                  $class_name = 'user_img_custom';
-                  $menu_user_img = wp_get_attachment_url($profile_image_id);
-                }else{
-                  $class_name = 'user_img';
-                  $menu_user_img = get_template_directory_uri()."/assets/images/user_icon.png";
-                }
-                ?>
-              <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
-            </a>
+          <li class="nav-item dropdown">
+            <?php if(is_user_logged_in()){ ?> 
+              <a class="nav-link user_icon"
+              type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                  href="#"
+              >
+              <?php 
+                  $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
+                  if(!empty($profile_image_id)){
+                    $class_name = 'user_img_custom';
+                    $menu_user_img = wp_get_attachment_url($profile_image_id);
+                  }else{
+                    $class_name = 'user_img';
+                    $menu_user_img = get_template_directory_uri()."/assets/images/user_icon.png";
+                  }
+                  ?>
+                <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
+              </ul>
+            <?php }else{ ?>
+              <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Log in
+              </a>
+            <?php } ?> 
           </li>
         </ul>
       </div>
@@ -90,10 +103,11 @@
               </a>
             </li>
             <?php if(is_user_logged_in()){ ?>
-            <li class="nav-item">
+            <li class="nav-item dropdown">
               <a
                 class="nav-link user_icon"
-                href="<?php echo site_url('my-account');?>"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                href="#"
               >
                 <?php 
                 $profile_image_id = get_user_meta(get_current_user_id(), 'profile_image_id', true);
@@ -107,6 +121,10 @@
                 ?>
                 <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
               </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
+              </ul>
             </li>
             <?php }else{ ?>
               <li class="nav-item">

@@ -725,6 +725,8 @@ header .navbar-nav {
 }
 .premium_modal .modal-dialog {
   max-width: 1025px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .modal-content {
   border-radius: 0;
@@ -1834,7 +1836,7 @@ footer .menu_inner_col .item:nth-child(3) {
     margin-bottom: 32px;
     max-width: 100% !important;
   }
-  .login_signup_f_g_contianer button:first-child {
+  .login_signup_f_g_contianer a:first-child {
     margin-bottom: 0;
     margin-right: 15px;
   }
@@ -2032,11 +2034,15 @@ footer .menu_inner_col .item:nth-child(3) {
   .login_signup_f_g_contianer {
     flex-direction: column;
   }
-  .login_signup_f_g_contianer button {
+  .login_signup_f_g_contianer a {
     width: 100%;
     justify-content: center;
   }
-  .login_signup_f_g_contianer button:first-child {
+  .login_signup_f_g_contianer button {
+    text-align: center;
+    justify-content: center;
+  }
+  .login_signup_f_g_contianer a:first-child {
     margin-right: 0;
     margin-bottom: 10px;
   }
@@ -2044,7 +2050,7 @@ footer .menu_inner_col .item:nth-child(3) {
     padding: 9px 12px;
   }
   .login_signup_f_g_contianer button img {
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
   .related_mockups_col .card_item,
   .free_download_page_main_section .related_mockups_col .card_item {
