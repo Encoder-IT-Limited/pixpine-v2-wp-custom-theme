@@ -64,7 +64,11 @@ get_header();
                   </ul>
                 </div>
                 <div class="btn_col text-center">
+                <?php if(is_user_logged_in()){ ?>
                   <button class="_btn btn_primary subscribe" subscripton_plan="monthly" amount="21" planid="price_1O7zCcSCPnS6Hgf9e0CiHplS">SUBSCRIBE</button>
+                <?php }else{ ?>
+                  <button class="_btn btn_primary nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">SUBSCRIBE</button>
+                <?php } ?>
                 </div>
               </div>
               <div class="subscriptions_package yearly__subscription">
@@ -122,7 +126,11 @@ get_header();
                   </ul>
                 </div>
                 <div class="btn_col text-center">
+                  <?php if(is_user_logged_in()){ ?>
                   <button class="_btn btn_black subscribe" amount="168" subscripton_plan="yearly" planid="price_1O7z81SCPnS6Hgf9nqsIfDdi">SUBSCRIBE</button>
+                  <?php }else{ ?>
+                    <button class="_btn btn_black nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">SUBSCRIBE</button>
+                  <?php } ?>
                 </div>
               </div>
             </div>
