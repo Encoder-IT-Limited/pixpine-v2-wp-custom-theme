@@ -6,7 +6,6 @@ get_header();
 $user_id = get_current_user_id();
 $user = get_user_by('ID', $user_id);
 $msg = '';
-
 if(isset($_POST['submit'])){
   $msg = 'success';
 
@@ -70,7 +69,7 @@ $first_name = get_user_meta($user_id, 'first_name', true);
 $last_name = get_user_meta($user_id, 'last_name', true);
 $profile_image_id = get_user_meta($user_id, 'profile_image_id', true);
 // $img = get_template_directory_uri().'/assets/images/dashboard_user_photo.png';
-$img = get_template_directory_uri().'/assets/images/user_icon.png';
+$img = get_template_directory_uri().'/assets/images/avater.png';
 if(!empty($profile_image_id)){
   $img = wp_get_attachment_url($profile_image_id);
 }

@@ -61,10 +61,10 @@ if(isset($results[0]['status'])){
                   <p>Subscription Expire: <span><?php echo date('d F Y',strtotime($row['end_date']));?></span></p>
                 </li>
                 <li>
-                  <p>Download Limit: <span>56</span></p>
+                  <p>Download Limit: <span><?php echo ($row['subscripton_plan'] == 'monthly')? "56":"UNLIMITED";?></span></p>
                 </li>
                 <li>
-                  <p>Downloads Remaining: <span><?php echo get_user_meta($user_id, 'available_download', true);?></span></p>
+                  <p>Downloads Remaining: <span><?php echo ($row['subscripton_plan'] == 'monthly')? get_user_meta($user_id, 'available_download', true):"UNLIMITED";?></span></p>
                 </li>
                    <li>
                   <p>Status: <span><?php echo $row['status']; ?></span></p>

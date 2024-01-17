@@ -592,19 +592,23 @@ function sub_stripesuccess()
 
     $wpdb->query($query);
 
-    $subscription_plan = $wpdb->get_var("SELECT subscripton_plan FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id=' $checkoutSession->subscription'");
-    error_log( print_r($subscription_plan) );
+    $subscription_plan = $wpdb->get_var("SELECT subscripton_plan FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id='$checkoutSession->subscription'");
+    error_log( print_r($subscription_plan, true) );
     if($subscription_plan == 'monthly'){
         $download_per_month = 56;
         $available_download = get_user_meta($user_id, 'available_download', true);
-        error_log( print_r($available_download) );
+        error_log( print_r($available_download, true) );
 
         if($available_download == ''){
             $available_download = $download_per_month;
         }else{
             $available_download += $download_per_month;
         }
-        error_log( print_r($available_download) );
+        error_log( print_r($available_download, true) );
+        
+        update_user_meta($user_id, 'available_download', $available_download);
+    }else{
+        $download_per_month = '-1';
         update_user_meta($user_id, 'available_download', $available_download);
     }
 
@@ -628,7 +632,6 @@ function sub_stripesuccess()
         $wpdb->query($sql);
   }*/
 
-die('abc');
 
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
@@ -932,3 +935,18 @@ function remove_admin_bar() {
         show_admin_bar(false);
     }
 }
+
+
+function my_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logo.png);
+		height:83px;
+		width:250px;
+		background-size: 250px 83px;
+		background-repeat: no-repeat;
+        	padding-bottom: 30px;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
