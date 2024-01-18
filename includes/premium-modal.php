@@ -188,7 +188,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                               } else {
                                 // echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . ', </a>';
                               ?>
-                                <a href="<?php echo site_url().'?cat=premium-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"> <?php echo $tag->name;?></a>, 
+                                <a href="<?php echo site_url().'?cat=premium-mockup&type=tag&tag-name='.$tag->name.'&s=';?>"> <?php echo $tag->name;?></a> 
                               <?php
                               }
                             }

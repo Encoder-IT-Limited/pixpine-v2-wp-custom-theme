@@ -80,16 +80,10 @@ if(isset($results[0]['status'])){
             <?php } }?>
 
               <div id="warning_message">
-                <div class="">
-                  <div class="">
-                    <div class="text-center">
-                      <h5>Important Message</h5>
-                      <p>
-                        After canceling your subscription, your download list will no longer be available after your subscription expiry.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <h5>Important Message</h5>
+                <p>
+                   After canceling your subscription, your download list will no longer be available after your subscription expiry.
+                </p>
               </div>
           </div>
             
