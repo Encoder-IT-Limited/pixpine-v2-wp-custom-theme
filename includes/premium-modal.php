@@ -51,7 +51,6 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
       }
   }
 }
-
 ?>
 <!-- <div class="modal fade premium_modal show" id="premiumModal" tabindex="-1" aria-labelledby="premiumModalLabel" aria-modal="true" role="dialog" style="display: block;"> -->
   <div class="modal-dialog">
@@ -64,7 +63,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                 <div class="slider_product_about_column">
                   <div class="heading_col">
                       <h1 class="page_heading">
-                        <?php echo $cpt->post_title;?>
+                        <?php echo $cpt->post_title;?> 
                       </h1>
                       <p>
                         <span class="user_id">ID:<?php echo $cpt->ID;?></span> in
@@ -313,8 +312,13 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
                           </h5>
                         </div>
-                        <button class="_btn btn_primary add-to-cart" p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
-                        <?php echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';?>
+                        <button class="_btn btn_primary 
+                        <?php echo is_show_download_btn($cpt->ID) ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
+                        <?php if (is_show_download_btn($cpt->ID)) {
+                          echo "Download";
+                        }else{
+                          echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';
+                        }?>
                         </button>
                       </div>
                       <div class="save_unlimited_downloads">
