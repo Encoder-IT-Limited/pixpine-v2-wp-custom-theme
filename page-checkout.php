@@ -297,25 +297,28 @@ if($billing_l_name == ''){
               </div>
                   <div class="payment_option <?php echo $info_class_name;?>">
                     <h5 class="product-title">Payment Method</h5>
-                    <div class="icon_payment">
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/visa_icon.png" alt="">
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/american_express_icon.png" alt="">
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/master_card_icon.png" alt="">
-                    </div>
                     <div class="paypal_item">
-                     <label>Stripe</label>
-                      <input type="radio" name="payment_method" id="payment-stripe" value="Stripe">
-                         <input type="hidden" name="price" value="<?php echo $total_price;?>">
-                        <input type="hidden" name="placeOrder" value="1">
-                        <input type="hidden" name="proid" value="<?php echo $cpt_id;?>">
-                  </div>
-                  <div class="paypal_item <?php echo $info_class_name;?>">
-                    <label>Paypal</label>
-                    <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
-                    <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
-                    <!-- Your HTML content -->
-                    <div id="paypal-button-container" style="width: 100%;margin-top: 10px;"></div>
-                  </div>
+                        <label>Stripe</label>
+                        <input type="radio" name="payment_method" id="payment-stripe" value="Stripe">
+                            <input type="hidden" name="price" value="<?php echo $total_price;?>">
+                            <input type="hidden" name="placeOrder" value="1">
+                            <input type="hidden" name="proid" value="<?php echo $cpt_id;?>">
+                        <div class="icon_payment">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/visa_icon.png" alt="">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/american_express_icon.png" alt="">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/master_card_icon.png" alt="">
+                        </div>
+                    </div>
+                    <div class="paypal_item <?php echo $info_class_name;?>">
+                        <label>Paypal</label>
+                        <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
+                        <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
+                        <div class="icon_payment">
+                            <img src="<?php echo get_template_directory_uri();?>/assets/images/paypal_icon.png" alt="">
+                        </div>
+                        <!-- Your HTML content -->
+                        <div id="paypal-button-container" style="width: 100%;margin-top: 15px;"></div>
+                    </div>
                 </div>
                 <button style="display: none;" class="_btn get_premium_btn btn_black_small btn_primary payment-submit" type="submit">Place Order</button>
             </div>

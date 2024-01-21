@@ -954,7 +954,11 @@ footer .menu_inner_col .item:nth-child(3) {
   margin-right: 16%;
 }
 #mobile__btn__container,
-.mobule_nav_tabs_button {
+.mobule_nav_tabs_button,
+.mobile_,
+.premium_product_page
+  .slider_product_about_column
+  .price_product_specs_container {
   display: none;
 }
 /* Footer End */
@@ -1629,7 +1633,7 @@ footer .menu_inner_col .item:nth-child(3) {
     margin: 0 12.5px;
   }
   .subscriptions_package_container {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .subscriptions_package,
   .faq_section .accordin_container .accordion,
@@ -1641,7 +1645,10 @@ footer .menu_inner_col .item:nth-child(3) {
     margin-right: 0;
     margin-top: 30px;
   }
-  .subscriptions_package.yearly__subscription,
+  .subscriptions_package.yearly__subscription{
+    margin-bottom: 30px;
+    margin-left: 0;
+  }
   .faq_section .accordin_container .right {
     margin-top: 30px;
     margin-left: 0;
@@ -1946,8 +1953,11 @@ footer .menu_inner_col .item:nth-child(3) {
     display: block;
     margin-bottom: 15px;
   }
+  .trending_col,
   .premium_product_page .simple_vertical_add_to_cart_column .heading_col,
-  .trending_col {
+  .premium_product_page
+    .simple_vertical_add_to_cart_column
+    .price_product_specs_container {
     display: none;
   }
   .premium_modal .modal-dialog,
@@ -1959,10 +1969,14 @@ footer .menu_inner_col .item:nth-child(3) {
   .recently_added_free_mockups .tab-content .img_col {
     margin-bottom: 4px;
   }
-  .premium_modal header,
+  .mobile_,
   .bundle_modal header,
+  .premium_modal header,
   .premium_modal .banner_section,
-  .bundle_modal .banner_section {
+  .bundle_modal .banner_section,
+  .premium_product_page
+    .slider_product_about_column
+    .price_product_specs_container {
     display: block;
   }
   .recently_added_premium_mockups .section_heading,
@@ -2082,14 +2096,10 @@ footer .menu_inner_col .item:nth-child(3) {
     margin-bottom: 20px;
   }
   .collection_premium_section .card_container .card_item,
-  #premium_mockups_page .tab-content .card_item,
   #free_mockups_page .tab-content .card_item,
   .pixpine_free_product_top .first_card_col {
     width: 100%;
   }
-  .tab-content .card_item,
-  .explore_creative_section .card_item,
-  .tab-content .card_container .card_item,
   .bundle_mockups_yearly_subscription .card_item,
   .recently_added_free_mockups .tab-content .card_item,
   .dashboard__likes .tab-content .likes__bundle__mockups .card_item {

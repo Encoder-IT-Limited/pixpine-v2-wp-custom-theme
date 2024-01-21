@@ -98,7 +98,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       ?>
                         <img
                           src="<?php echo wp_get_attachment_image_url($image_id, 'full');?>"
-                          alt="shoe image"
+                          alt="Pixpine product image"
                         />
                       <?php } ?>
                       </div>
@@ -231,6 +231,72 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                     </div>
                     <div class="separetor"></div>
                   </div>
+                  <div class="mobile_">
+                    <div class="price_product_specs_container">
+                      <div class="add_to_cart">
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <h5>Price</h5>
+                          <h5>
+                            <?php if(!empty(get_post_meta($post_id, 'personal_commercial_price', true))){ ?>
+                              <del class="mx-2">$<?php echo get_post_meta($post_id, 'personal_commercial_price', true);?> </del>
+                            <?php } ?>
+                            $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
+                          </h5>
+                        </div>
+                        <button class="_btn btn_primary 
+                        <?php echo is_show_download_btn($cpt->ID) ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
+                        <?php if (is_show_download_btn($cpt->ID)) {
+                          echo "Download";
+                        }else{
+                          echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';
+                        }?>
+                        </button>
+                      </div>
+                      <div class="save_unlimited_downloads">
+                        <h2 class="primary_color text-uppercase">Save 50%</h2>
+                        <p>Get this for only $14.5 with year subscription</p>
+                        <a
+                          class="_btn btn_black text-center"
+                          href="<?php echo site_url('get-subscription');?>"
+                          >Get premium</a
+                        >
+                      </div>
+                      <div class="product__specs">
+                        <h3>Product Specs.</h3>
+                        <ul>
+                          <li>
+                            <p><span>Compatible with:</span><?php echo get_post_meta($post_id, 'compatible_with', true);?></p>
+                          </li>
+                          <li>
+                            <p><span>File Type:</span><?php echo get_post_meta($post_id, 'file_type', true);?></p>
+                          </li>
+                          <li>
+                            <p><span>File Size:</span><?php echo get_post_meta($post_id, 'file_size', true);?></p>
+                          </li>
+                          <li>
+                            <p><span>Dimension:</span><?php echo get_post_meta($post_id, 'dimension', true);?></p>
+                          </li>
+                          <li>
+                            <p>
+                              <span>License:</span>
+                              <a href="<?php echo site_url('license');?>"> <?php echo get_post_meta($post_id, 'license', true);?></a>
+                            </p>
+                          </li>
+                          <li>
+                            <p>
+                              <span>Extended License:</span> <?php echo get_post_meta($post_id, 'extended_license', true);?>
+                            </p>
+                          </li>
+                          <li>
+                            <p><span>Author:</span><?php echo get_post_meta($post_id, 'author', true);?></p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="separetor"></div>
+                  </div>
                   <div class="related_products product">
                     <h2 class="column_heading">Related Products</h2>
                     <div class="related_products_slider">
@@ -264,7 +330,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="separetor"></div>
+                  <div class="separetor"></div>
                   <div class="comment_box_container">
                     <p>
                       You must be
@@ -296,7 +362,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         />
                       </div>
                     </form>
-                  </div> -->
+                  </div>
                 </div>
                 <div class="simple_vertical_add_to_cart_column">
                   <div class="sticky-top">

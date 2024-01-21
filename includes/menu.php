@@ -34,8 +34,8 @@
                 <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
               </ul>
             <?php }else{ ?>
-              <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Log in
+              <a type="button" data-bs-toggle="modal" data-bs-target="#signupModal" class="nav-link">
+                Sign up
               </a>
             <?php } ?> 
           </li>
@@ -66,6 +66,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('customized-mockup-request');?>">Customise Mockups</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
 
           <div id="mobile__btn__container">
             <li class="nav-item">
@@ -77,13 +80,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#signupModal"
-                class="nav-link"
-                >Sign up</a
-              >
+              <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Log in
+              </a>
             </li>
           </div>
         </ul>

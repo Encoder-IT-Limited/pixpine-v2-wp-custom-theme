@@ -1530,6 +1530,7 @@ body.modal-open {
 /* PREMIUM MOCUPS - PRODUCT PAGE End */
 
 /* BUNDLE MOCKUPS - PRODUCT PAGE Stat */
+.comment_box_container form ._btn,
 .bundle_product_page .comment_box_container form ._btn {
   background-color: var(--text-color);
   padding: 3.5px 25px;
@@ -2495,13 +2496,14 @@ header .dropdown-menu .dropdown-item:hover {
   margin-top: 20px;
 }
 .checkout_row .order__column .payment_option .product-title {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .checkout_row .order__column .payment_option label {
   margin-bottom: 0;
-  min-width: 45px;
+  min-width: 50px;
   text-transform: uppercase;
 }
+
 .checkout_row .order__column .payment_option input {
   height: 20px;
   width: 20px;
@@ -2520,7 +2522,7 @@ header .dropdown-menu .dropdown-item:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .checkout_row
   .order__column
@@ -2531,7 +2533,7 @@ header .dropdown-menu .dropdown-item:hover {
 }
 .checkout_row .order__column .payment_option .icon_payment {
   display: flex;
-  margin-bottom: 13px;
+  margin-left: 25px;
 }
 .checkout_row .order__column .payment_option .icon_payment img {
   height: 25px;
