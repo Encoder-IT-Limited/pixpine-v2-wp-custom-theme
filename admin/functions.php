@@ -872,6 +872,12 @@ function add_custom_taxonomy_image_field($taxonomy) {
         Show it in the top 6
     </label>
     </div>';
+    $_custom_cat_serial = get_term_meta($taxonomy->term_id, '_custom_cat_serial', true);
+    echo ' <br>
+    <div class="form-group">
+    <label for="_custom_cat_serial">Serial Number</label>
+    <input type="number" class="form-control" id="_custom_cat_serial" name="_custom_cat_serial" placeholder="Enter serial number" value="'.$_custom_cat_serial.'" required>
+    </div>';
 }
 // add_action('mockup_category_add_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
 add_action('mockup_category_edit_form_fields', 'add_custom_taxonomy_image_field', 10, 1);
@@ -885,7 +891,7 @@ function save_custom_taxonomy_image($term_id) {
         }else{
             update_term_meta($term_id, '_custom_is_show_cat', 0);
         }
-        
+        update_term_meta($term_id, '_custom_cat_serial', sanitize_text_field($_POST['_custom_cat_serial']));
     }
 }
 // add_action('created_mockup_category', 'save_custom_taxonomy_image', 10, 1);

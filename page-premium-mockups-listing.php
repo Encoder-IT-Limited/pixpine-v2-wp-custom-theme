@@ -124,6 +124,9 @@ get_header();
                         'child_of' => 0, // Set to 0 to get top-level terms
                         'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID
                         'hide_empty' => false, // Set to false to retrieve even if they are empty
+                        'meta_key'   => '_custom_cat_serial',  // Replace 'your_meta_key' with the actual meta key you want to use
+                        'orderby'    => 'meta_value',     // Order by the value of the specified meta key
+                        'order'      => 'ASC',            // Adjust the order as needed (ASC or DESC)
                     );
                 
                     $subcategories = get_terms($args);
@@ -149,56 +152,6 @@ get_header();
                       }
                     }
                     ?>
-                  <!-- <div class="card_item">
-                    <a href="">
-                      <div class="card_inner pixpine_card_border">
-                        <p href="">Apparel Mockups</p>
-                        <div class="img_col">
-                          <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="card_item">
-                    <a href="">
-                      <div class="card_inner pixpine_card_border">
-                        <p href="">Device Mockups</p>
-                        <div class="img_col">
-                          <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="card_item">
-                    <a href="">
-                      <div class="card_inner pixpine_card_border">
-                        <p href="">Vehicle Mockups</p>
-                        <div class="img_col">
-                          <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="card_item">
-                    <a href="">
-                      <div class="card_inner pixpine_card_border">
-                        <p href="">Bottle Packaging Mockups</p>
-                        <div class="img_col">
-                          <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="card_item">
-                    <a href="">
-                      <div class="card_inner pixpine_card_border">
-                        <p href="">Stationery Mockups</p>
-                        <div class="img_col">
-                          <img src="<?php echo get_template_directory_uri();?>/assets/images/premium_img.png" alt="" />
-                        </div>
-                      </div>
-                    </a>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -215,155 +168,6 @@ get_header();
             $parent_category_slug = 'premium-mockups';
             echo show_sub_cats_in_listing_page($parent_category_slug); 
             ?>
-            <!-- <ul class="nav nav-tabs" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link active"
-                  id="stationery_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#stationery_cards"
-                  type="button"
-                  role="tab"
-                  aria-controls="stationery_cards"
-                  aria-selected="true"
-                >
-                  Stationery
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="boxes_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#boxes"
-                  type="button"
-                  role="tab"
-                  aria-controls="boxes"
-                  aria-selected="false"
-                >
-                  Boxes
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="jar_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#jar"
-                  type="button"
-                  role="tab"
-                  aria-controls="jar"
-                  aria-selected="false"
-                >
-                  Jar
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="bottles_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#bottles"
-                  type="button"
-                  role="tab"
-                  aria-controls="bottles"
-                  aria-selected="false"
-                >
-                  Bottles
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="vehicle_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#vehicle"
-                  type="button"
-                  role="tab"
-                  aria-controls="vehicle"
-                  aria-selected="false"
-                >
-                  Vehicle
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="t-shirts_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#t-shirts"
-                  type="button"
-                  role="tab"
-                  aria-controls="t-shirts"
-                  aria-selected="false"
-                >
-                  T-Shirts
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="books_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#books"
-                  type="button"
-                  role="tab"
-                  aria-controls="books"
-                  aria-selected="false"
-                >
-                  Books
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="apparel_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#apparel"
-                  type="button"
-                  role="tab"
-                  aria-controls="apparel"
-                  aria-selected="false"
-                >
-                  Apparel
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="advertising_tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#advertising"
-                  type="button"
-                  role="tab"
-                  aria-controls="advertising"
-                  aria-selected="false"
-                >
-                  Advertising
-                </button>
-                <div class="dropdown">
-              <button
-                class="dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img src="<?php echo get_template_directory_uri();?>/assets/images/tab_down_arrow.png" alt="" />
-              </button>
-
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="">Cup</a></li>
-                <li><a class="dropdown-item" href="">Cosmetic</a></li>
-                <li><a class="dropdown-item" href="">Flyers</a></li>
-                <li><a class="dropdown-item" href="">Frame</a></li>
-                <li><a class="dropdown-item" href="">Packaging</a></li>
-                <li><a class="dropdown-item" href="">Poster</a></li>
-                <li><a class="dropdown-item" href="">Shopping Bag</a></li>
-                <li><a class="dropdown-item" href="">Stationery</a></li>
-              </ul>
-            </div>
-              </li>
-            </ul> -->
             <div class="tab-content">
               <div
                 class="tab-pane fade show active"
