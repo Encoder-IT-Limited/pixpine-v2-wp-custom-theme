@@ -56,6 +56,8 @@ get_header();
 
           // Define the tax_query to retrieve child terms of the specified parent category
           $args = array(
+              'orderby'=>'ID',
+              'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
               'taxonomy' => $taxonomy,
               'child_of' => 0, // Set to 0 to get top-level terms
               'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID

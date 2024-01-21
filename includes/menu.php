@@ -67,7 +67,7 @@
             <a class="nav-link" href="<?php echo site_url('customized-mockup-request');?>">Customise Mockups</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="<?php echo site_url('about-us');?>">About</a>
           </li>
 
           <div id="mobile__btn__container">

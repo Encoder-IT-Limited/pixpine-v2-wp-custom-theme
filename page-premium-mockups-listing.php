@@ -383,6 +383,7 @@ get_header();
                     $args = array(
                       // 'post_type' => 'product', // Replace with the name of your CPT
                       'posts_per_page' => 20, // Number of posts to display (adjust as needed)
+                      'orderby'=>'ID',
                       'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                       'tax_query' => array(
                         array(

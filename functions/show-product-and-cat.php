@@ -85,6 +85,7 @@ function get_product_home_premium(){
         // 'post_type' => 'product', // Replace with the name of your CPT
         'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
         'paged' => $page_no,
+        'orderby'=>'ID',
         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
         'tax_query' => array(
             array(
@@ -149,6 +150,7 @@ function get_product_home_free(){
         // 'post_type' => 'product', // Replace with the name of your CPT
         'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
         'paged' => $page_no,
+        'orderby'=>'ID',
         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
         'tax_query' => array(
             array(
@@ -209,6 +211,7 @@ function get_product_with_pagination()
             // 'post_type' => 'product', // Replace with the name of your CPT
             'posts_per_page' => $posts_per_page, // Number of posts to display (adjust as needed)
             'paged' => $page_no,
+            'orderby'=>'ID',
             'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
             'tax_query' => array(
                 array(

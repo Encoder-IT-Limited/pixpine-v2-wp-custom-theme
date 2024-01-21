@@ -88,7 +88,7 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#"
+                  <a class="nav-link" href="<?php echo site_url('about-us');?>"
                     >About</a
                   >
                 </li>
@@ -321,6 +321,7 @@
                   $args = array(
                     // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => 10, // Number of posts to display (adjust as needed)
+                    'orderby'=>'ID',
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
                       array(
@@ -414,6 +415,7 @@
                   $args = array(
                     // 'post_type' => 'product', // Replace with the name of your CPT
                     'posts_per_page' => 10, // Number of posts to display (adjust as needed)
+                    'orderby'=>'ID',
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                     'tax_query' => array(
                       array(
@@ -506,6 +508,7 @@
               $args = array(
                 // 'post_type' => 'product', // Replace with the name of your CPT
                 'posts_per_page' => 10, // Number of posts to display (adjust as needed)
+                'orderby'=>'ID',
                 'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
                 'tax_query' => array(
                   array(
