@@ -556,13 +556,12 @@
 
       <!-- Never miss out form section -->
       <?php include 'includes/never-miss-out-form.php';?>
+
+      <script>
+        jQuery(document).ready(function(){
+          localStorage.setItem('redirect_url', window.location.href);
+        })
+      </script>
     </main>
-
-    <!-- Premium Modal -->
-    <?php //include 'includes/premium-modal.php';?>
-
-    <!-- Bundle Modal -->
-    <?php //include 'includes/bundle-modal.php';?>
-
     <!-- Footer -->
     <?php include 'includes/footer.php';?>

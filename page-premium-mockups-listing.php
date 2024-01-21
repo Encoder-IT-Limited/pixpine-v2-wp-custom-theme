@@ -307,7 +307,11 @@ get_header();
 
       <!-- Never miss out form section -->
       <?php include get_template_directory() .'/includes/never-miss-out-form.php';?>
-
+      <script>
+        jQuery(document).ready(function(){
+          localStorage.setItem('redirect_url', window.location.href);
+        })
+      </script>
       
     </main>
 

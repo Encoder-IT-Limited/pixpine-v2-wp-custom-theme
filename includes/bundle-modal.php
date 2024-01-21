@@ -456,7 +456,10 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
     jQuery(document).on('click', function(e) {
       var pop_container = jQuery(".modal-dialog");
       if (!pop_container.is(e.target) && pop_container.has(e.target).length === 0) {
-        window.history.back();
+        if (localStorage["redirect_url"]) {
+          var redirect_url = localStorage.getItem("redirect_url");
+          window.location.href = redirect_url;
+        }
       }
     });
   })
