@@ -15,7 +15,30 @@ jQuery(document).ready(function ($) {
     //         alert('Response from server: ' + response);
     //     },
     // });
-  
+    
+    // remove cart
+    $(document).on("click", ".download-product", function () {
+      var pId = $(this).attr("p-id");
+      $.ajax({
+        url: ajax_object.ajax_url,
+        type: "POST",
+        data: {
+          action: "pixpine_download_product",
+          nonce: ajax_object.ajax_nonce, // Include the nonce
+          pId: pId,
+        },
+        success: function (response) {
+          if (response == "fail") {
+            alert('You can not download this product now.');
+            window.location.reload();
+          }else{
+            top.location.href = response;
+          }
+        },
+      });
+    });
+
+
     // remove cart
     $(document).on("click", ".remove-cart", function () {
       var pId = $(this).attr("p-id");

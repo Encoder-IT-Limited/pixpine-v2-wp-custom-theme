@@ -1,4 +1,62 @@
 <?php
+
+function pixpine_download_product(){
+        // Verify the nonce
+        if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+            $output = '';
+            // Nonce is valid, process the AJAX request
+            $product_id = $_POST['pId'];
+            $link = get_post_meta($product_id, 'download_link', true);
+            
+            // is user has subscription
+            global $wpdb;
+            $user_id = get_current_user_id();
+            $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
+            
+            if ($active_subscription != null) {
+
+                $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_subscription_downloaded_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
+                if($bought_product != null){
+                    $output = $link;
+                }else{
+                    if($active_subscription == 'yearly'){
+                        $sql = "INSERT INTO `" . $wpdb->prefix . "pixpine_subscription_downloaded_items`(`product_id`, `user_id`) VALUES ('$product_id','$user_id')";
+                        $wpdb->query($sql);
+                        $output = $link;
+                    }elseif($active_subscription == 'monthly'){
+                        $available_download = get_user_meta($user_id, 'available_download', true);
+                        if($available_download > 0){
+                            // reduce download count
+                            $available_download--;
+                            update_user_meta($user_id, 'available_download', $available_download);
+                            // add this product in subscription download
+                            $sql = "INSERT INTO `" . $wpdb->prefix . "pixpine_subscription_downloaded_items`(`product_id`, `user_id`) VALUES ('$product_id','$user_id')";
+                            $wpdb->query($sql);
+                            $output = $link;
+                        }
+                    }                    
+                }
+            } 
+            // already downloaded
+            $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_order_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
+            if($bought_product != null){
+                $output = $link;
+            }
+            if($output == ''){
+                echo 'fail';
+            }else{
+                echo $output;
+            }
+        } else {
+            // Nonce is not valid, reject the request
+            echo 'Nonce verification failed.';
+        }
+        wp_die(); // This is required to end the AJAX request
+    }
+add_action('wp_ajax_pixpine_download_product', 'pixpine_download_product'); // For logged-in users
+
+
+
 function show_sub_cats_in_listing_page($parent_category_slug, $js_class='get-product')
 {
     $html = '<ul class="nav nav-tabs" role="tablist">';

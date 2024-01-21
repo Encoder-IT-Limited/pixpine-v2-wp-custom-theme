@@ -959,6 +959,11 @@ function is_show_download_btn($product_id=null){
     $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
     
     if ($active_subscription != null) {
+        $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_subscription_downloaded_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
+        if($bought_product != null){
+            return true;
+        }
+
         if($active_subscription == 'yearly'){
             return true;
         }elseif($active_subscription == 'monthly'){
