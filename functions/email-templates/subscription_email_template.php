@@ -1,10 +1,42 @@
-<!DOCTYPE html>
+<?php
+function pixpine_subscription_email($subscription_plan){
+  $amount = ($subscription_plan == "monthly") ? "21.00" : "168.00";
+  $user_id = get_current_user_id();
+  $first_name = get_user_meta($user_id, 'first_name', true);
+  $last_name = get_user_meta($user_id, 'last_name', true);
+  if($first_name == ''){
+    $first_name = get_user_meta($user_id, 'billing_f_name', true);
+  }
+  if($last_name == ''){
+    $last_name = get_user_meta($user_id, 'billing_l_name', true);
+  }
+
+  $billing_f_name = get_user_meta($user_id, 'billing_f_name', true);
+  $billing_l_name = get_user_meta($user_id, 'billing_l_name', true);
+  $billing_email = get_user_meta($user_id, 'billing_email', true);
+  $billing_company = get_user_meta($user_id, 'billing_company', true);
+  $billing_country = get_user_meta($user_id, 'billing_country', true);
+  $billing_address = get_user_meta($user_id, 'billing_address', true);
+  $billing_city = get_user_meta($user_id, 'billing_city', true);
+  $billing_state = get_user_meta($user_id, 'billing_state', true);
+  $billing_zip = get_user_meta($user_id, 'billing_zip', true);
+
+
+  if($billing_f_name == ''){
+    $billing_f_name = get_user_meta($user_id, 'first_name', true);
+  }
+  if($billing_l_name == ''){
+    $billing_l_name = get_user_meta($user_id, 'last_name', true);
+  }
+
+  $html = '';
+  $html .= '<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bundle mockups with yearly subscription</title>
+    <title>Subscription email template</title>
   </head>
   <body>
     <div
@@ -680,7 +712,7 @@
                   margin: 0 auto;
                   padding: 0;
                   color: #333;
-                  font-family: 'Roboto', 'Open Sans', 'Helvetica Neue',
+                  font-family: \'Roboto\', \'Open Sans\', \'Helvetica Neue\',
                     Helvetica, Arial, sans-serif;
                   font-size: 14px;
                   overflow: hidden;
@@ -713,9 +745,9 @@
                     >
                       <a href="">
                         <img
-                          style="max-width: 100%"
+                          style="width: 171px; hight: auto"
                           class="wp_logo"
-                          src="./images/logo.svg"
+                          src="'.get_template_directory_uri().'/assets/email/logo.jpg"
                           alt=""
                         />
                       </a>
@@ -767,7 +799,7 @@
                             font-weight: 500;
                             text-transform: uppercase;
                           "
-                          >Josh</span
+                          >'.$first_name.' '.$last_name.'</span
                         >
                       </h3>
                       <p
@@ -819,7 +851,7 @@
                           >
                             Purchase Date:
                             <span style="font-weight: 700"
-                              >November 28, 2023</span
+                              >'.date("F d, Y").'</span
                             >
                           </p>
                           <p
@@ -832,7 +864,7 @@
                             "
                           >
                             Payment Method:
-                            <span style="font-weight: 700">Stripe/PayPal</span>
+                            <span style="font-weight: 700">Stripe</span>
                           </p>
                         </div>
                       </div>
@@ -914,30 +946,8 @@
                                 margin: 0;
                               "
                             >
-                              Round Neck Men’s T-shirt Mockup
+                              '.ucfirst($subscription_plan).' Subscription
                             </h3>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              ID: <span>3136</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              File Type: <span>PSD</span>
-                            </p>
                             <p
                               style="
                                 font-size: 12px;
@@ -973,7 +983,7 @@
                               font-weight: 400;
                             "
                           >
-                            US$<span>12.00</span>
+                            US$<span>'.$amount.'</span>
                           </td>
                           <td
                             style="
@@ -984,9 +994,7 @@
                               line-height: 19px;
                               font-weight: 400;
                             "
-                          >
-                            <span>50%</span>
-                          </td>
+                          ></td>
                           <td
                             style="
                               border: 1px solid #707070;
@@ -997,325 +1005,7 @@
                               font-weight: 400;
                             "
                           >
-                            US$<span>6.00</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            <h3
-                              style="
-                                font-size: 14px;
-                                line-height: 17px;
-                                font-weight: 400;
-                                color: #005aff;
-                                margin: 0;
-                              "
-                            >
-                              Mailing Box Bundle Mockups
-                            </h3>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              ID: <span>3136</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              File Type: <span>PSD</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              License:
-                              <a
-                                href=""
-                                style="
-                                  font-size: 12px;
-                                  line-height: 15px;
-                                  font-weight: 400;
-                                  margin: 0;
-                                  color: #333333;
-                                  text-decoration: none;
-                                "
-                              >
-                                Personal & Commercial
-                              </a>
-                            </p>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            US$<span>10.00</span>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            <span>50%</span>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            US$<span>5.00</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            <h3
-                              style="
-                                font-size: 14px;
-                                line-height: 17px;
-                                font-weight: 400;
-                                color: #005aff;
-                                margin: 0;
-                              "
-                            >
-                              Photo Frame Bundle Mockups
-                            </h3>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              ID: <span>3136</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              File Type: <span>PSD</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              License:
-                              <a
-                                href=""
-                                style="
-                                  font-size: 12px;
-                                  line-height: 15px;
-                                  font-weight: 400;
-                                  margin: 0;
-                                  color: #333333;
-                                  text-decoration: none;
-                                "
-                              >
-                                Personal & Commercial
-                              </a>
-                            </p>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            US$<span>24.00</span>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            <span>50%</span>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            US$<span>12.00</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            <h3
-                              style="
-                                font-size: 14px;
-                                line-height: 17px;
-                                font-weight: 400;
-                                color: #005aff;
-                                margin: 0;
-                              "
-                            >
-                              Candle Glass Jar Bundle Mockups
-                            </h3>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              ID: <span>3136</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              File Type: <span>PSD</span>
-                            </p>
-                            <p
-                              style="
-                                font-size: 12px;
-                                line-height: 15px;
-                                font-weight: 400;
-                                margin: 0;
-                                color: #333333;
-                              "
-                            >
-                              License:
-                              <a
-                                href=""
-                                style="
-                                  font-size: 12px;
-                                  line-height: 15px;
-                                  font-weight: 400;
-                                  margin: 0;
-                                  color: #333333;
-                                  text-decoration: none;
-                                "
-                              >
-                                Personal & Commercial
-                              </a>
-                            </p>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            US$<span>22.00</span>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            <span>50%</span>
-                          </td>
-                          <td
-                            style="
-                              border: 1px solid #707070;
-                              text-align: left;
-                              padding: 9px;
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                            "
-                          >
-                            US$<span>11.00</span>
+                            US$<span>'.$amount.'</span>
                           </td>
                         </tr>
                         <tr>
@@ -1354,7 +1044,7 @@
                             "
                             class="font_bold table__heading"
                           >
-                            US$<span>34.00</span>
+                            US$<span>'.$amount.'</span>
                           </td>
                         </tr>
                       </table>
@@ -1372,15 +1062,16 @@
                       >
                         Billing Address
                       </h4>
+
                       <p style="font-size: 15px; line-height: 22px; margin: 0">
-                        Josh Jimmy
+                        '.$billing_f_name.' '.$billing_l_name.'
                       </p>
                       <p style="font-size: 15px; line-height: 22px; margin: 0">
-                        24 Ave, Thomas Street <br />
-                        Hampton Park, VIC 1457 <br />
-                        Australia.
+                        '.$billing_address.' <br />
+                        '.$billing_city.', '.$billing_state.' '.$billing_zip.' <br />
+                        '.$billing_country.'.
                       </p>
-                      <a
+                      <!-- <a
                         style="
                           text-decoration: none;
                           color: #333333;
@@ -1391,7 +1082,7 @@
                         href="tel:62425687724"
                         >62425687724</a
                       >
-                      <br />
+                      <br /> -->
                       <a
                         style="
                           text-decoration: none;
@@ -1400,8 +1091,8 @@
                           line-height: 22px;
                           margin: 0;
                         "
-                        href="mailto:J.jimmy@gmail.com"
-                        >J.jimmy@gmail.com</a
+                        href="mailto:'.$billing_email.'"
+                        >'.$billing_email.'</a
                       >
                     </div>
                     <div
@@ -1416,66 +1107,66 @@
                         class="social_link"
                         style="text-align: center; margin: 0; padding: 0"
                       >
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="youtube" href="https://www.youtube.com/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/youtube.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a
-                            class="pinterest"
-                            href="https://www.pinterest.com/"
-                          >
-                            <img
-                              style="max-width: 100%"
-                              src="./images/pinterest.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a
-                            class="instagram"
-                            href="https://www.instagram.com/"
-                          >
-                            <img
-                              style="max-width: 100%"
-                              src="./images/instagram.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="twitter" href="https://twitter.com/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/twitter.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="behance" href="https://www.behance.net/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/behance.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
-                        <li style="display: inline-block; margin: 0 13px">
-                          <a class="facebook" href="https://www.facebook.com/">
-                            <img
-                              style="max-width: 100%"
-                              src="./images/facebook.svg"
-                              alt=""
-                            />
-                          </a>
-                        </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                        <a class="youtube" href="https://www.youtube.com/">
+                          <img
+                            style="width: 25px; height: 18px;"
+                            src="'.get_template_directory_uri().'/assets/email/youtube.jpg"
+                            alt=""
+                          />
+                        </a>
+                      </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                        <a
+                          class="pinterest"
+                          href="https://www.pinterest.com/"
+                        >
+                          <img
+                            style="width: 20px; height: 21px;"
+                            src="'.get_template_directory_uri().'/assets/email/pinterest.jpg"
+                            alt=""
+                          />
+                        </a>
+                      </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                        <a
+                          class="instagram"
+                          href="https://www.instagram.com/"
+                        >
+                          <img
+                            style="width: 19px; height: 19px;"
+                            src="'.get_template_directory_uri().'/assets/email/instagram.jpg"
+                            alt=""
+                          />
+                        </a>
+                      </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                        <a class="twitter" href="https://twitter.com/">
+                          <img
+                            style="width: 19px; height: 20px;"
+                            src="'.get_template_directory_uri().'/assets/email/twitter.jpg"
+                            alt=""
+                          />
+                        </a>
+                      </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                        <a class="behance" href="https://www.behance.net/">
+                          <img
+                            style="width: 26px; height: 16px;"
+                            src="'.get_template_directory_uri().'/assets/email/behance.jpg"
+                            alt=""
+                          />
+                        </a>
+                      </li>
+                      <li style="display: inline-block; margin: 0 13px">
+                        <a class="facebook" href="https://www.facebook.com/">
+                          <img
+                            style="width: 10px; height: 19px;"
+                            src="'.get_template_directory_uri().'/assets/email/facebook.jpg"
+                            alt=""
+                          />
+                        </a>
+                      </li>
                       </ul>
                       <div class="footer_menu" style="margin: 8px 0">
                         <ul style="text-align: center; margin: 0; padding: 0">
@@ -2268,4 +1959,8 @@
       </table>
     </div>
   </body>
-</html>
+</html>';
+return $html;
+}
+
+

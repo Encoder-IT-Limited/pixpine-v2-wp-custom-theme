@@ -7,16 +7,13 @@ $msg = '';
 if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
     // Define recipient email address
-    $to = "custommockups@pixpine.site, innovawebdeveloper@gmail.com";
+    $to = 'custommockups@pixpine.site, innovawebdeveloper@gmail.com';
 
     // Define email subject
     $subject = "Form Customized Mockup page";
 
-    // Define sender's email address
-    $from = $_POST["p_email"];
-
     // Create email headers
-    $headers .= "MIME-Version: 1.0\r\n";
+    $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
 
     // Define the message body
@@ -28,7 +25,7 @@ if(isset($_POST['p_submit'])){
     $message .= "Details: " . $_POST["p_details"] . "\r\n\r\n";
     $message .= "--boundary\r\n";
 
-    // Process the uploaded file
+    // // Process the uploaded file
     $file_name = $_FILES["p_file"]["name"];
     $file_temp = $_FILES["p_file"]["tmp_name"];
     $file_type = $_FILES["p_file"]["type"];
@@ -42,7 +39,7 @@ if(isset($_POST['p_submit'])){
     }
 
     // Send the email
-    if (wp_mail($to, $subject, $message, $headers)) {
+    if (mail($to, $subject, $message, $headers)) {
       $msg = 'success';
     } else {
       $msg = 'fail';

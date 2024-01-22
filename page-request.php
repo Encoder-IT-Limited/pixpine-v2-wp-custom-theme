@@ -8,10 +8,10 @@ $msg = '';
 if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
     // Define recipient email address
-    $to = "innovawebdeveloper@gmail.com";
+    $to = "request@pixpine.site, innovawebdeveloper@gmail.com";
 
     // Define email subject
-    $subject = "Form Request page";
+    $subject = "REQUEST MOCKUP";
 
     // Define sender's email address
     $from = $_POST["p_email"];
@@ -42,7 +42,7 @@ if(isset($_POST['p_submit'])){
     }
 
     // Send the email
-    if (wp_mail($to, $subject, $message, $headers)) {
+    if (mail($to, $subject, $message, $headers)) {
       $msg = 'success';
     } else {
       $msg = 'fail';

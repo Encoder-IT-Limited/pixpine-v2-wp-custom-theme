@@ -189,6 +189,8 @@ require get_template_directory() . '/functions/user.php';
 // calling templates 
 require get_template_directory() . '/functions/email-templates/welcome.php';
 require get_template_directory() . '/functions/email-templates/new_account_password.php';
+require get_template_directory() . '/functions/email-templates/subscription_email_template.php';
+require get_template_directory() . '/functions/email-templates/order_confirmation_email_template.php';
 
 // send email function
 function pixpine_send_html_email($to, $subject, $message) {
@@ -593,18 +595,15 @@ function sub_stripesuccess()
     $wpdb->query($query);
 
     $subscription_plan = $wpdb->get_var("SELECT subscripton_plan FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id='$checkoutSession->subscription'");
-    error_log( print_r($subscription_plan, true) );
     if($subscription_plan == 'monthly'){
         $download_per_month = 56;
         $available_download = get_user_meta($user_id, 'available_download', true);
-        error_log( print_r($available_download, true) );
 
         if($available_download == ''){
             $available_download = $download_per_month;
         }else{
             $available_download += $download_per_month;
         }
-        error_log( print_r($available_download, true) );
         
         update_user_meta($user_id, 'available_download', $available_download);
     }else{
@@ -612,29 +611,12 @@ function sub_stripesuccess()
         update_user_meta($user_id, 'available_download', $available_download);
     }
 
-    /*$pitem = $wpdb->get_row("SELECT * FROM ".$wpdb->prefix."pixpine_payment_details WHERE item_number='" . $order_id . "'", ARRAY_A);
-
-    $paymentid = (int)$pitem['id'];
-    $amount = $pitem['amount'];
-  $sql="insert into ".$wpdb->prefix."pixpine_orders (user_id,pixpine_payment_detail_id,total_price) values('$user_id','". $paymentid."','".$amount."')";
-    $wpdb->query($sql);
-  $dborderid = $wpdb->insert_id;
-  $table_name = $wpdb->prefix . 'pixpine_carts'; 
-  $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
-  $products =$wpdb->get_col($query);
-  $total_price = 0; 
-  
-  foreach($products as $cpt_id){ 
-      $cpt_post = get_post($cpt_id, 'product'); 
-       $name= $cpt_post->post_title
-       $price = get_post_meta($cpt_id,'personal_commercial_price', true); 
-        $sql="insert into ".$wpdb->prefix."pixpine_order_items(pixpine_order_id,product_id,user_id,product_name,price) values('$dborderid','".$cpt_id."','".$user_id."','".$user_id."','".$name."','".$price."')";
-        $wpdb->query($sql);
-  }*/
-
-
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
+
+    $html = pixpine_subscription_email($subscription_plan);
+    $email = 'subscribe@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
+    pixpine_send_html_email($email, ' Thank you for your payment', $html);
 
     $custom_page_url = site_url() . '/subscription-monthly?type=new-subcription';
     $_SESSION['message'] = 'Successfully Paid';
@@ -666,10 +648,10 @@ function stripesuccess()
     $dborderid = $wpdb->insert_id;
     $table_name = $wpdb->prefix . 'pixpine_carts';
     $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'";
-    $products = $wpdb->get_col($query);
+    $product_ids = $wpdb->get_col($query);
     $total_price = 0;
 
-    foreach ($products as $cpt_id) {
+    foreach ($product_ids as $cpt_id) {
         $cpt_post = get_post($cpt_id, 'product');
         $name = $cpt_post->post_title;
         $price = get_post_meta($cpt_id, 'personal_commercial_price', true);
@@ -678,6 +660,10 @@ function stripesuccess()
     }
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
+
+    $html = order_confirmation_email($product_ids, 'stripe');
+    $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
+    pixpine_send_html_email($email, ' Thank you for your payment', $html);
 
     $custom_page_url = site_url() . '/thank-you';
     $_SESSION['message'] = 'Successfully Paid';
@@ -941,9 +927,9 @@ function my_login_logo() { ?>
     <style type="text/css">
         #login h1 a, .login h1 a {
             background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logo.png);
-		height:83px;
-		width:250px;
-		background-size: 250px 83px;
+		height:43px;
+		width:130px;
+		background-size: 130px 43px;
 		background-repeat: no-repeat;
         	padding-bottom: 30px;
         }

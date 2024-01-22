@@ -14,7 +14,7 @@ if(isset($_POST['c_submit'])){
 
     // Email recipient (customize this)
     $to = 'helpdesk@pixpine.site, innovawebdeveloper@gmail.com'; // Replace with the client's email address
-    $subject = 'From contact us';
+    $subject = 'Help Desk';
 
     // Email body
     $message = '<html><body>';
@@ -26,6 +26,7 @@ if(isset($_POST['c_submit'])){
 
     $headers = array(
       'Content-Type: text/html; charset=UTF-8',
+      // 'From: WordPress'
     );
 
     if (wp_mail($to, $subject, $message, $headers)) {
