@@ -33,10 +33,10 @@ if (isset($_GET['tnx_id'])) {
   // get from cart
   $table_name = $wpdb->prefix . 'pixpine_carts';
   $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'";
-  $products = $wpdb->get_col($query);
+  $product_ids = $wpdb->get_col($query);
   $total_price = 0;
   // add in order item table
-  foreach ($products as $cpt_id) {
+  foreach ($product_ids as $cpt_id) {
     $cpt_post = get_post($cpt_id, 'product');
     $name = $cpt_post->post_title;
     $price = get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
@@ -47,24 +47,12 @@ if (isset($_GET['tnx_id'])) {
   $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
   $wpdb->query($query);
 
+  $html = order_confirmation_email($product_ids, 'stripe');
+  $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
+  pixpine_send_html_email($email, ' Thank you for your payment', $html);
+  $custom_page_url = site_url() . '/downloads?type=new-purchase';
+  $_SESSION['message'] = 'Successfully Paid';
+  wp_redirect($custom_page_url);
 }
 
 ?>
-<main>
-  <section class="dashboard_section dashboard__downloads">
-    <div class="container">
-      <div class="heading_col mb-5">
-        <h1 class="page_heading text-center">Success</h1>
-      </div>
-      <div class="row_d checkout_row">
-        <div class="alert alert-primary" role="alert">
-          Your payment is successful.
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </section>
-</main>
-<!-- Footer -->
-<?php get_footer(); ?>

@@ -618,7 +618,7 @@ function sub_stripesuccess()
     $email = 'subscribe@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 
-    $custom_page_url = site_url() . '/subscription-monthly?type=new-subcription';
+    $custom_page_url = site_url() . '/thank-you';
     $_SESSION['message'] = 'Successfully Paid';
     wp_redirect($custom_page_url);
     exit;
@@ -665,7 +665,7 @@ function stripesuccess()
     $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 
-    $custom_page_url = site_url() . '/thank-you';
+    $custom_page_url = site_url() . '/downloads?type=new-purchase';
     $_SESSION['message'] = 'Successfully Paid';
     wp_redirect($custom_page_url);
     exit;

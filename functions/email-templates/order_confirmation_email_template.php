@@ -927,15 +927,16 @@ function order_confirmation_email($product_ids, $method){
                           </th>
                         </tr>';
                         $total_price = 0;
-                        foreach($product_ids as $cpt_post){
+                        foreach($product_ids as $cpt_id){
                           $cpt_post = get_post($cpt_id);
                           $thumbnail_url = get_the_post_thumbnail_url($cpt_id);
                           $price = get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
                           $commercial_price = get_post_meta($cpt_id, 'personal_commercial_price', true);
                           $discount = '';
                           if($commercial_price != ''){
-                            $discount = (($commercial_price-$price)/$price)*100;
+                            $discount = (($commercial_price-$price)/$commercial_price)*100;
                             $discount = $discount.'%';
+                            $commercial_price = 'US$<span>'.$commercial_price.'</span>';
                           }
                           if (empty($price)) {
                             $price = 0;
@@ -1022,7 +1023,7 @@ function order_confirmation_email($product_ids, $method){
                               font-weight: 400;
                             "
                           >
-                            US$<span>'.$commercial_price.'</span>
+                            '.$commercial_price.'
                           </td>
                           <td
                             style="
@@ -1086,7 +1087,7 @@ function order_confirmation_email($product_ids, $method){
                             "
                             class="font_bold table__heading"
                           >
-                            US$<span>99999</span>
+                            US$<span>'.$total_price.'</span>
                           </td>
                         </tr>
                       </table>
@@ -2000,7 +2001,6 @@ function order_confirmation_email($product_ids, $method){
       </table>
     </div>
   </body>
-</html>
-
-  ';
+</html>';
+  return $html;
 }

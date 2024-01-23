@@ -11,6 +11,13 @@ $order_id = $wpdb->get_col("SELECT id FROM $table_name WHERE user_id = '$user_id
 $order_id = implode(',', $order_id);
 $table_name = $wpdb->prefix . 'pixpine_order_items';
 $product_ids = $wpdb->get_results("SELECT * FROM $table_name WHERE pixpine_order_id IN ($order_id)", ARRAY_A);
+
+$active_tab = 1;
+if(isset($_GET['type'])){
+  if($_GET['type'] == 'new-purchase'){
+    $active_tab = 2;
+  }
+}
 ?>
 
 <main>
@@ -23,6 +30,15 @@ $product_ids = $wpdb->get_results("SELECT * FROM $table_name WHERE pixpine_order
   <section class="dashboard_section dashboard__downloads">
     <div class="container">
       <div class="section_width">
+        <?php
+          if($active_tab == 2){
+            echo '
+            <div class="alert alert-success" role="alert">
+            Your purchase is successful. Thanks!!
+            </div>
+            ';
+          }
+        ?>
         <div class="dashboard_main d-flex">
           <div class="dashboard_navbar">
             <!-- Dashboard inner menu -->
@@ -33,14 +49,14 @@ $product_ids = $wpdb->get_results("SELECT * FROM $table_name WHERE pixpine_order
             <div class="tab__container__main">
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="subscription_tab" data-bs-toggle="tab"
+                  <button class="nav-link <?php echo ($active_tab==1)?'active':'';?>" id="subscription_tab" data-bs-toggle="tab"
                     data-bs-target="#subscription" type="button" role="tab" aria-controls="subscription"
                     aria-selected="true">
                     Subscription
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="premium_mockup_tab" data-bs-toggle="tab" data-bs-target="#premium_mockup"
+                  <button class="nav-link <?php echo ($active_tab==2)?'active':'';?>" id="premium_mockup_tab" data-bs-toggle="tab" data-bs-target="#premium_mockup"
                     type="button" role="tab" aria-controls="premium_mockup" aria-selected="false" tabindex="-1">
                     Premium/Bundle Mockup
                   </button>
@@ -53,7 +69,7 @@ $product_ids = $wpdb->get_results("SELECT * FROM $table_name WHERE pixpine_order
                 </li> -->
               </ul>
               <div class="tab-content">
-                <div class="tab-pane fade show active" id="subscription" role="tabpanel"
+                <div class="tab-pane fade <?php echo ($active_tab==1)?'show active':'';?>" id="subscription" role="tabpanel"
                   aria-labelledby="subscription_tab">
                   <div class="tab_inner_content">
                     <ul>
@@ -91,7 +107,7 @@ $product_ids = $wpdb->get_results("SELECT * FROM $table_name WHERE pixpine_order
                     </ul>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="premium_mockup" role="tabpanel" aria-labelledby="premium_mockup_tab">
+                <div class="tab-pane fade  <?php echo ($active_tab==2)?'show active':'';?>" id="premium_mockup" role="tabpanel" aria-labelledby="premium_mockup_tab">
                   <div class="tab_inner_content">
                     <?php
                     if (!empty($product_ids)) {
