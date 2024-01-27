@@ -8,14 +8,14 @@ if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
     // Define recipient email address
     $to = 'custommockups@pixpine.site, innovawebdeveloper@gmail.com';
-
+    
     // Define email subject
     $subject = "Form Customized Mockup page";
-
+    
     // Create email headers
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
-
+    
     // Define the message body
     $message = "--boundary\r\n";
     $message .= "Content-type: text/plain; charset='UTF-8'\r\n\r\n";
@@ -24,20 +24,31 @@ if(isset($_POST['p_submit'])){
     $message .= "License Type: " . $_POST["p_license_type"] . "\r\n\r\n";
     $message .= "Details: " . $_POST["p_details"] . "\r\n\r\n";
     $message .= "--boundary\r\n";
-
-    // // Process the uploaded file
-    $file_name = $_FILES["p_file"]["name"];
-    $file_temp = $_FILES["p_file"]["tmp_name"];
-    $file_type = $_FILES["p_file"]["type"];
-
-    if ($file_name) {
-        $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
-        $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
-        $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
-        $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
-        $message .= "--boundary--";
+    
+    // Process the uploaded file
+    $totalFiles = count($_FILES['p_file']['name']);
+    // Loop through each file
+    for ($i = 0; $i < $totalFiles; $i++) {
+      $file_name = $_FILES["p_file"]["name"][$i];
+      $file_temp = $_FILES["p_file"]["tmp_name"][$i];
+      $file_type = $_FILES["p_file"]["type"][$i];
+      $file_size = $_FILES["p_file"]["size"][$i];
+      
+      if ($file_size > 1048576) {
+        if ($file_name) {
+          $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
+          $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
+          $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
+          $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
+          if(($i+1) == $totalFiles){
+            $message .= "--boundary--";
+          }else{
+            $message .= "--boundary\r\n";
+          }
+        }
+      }
     }
-
+    
     // Send the email
     if (mail($to, $subject, $message, $headers)) {
       $msg = 'success';
@@ -88,7 +99,7 @@ if(isset($_POST['p_submit'])){
                       if($msg == 'success'){
                         echo '
                         <div class="alert alert-success" role="alert">
-                          Message sent successful. We will contact you ASAP.
+                        Your request has been received and we will be in touch with you as soon as possible.
                         </div>
                         ';
                       }elseif($msg == 'fail'){
@@ -147,10 +158,14 @@ if(isset($_POST['p_submit'])){
                           id="files"
                           style="visibility: hidden; width: 10px"
                           type="file"
-                          name="p_file"
-                          
+                          name="p_file[]"
+                          accept=".png,.jpg,.jpeg"
+                          multiple
                         />
                       </div>
+                      <p>
+                        <div id="selectedImages"></div>
+                      </p>
                       <p>Upload reference images.</p>
                     </div>
                     <div class="text-end">
@@ -473,6 +488,35 @@ if(isset($_POST['p_submit'])){
         </div>
       </section>
     </main>
+    <script>
+      jQuery(document).ready(function(){
+        jQuery('#files').change(function(event) {
+          var totalSize = 0;
+          var files = event.target.files;
+          var imagesHTML = '';
 
+          // Calculate total size of selected files
+          jQuery('#selectedImages').html('');
+          for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            let p_size = files[i].size;
+            
+
+            reader.onload = function(e) {
+              if(p_size <= 1048576){
+                imagesHTML += '<img src="' + e.target.result + '" alt="Selected Image" style="height: 80px; width: auto; padding: 10px;">';
+                jQuery('#selectedImages').html(imagesHTML);
+              }
+            };
+            reader.readAsDataURL(file);
+            if(files[i].size > 1048576){
+              alert("File can not be more than 1 MB.")
+            }
+          }
+        });
+
+      })
+    </script>
 <!-- Footer -->
 <?php get_footer();?>

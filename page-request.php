@@ -135,7 +135,7 @@ if(isset($_POST['p_submit'])){
                       id="files"
                       style="visibility: hidden; width: 10px"
                       type="file"
-                      name="p_file"
+                      name="p_file[]"
                       accept=".png,.jpg,.jpeg"
                       multiple
                     />
