@@ -51,6 +51,10 @@ if($billing_f_name == ''){
 if($billing_l_name == ''){
   $billing_l_name = get_user_meta($user_id, 'last_name', true);
 }
+if($billing_email == ''){
+  $current_user = wp_get_current_user();
+  $billing_email = $current_user->user_email;
+}
 ?>
 
 <main>

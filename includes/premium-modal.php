@@ -332,6 +332,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                   </div>
                    <div class="separetor"></div>
                   <div class="comment_box_container">
+                    <?php if(!is_user_logged_in()){ ?>
                     <p>
                       You must be
                       <a class="primary_color" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -339,24 +340,28 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </a> to leave a
                       comment.
                     </p>
-                    <div class="autor_details d-flex align-items-center">
-                      <img
-                        class="autor_img"
-                        src="<?php echo get_template_directory_uri();?>/assets/images/comment_autor_img.png"
-                        alt=""
-                      />
-                      <span class="autor_name">Sam Jimmy</span>
-                    </div>
-                    <form action="">
-                      <textarea class="w-100" name="" id=""></textarea>
-                      <div class="text-end">
-                        <input
-                          class="_btn btn_black"
-                          type="submit"
-                          value="Submit"
+                    <?php }else{ ?>
+                      <div class="autor_details d-flex align-items-center">
+                        <img
+                          class="autor_img"
+                          src="<?php echo get_template_directory_uri();?>/assets/images/comment_autor_img.png"
+                          alt=""
                         />
+                        <span class="autor_name">Sam Jimmy</span>
                       </div>
-                    </form>
+                      <form action="">
+                        <textarea class="w-100" name="" id=""></textarea>
+                        <div class="text-end">
+                          <input
+                            class="_btn btn_black"
+                            type="submit"
+                            value="Submit"
+                          />
+                        </div>
+                      </form>
+                    <?php } ?>
+
+
                   </div>
                 </div>
                 <div class="simple_vertical_add_to_cart_column">

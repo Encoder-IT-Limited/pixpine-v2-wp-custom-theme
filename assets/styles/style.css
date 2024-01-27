@@ -2485,7 +2485,7 @@ header .dropdown-menu .dropdown-item:hover {
   border: 0;
   color: #656565;
   font-size: 14px;
-  font-weight: 700;
+  /* font-weight: 700; */
   line-height: 1.2;
   transition: all 0.4s;
   white-space: nowrap;

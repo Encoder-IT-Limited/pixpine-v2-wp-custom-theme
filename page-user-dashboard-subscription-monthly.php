@@ -28,7 +28,7 @@ if(isset($results[0]['status'])){
       <?php
 
             if(isset($_GET['type'])){
-              if($_GET['type'] == 'new-subcription'){
+              if($_GET['type'] == 'new-subscription'){
                 echo '
                 <div class="alert alert-success" role="alert">
                 Thank you for your recent purchase, Your '.ucfirst($sub_plan).' Subscription is activated.

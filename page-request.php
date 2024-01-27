@@ -29,16 +29,27 @@ if(isset($_POST['p_submit'])){
     $message .= "--boundary\r\n";
 
     // Process the uploaded file
-    $file_name = $_FILES["p_file"]["name"];
-    $file_temp = $_FILES["p_file"]["tmp_name"];
-    $file_type = $_FILES["p_file"]["type"];
-
-    if ($file_name) {
-        $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
-        $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
-        $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
-        $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
-        $message .= "--boundary--";
+    $totalFiles = count($_FILES['p_file']['name']);
+    // Loop through each file
+    for ($i = 0; $i < $totalFiles; $i++) {
+      $file_name = $_FILES["p_file"]["name"][$i];
+      $file_temp = $_FILES["p_file"]["tmp_name"][$i];
+      $file_type = $_FILES["p_file"]["type"][$i];
+      $file_size = $_FILES["p_file"]["size"][$i];
+      
+      if ($file_size > 1048576) {
+        if ($file_name) {
+          $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
+          $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
+          $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
+          $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
+          if(($i+1) == $totalFiles){
+            $message .= "--boundary--";
+          }else{
+            $message .= "--boundary\r\n";
+          }
+        }
+      }
     }
 
     // Send the email
@@ -72,7 +83,7 @@ if(isset($_POST['p_submit'])){
                       if($msg == 'success'){
                         echo '
                         <div class="alert alert-success" role="alert">
-                          Message sent successful. We will contact you ASAP.
+                        We appreciate you contacting us, and we will respond to your message as early as possible.
                         </div>
                         ';
                       }elseif($msg == 'fail'){
@@ -112,6 +123,7 @@ if(isset($_POST['p_submit'])){
                     value="Upload"
                   /> -->
                   <div class="d-flex">
+                    
                     <label
                       class="_btn btn_black"
                       for="files"
@@ -124,9 +136,14 @@ if(isset($_POST['p_submit'])){
                       style="visibility: hidden; width: 10px"
                       type="file"
                       name="p_file"
+                      accept=".png,.jpg,.jpeg"
+                      multiple
                     />
-                  </div>
 
+                  </div>
+                  <p>
+                    <div id="selectedImages"></div>
+                  </p>
                   <div class="paragraph_text">
                     <p>
                       Share reference images or drawings to better understand
@@ -135,7 +152,7 @@ if(isset($_POST['p_submit'])){
                   </div>
                   <div class="checkbox_container">
                     <!-- <input type="checkbox" name="" id="" /> -->
-                    <input type="checkbox" name="" id="checkbox" required />
+                    <input type="checkbox" class="p_checkbox" id="checkbox" required />
                     <label for="checkbox"></label>
                     <p>I accept the <a href="<?php echo site_url('terms-and-conditions');?>">terms and conditions</a></p>
                   </div>
@@ -143,6 +160,7 @@ if(isset($_POST['p_submit'])){
                     class="_btn btn_primary"
                     type="submit"
                     value="Submit"
+                    id="p_submit"
                     name="p_submit"
                   />
                 </form>
@@ -163,6 +181,41 @@ if(isset($_POST['p_submit'])){
         </div>
       </section>
     </main>
+    <script>
+      jQuery(document).ready(function(){
+        jQuery("#p_submit").on('click', function(e) {
+          if(!jQuery(".p_checkbox").is(':checked')){
+            alert('Please accept the terms and conditions');
+          }
+        });
 
+        jQuery('#files').change(function(event) {
+          var totalSize = 0;
+          var files = event.target.files;
+          var imagesHTML = '';
+
+          // Calculate total size of selected files
+          jQuery('#selectedImages').html('');
+          for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            let p_size = files[i].size;
+            
+
+            reader.onload = function(e) {
+              if(p_size <= 1048576){
+                imagesHTML += '<img src="' + e.target.result + '" alt="Selected Image" style="height: 80px; width: auto; margin-right: 10px;">';
+                jQuery('#selectedImages').html(imagesHTML);
+              }
+            };
+            reader.readAsDataURL(file);
+            if(files[i].size > 1048576){
+              alert("File can not be more than 1 MB.")
+            }
+          }
+        });
+
+      })
+    </script>
 <!-- Footer -->
 <?php get_footer();?>
