@@ -10,59 +10,62 @@ if(isset($_POST['submit'])){
   $msg = 'success';
 
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
-
+    
     $first_name = sanitize_text_field($_POST['first_name']);
     $last_name = sanitize_text_field($_POST['last_name']);
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-      $file = $_FILES['profile_image'];
-      // File upload settings
-      $upload_dir = wp_upload_dir();
-      $target_dir = $upload_dir['basedir'] . '/profile-image/'; // Change 'custom-folder' to your desired folder name
-      $target_file = $target_dir . basename($file['name']);
-      $file_type = wp_check_filetype($file['name'], array()); // Restrict to image file types
-      $ext = end((explode(".", $file['name'])));
+    if($new_password == $confirm_password){
+      if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+        $file = $_FILES['profile_image'];
+        // File upload settings
+        $upload_dir = wp_upload_dir();
+        $target_dir = $upload_dir['basedir'] . '/profile-image/'; // Change 'custom-folder' to your desired folder name
+        $target_file = $target_dir . basename($file['name']);
+        $file_type = wp_check_filetype($file['name'], array()); // Restrict to image file types
+        $ext = end((explode(".", $file['name'])));
 
-      // Check if the file is a valid image
-      if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) {
-        if (!file_exists($target_dir)) {
-            mkdir($target_dir, 0755, true);
-        }
-        if (move_uploaded_file($file['tmp_name'], $target_file)) {
-          // Image uploaded successfully
-          $attachment = array(
-              'post_title'     => sanitize_file_name($file['name']),
-              'post_content'   => '',
-              'post_status'    => 'inherit',
-              'post_mime_type' => $file_type['type'],
-          );
+        // Check if the file is a valid image
+        if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) {
+          if (!file_exists($target_dir)) {
+              mkdir($target_dir, 0755, true);
+          }
+          if (move_uploaded_file($file['tmp_name'], $target_file)) {
+            // Image uploaded successfully
+            $attachment = array(
+                'post_title'     => sanitize_file_name($file['name']),
+                'post_content'   => '',
+                'post_status'    => 'inherit',
+                'post_mime_type' => $file_type['type'],
+            );
 
-          $attach_id = wp_insert_attachment($attachment, $target_file);
-          require_once ABSPATH . 'wp-admin/includes/image.php';
-          $attach_data = wp_generate_attachment_metadata($attach_id, $target_file);
-          wp_update_attachment_metadata($attach_id, $attach_data);
+            $attach_id = wp_insert_attachment($attachment, $target_file);
+            require_once ABSPATH . 'wp-admin/includes/image.php';
+            $attach_data = wp_generate_attachment_metadata($attach_id, $target_file);
+            wp_update_attachment_metadata($attach_id, $attach_data);
 
-          // $attach_id now contains the ID of the uploaded image
-           update_user_meta($user_id, 'profile_image_id', $attach_id);
+            // $attach_id now contains the ID of the uploaded image
+            update_user_meta($user_id, 'profile_image_id', $attach_id);
+          } else {
+            // Error handling for failed upload
+            $msg = 'Image upload failed.';
+          }
         } else {
-          // Error handling for failed upload
-          $msg = 'Image upload failed.';
+          // Error handling for invalid file type
+          $msg = 'Invalid file type. Please upload an image.';
         }
-      } else {
-        // Error handling for invalid file type
-        $msg = 'Invalid file type. Please upload an image.';
       }
-    }
-    if(isset($new_password) && !empty($new_password)){
-      if($new_password == $confirm_password){
-        wp_set_password($new_password, $user_id);
+      if(isset($new_password) && !empty($new_password)){
+        if($new_password == $confirm_password){
+          wp_set_password($new_password, $user_id);
+        }
       }
+      update_user_meta($user_id, 'first_name', $first_name);
+      update_user_meta($user_id, 'last_name', $last_name);      
+    }else{
+      $msg = 'Passwords do not match.';
     }
-    update_user_meta($user_id, 'first_name', $first_name);
-    update_user_meta($user_id, 'last_name', $last_name);
-    
   }
 }
 $first_name = get_user_meta($user_id, 'first_name', true);
@@ -98,7 +101,7 @@ if($last_name == ''){
             if($msg == 'success'){
               echo '
               <div class="alert alert-success" role="alert">
-                Data saved successfully.
+                Your information has been updated successfully.
               </div>
               ';
             }else{
