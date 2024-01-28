@@ -86,7 +86,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_f_name"
                   value="<?php echo $billing_f_name;?>"
-                  id=""
+                  
                   required
                 />
               </div>
@@ -96,7 +96,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_l_name"
                   value="<?php echo $billing_l_name;?>"
-                  id=""
+                  
                   required
                 />
               </div>
@@ -108,7 +108,7 @@ if($billing_l_name == ''){
                   type="email"
                   name="billing_email"
                   value="<?php echo $billing_email;?>"
-                  id=""
+                  
                   required
                 />
               </div>
@@ -120,7 +120,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_company"
                   value="<?php echo $billing_company;?>"
-                  id=""
+                  
                 />
               </div>
               <div class="half_width input_group">
@@ -129,7 +129,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_country"
                   value="<?php echo $billing_country;?>"
-                  id=""
+                  
                   required
                 />
               </div>
@@ -141,7 +141,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_address"
                   value="<?php echo $billing_address;?>"
-                  id=""
+                  
                 />
               </div>
             </div>
@@ -152,7 +152,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_city"
                   value="<?php echo $billing_city;?>"
-                  id=""
+                  
                 />
               </div>
               <div class="half_width input_group">
@@ -161,7 +161,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_state"
                   value="<?php echo $billing_state;?>"
-                  id=""
+                  
                 />
               </div>
             </div>
@@ -172,7 +172,7 @@ if($billing_l_name == ''){
                   type="text"
                   name="billing_zip"
                   value="<?php echo $billing_zip;?>"
-                  id=""
+                  
                 />
               </div>
             </div>
@@ -323,70 +323,78 @@ if($billing_l_name == ''){
                 <button style="display: none;" class="_btn get_premium_btn btn_black_small btn_primary payment-submit" type="submit">Place Order</button>
             </div>
           </div>
-            
-    
-   
-    <!-- Include PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=<?=ENCODER_IT_PAYPAL_CLIENT?>&currency=USD&disable-funding=paylater"></script>
-    <script>
-
-      jQuery(document).ready(function(){
-        var total_price = <?php echo $total_price;?>;
-        var paypal_tansaction_id='';
-      
-      
-
-        document.getElementById('paypal-button-container').style.display='none'; 
-
-
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '<?php echo $total_price;?>',
-                            currency_code: 'USD',
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-              return actions.order.capture().then(function(details) {
-                //const result=JSON.stringify(details,null,2);
-                // console.log(details.purchase_units[0].payments.captures[0].id , details.purchase_units[0].payments.captures[0].status);
-                let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
-                let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
-                let paypal_transaction_name=details.payer.name.given_name;
-                if(paypal_transaction_status == "COMPLETED"){
-                  var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tnx_id='+paypal_tansaction_id+'&amount='+total_price;
-                  window.location.href = paypalSuccessUrl;
+          <input type="hidden" id="is_user_logged_in" value="<?php echo (is_user_logged_in())? '1':'0';?> ">
+          <script>
+            jQuery(document).ready(function(){
+              var is_user_logged_in = parseInt(jQuery("#is_user_logged_in").val());
+              if(is_user_logged_in == 0){
+                jQuery('#loginModal').modal('show');
               }
             });
-          },
-          onError: function(err) {
-              console.log('Error:', err);
-              // Implement logic to handle errors
-          }
-        }).render('#paypal-button-container');
+          </script>
+   
+          <!-- Include PayPal JavaScript SDK -->
 
-        jQuery("#payment-paypal").click(function(){
-          jQuery(".payment-submit").hide();
-          document.getElementById('paypal-button-container').style.display='none'; 
-          document.getElementById('paypal-button-container').style.display='block';
-        })
-        jQuery("#payment-stripe").click(function(){
-          jQuery(".payment-submit").show();
-          document.getElementById('paypal-button-container').style.display='none'; 
-        })
-      });
+          <script src="https://www.paypal.com/sdk/js?client-id=<?=ENCODER_IT_PAYPAL_CLIENT?>&currency=USD&disable-funding=paylater"></script>
+          <script>
 
-  </script>
-        </div>
-               </form>
+            jQuery(document).ready(function(){
+              var total_price = <?php echo $total_price;?>;
+              var paypal_tansaction_id='';
+            
+            
+
+              document.getElementById('paypal-button-container').style.display='none'; 
+
+
+              paypal.Buttons({
+                  createOrder: function(data, actions) {
+                      return actions.order.create({
+                          purchase_units: [{
+                              amount: {
+                                  value: '<?php echo $total_price;?>',
+                                  currency_code: 'USD',
+                              }
+                          }]
+                      });
+                  },
+                  onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                      //const result=JSON.stringify(details,null,2);
+                      // console.log(details.purchase_units[0].payments.captures[0].id , details.purchase_units[0].payments.captures[0].status);
+                      let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
+                      let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
+                      let paypal_transaction_name=details.payer.name.given_name;
+                      if(paypal_transaction_status == "COMPLETED"){
+                        var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tnx_id='+paypal_tansaction_id+'&amount='+total_price;
+                        window.location.href = paypalSuccessUrl;
+                    }
+                  });
+                },
+                onError: function(err) {
+                    console.log('Error:', err);
+                    // Implement logic to handle errors
+                }
+              }).render('#paypal-button-container');
+
+              jQuery("#payment-paypal").click(function(){
+                jQuery(".payment-submit").hide();
+                document.getElementById('paypal-button-container').style.display='none'; 
+                document.getElementById('paypal-button-container').style.display='block';
+              })
+              jQuery("#payment-stripe").click(function(){
+                jQuery(".payment-submit").show();
+                document.getElementById('paypal-button-container').style.display='none'; 
+              })
+            });
+
+          </script>
+          </div>
+        </form>
       </div>
-        
     </div>
   </section>
 </main>
+
 <!-- Footer -->
 <?php get_footer();?>

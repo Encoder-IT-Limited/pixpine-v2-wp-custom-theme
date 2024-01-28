@@ -5,11 +5,15 @@ Template Name: Cart
 get_header();
 
 global $wpdb;
-$user_id = get_current_user_id();
-$table_name = $wpdb->prefix . 'pixpine_carts';
-$query = "SELECT product_id
-FROM $table_name WHERE user_id='$user_id'";
-$products = $wpdb->get_col($query);
+if(is_user_logged_in()){
+  $user_id = get_current_user_id();
+  $table_name = $wpdb->prefix . 'pixpine_carts';
+  $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'";
+  $products = $wpdb->get_col($query);
+}else{
+  $products = $_SESSION['cart_items'];
+}
+
 $total_price = 0;
 ?>
 

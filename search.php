@@ -454,6 +454,10 @@ if($type == 'search'){
       <!-- Never miss out form section -->
       <?php include 'includes/never-miss-out-form.php';?>
     </main>
-
+    <script>
+      jQuery(document).ready(function(){
+        localStorage.setItem('redirect_url', window.location.href);
+      })
+    </script>
 <!-- Footer -->
 <?php get_footer();?>

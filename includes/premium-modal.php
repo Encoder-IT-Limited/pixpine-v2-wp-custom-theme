@@ -32,6 +32,10 @@ if($is_logged_in == 1){
   if($count>0){
     $in_cart = 1;
   }
+}else{
+  if(in_array($post_id, $_SESSION['cart_items'])){
+    $in_cart = 1;
+  }
 }
 
 $cpt = get_post($post_id);

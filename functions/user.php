@@ -3,15 +3,19 @@
 function pixpine_remove_cart(){
     // User login credentials
     $p_id = $_POST['pId'];
-    $user_id = get_current_user_id();
+    if(is_user_logged_in()){
+        $user_id = get_current_user_id();
 
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'pixpine_carts';
-    if($isCart == 0 ){
-        $wpdb->delete($table_name, array(
-            'user_id' => $user_id,
-            'product_id' => $p_id
-        ));
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'pixpine_carts';
+        if($isCart == 0 ){
+            $wpdb->delete($table_name, array(
+                'user_id' => $user_id,
+                'product_id' => $p_id
+            ));
+        }        
+    }else{
+        $_SESSION['cart_items'] = array_diff($_SESSION['cart_items'],[$p_id]);
     }
 
     echo 'success';
@@ -24,16 +28,21 @@ function pixpine_update_cart(){
     // User login credentials
     $p_id = $_POST['pId'];
     $isCart = $_POST['isCart'];
-    // $meta_key = 'pixpine_favorite_'.$type;
-    $user_id = get_current_user_id();
+    if(is_user_logged_in()){
+        $user_id = get_current_user_id();
 
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'pixpine_carts';
-    if($isCart == 0 ){
-        $wpdb->insert($table_name, array(
-            'user_id' => $user_id,
-            'product_id' => $p_id
-        ));
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'pixpine_carts';
+        if($isCart == 0 ){
+            $wpdb->insert($table_name, array(
+                'user_id' => $user_id,
+                'product_id' => $p_id
+            ));
+        }        
+    }else{
+        if(!in_array($p_id, $_SESSION['cart_items'])){
+            array_push($_SESSION['cart_items'], $p_id);
+        }
     }
 
     echo 'success';
@@ -41,6 +50,7 @@ function pixpine_update_cart(){
     die();
 }
 add_action('wp_ajax_pixpine_update_cart', 'pixpine_update_cart'); // For logged-in users
+add_action('wp_ajax_nopriv_pixpine_update_cart', 'pixpine_update_cart'); // For logged-in users
 
 function pixpine_alter_favorite(){
     // User login credentials
@@ -98,6 +108,7 @@ function pixpine_login_user(){
         // echo 'Login failed: ' . $user_id->get_error_message();
     } else {
         // Login successful
+        move_session_cart_to_db_cart($user->ID);
         echo 'success';
     }
 
@@ -106,6 +117,22 @@ function pixpine_login_user(){
 add_action('wp_ajax_pixpine_login_user', 'pixpine_login_user'); // For logged-in users
 add_action('wp_ajax_nopriv_pixpine_login_user', 'pixpine_login_user'); // For non-logged-in users
 
+function move_session_cart_to_db_cart($user_id){
+    if(count($_SESSION['cart_items'])>0){
+        global $wpdb;
+        foreach($_SESSION['cart_items'] as $p_id){
+            $table_name = $wpdb->prefix . 'pixpine_carts';            
+            $checkIfExists = $wpdb->get_var("SELECT id FROM $table_name WHERE user_id = '$user_id' AND product_id='$p_id'");
+            if ($checkIfExists == NULL) {
+                $wpdb->insert($table_name, array(
+                    'user_id' => $user_id,
+                    'product_id' => $p_id
+                )); 
+            }
+        }
+        $_SESSION['cart_items'] = [];
+    }
+}
 
 function pixpine_signup(){
     // User login credentials
@@ -129,6 +156,7 @@ function pixpine_signup(){
         } else {
             // Registration successful
             // echo 'Registration successful. User ID: ' . $user_id;
+            move_session_cart_to_db_cart($user_id);
             // send welcome email
             $html = pixpine_welcome_email($username);
             pixpine_send_html_email($email, 'Pixpine', $html);

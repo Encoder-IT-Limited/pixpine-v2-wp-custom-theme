@@ -938,55 +938,52 @@ function my_login_logo() { ?>
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 
-function is_show_download_btn($product_id=null){
-    // is user has subscription
-    global $wpdb;
-    $user_id = get_current_user_id();
-    $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
-    
-    if ($active_subscription != null) {
-        $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_subscription_downloaded_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
-        if($bought_product != null){
-            return true;
-        }
+function is_show_download_btn($product_id=null, $mockup_cat=null){
 
-        if($active_subscription == 'yearly'){
-            return true;
-        }elseif($active_subscription == 'monthly'){
-           $available_download = get_user_meta($user_id, 'available_download', true);
-            if($available_download > 0){
+    if(!is_user_logged_in()){
+        return false;
+    }else{
+        // is user has subscription
+        global $wpdb;
+        $user_id = get_current_user_id();
+
+        // already downloaded
+        if($product_id != null){
+            $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_order_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
+            if($bought_product != null){
                 return true;
             }
         }
-    } 
-    // already downloaded
-    if($product_id != null){
-        $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_order_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
-        if($bought_product != null){
-            return true;
+
+        $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
+        
+        if ($active_subscription != null) {
+            $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_subscription_downloaded_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
+            if($bought_product != null){
+                return true;
+            }
+
+            if(($active_subscription == 'yearly') && ($mockup_cat != 'bundle-mockups')){
+                return true;
+            }elseif($active_subscription == 'monthly'){
+            $available_download = get_user_meta($user_id, 'available_download', true);
+                if(($available_download > 0) && ($mockup_cat != 'bundle-mockups')){
+                    return true;
+                }
+            }
         }
+        return false;
     }
-    
-    return false;
 }
 
 
-// // Add this code to your theme's functions.php file or a custom plugin
-
-// add_filter( 'wp_login_errors', 'remove_lost_password_link' );
-
-// function remove_lost_password_link( $errors ) {
-//     if ( isset( $errors->errors['incorrect_password'] ) ) {
-//         // Get the error message
-//         $error_message = $errors->errors['incorrect_password'][0];
-
-//         // Remove the "Lost your password?" link from the error message
-//         $error_message .= 'ddddddd';
-//         // $error_message = str_replace( 'Lost your password?', '', $error_message );
-
-//         // Update the error message
-//         $errors->errors['incorrect_password'][0] = $error_message;
-//     }
-
-//     return $errors;
-// }
+function pixpine_init_session() {
+    if ( ! session_id() ) {
+        session_start();
+    }
+    if(!isset($_SESSION['cart_items'])){
+        $_SESSION['cart_items'] = [];
+    }
+}
+// Start session on init hook.
+add_action( 'init', 'pixpine_init_session' );

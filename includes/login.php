@@ -46,18 +46,20 @@
               <form action="" id="login-form">
                 <input
                   type="email"
-                  name=""
+                  name="user_email"
                   id="login-email"
                   placeholder="Email"
                   required
+                  autocomplete="on"
                 />
                 <div class="label_col">
                   <input
                     type="password"
-                    name=""
+                    name="user_password"
                     id="login-password"
                     placeholder="Password"
                     required
+                    autocomplete="on"
                   />
                   <p class="login-form-error"></p>
                   <label class="forgot_password" for=""

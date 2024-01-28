@@ -168,7 +168,7 @@ if(isset($_POST['p_submit'])){
               <div class="customized_mockups_col">
                 <div class="inner_content">
                   <h2><span>Get 30% Off</span> on customized mockups</h2>
-                  <p>With yearly subscription</p>
+                  <p style="text-align: left;">With yearly subscription</p>
                   <div class="text-center">
                     <a class="_btn btn_black" href="<?php echo site_url('get-subscription');?>">
                       Get premium

@@ -125,7 +125,7 @@ jQuery(document).ready(function ($) {
       var isCart = $(this).attr("in-cart");
       var cartUrl = $(this).attr("cart-url");
   
-      if (isLoggedIn == "1") {
+      // if (isLoggedIn == "1") {
         if (isCart == "0") {
           $.ajax({
             url: ajax_object.ajax_url,
@@ -147,9 +147,9 @@ jQuery(document).ready(function ($) {
         } else {
           window.location.href = cartUrl;
         }
-      } else {
-        alert("You have logged in to mark it as favorite.");
-      }
+      // } else {
+      //   alert("You have logged in to mark it as favorite.");
+      // }
     });
   
     // alter favorite product

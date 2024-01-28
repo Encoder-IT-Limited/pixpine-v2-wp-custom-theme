@@ -102,11 +102,13 @@
                       Get Premium
                     </a>
                   </li>
+                  <?php if(!is_user_logged_in()){ ?> 
                   <li class="nav-item">
                     <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
                       Log in
                     </a>
                   </li>
+                  <?php } ?> 
                 </div>
               </ul>
               <div id="login_signup">
