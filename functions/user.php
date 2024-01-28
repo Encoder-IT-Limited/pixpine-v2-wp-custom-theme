@@ -5,15 +5,12 @@ function pixpine_remove_cart(){
     $p_id = $_POST['pId'];
     if(is_user_logged_in()){
         $user_id = get_current_user_id();
-
         global $wpdb;
         $table_name = $wpdb->prefix . 'pixpine_carts';
-        if($isCart == 0 ){
-            $wpdb->delete($table_name, array(
-                'user_id' => $user_id,
-                'product_id' => $p_id
-            ));
-        }        
+        $wpdb->delete($table_name, array(
+            'user_id' => $user_id,
+            'product_id' => $p_id
+        ));
     }else{
         $_SESSION['cart_items'] = array_diff($_SESSION['cart_items'],[$p_id]);
     }
