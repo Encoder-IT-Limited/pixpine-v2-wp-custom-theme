@@ -2814,3 +2814,10 @@ header .dropdown-menu .dropdown-item:hover {
     border-radius: 15px;
   }
 }
+
+
+.login-form-error{
+  font-size: 14px !important;
+  line-height: 18px !important;
+  font-weight: 400 !important;
+}

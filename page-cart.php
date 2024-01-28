@@ -118,7 +118,7 @@ $total_price = 0;
       <?php }else{ ?>
         <div class="row">
         <div class="col-md-8 mx-auto">
-        <h1 class="page_heading text-center">Your cart is empty, browse our Premium Mockups</h1>
+        <h1 class="page_heading text-center" style="font-size: 20px; font-weight: 400">Your cart is empty, browse our Premium Mockups</h1>
           <p class="mt-5 text-center">
             <a class="_btn btn_primary" href="<?php echo site_url('/premium-mockups/');?>">Browse Premium</a>
           </p>

@@ -48,10 +48,14 @@
 
           // Define the tax_query to retrieve child terms of the specified parent category
           $args = array(
+              
               'taxonomy' => $taxonomy,
               'child_of' => 0, // Set to 0 to get top-level terms
               'parent' => get_term_by('slug', $parent_category_slug, $taxonomy)->term_id, // Get the parent term ID
               'hide_empty' => false, // Set to false to retrieve even if they are empty
+              'meta_key'   => '_custom_cat_serial',  // Replace 'your_meta_key' with the actual meta key you want to use
+              'orderby'    => 'meta_value',     // Order by the value of the specified meta key
+              'order'      => 'ASC',            // Adjust the order as needed (ASC or DESC)
           );
 
           $subcategories = get_terms($args);

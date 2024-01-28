@@ -969,3 +969,24 @@ function is_show_download_btn($product_id=null){
     
     return false;
 }
+
+
+// // Add this code to your theme's functions.php file or a custom plugin
+
+// add_filter( 'wp_login_errors', 'remove_lost_password_link' );
+
+// function remove_lost_password_link( $errors ) {
+//     if ( isset( $errors->errors['incorrect_password'] ) ) {
+//         // Get the error message
+//         $error_message = $errors->errors['incorrect_password'][0];
+
+//         // Remove the "Lost your password?" link from the error message
+//         $error_message .= 'ddddddd';
+//         // $error_message = str_replace( 'Lost your password?', '', $error_message );
+
+//         // Update the error message
+//         $errors->errors['incorrect_password'][0] = $error_message;
+//     }
+
+//     return $errors;
+// }

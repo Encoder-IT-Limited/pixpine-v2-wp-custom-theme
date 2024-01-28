@@ -94,7 +94,8 @@ function pixpine_login_user(){
 
     if (is_wp_error($user)) {
         // Login failed
-        echo 'Login failed: ' . $user->get_error_message();
+        echo 'Login failed: ' . str_replace( 'Lost your password?', '', $user->get_error_message());
+        // echo 'Login failed: ' . $user_id->get_error_message();
     } else {
         // Login successful
         echo 'success';
@@ -138,7 +139,7 @@ function pixpine_signup(){
         }
     } else {
         // User already exists with the provided email
-        echo 'User with this email already exists.';
+        echo 'An account already exists with this email.';
     }
 
     die();
