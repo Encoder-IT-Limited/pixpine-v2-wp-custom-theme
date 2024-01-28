@@ -976,6 +976,22 @@ function is_show_download_btn($product_id=null, $mockup_cat=null){
     }
 }
 
+function get_user_specific_discount(){
+    // is user has subscription
+    if(is_user_logged_in()){
+        global $wpdb;
+        $user_id = get_current_user_id();
+        $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
+        if ($active_subscription != null) {
+            if($active_subscription == 'yearly'){
+                return 50;
+            }elseif($active_subscription == 'monthly'){
+                return 30;
+            }
+        }
+    }
+    return 0;
+}
 
 function pixpine_init_session() {
     if ( ! session_id() ) {
