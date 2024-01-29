@@ -185,7 +185,7 @@ if($last_name == ''){
                   </div>
                 </div>
                 <div class="form_btn_container">
-                  <input class="_btn btn_primary" type="submit" name="submit" value="Update" />
+                  <input class="_btn btn_primary p_submit" type="submit" name="submit" value="Update" />
                 </div>
               </div>
             </form>
@@ -195,6 +195,65 @@ if($last_name == ''){
     </div>
   </section>
 </main>
+<script>
+jQuery(document).ready(function(){
 
+
+  // Attach an event listener to the file input field
+  jQuery('.profile-image-input').on('change', function () {
+
+    var error_message = '';
+
+    if (this.files && this.files[0]) {
+      // Create a FileReader object
+      const reader = new FileReader();
+      let p_size = this.files[0].size;
+
+      // When the file is loaded
+      reader.onload = function (e) {
+        // Create a new Image object
+        const img = new Image();
+        
+        // Set the source of the image to the file's data URL
+        img.src = e.target.result;
+        
+        // When the image is loaded
+        img.onload = function() {
+          // Get the width and height of the image
+          const width = this.width;
+          const height = this.height;
+
+          if(p_size > 1048576){
+            error_message += 'The maximum size of the image can be 1 MB.';
+          }
+          if((width != 200) || (height != 200)){
+            error_message += 'The profile image must be 200*200 pixels.';
+          }
+          if(error_message == ''){
+            jQuery('.profile-image-preview').attr('src', e.target.result);
+            jQuery(".p_submit").prop('disabled', false);
+          }else{
+            jQuery(".p_submit").prop('disabled', true);
+            alert(error_message);
+          }
+          
+          // Now you can use 'width' and 'height' as needed
+          console.log('Width:', width, 'Height:', height);
+        };
+      };
+
+      // Read the file as a data URL
+      reader.readAsDataURL(this.files[0]);
+    }
+
+  });
+  
+
+//   jQuery('.profile-image-input').on('change', function () {
+//   // Check if any file is selected
+
+// });
+})
+</script>
 <!-- Footer -->
 <?php get_footer();?>
