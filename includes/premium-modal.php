@@ -204,6 +204,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                   <div class="mobile_">
                     <div class="price_product_specs_container">
                       <div class="add_to_cart">
+                        <?php if(!is_show_download_btn($cpt->ID)){?>
                         <div
                           class="d-flex justify-content-between align-items-center"
                         >
@@ -215,6 +216,8 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
                           </h5>
                         </div>
+                        <?php } ?>
+
                         <button class="_btn btn_primary 
                         <?php echo is_show_download_btn($cpt->ID) ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
                         <?php if (is_show_download_btn($cpt->ID)) {
@@ -383,6 +386,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                     </div>
                     <div class="price_product_specs_container">
                       <div class="add_to_cart">
+                        <?php if(!is_show_download_btn($cpt->ID)){?>
                         <div
                           class="d-flex justify-content-between align-items-center"
                         >
@@ -394,6 +398,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                             $<?php echo get_post_meta($post_id, 'personal_commercial_sale_price', true);?> 
                           </h5>
                         </div>
+                        <?php } ?>
                         <button class="_btn btn_primary 
                         <?php echo is_show_download_btn($cpt->ID) ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
                         <?php if (is_show_download_btn($cpt->ID)) {

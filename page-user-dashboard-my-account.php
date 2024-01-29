@@ -231,9 +231,8 @@ jQuery(document).ready(function(){
           }
           if(error_message == ''){
             jQuery('.profile-image-preview').attr('src', e.target.result);
-            jQuery(".p_submit").prop('disabled', false);
           }else{
-            jQuery(".p_submit").prop('disabled', true);
+            jQuery('.profile-image-input').val("");
             alert(error_message);
           }
           
@@ -247,12 +246,6 @@ jQuery(document).ready(function(){
     }
 
   });
-  
-
-//   jQuery('.profile-image-input').on('change', function () {
-//   // Check if any file is selected
-
-// });
 })
 </script>
 <!-- Footer -->

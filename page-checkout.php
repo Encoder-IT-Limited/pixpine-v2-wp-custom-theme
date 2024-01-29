@@ -230,6 +230,10 @@ if($billing_l_name == ''){
                 $table_name = $wpdb->prefix . 'pixpine_carts'; 
                 $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
                 $products = $wpdb->get_col($query); $total_price = 0; 
+
+                $get_user_specific_discount = get_user_specific_discount();
+                $get_user_specific_discount_amount = get_user_specific_discount_amount($products, $get_user_specific_discount);
+
                 foreach($products as $cpt_id){ 
                   $cpt_post = get_post($cpt_id); 
                   $thumbnail_url = get_the_post_thumbnail_url($cpt_id); 
@@ -278,6 +282,14 @@ if($billing_l_name == ''){
                   <span class="amount">$<?php echo number_format($total_price, 2);?></span>
                 </div>
               </div>
+              <?php if($get_user_specific_discount != 0){?>
+              <div class="tax-rate tax-rate-de-vat-1">
+                <div class="d-flex align-items-center justify-content-between">
+                  <p>Subscription Discount(<?=$get_user_specific_discount?>%)</p>
+                  <span class="amount">- $<?php echo $get_user_specific_discount_amount; ?></span>
+                </div>
+              </div>
+              <?php } ?>
               <div class="tax-rate tax-rate-de-vat-1">
                 <div class="d-flex align-items-center justify-content-between">
                   <p>VAT</p>
@@ -286,7 +298,7 @@ if($billing_l_name == ''){
               </div>
               <div
                 class="order-total order-total-main"
-                data-total="<?php echo $total_price;?>"
+                data-total="<?php echo $total_price = $total_price - $get_user_specific_discount_amount;?>"
                 data-total-feeless="17.84"
                 data-total-blue="14.99"
               >

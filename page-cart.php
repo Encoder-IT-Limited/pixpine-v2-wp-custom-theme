@@ -15,6 +15,8 @@ if(is_user_logged_in()){
 }
 
 $total_price = 0;
+$get_user_specific_discount = get_user_specific_discount();
+$get_user_specific_discount_amount = get_user_specific_discount_amount($products, $get_user_specific_discount);
 ?>
 
 <main>
@@ -79,11 +81,21 @@ $total_price = 0;
                 </span>
               </p>
             </div>
+            <?php if($get_user_specific_discount != 0){?>
+            <div class="item">
+              <p>Subscription Discount(<?=$get_user_specific_discount?>%)</p>
+              <p>
+                - $<span class="total-cart-price">
+                  <?php echo $get_user_specific_discount_amount; ?>
+                </span>
+              </p>
+            </div>
+            <?php } ?>
             <div class="item">
               <p>Order Total</p>
               <p>
                 $<span class="total-cart-price">
-                  <?php echo number_format($total_price, 2); ?>
+                  <?php echo number_format(($total_price-$get_user_specific_discount_amount), 2); ?>
                 </span>
               </p>
             </div>

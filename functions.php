@@ -993,6 +993,35 @@ function get_user_specific_discount(){
     return 0;
 }
 
+function get_user_specific_discount_amount($product_ids, $discount_percentage){
+    $discount = 0;
+    if(is_user_logged_in()){
+        global $wpdb;
+        $user_id = get_current_user_id();
+
+        $only_bundle_mockup_price = 0;
+
+        $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
+        foreach($product_ids as $p_id){
+            $custom_categories = wp_get_post_terms($p_id, $taxonomy);
+            // Check if custom categories were found
+            if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
+                // Loop through the custom categories and display them
+                foreach ($custom_categories as $category) {
+                    if(esc_html($category->slug) == "bundle-mockups"){
+                        $price = get_post_meta($p_id, 'personal_commercial_sale_price', true);
+                        $only_bundle_mockup_price += $price;
+                    }
+                }
+            }
+        }
+        if($only_bundle_mockup_price != 0){
+            $discount = $only_bundle_mockup_price*($discount_percentage/100);
+        }
+    }
+    return $discount;
+}
+
 function pixpine_init_session() {
     if ( ! session_id() ) {
         session_start();
