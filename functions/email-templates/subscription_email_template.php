@@ -9,7 +9,7 @@ function pixpine_subscription_email($subscription_plan){
   }
   if($last_name == ''){
     $last_name = get_user_meta($user_id, 'billing_l_name', true);
-  }
+  } 
 
   $billing_f_name = get_user_meta($user_id, 'billing_f_name', true);
   $billing_l_name = get_user_meta($user_id, 'billing_l_name', true);
@@ -747,7 +747,7 @@ function pixpine_subscription_email($subscription_plan){
                         <img
                           style="width: 171px; hight: auto"
                           class="wp_logo"
-                          src="'.get_template_directory_uri().'/assets/email/logo.jpg"
+                          src="'.get_template_directory_uri().'/assets/email/logo.png"
                           alt=""
                         />
                       </a>
@@ -1107,62 +1107,62 @@ function pixpine_subscription_email($subscription_plan){
                         class="social_link"
                         style="text-align: center; margin: 0; padding: 0"
                       >
-                      <li style="display: inline-block; margin: 0 13px">
+                      <li style="display: inline-block; margin: 0 13px; vertical-align: middle;">
                         <a class="youtube" href="https://www.youtube.com/">
                           <img
-                            style="width: 25px; height: 18px;"
-                            src="'.get_template_directory_uri().'/assets/email/youtube.jpg"
+                            style="width: 25px; height: 18px; object-fit: contain;"
+                            src="'.get_template_directory_uri().'/assets/email/youtube.png"
                             alt=""
                           />
                         </a>
                       </li>
-                      <li style="display: inline-block; margin: 0 13px">
+                      <li style="display: inline-block; margin: 0 13px; vertical-align: middle;">
                         <a
                           class="pinterest"
                           href="https://www.pinterest.com/"
                         >
                           <img
-                            style="width: 20px; height: 21px;"
-                            src="'.get_template_directory_uri().'/assets/email/pinterest.jpg"
+                            style="width: 20px; height: 21px; object-fit: contain;"
+                            src="'.get_template_directory_uri().'/assets/email/pinterest.png"
                             alt=""
                           />
                         </a>
                       </li>
-                      <li style="display: inline-block; margin: 0 13px">
+                      <li style="display: inline-block; margin: 0 13px; vertical-align: middle;">
                         <a
                           class="instagram"
                           href="https://www.instagram.com/"
                         >
                           <img
-                            style="width: 19px; height: 19px;"
-                            src="'.get_template_directory_uri().'/assets/email/instagram.jpg"
+                            style="width: 19px; height: 19px; object-fit: contain;"
+                            src="'.get_template_directory_uri().'/assets/email/instagram.png"
                             alt=""
                           />
                         </a>
                       </li>
-                      <li style="display: inline-block; margin: 0 13px">
+                      <li style="display: inline-block; margin: 0 13px; vertical-align: middle;">
                         <a class="twitter" href="https://twitter.com/">
                           <img
-                            style="width: 19px; height: 20px;"
-                            src="'.get_template_directory_uri().'/assets/email/twitter.jpg"
+                            style="width: 19px; height: 20px; object-fit: contain;"
+                            src="'.get_template_directory_uri().'/assets/email/twitter.png"
                             alt=""
                           />
                         </a>
                       </li>
-                      <li style="display: inline-block; margin: 0 13px">
+                      <li style="display: inline-block; margin: 0 13px; vertical-align: middle;">
                         <a class="behance" href="https://www.behance.net/">
                           <img
-                            style="width: 26px; height: 16px;"
-                            src="'.get_template_directory_uri().'/assets/email/behance.jpg"
+                            style="width: 26px; height: 16px; object-fit: contain;"
+                            src="'.get_template_directory_uri().'/assets/email/behance.png"
                             alt=""
                           />
                         </a>
                       </li>
-                      <li style="display: inline-block; margin: 0 13px">
+                      <li style="display: inline-block; margin: 0 13px; vertical-align: middle;">
                         <a class="facebook" href="https://www.facebook.com/">
                           <img
-                            style="width: 10px; height: 19px;"
-                            src="'.get_template_directory_uri().'/assets/email/facebook.jpg"
+                            style="width: 10px; height: 19px; object-fit: contain;"
+                            src="'.get_template_directory_uri().'/assets/email/facebook.png"
                             alt=""
                           />
                         </a>

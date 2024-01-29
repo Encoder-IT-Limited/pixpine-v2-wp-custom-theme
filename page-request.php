@@ -8,7 +8,7 @@ $msg = '';
 if(isset($_POST['p_submit'])){
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
     // Define recipient email address
-    $to = "request@pixpine.site, innovawebdeveloper@gmail.com";
+    $to = "request@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com";
 
     // Define email subject
     $subject = "REQUEST MOCKUP";

@@ -48,7 +48,7 @@ if (isset($_GET['tnx_id'])) {
   $wpdb->query($query);
 
   $html = order_confirmation_email($product_ids, 'stripe');
-  $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
+  $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
   pixpine_send_html_email($email, ' Thank you for your payment', $html);
   $custom_page_url = site_url() . '/downloads?type=new-purchase';
   $_SESSION['message'] = 'Successfully Paid';

@@ -13,7 +13,7 @@ if(isset($_POST['c_submit'])){
     $c_email = sanitize_email($_POST['c_email']);
 
     // Email recipient (customize this)
-    $to = 'helpdesk@pixpine.site, innovawebdeveloper@gmail.com'; // Replace with the client's email address
+    $to = 'helpdesk@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com'; // Replace with the client's email address
     $subject = 'Help Desk';
 
     // Email body

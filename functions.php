@@ -615,7 +615,7 @@ function sub_stripesuccess()
     $wpdb->query($query);
 
     $html = pixpine_subscription_email($subscription_plan);
-    $email = 'subscribe@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
+    $email = 'subscribe@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 
     $custom_page_url = site_url() . '/subscription-monthly?type=new-subscription';
@@ -662,7 +662,7 @@ function stripesuccess()
     $wpdb->query($query);
 
     $html = order_confirmation_email($product_ids, 'stripe');
-    $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, '.$current_user->user_email;
+    $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 
     $custom_page_url = site_url() . '/downloads?type=new-purchase';
