@@ -9,6 +9,7 @@
           <li class="nav-item">
             <a class="nav-link cart_icon" href="<?php echo site_url('cart');?>">
               <img class="cart_img" src="<?php echo get_template_directory_uri();?>/assets/images/cart_icon.png" alt="" />
+              <span class="number_of_items">(1)</span>
             </a>
           </li>
           <li class="nav-item dropdown">
@@ -99,6 +100,7 @@
             <li class="nav-item">
               <a class="nav-link cart_icon" href="<?php echo site_url('cart');?>">
                 <img class="cart_img" src="<?php echo get_template_directory_uri();?>/assets/images/cart_icon.png" alt="" />
+                <span class="number_of_items">(1)</span>
               </a>
             </li>
             <?php if(is_user_logged_in()){ ?>

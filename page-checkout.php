@@ -328,11 +328,23 @@ if($billing_l_name == ''){
                         <div class="icon_payment">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/paypal_icon.png" alt="">
                         </div>
+                        <div class="checkbox_container">
+                          <input type="checkbox" name="" id="checkbox" />
+                          <label for="checkbox">
+                            I have read and agree to the website <a href="<?php echo site_url('terms-and-conditions');?>">Terms & Conditions</a>.
+                          </label>
+                        </div>
                         <!-- Your HTML content -->
                         <div id="paypal-button-container" style="width: 100%;margin-top: 15px;"></div>
                     </div>
+                    <!-- <div class="checkbox_container">
+                      <input type="checkbox" name="" id="checkbox" />
+                      <label for="checkbox">
+                        I have read and agree to the website <a href="<?php echo site_url('terms-and-conditions');?>">Terms & Conditions</a>.
+                      </label>
+                    </div> -->
                 </div>
-                <button style="display: none;" class="_btn get_premium_btn btn_black_small btn_primary payment-submit" type="submit">Place Order</button>
+                <button style="display: none;" class="_btn get_premium_btn btn_primary payment-submit" type="submit">Place Order</button>
             </div>
           </div>
           <input type="hidden" id="is_user_logged_in" value="<?php echo (is_user_logged_in())? '1':'0';?> ">

@@ -221,9 +221,17 @@ header .navbar-nav {
 #login_signup .nav-link .cart_img {
   max-width: 19px;
 }
+header .cart_icon .number_of_items {
+  margin-left: 5px;
+  display: none;
+}
 #login_signup .nav-link.cart_icon {
   margin-right: 8px;
   margin-left: 0;
+  display: flex;
+}
+header .nav-link.cart_icon {
+  align-items: center;
 }
 #login_signup .nav-link.user_icon {
   /* margin-right: 31px; */
@@ -251,7 +259,9 @@ header .navbar-nav {
   color: #ffffff;
   background-color: #030303;
 }
-.home header .navbar-nav .nav-link {
+.home header .navbar-nav .nav-link,
+.home .cart_icon .number_of_items,
+.home #login_signup .cart_icon .number_of_items {
   color: #fafafa;
 }
 /* Header Css End */
@@ -1424,7 +1434,7 @@ footer .menu_inner_col .item:nth-child(3) {
     justify-content: end;
   }
   #mobile_cart_btn .nav-link {
-    display: block;
+    display: flex;
     margin-left: 27px;
   }
   .home #mobile_cart_btn .nav-link {
@@ -1645,7 +1655,7 @@ footer .menu_inner_col .item:nth-child(3) {
     margin-right: 0;
     margin-top: 30px;
   }
-  .subscriptions_package.yearly__subscription{
+  .subscriptions_package.yearly__subscription {
     margin-bottom: 30px;
     margin-left: 0;
   }

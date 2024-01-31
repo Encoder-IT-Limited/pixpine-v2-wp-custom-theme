@@ -138,8 +138,8 @@ if(isset($_POST['p_submit'])){
                     value="Upload"
                   /> -->
                   <div class="checkbox_container">
-                    <input type="checkbox" class="customized-mockup-terms" name="" id="checkbox customized-mockup-terms" />
-                    <label for="checkbox"></label>
+                    <input type="checkbox" class="customized-mockup-terms" name="" id="customized-mockup-terms" />
+                    <label for="customized-mockup-terms"></label>
                     <p>I accept the <a href="<?php echo site_url('terms-and-conditions');?>">terms and conditions</a></p>
                   </div>
                   <div
