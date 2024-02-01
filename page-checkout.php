@@ -42,11 +42,14 @@ $billing_address = get_user_meta($user_id, 'billing_address', true);
 $billing_city = get_user_meta($user_id, 'billing_city', true);
 $billing_state = get_user_meta($user_id, 'billing_state', true);
 $billing_zip = get_user_meta($user_id, 'billing_zip', true);
+
+$is_billing_form_filled = 1;
 $form_class_name = 'd-none';
 $info_class_name = '';
 if($billing_email == '') {
   $form_class_name = '';
   $info_class_name = 'd-none';
+  $is_billing_form_filled = 0;
 }
 
 if($billing_f_name == ''){
@@ -77,7 +80,7 @@ if($billing_l_name == ''){
         </div>
         '; } } ?>
         <div class="content__column billing_form <?php echo $form_class_name;?>">
-          <form action="#" method="post">
+          <form action="#" method="post" class="billing-info-form">
             <?php wp_nonce_field('client_form_nonce', 'client_form_nonce'); ?>
             <div class="full_width_container">
               <div class="half_width input_group">
@@ -178,7 +181,7 @@ if($billing_l_name == ''){
             </div>
             <div class="form_btn_container">
               <input
-                class="_btn btn_primary"
+                class="_btn btn_primary billing-info-form-submit"
                 type="submit"
                 name="submit"
                 value="Update"
@@ -307,7 +310,7 @@ if($billing_l_name == ''){
                   <span class="amount">$<?php echo number_format($total_price, 2);?></span>
                 </div>
               </div>
-                  <div class="payment_option <?php echo $info_class_name;?>">
+                  <div class="payment_option">
                     <h5 class="product-title">Payment Method</h5>
                     <div class="paypal_item">
                         <label>Stripe</label>
@@ -321,7 +324,7 @@ if($billing_l_name == ''){
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/master_card_icon.png" alt="">
                         </div>
                     </div>
-                    <div class="paypal_item <?php echo $info_class_name;?>">
+                    <div class="paypal_item">
                         <label>Paypal</label>
                         <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
                         <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
@@ -329,7 +332,7 @@ if($billing_l_name == ''){
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/paypal_icon.png" alt="">
                         </div>
                         <div class="checkbox_container">
-                          <input type="checkbox" name="" id="checkbox" />
+                          <input type="checkbox" name="" id="checkbox" class="tc_checkbox" />
                           <label for="checkbox">
                             I have read and agree to the website <a href="<?php echo site_url('terms-and-conditions');?>">Terms & Conditions</a>.
                           </label>
@@ -337,17 +340,12 @@ if($billing_l_name == ''){
                         <!-- Your HTML content -->
                         <div id="paypal-button-container" style="width: 100%;margin-top: 15px;"></div>
                     </div>
-                    <!-- <div class="checkbox_container">
-                      <input type="checkbox" name="" id="checkbox" />
-                      <label for="checkbox">
-                        I have read and agree to the website <a href="<?php echo site_url('terms-and-conditions');?>">Terms & Conditions</a>.
-                      </label>
-                    </div> -->
                 </div>
                 <button style="display: none;" class="_btn get_premium_btn btn_primary payment-submit" type="submit">Place Order</button>
             </div>
           </div>
           <input type="hidden" id="is_user_logged_in" value="<?php echo (is_user_logged_in())? '1':'0';?> ">
+          <input type="hidden" id="is_billing_form_filled" value="<?php echo $is_billing_form_filled;?> ">
           <script>
             jQuery(document).ready(function(){
               var is_user_logged_in = parseInt(jQuery("#is_user_logged_in").val());
@@ -401,15 +399,70 @@ if($billing_l_name == ''){
                 }
               }).render('#paypal-button-container');
 
-              jQuery("#payment-paypal").click(function(){
-                jQuery(".payment-submit").hide();
-                document.getElementById('paypal-button-container').style.display='none'; 
-                document.getElementById('paypal-button-container').style.display='block';
+
+              jQuery('input[name="payment_method"]').change(function(){
+                show_payment_options();
               })
-              jQuery("#payment-stripe").click(function(){
-                jQuery(".payment-submit").show();
-                document.getElementById('paypal-button-container').style.display='none'; 
-              })
+
+              jQuery('.tc_checkbox').change(function(){
+                show_payment_options()
+              });
+
+              function show_payment_options(){
+                var payment_method_selected = jQuery('input[name="payment_method"]:checked').val();
+                var is_billing_form_filled = jQuery("#is_billing_form_filled").val();
+                if(is_billing_form_filled == 1){
+                  if(jQuery('.tc_checkbox').is(":checked")){
+                    if(payment_method_selected == 'Stripe'){
+                    jQuery(".payment-submit").show();
+                    document.getElementById('paypal-button-container').style.display='none'; 
+                    }else{
+                      // paypal
+                      jQuery(".payment-submit").hide();
+                      document.getElementById('paypal-button-container').style.display='none'; 
+                      document.getElementById('paypal-button-container').style.display='block';
+                    }
+                  }else{
+                    jQuery(".payment-submit").hide();
+                    document.getElementById('paypal-button-container').style.display='none'; 
+                  }
+
+                }else{
+                  alert("You have to have a billing address to buy.");
+                  scroll_to_form();
+                  jQuery(".billing-info-form-submit").submit();
+                }
+              }
+
+
+              // jQuery("#payment-paypal").click(function(){
+              //   var is_billing_form_filled = jQuery("#is_billing_form_filled").val();
+              //   if(is_billing_form_filled == 1){
+              //   jQuery(".payment-submit").hide();
+              //     document.getElementById('paypal-button-container').style.display='none'; 
+              //     document.getElementById('paypal-button-container').style.display='block';
+              //   }else{
+              //     alert("You have to have a billing address to buy.");
+              //     scroll_to_form()
+              //     jQuery(".billing-info-form-submit").submit();
+              //   }
+              // })
+              // jQuery("#payment-stripe").click(function(){
+              //   var is_billing_form_filled = jQuery("#is_billing_form_filled").val();
+              //   if(is_billing_form_filled == 1){
+              //     jQuery(".payment-submit").show();
+              //     document.getElementById('paypal-button-container').style.display='none'; 
+              //   }else{
+              //     alert("You have to have a billing address to buy.");
+              //     scroll_to_form()
+              //     jQuery(".billing-info-form-submit").submit();
+              //   }
+                
+              // });
+
+              function scroll_to_form(){
+                jQuery('html, body').scrollTop(jQuery('.billing-info-form').offset().top);
+              }
             });
 
           </script>
