@@ -933,6 +933,7 @@ function order_confirmation_email($product_ids, $method, $discount){
                           $price = get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
                           
                           $discounted_price = $price;
+                          $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
                           if($discount != 0){
                             $custom_categories = wp_get_post_terms($cpt_id, $taxonomy);
                             // Check if custom categories were found

@@ -31,10 +31,13 @@ function pixpine_update_cart(){
         global $wpdb;
         $table_name = $wpdb->prefix . 'pixpine_carts';
         if($isCart == 0 ){
-            $wpdb->insert($table_name, array(
-                'user_id' => $user_id,
-                'product_id' => $p_id
-            ));
+            $checkIfExists = $wpdb->get_var("SELECT id FROM $table_name WHERE user_id = '$user_id' AND product_id='$p_id'");
+            if ($checkIfExists == NULL) {
+                $wpdb->insert($table_name, array(
+                    'user_id' => $user_id,
+                    'product_id' => $p_id
+                ));
+            }
         }        
     }else{
         if(!in_array($p_id, $_SESSION['cart_items'])){
