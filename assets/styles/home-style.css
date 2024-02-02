@@ -900,6 +900,7 @@ footer .footer_menu_col .subscribe_col .inner_col {
   padding: 25px 30px;
   min-width: 520px;
 }
+.cart__page .get_premium_mockups_section .premium_mockups_inner h2,
 footer .subscribe_col h2 {
   font-size: 22px;
   line-height: 32px;
@@ -908,6 +909,7 @@ footer .subscribe_col h2 {
   color: var(--primary-color);
   margin: 0;
 }
+.cart__page .get_premium_mockups_section .premium_mockups_inner span,
 footer .subscribe_col span {
   font-size: 23px;
   line-height: 27px;
@@ -917,6 +919,7 @@ footer .subscribe_col span {
 footer .subscribe_col ._btn {
   padding: 9.5px 36px;
 }
+.cart__page .get_premium_mockups_section .premium_mockups_inner p,
 footer .subscribe_col p {
   font-size: 18px;
   line-height: 27px;

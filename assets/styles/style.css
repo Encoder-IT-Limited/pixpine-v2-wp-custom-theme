@@ -2564,10 +2564,10 @@ header .dropdown-menu .dropdown-item:hover {
   margin-right: 10px;
 }
 .checkout_row .order__column .payment_option .checkbox_container {
-	display: flex;
-	align-items: start;
-	width: 100%;
-	margin-top: 20px;
+  display: flex;
+  align-items: start;
+  width: 100%;
+  margin-top: 20px;
 }
 /* New Style start*/
 .payment_option .checkbox_container input[type="checkbox"] {
@@ -2641,11 +2641,43 @@ header .dropdown-menu .dropdown-item:hover {
 }
 .cart__page .get_premium_mockups_section ._btn {
   width: 100%;
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 500;
 }
 .cart__page .get_premium_mockups_section .premium_mockups_inner {
   padding: 30px 40px;
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
 }
+.alert,
+.alert > * {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--primary-color);
+}
+.alert,
+.pixpine_success_alert {
+  background-color: var(--banner-color);
+  border-color: var(--banner-color);
+  color: var(--primary-color);
+  --bs-alert-link-color: var(--primary-color);
+}
+.alert-danger,
+.pixpine_danger_alert {
+  background-color: var(--banner-color);
+  border-color: var(--banner-color);
+  /*  color: #800000;
+  --bs-alert-link-color: #800000; */
 
+  color: var(--primary-color);
+  --bs-alert-link-color: var(--primary-color);
+}
 /*
 
   *
@@ -2806,6 +2838,11 @@ header .dropdown-menu .dropdown-item:hover {
   }
   .my__account .content__column form {
     max-width: 100%;
+  }
+  .alert,
+  .alert > * {
+    font-size: 14px;
+    line-height: 1.3;
   }
 }
 

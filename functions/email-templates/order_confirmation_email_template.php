@@ -1,5 +1,5 @@
 <?php
-function order_confirmation_email($product_ids, $method){
+function order_confirmation_email($product_ids, $method, $discount){
   $user_id = get_current_user_id();
   $first_name = get_user_meta($user_id, 'first_name', true);
   $last_name = get_user_meta($user_id, 'last_name', true);
@@ -931,17 +931,25 @@ function order_confirmation_email($product_ids, $method){
                           $cpt_post = get_post($cpt_id);
                           $thumbnail_url = get_the_post_thumbnail_url($cpt_id);
                           $price = get_post_meta($cpt_id, 'personal_commercial_sale_price', true);
-                          $commercial_price = get_post_meta($cpt_id, 'personal_commercial_price', true);
-                          $discount = '';
-                          if($commercial_price != ''){
-                            $discount = (($commercial_price-$price)/$commercial_price)*100;
-                            $discount = $discount.'%';
-                            $commercial_price = 'US$<span>'.$commercial_price.'</span>';
+                          
+                          $discounted_price = $price;
+                          if($discount != 0){
+                            $custom_categories = wp_get_post_terms($cpt_id, $taxonomy);
+                            // Check if custom categories were found
+                            if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
+                                // Loop through the custom categories and display them
+                                foreach ($custom_categories as $category) {
+                                    if(esc_html($category->slug) == "bundle-mockups"){
+                                      $discounted_price = $price - (($discount/100)*$price);
+                                    }
+                                }
+                            }
                           }
+                       
                           if (empty($price)) {
                             $price = 0;
                           }
-                          $total_price += $price; 
+                          $total_price += $discounted_price; 
 
                         $html .= '
                         <tr>
@@ -1023,7 +1031,7 @@ function order_confirmation_email($product_ids, $method){
                               font-weight: 400;
                             "
                           >
-                            '.$commercial_price.'
+                            '.'US$<span>'.$price.'</span>'.'
                           </td>
                           <td
                             style="
@@ -1035,7 +1043,7 @@ function order_confirmation_email($product_ids, $method){
                               font-weight: 400;
                             "
                           >
-                            <span>'.$discount.'</span>
+                            <span>'.$discount.'%</span>
                           </td>
                           <td
                             style="
@@ -1047,7 +1055,7 @@ function order_confirmation_email($product_ids, $method){
                               font-weight: 400;
                             "
                           >
-                            US$<span>'.$price.'</span>
+                            US$<span>'.$discounted_price.'</span>
                           </td>
                         </tr>';
                       }
@@ -1334,7 +1342,7 @@ function order_confirmation_email($product_ids, $method){
                           line-height: 14px;
                         "
                       >
-                        Copyright © 2023
+                        Copyright © 2024
                         <a
                           style="
                             text-decoration: none;

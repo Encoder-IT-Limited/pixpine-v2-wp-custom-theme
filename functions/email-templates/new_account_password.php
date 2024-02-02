@@ -976,7 +976,7 @@ function pixpine_new_account_password_email($password){
                           line-height: 14px;
                         "
                       >
-                        Copyright © 2023
+                        Copyright © 2024
                         <a
                           style="
                             text-decoration: none;

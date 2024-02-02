@@ -47,7 +47,8 @@ if (isset($_GET['tnx_id'])) {
   $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
   $wpdb->query($query);
 
-  $html = order_confirmation_email($product_ids, 'stripe');
+  $discount = get_user_specific_discount();
+  $html = order_confirmation_email($product_ids, 'stripe', $discount);
   $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
   pixpine_send_html_email($email, ' Thank you for your payment', $html);
   $custom_page_url = site_url() . '/downloads?type=new-purchase';

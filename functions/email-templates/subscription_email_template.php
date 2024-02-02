@@ -1292,7 +1292,7 @@ function pixpine_subscription_email($subscription_plan){
                           line-height: 14px;
                         "
                       >
-                        Copyright © 2023
+                        Copyright © 2024
                         <a
                           style="
                             text-decoration: none;

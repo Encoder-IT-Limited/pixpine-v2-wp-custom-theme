@@ -104,27 +104,13 @@ $get_user_specific_discount_amount = get_user_specific_discount_amount($products
               Proceed to checkout
             </a>
           </div>
-          <div class="card_item get_off mt-2">
+          <div class="card_item get_off mt-5">
               <div class="get_premium_mockups_section">
-                <div
-                  class="premium_mockups_inner d-flex justify-content-between align-items-center"
-                >
-                  <div class="premium_text text-center w-100 m-0">
-                    <h2
-                      class="section_heading section_heading_primary section_heading_bold"
-                    >
-                      Get 96% Off
-                      <span class="section_heading_medium default_color"
-                        >on premium mockups</span
-                      >
-                    </h2>
-                    <span class="primary_color">As low as $0.14 a mockup</span>
-                    <a
-                      href="<?php echo site_url('get-subscription');?>"
-                      class="btn_primary _btn"
-                      >Get premium</a
-                    >
-                  </div>
+                <div class="premium_mockups_inner">
+                  <h2>Download Unlimited Mockups</h2>
+                  <p>As low as $0.14 a mockup</p>
+                  <span>$14.00/mo</span>
+                  <a class="btn_primary _btn" href="<?php echo site_url('get-subscription');?>">Get premium</a>
                 </div>
               </div>
           </div>
