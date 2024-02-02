@@ -414,9 +414,9 @@ if($billing_l_name == ''){
                 if(is_billing_form_filled == 1){
                   if(jQuery('.tc_checkbox').is(":checked")){
                     if(payment_method_selected == 'Stripe'){
-                    jQuery(".payment-submit").show();
-                    document.getElementById('paypal-button-container').style.display='none'; 
-                    }else{
+                      jQuery(".payment-submit").show();
+                      document.getElementById('paypal-button-container').style.display='none'; 
+                    }else if(payment_method_selected == 'Paypal'){
                       // paypal
                       jQuery(".payment-submit").hide();
                       document.getElementById('paypal-button-container').style.display='none'; 
