@@ -227,6 +227,23 @@ function create_custom_table() {
         dbDelta( $sql );
     }
 
+    $table_name = $wpdb->prefix . 'pixpine_reviews';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+    if (!$table_exists) {
+        $sql = "CREATE TABLE $table_name (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            product_id INT(11) DEFAULT NULL,
+            user_id INT(11) DEFAULT NULL,
+            review TEXT DEFAULT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            -- FOREIGN KEY (subscription_id) REFERENCES $t1(id),
+            -- FOREIGN KEY (payment_detail_id) REFERENCES $t2(ID)
+        ) $charset_collate;";
+        dbDelta( $sql );
+    }
+
+
 }
 add_action( 'after_switch_theme', 'create_custom_table' );
 

@@ -15,6 +15,42 @@ jQuery(document).ready(function ($) {
     //         alert('Response from server: ' + response);
     //     },
     // });
+
+    // add to cart
+    $(document).on("click", "#save-review", function () {
+      var product_id = $("#product_id").val();
+      var review = $("#review").val();
+      var currentDate = new Date();
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var formattedDate = months[currentDate.getMonth()] + ' ' + currentDate.getDate() + ', ' + currentDate.getFullYear();
+      console.log(product_id, review)
+      $.ajax({
+        url: ajax_object.ajax_url,
+        type: "POST",
+        data: {
+          action: "pixpine_save_review",
+          nonce: ajax_object.ajax_nonce, // Include the nonce
+          product_id: product_id,
+          review: review
+        },
+        success: function (response) {
+          if (response == "success") {
+            $("#review").val("");
+            $(".new-added-review").html(`
+              <p>
+                <p><b>`+jQuery('.autor_name').html()+`</b> - `+formattedDate+`</p>
+                `+review+`
+                <hr>
+              </p>
+            `);
+          }else{
+            alert("Something went wrong. Please try again.");
+          }
+        }
+      });
+
+    });
+
     
     // remove cart
     $(document).on("click", ".download-product", function () {
