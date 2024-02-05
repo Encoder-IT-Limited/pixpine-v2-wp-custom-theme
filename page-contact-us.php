@@ -75,7 +75,7 @@ if(isset($_POST['c_submit'])){
                     if($msg == 'success'){
                       echo '
                       <div class="alert alert-success" role="alert">
-                        Message sent successful. We will contact you ASAP.
+                      We appreciate you contacting us, and we will respond to your message as early as possible.
                       </div>
                       ';
                     }elseif($msg == 'fail'){

@@ -84,7 +84,7 @@ if($billing_email == ''){
                   if($msg == 'success'){
                     echo '
                     <div class="alert alert-success" role="alert">
-                      Address saved successful.
+                      Your information has been updated successfully.
                     </div>
                     ';
                   }elseif($msg == 'fail'){
