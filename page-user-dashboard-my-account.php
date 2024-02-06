@@ -2,6 +2,7 @@
 /*
 Template Name: User Dashboard My Account
 */
+ob_start();
 get_header();
 $user_id = get_current_user_id();
 $user = get_user_by('ID', $user_id);
@@ -59,6 +60,26 @@ if(isset($_POST['submit'])){
       if(isset($new_password) && !empty($new_password)){
         if($new_password == $confirm_password){
           wp_set_password($new_password, $user_id);
+          // login again
+
+
+
+// Reauthenticate the user with the new password
+$user_signin = wp_signon(array(
+    'user_login'    => $user->user_login,
+    'user_password' => $new_password,
+    'remember'      => true // You can set it to false if you don't want to remember the login
+));
+
+if (!is_wp_error($user_signin)) {
+    // Log the user in
+    wp_set_current_user($user_id);
+    wp_set_auth_cookie($user_id);
+    do_action('wp_login', $user->user_login);
+
+} else {
+    echo 'Login failed. Please check your credentials.';
+}
         }
       }
       update_user_meta($user_id, 'first_name', $first_name);

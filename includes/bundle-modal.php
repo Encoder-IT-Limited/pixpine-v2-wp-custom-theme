@@ -336,36 +336,64 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                   </div>
                   <div class="separetor"></div>
                   <div class="comment_box_container">
+                    <?php
+                    $table_name = $wpdb->prefix . 'pixpine_reviews';
+                    $query = "SELECT * FROM `wp_pixpine_reviews` WHERE `product_id`='$post_id'";
+                    $results = $wpdb->get_results($query);
+                      foreach ($results as $result) {
+                        $datetimeString = $result->created_at;
+                        $datetime = new DateTime($datetimeString);
+                        $formattedDate = $datetime->format('F j, Y');
+                    ?>
+                    <p>
+                      <p><b><?=get_user_meta($result->user_id, 'first_name', true);?> <?=get_user_meta($result->user_id, 'last_name', true);?></b> - <?=$formattedDate?></p>
+                      <?=$result->review;?>
+                      <hr>
+                    </p>
+                    <?php
+                    }
+                    ?>
+                    <div class="new-added-review"></div>
+                  
+                    <?php if(!is_user_logged_in()){ ?>
                     <p>
                       You must be
-                      <a
-                        class="primary_color"
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModal"
-                      >
+                      <a class="primary_color" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
                         signed in
-                      </a>
-                      to leave a comment.
+                      </a> to leave a
+                      comment.
                     </p>
-                    <div class="autor_details d-flex align-items-center">
-                      <img
-                        class="autor_img"
-                        src="<?php echo get_template_directory_uri();?>/assets/images/comment_autor_img.png"
-                        alt=""
-                      />
-                      <span class="autor_name">Sam Jimmy</span>
-                    </div>
-                    <form action="">
-                      <textarea class="w-100" name="" id="" required></textarea>
-                      <div class="text-end">
-                        <input
-                          class="_btn btn_black"
-                          type="submit"
-                          value="Submit"
+                    <?php }else{ 
+                      $profile_image_id = get_user_meta($user_id, 'profile_image_id', true);
+                      $img = get_template_directory_uri().'/assets/images/avater.png';
+                      if(!empty($profile_image_id)){
+                        $img = wp_get_attachment_url($profile_image_id);
+                      }
+                      ?>
+                      <div class="autor_details d-flex align-items-center">
+                        <img
+                          class="autor_img"
+                          src="<?php echo $img;?>"
+                          alt=""
                         />
+                        <span class="autor_name">
+                          <?=get_user_meta($user_id, 'first_name', true);?> 
+                          <?=get_user_meta($user_id, 'last_name', true);?>
+                        </span>
                       </div>
-                    </form>
+                      <form action="">
+                        <textarea class="w-100" name="" id="review"></textarea>
+                        <input type="hidden" value="<?=$post_id?>" id="product_id">
+                        <div class="text-end">
+                          <input
+                            class="_btn btn_black"
+                            type="button"
+                            id="save-review"
+                            value="Submit"
+                          />
+                        </div>
+                      </form>
+                    <?php } ?>
                   </div>
                 </div>
                 <div class="simple_vertical_add_to_cart_column">

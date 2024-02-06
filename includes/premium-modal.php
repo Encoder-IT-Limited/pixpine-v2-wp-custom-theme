@@ -367,6 +367,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       comment.
                     </p>
                     <?php }else{ 
+                      $profile_image_id = get_user_meta($user_id, 'profile_image_id', true);
                       $img = get_template_directory_uri().'/assets/images/avater.png';
                       if(!empty($profile_image_id)){
                         $img = wp_get_attachment_url($profile_image_id);
@@ -396,8 +397,6 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         </div>
                       </form>
                     <?php } ?>
-
-
                   </div>
                 </div>
                 <div class="simple_vertical_add_to_cart_column">

@@ -104,8 +104,8 @@ function pixpine_login_user(){
 
     if (is_wp_error($user)) {
         // Login failed
-        echo 'Login failed: ' . str_replace( 'Lost your password?', '', $user->get_error_message());
-        // echo 'Login failed: ' . $user_id->get_error_message();
+        // echo 'Login failed: ' . str_replace( 'Lost your password?', '', $user->get_error_message());
+        echo 'Login failed: Invalid Password or Username';
     } else {
         // Login successful
         move_session_cart_to_db_cart($user->ID);

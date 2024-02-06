@@ -170,7 +170,7 @@ if(isset($_POST['p_submit'])){
                     </div>
                     <div class="text-end">
                       <input
-                        class="_btn btn_primary btn_helvetica"
+                        class="_btn btn_primary btn_helvetica p_submit"
                         type="submit"
                         name="p_submit"
                         value="Submit"
@@ -497,23 +497,30 @@ if(isset($_POST['p_submit'])){
 
           // Calculate total size of selected files
           jQuery('#selectedImages').html('');
-          for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            var reader = new FileReader();
-            let p_size = files[i].size;
-            
+          if(files.length <= 4){
+            jQuery(".p_submit").attr('disabled', false);
+            for (var i = 0; i < files.length; i++) {
+              var file = files[i];
+              var reader = new FileReader();
+              let p_size = files[i].size;
+              
 
-            reader.onload = function(e) {
-              if(p_size <= 1048576){
-                imagesHTML += '<img src="' + e.target.result + '" alt="Selected Image" style="height: 80px; width: auto; padding: 10px;">';
-                jQuery('#selectedImages').html(imagesHTML);
+              reader.onload = function(e) {
+                if(p_size <= 1048576){
+                  imagesHTML += '<img src="' + e.target.result + '" alt="Selected Image" style="height: 80px; width: auto; padding: 10px;">';
+                  jQuery('#selectedImages').html(imagesHTML);
+                }
+              };
+              reader.readAsDataURL(file);
+              if(files[i].size > 1048576){
+                alert("File can not be more than 1 MB.")
               }
-            };
-            reader.readAsDataURL(file);
-            if(files[i].size > 1048576){
-              alert("File can not be more than 1 MB.")
             }
+          }else{
+            alert("You can not upload more than 4 images.");
+            jQuery(".p_submit").attr('disabled', true);
           }
+
         });
 
       })

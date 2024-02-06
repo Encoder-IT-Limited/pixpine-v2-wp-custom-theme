@@ -715,7 +715,7 @@ function pixpine_new_account_password_email($password){
                         display: inline-block;
                       "
                     >
-                      <a href="">
+                      <a href="'.site_url().'">
                         <img
                           style="width: 171px; hight: auto"
                           class="wp_logo"

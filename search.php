@@ -59,7 +59,7 @@ if($type == 'search'){
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                        's'         => $search_keyword, 
+                        // 's'         => $search_keyword, 
                         'tax_query' => array(
                           array(
                               'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
@@ -67,7 +67,15 @@ if($type == 'search'){
                               'terms' => 'premium-mockups', // Replace with the slug of the custom category term you want to query
                           ),
                         ),
-                      );                      
+                      );         
+                      // Check if the search query is numeric
+                      if (is_numeric($search_keyword)) {
+                        // If numeric, search by post ID
+                        $args['post__in'] = array(intval($search_keyword));
+                      } else {
+                        // If not numeric, search by title or content
+                        $args['s'] = $search_keyword;
+                      }             
                     }elseif($type == 'category'){
                       $term_name = $_GET['term-name'];
                       $args = array(
@@ -206,7 +214,7 @@ if($type == 'search'){
                         'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                         'paged' => $page,
                         'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                        's'         => $search_keyword, 
+                        // 's'         => $search_keyword, 
                         'tax_query' => array(
                           array(
                               'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
@@ -214,7 +222,15 @@ if($type == 'search'){
                               'terms' => 'free-mockups', // Replace with the slug of the custom category term you want to query
                           ),
                         ),
-                      );                      
+                      );               
+                      // Check if the search query is numeric
+                      if (is_numeric($search_keyword)) {
+                        // If numeric, search by post ID
+                        $args['post__in'] = array(intval($search_keyword));
+                      } else {
+                        // If not numeric, search by title or content
+                        $args['s'] = $search_keyword;
+                      }          
                     }elseif($type == 'category'){
                       $term_name = $_GET['term-name'];
                       $args = array(
@@ -335,7 +351,7 @@ if($type == 'search'){
                     'posts_per_page' => $post_per_page, // Number of posts to display (adjust as needed)
                     'paged' => $page,
                     'order' => 'DESC', // Sorting order (DESC for latest first, ASC for oldest first)
-                    's'         => $search_keyword, 
+                    // 's'         => $search_keyword, 
                     'tax_query' => array(
                       array(
                           'taxonomy' => 'mockup_category', // Replace with the name of your custom category taxonomy
@@ -343,7 +359,15 @@ if($type == 'search'){
                           'terms' => 'bundle-mockups', // Replace with the slug of the custom category term you want to query
                       ),
                     ),
-                  );                      
+                  );    
+                  // Check if the search query is numeric
+                  if (is_numeric($search_keyword)) {
+                    // If numeric, search by post ID
+                    $args['post__in'] = array(intval($search_keyword));
+                  } else {
+                    // If not numeric, search by title or content
+                    $args['s'] = $search_keyword;
+                  }                     
                 }elseif($type == 'category'){
                   $term_name = $_GET['term-name'];
                   $args = array(

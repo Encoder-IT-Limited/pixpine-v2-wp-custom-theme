@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
         success: function (response) {
           if (response == "success") {
             $("#review").val("");
-            $(".new-added-review").html(`
+            $(".new-added-review").append(`
               <p>
                 <p><b>`+jQuery('.autor_name').html()+`</b> - `+formattedDate+`</p>
                 `+review+`

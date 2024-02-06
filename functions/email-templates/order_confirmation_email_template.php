@@ -743,7 +743,7 @@ function order_confirmation_email($product_ids, $method, $discount){
                         display: inline-block;
                       "
                     >
-                      <a href="">
+                      <a href="'.site_url().'">
                         <img
                           style="width: 171px; hight: auto"
                           class="wp_logo"
