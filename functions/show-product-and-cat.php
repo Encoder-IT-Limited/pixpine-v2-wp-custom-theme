@@ -112,7 +112,7 @@ function show_sub_cats_in_listing_page($parent_category_slug, $js_class='get-pro
             >
                 ' . $cat_name . '
             </button>
-            <div class="dropdown">
+            <div class="dropdown-center">
                 <button
                 class="dropdown-toggle"
                 type="button"

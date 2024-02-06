@@ -69,7 +69,7 @@ get_header();
 
 
                   <div class="tab_inner_content">
-                    <div class="card_container row_d justify-content-center">
+                    <div class="card_container row_d">
 
                       <?php
                       $user_id = get_current_user_id();
@@ -115,7 +115,7 @@ get_header();
                         // Restore the global post data
                         wp_reset_postdata();
                       }else{
-                        echo 'No liked product';
+                        echo '<div class="card_item"><div class="inner_col">No liked product</div></div>';
                       }
                       ?>
                     </div>
@@ -128,7 +128,7 @@ get_header();
                   aria-labelledby="bundle_mockups_tab"
                 >
                   <div class="tab_inner_content">
-                    <div class="card_container row_d justify-content-center">
+                    <div class="card_container row_d">
                     <?php
                       $user_id = get_current_user_id();
                       $old_ids = get_user_meta($user_id, 'pixpine_favorite_bundle', true);
@@ -175,7 +175,7 @@ get_header();
                         // Restore the global post data
                         wp_reset_postdata();
                       }else{
-                        echo 'No liked product';
+                        echo '<div class="card_item"><div class="inner_col">No liked product</div></div>';
                       }
                       ?>
                     </div>

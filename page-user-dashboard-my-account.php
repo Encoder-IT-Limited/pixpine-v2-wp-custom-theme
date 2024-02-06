@@ -180,12 +180,15 @@ if($last_name == ''){
                           class="profile-image-input"
                         />
                       </div>
-                      <p>JPEG, GIF or PNG, 200х200 pixels. Max 1MB</p>
+                      <!--<p>JPEG, GIF or PNG, 200х200 pixels. Max 1MB</p>-->
                     </div>
                   </div>
                 </div>
-                <div class="form_btn_container">
+                <div class="form_btn_container d-flex">
                   <input class="_btn btn_primary p_submit" type="submit" name="submit" value="Update" />
+                  <div class="text-end ms-2">
+                      <p>JPEG, GIF or PNG, 200х200 pixels. Max 1MB</p>
+                  </div>
                 </div>
               </div>
             </form>

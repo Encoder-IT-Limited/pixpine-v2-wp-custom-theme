@@ -99,7 +99,7 @@ $get_user_specific_discount_amount = get_user_specific_discount_amount($products
                 </span>
               </p>
             </div>
-            <p class="text-center">All prices are in US dollars</p>
+            <p class="">All prices are in US dollars</p>
             <a class="_btn btn_primary" href="<?php echo site_url('checkout'); ?>">
               Proceed to checkout
             </a>
@@ -110,7 +110,7 @@ $get_user_specific_discount_amount = get_user_specific_discount_amount($products
                   <h2>Download Unlimited Mockups</h2>
                   <p>As low as $0.14 a mockup</p>
                   <span>$14.00/mo</span>
-                  <a class="btn_primary _btn" href="<?php echo site_url('get-subscription');?>">Get premium</a>
+                  <a class="_btn btn_black" href="<?php echo site_url('get-subscription');?>">Get premium</a>
                 </div>
               </div>
           </div>

@@ -21,7 +21,7 @@
                 <div class="btn_img">
                   <img src="<?php echo get_template_directory_uri();?>/assets/images/login_signup_g.png" alt="" />
                 </div>
-                <span>Sign up with your Gmail</span>
+                <span>Continue with Gmail</span>
               </button>
               </a>
               <a href="<?php echo eil_code_fb_login();?>">
@@ -29,7 +29,7 @@
                 <div class="btn_img">
                   <img src="<?php echo get_template_directory_uri();?>/assets/images/login_signup_f.png" alt="" />
                 </div>
-                <span>Sign up with your Facebook</span>
+                <span>Continue with Facebook</span>
               </button>
               </a>
             </div>

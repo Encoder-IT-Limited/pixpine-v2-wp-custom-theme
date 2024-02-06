@@ -60,7 +60,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
   <div class="modal-dialog">
     <div class="modal-content">
       <main>
-        <section class="premium_product_page">
+        <section class="premium_product_page premium_product_page_single">
           <div class="container">
             <div class="section_width">
               <div class="row_d">
@@ -206,7 +206,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       <div class="add_to_cart">
                         <?php if(!is_show_download_btn($cpt->ID)){?>
                         <div
-                          class="d-flex justify-content-between align-items-center"
+                          class="m_add_to_cart d-flex justify-content-between align-items-center"
                         >
                           <h5>Price</h5>
                           <h5>
@@ -417,7 +417,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       <div class="add_to_cart">
                         <?php if(!is_show_download_btn($cpt->ID)){?>
                         <div
-                          class="d-flex justify-content-between align-items-center"
+                          class="m_add_to_cart d-flex justify-content-between align-items-center"
                         >
                           <h5>Price</h5>
                           <h5>

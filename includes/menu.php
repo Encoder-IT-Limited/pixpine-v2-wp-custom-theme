@@ -31,7 +31,7 @@
                 <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">My Account</a></li>
                 <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
               </ul>
             <?php }else{ ?>
@@ -123,7 +123,7 @@
                 <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">My Account</a></li>
                 <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
               </ul>
             </li>

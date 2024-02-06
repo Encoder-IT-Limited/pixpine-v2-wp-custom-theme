@@ -61,11 +61,11 @@ if($billing_l_name == ''){
 ?>
 <main>
   <section class="dashboard_section dashboard__downloads">
-    <div class="container">
+    <div class="container checkout_row">
       <div class="heading_col mb-5">
-        <h1 class="page_heading text-center">Checkout</h1>
+        <h1 class="page_heading">Billing Information</h1>
       </div>
-      <div class="row_d checkout_row">
+      <div class="row_d">
         <div class="left_col">
           <?php
             if($msg != ''){
@@ -223,8 +223,8 @@ if($billing_l_name == ''){
             <div
               class="order_heading_col d-flex align-items-center justify-content-between"
             >
-              <p class="product-name">Product</p>
-              <p class="product-total">Total</p>
+              <!--<p class="product-name">Product</p>-->
+              <!--<p class="product-total">Total</p>-->
             </div>
             <div>
               <?php
@@ -305,7 +305,7 @@ if($billing_l_name == ''){
                 data-total-feeless="17.84"
                 data-total-blue="14.99"
               >
-                <div class="d-flex align-items-center justify-content-between">
+                <div class="order_total__border d-flex align-items-center justify-content-between">
                   <p>Order Total</p>
                   <span class="amount">$<?php echo number_format($total_price, 2);?></span>
                 </div>
@@ -313,11 +313,11 @@ if($billing_l_name == ''){
                   <div class="payment_option">
                     <h5 class="product-title">Payment Method</h5>
                     <div class="paypal_item">
-                        <label>Stripe</label>
                         <input type="radio" name="payment_method" id="payment-stripe" value="Stripe">
                             <input type="hidden" name="price" value="<?php echo $total_price;?>">
                             <input type="hidden" name="placeOrder" value="1">
                             <input type="hidden" name="proid" value="<?php echo $cpt_id;?>">
+                            <label>CREDIT / DEBIT CARD</label>
                         <div class="icon_payment">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/visa_icon.png" alt="">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/american_express_icon.png" alt="">
@@ -325,9 +325,9 @@ if($billing_l_name == ''){
                         </div>
                     </div>
                     <div class="paypal_item">
-                        <label>Paypal</label>
                         <input type="radio" name="payment_method" id="payment-paypal" value="Paypal">
                         <input type="hidden" id="payment-success-page-url" value="<?php echo site_url('paypal-success');?>">
+                        <label>Paypal</label>
                         <div class="icon_payment">
                             <img src="<?php echo get_template_directory_uri();?>/assets/images/paypal_icon.png" alt="">
                         </div>

@@ -48,7 +48,7 @@
                       <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                        <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">My Account</a></li>
                         <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
                     </ul>
                 <?php }else{ ?> 
@@ -151,7 +151,7 @@
                       <img class="<?php echo $class_name;?>" src="<?php echo $menu_user_img;?>" alt="" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">Profile</a></li>
+                        <li><a class="dropdown-item" href="<?php echo site_url('my-account');?>">My Account</a></li>
                         <li><a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>">Log out</a></li>
                     </ul>
                   </li>
@@ -396,6 +396,9 @@
       </section>
       <section id="free_mockups" class="recently_added_free_mockups">
         <div class="container">
+            <div class="separetor_container">
+                <div class="separetor"></div>
+            </div>
           <div class="heading_col text-center">
             <h2 class="section_heading">Recently Added Free Mockups</h2>
           </div>
@@ -503,6 +506,12 @@
               </div>
             </div>
           </div>
+          <div class="heading_col text-center">
+            <h2 class="section_heading">Our Bundle Mockups Collection</h2>
+          </div>
+          <div class="separetor_container">
+                <div class="separetor"></div>
+            </div>
           <div class="inner_content">
             <div
               class="card_container row_d justify-content-center align-items-stretch"
