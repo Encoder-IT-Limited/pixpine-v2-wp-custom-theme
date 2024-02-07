@@ -2,6 +2,7 @@
 /*
 Template Name: Checkout
 */
+ob_start();
 get_header();
 $user_id = get_current_user_id();
 $msg = '';
@@ -9,6 +10,57 @@ $msg = '';
 if(isset($_POST['submit'])){
 
   if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
+
+    if(!is_user_logged_in()){
+      // User login credentials
+      $signup_first_name = $_POST['billing_f_name'];
+      $signup_last_name = $_POST['billing_l_name'];
+      // User registration data
+      $username = $signup_first_name.' '.$signup_last_name;
+      $email = $_POST['billing_email'];
+      $password = $_POST['billing_password'];
+
+      // Check if the user already exists by email
+      $user_exists = email_exists($email);
+
+      if (!$user_exists) {
+          // User does not exist, proceed with registration
+          $user_id = wp_create_user($username, $password, $email);
+
+          if (is_wp_error($user_id)) {
+              // Registration failed
+              $msg = 'Registration failed: ' . $user_id->get_error_message();
+          } else {
+              // Registration successful
+              // $msg = 'Registration successful. User ID: ' . $user_id;
+              move_session_cart_to_db_cart($user_id);
+              // send welcome email
+              $html = pixpine_welcome_email($username);
+              pixpine_send_html_email($email, 'Pixpine', $html);
+
+              $html = pixpine_new_account_password_email($password);
+              pixpine_send_html_email($email, 'Pixpine', $html);
+
+              // Reauthenticate the user with the new password
+              $user_signin = wp_signon(array(
+                'user_login'    => $email,
+                'user_password' => $password,
+                'remember'      => true // You can set it to false if you don't want to remember the login
+              ));
+              if (!is_wp_error($user_signin)) {
+                // Log the user in
+                wp_set_current_user($user_id);
+                wp_set_auth_cookie($user_id);
+                do_action('wp_login', $email);
+              } else {
+                $msg = 'Login failed. Please check your credentials.';
+              }
+          }
+      } else {
+          // User already exists with the provided email
+          $msg = 'An account already exists with this email.';
+      }
+    }
 
     $billing_f_name = sanitize_text_field($_POST['billing_f_name']);
     $billing_l_name = sanitize_text_field($_POST['billing_l_name']);
@@ -30,7 +82,9 @@ if(isset($_POST['submit'])){
     update_user_meta($user_id, 'billing_state', $billing_state);
     update_user_meta($user_id, 'billing_zip', $billing_zip);
 
-    $msg = 'success';
+    if($msg == ''){
+      $msg = 'success';
+    }
   }
 }
 $billing_f_name = get_user_meta($user_id, 'billing_f_name', true);
@@ -74,9 +128,9 @@ if($billing_l_name == ''){
                 <div class="alert alert-success" role="alert">
           Billing address updated successful.
         </div>
-        '; }elseif($msg == 'fail'){ echo '
+        '; }elseif($msg != ''){ echo '
         <div class="alert alert-warning" role="alert">
-          Failed!! Try again later.
+          '.$msg.'
         </div>
         '; } } ?>
         <div class="content__column billing_form <?php echo $form_class_name;?>">
@@ -115,6 +169,17 @@ if($billing_l_name == ''){
                   required
                 />
               </div>
+              <?php if(!is_user_logged_in()){ ?>
+              <div class="half_width input_group">
+                <label for="">Password<span>*</span></label>
+                <input
+                  type="password"
+                  name="billing_password"
+                  value=""
+                  required
+                />
+              </div>
+              <?php } ?>
             </div>
             <div class="full_width_container">
               <div class="half_width input_group">
@@ -229,11 +294,18 @@ if($billing_l_name == ''){
             <div>
               <?php
                 global $wpdb;
-                $user_id = get_current_user_id();
-                $table_name = $wpdb->prefix . 'pixpine_carts'; 
-                $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
-                $products = $wpdb->get_col($query); $total_price = 0; 
 
+
+                if(is_user_logged_in()){
+                  $user_id = get_current_user_id();
+                  $table_name = $wpdb->prefix . 'pixpine_carts'; 
+                  $query = "SELECT product_id FROM $table_name WHERE user_id='$user_id'"; 
+                  $products = $wpdb->get_col($query); 
+                }else{
+                  $products = $_SESSION['cart_items'];
+                }
+
+                $total_price = 0; 
                 $get_user_specific_discount = get_user_specific_discount();
                 $get_user_specific_discount_amount = get_user_specific_discount_amount($products, $get_user_specific_discount);
 
@@ -341,19 +413,23 @@ if($billing_l_name == ''){
                         <div id="paypal-button-container" style="width: 100%;margin-top: 15px;"></div>
                     </div>
                 </div>
-                <button style="display: none;" class="_btn get_premium_btn btn_primary payment-submit" type="submit">Place Order</button>
+                <?php if(!is_user_logged_in()){ ?>
+                  <button class="_btn get_premium_btn btn_primary payment-submit-dummy-nonlogged-user" type="button">Place Order</button>
+                <?php }else{ ?>
+                  <button class="_btn get_premium_btn btn_primary payment-submit" type="submit">Place Order</button>
+                <?php } ?>
             </div>
           </div>
           <input type="hidden" id="is_user_logged_in" value="<?php echo (is_user_logged_in())? '1':'0';?> ">
           <input type="hidden" id="is_billing_form_filled" value="<?php echo $is_billing_form_filled;?> ">
-          <script>
+          <!-- <script>
             jQuery(document).ready(function(){
               var is_user_logged_in = parseInt(jQuery("#is_user_logged_in").val());
               if(is_user_logged_in == 0){
                 jQuery('#loginModal').modal('show');
               }
             });
-          </script>
+          </script> -->
    
           <!-- Include PayPal JavaScript SDK -->
 
@@ -404,6 +480,10 @@ if($billing_l_name == ''){
                 show_payment_options();
               })
 
+              jQuery('.payment-submit-dummy-nonlogged-user').click(function(){
+                show_payment_options()
+              });
+
               jQuery('.tc_checkbox').change(function(){
                 show_payment_options()
               });
@@ -419,12 +499,11 @@ if($billing_l_name == ''){
                     }else if(payment_method_selected == 'Paypal'){
                       // paypal
                       jQuery(".payment-submit").hide();
-                      document.getElementById('paypal-button-container').style.display='none'; 
                       document.getElementById('paypal-button-container').style.display='block';
                     }
                   }else{
-                    jQuery(".payment-submit").hide();
                     document.getElementById('paypal-button-container').style.display='none'; 
+                    jQuery(".payment-submit").show();
                   }
 
                 }else{

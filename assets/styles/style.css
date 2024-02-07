@@ -2346,7 +2346,8 @@ body.modal-open {
   padding: 20px 0;
   border-top: 1px solid rgba(34, 34, 34, 0.4);
 }
-.checkout_row .order__column .order_footer .payment-submit {
+.checkout_row .order__column .order_footer .payment-submit,
+.checkout_row .order__column .order_footer .payment-submit-dummy-nonlogged-user {
   width: 100%;
   /*background-color: #ffc439;*/
   /*border-radius: 4px;*/
