@@ -1,5 +1,5 @@
 <?php
-function pixpine_new_account_password_email($password){
+function pixpine_new_account_password_email($name, $password){
   $html = '';
   $html .= '
   <!DOCTYPE html>
@@ -737,6 +737,37 @@ function pixpine_new_account_password_email($password){
                     "
                   >
                     <div class="main__content" style="max-width: 430px">
+
+
+                      <div style="max-width: 430px">
+                        <div class="top_p" style="margin-bottom: 25px">
+                          <p
+                            style="
+                              font-weight: 500;
+                              font-size: 16px;
+                              line-height: 24px;
+                              color: #333333;
+                              margin: 0;
+                            "
+                          >
+                            <span>'.$name.'</span>, Welcome to Pixpine
+                          </p>
+                        </div>
+                        <p
+                          style="
+                            font-size: 16px;
+                            line-height: 24px;
+                            color: #333333;
+                            margin: 0;
+                          "
+                        >
+                          Thanks for registering an account on Pixpine we are
+                          excited to see you join. Start exploring our wide
+                          range of free mockups and premium mockups.
+                        </p>
+                      </div>
+
+
                       <div class="top_p" style="margin-bottom: 25px">
                         <p
                           style="

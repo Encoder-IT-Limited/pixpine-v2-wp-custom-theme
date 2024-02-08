@@ -685,7 +685,7 @@ function sub_stripefailed()
     $query = "UPDATE " . $wpdb->prefix . "pixpine_payment_details SET payment_status='Failed', tnx_id='" . $checkoutSession->subscription . "' WHERE item_number='$order_id' ";
 
     $wpdb->query($query);
-    $custom_page_url = site_url() . '/orderfailed/';
+    $custom_page_url = site_url() . '/order-failed/';
     $_SESSION['message'] = 'Something went wrong!';
     wp_redirect($custom_page_url);
     exit;
@@ -703,7 +703,7 @@ function stripefailed()
     $query = "UPDATE " . $wpdb->prefix . "pixpine_payment_details SET payment_status='Failed', tnx_id='" . $checkoutSession->payment_intent . "' WHERE item_number='$order_id' ";
 
     $wpdb->query($query);
-    $custom_page_url = site_url() . '/orderfailed/';
+    $custom_page_url = site_url() . '/order-failed/';
     $_SESSION['message'] = 'Something went wrong!';
     wp_redirect($custom_page_url);
     exit;

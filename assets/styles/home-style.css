@@ -223,7 +223,7 @@ header .navbar-nav {
 }
 header .cart_icon .number_of_items {
   margin-left: 5px;
-  display: none;
+  /* display: none; */
 }
 #login_signup .nav-link.cart_icon {
   margin-right: 8px;

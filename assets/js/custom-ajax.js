@@ -16,6 +16,27 @@ jQuery(document).ready(function ($) {
     //     },
     // });
 
+
+    function number_of_cart_items(){
+      $.ajax({
+        url: ajax_object.ajax_url,
+        type: "POST",
+        data: {
+          action: "pixpine_cart_item_number",
+          nonce: ajax_object.ajax_nonce, // Include the nonce
+        },
+        success: function (response) {
+          if(response == 0){
+            $(".number_of_items").html('');
+          }else{
+            $(".number_of_items").html('('+response+')');
+          }
+          console.log('response', response);
+        }
+      });
+    }
+    number_of_cart_items()
+
     // add to cart
     $(document).on("click", "#save-review", function () {
       var product_id = $("#product_id").val();
@@ -50,6 +71,8 @@ jQuery(document).ready(function ($) {
       });
 
     });
+
+
 
     
     // remove cart
@@ -96,6 +119,7 @@ jQuery(document).ready(function ($) {
             });
             $(".total-cart-price").text(total_price);
           }
+          number_of_cart_items();
         },
       });
     });
@@ -177,6 +201,8 @@ jQuery(document).ready(function ($) {
               if (response == "success") {
                 $(".add-to-cart").attr("in-cart", "1");
                 $(".add-to-cart").text("View Cart");
+                $(".browse-more-product").removeClass("d-none");
+                number_of_cart_items();
               }
             },
           });

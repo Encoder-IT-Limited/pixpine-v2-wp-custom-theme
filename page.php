@@ -27,7 +27,7 @@ get_header();
         <div class="container">
           <div class="row">
             <div class="col-md-8 mx-auto text-center">
-				<?php echo get_the_content();?>
+				      <?php echo get_the_content();?>
             </div>
           </div>
         </div>

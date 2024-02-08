@@ -20,6 +20,7 @@ function pixpine_remove_cart(){
     die();
 }
 add_action('wp_ajax_pixpine_remove_cart', 'pixpine_remove_cart'); // For logged-in users
+add_action('wp_ajax_nopriv_pixpine_remove_cart', 'pixpine_remove_cart'); // For logged-in users
 
 function pixpine_update_cart(){
     // User login credentials
@@ -158,10 +159,10 @@ function pixpine_signup(){
             // echo 'Registration successful. User ID: ' . $user_id;
             move_session_cart_to_db_cart($user_id);
             // send welcome email
-            $html = pixpine_welcome_email($username);
-            pixpine_send_html_email($email, 'Pixpine', $html);
+            // $html = pixpine_welcome_email($username);
+            // pixpine_send_html_email($email, 'Pixpine', $html);
 
-            $html = pixpine_new_account_password_email($password);
+            $html = pixpine_new_account_password_email($username, $password);
             pixpine_send_html_email($email, 'Pixpine', $html);
             echo 'success';
         }

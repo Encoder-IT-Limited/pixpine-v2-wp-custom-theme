@@ -26,7 +26,7 @@
                       src="<?php echo get_template_directory_uri();?>/assets/images/home_cart_icon.png"
                       alt=""
                     />
-                    <span class="number_of_items">(1)</span>
+                    <span class="number_of_items"></span>
                   </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -129,7 +129,7 @@
                         src="<?php echo get_template_directory_uri();?>/assets/images/home_cart_icon.png"
                         alt=""
                       />
-                      <span class="number_of_items">(1)</span>
+                      <span class="number_of_items"></span>
                     </a>
                   </li>
                   <?php if(is_user_logged_in()){ ?> 

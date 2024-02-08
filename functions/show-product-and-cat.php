@@ -570,6 +570,27 @@ function get_pagination_html($current_page, $total_page, $term_slug){
     return $html;
 }
 
+function pixpine_cart_item_number() {
+    $cnt = 0;
+    // Verify the nonce
+    if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+        if(is_user_logged_in()){
+            $user_id = get_current_user_id();
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'pixpine_carts';
+            $rows  = $wpdb->get_results("SELECT COUNT(*) as num_rows FROM $table_name WHERE user_id = '$user_id'");
+            $cnt = $rows[0]->num_rows;
+        }else{
+            $cnt = count($_SESSION['cart_items']) ;
+        }
+    } 
+    echo $cnt;
+    wp_die(); // This is required to end the AJAX request
+}
+add_action('wp_ajax_pixpine_cart_item_number', 'pixpine_cart_item_number'); // For logged-in users
+add_action('wp_ajax_nopriv_pixpine_cart_item_number', 'pixpine_cart_item_number'); 
+
+
 
 function pixpine_get_html_download_link() {
     // Verify the nonce
