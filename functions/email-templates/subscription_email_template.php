@@ -825,6 +825,96 @@ function pixpine_subscription_email($subscription_plan){
                       margin-top: 44px;
                     "
                   >
+
+
+                  <div
+                  class="welcome_btn_col"
+                  style="
+                    margin-top: 35px;
+                    margin-bottom: 30px;
+                    vertical-align: middle;
+                  "
+                >
+                  <div style="width: 49.5%; display: inline-block;
+                  vertical-align: middle;margin-bottom: 10px;">
+                    <button
+                      style="
+                        background: transparent;
+                        outline: none;
+                        box-shadow: none;
+                        padding: 13px;
+                        border: 1px solid #707070;
+                        border-radius: 0;
+                        font-size: 18px;
+                        line-height: 22px;
+                        font-weight: 600;
+                        color: #005aff;
+                        min-width: 165px;
+                        text-align: left;
+                        cursor: pointer;
+                        display: inline-block;
+                        text-decoration: none;
+                      "
+                    >
+                    <a style="text-decoration: none; color:inherit;" href="'.site_url().'">
+                      Get started
+                      <img
+                        style="width: 17px;hight: auto;margin-left: 12px;  object-fit: contain;"
+                        src="'.get_template_directory_uri().'/assets/email/right_arrow.png"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                  <div
+                    style="
+                      width: 49.5%;
+                      display: inline-block;
+                      text-align: right;
+                      vertical-align: middle;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <div
+                      class="welcome_btn_text__col"
+                      style="
+                        display: inline-block;
+                        background-color: #b9dfff;
+                        padding: 8px 12px;
+                        text-align: left;
+                      "
+                    >
+                    <a style="text-decoration: none; color:inherit;" href="'.site_url('get-subscription').'"
+                      <h3
+                        style="
+                          font-size: 14px;
+                          line-height: 16px;
+                          font-weight: 500;
+                          color: #696969;
+                          margin: 0;
+                        "
+                      >
+                        <span style="color: #005aff; font-weight: 700">
+                          Get <span>96</span>% Off
+                        </span>
+                        on premium mockups
+                      </h3>
+                    </a>
+                      <p
+                        style="
+                          font-size: 13px;
+                          line-height: 18px;
+                          font-weight: 500;
+                          color: #005aff;
+                          margin: 0;
+                        "
+                      >
+                        As low as $<span>0.56</span> a mockup
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
                     <div class="main__content">
                       <div class="table__hading">
                         <h2
