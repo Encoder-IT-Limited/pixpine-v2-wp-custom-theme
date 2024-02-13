@@ -35,11 +35,11 @@ if(isset($_POST['submit'])){
               // $msg = 'Registration successful. User ID: ' . $user_id;
               move_session_cart_to_db_cart($user_id);
               // send welcome email
-              // $html = pixpine_welcome_email($username);
-              // pixpine_send_html_email($email, 'Pixpine', $html);
+              $html = pixpine_welcome_email($username);
+              pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
 
               $html = pixpine_new_account_password_email($username, $password);
-              pixpine_send_html_email($email, 'Pixpine', $html);
+              pixpine_send_html_email($email, 'Your New Account Password', $html);
 
               // Reauthenticate the user with the new password
               $user_signin = wp_signon(array(
@@ -126,8 +126,8 @@ if($billing_l_name == ''){
               if($msg == 'success'){
                 echo '
                 <div class="alert alert-success" role="alert">
-          Billing address updated successful.
-        </div>
+                  Your information has been updated successfully
+                </div>
         '; }elseif($msg != ''){ echo '
         <div class="alert alert-warning" role="alert">
           '.$msg.'

@@ -159,11 +159,11 @@ function pixpine_signup(){
             // echo 'Registration successful. User ID: ' . $user_id;
             move_session_cart_to_db_cart($user_id);
             // send welcome email
-            // $html = pixpine_welcome_email($username);
-            // pixpine_send_html_email($email, 'Pixpine', $html);
+            $html = pixpine_welcome_email($username);
+            pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
 
             $html = pixpine_new_account_password_email($username, $password);
-            pixpine_send_html_email($email, 'Pixpine', $html);
+            pixpine_send_html_email($email, 'Your New Account Password', $html);
             echo 'success';
         }
     } else {

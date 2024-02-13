@@ -257,7 +257,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           echo ($in_cart==1) ? 'View Cart' : 'Add to Cart';
                         }?>
                         </button>
-                        <a href="<?php echo site_url();?>">
+                        <a href="<?php echo site_url('/premium-mockups');?>">
                           <button class="_btn btn_primary browse-more-product mt-3 <?php echo ($in_cart != 1)?'d-none':'';?>">
                             Keep Browsing
                           </button>

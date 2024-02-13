@@ -3005,3 +3005,10 @@ header .dropdown-menu .dropdown-item:hover {
   line-height: 18px !important;
   font-weight: 400 !important;
 }
+
+
+.browse-more-product{
+  background-color: white !important;
+  border: 2px solid black !important;
+  color: black !important;
+}
