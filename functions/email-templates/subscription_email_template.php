@@ -846,34 +846,80 @@ function pixpine_subscription_email($subscription_plan){
                         >
                           Order Summary
                         </h2>
-                        <div class="purchase_date__payment_method">
-                          <p
-                            style="
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                              margin-bottom: 6px;
-                              margin-top: 0;
-                            "
-                          >
-                            Purchase Date:
-                            <span style="font-weight: 700"
-                              >'.date("F d, Y").'</span
+                        <table style="border: none; margin: 0; padding: 0; width: 100%">
+                          <tr>
+                            <td style="border: none; padding: 0; vertical-align: middle; width: 60%">
+                              <div class="purchase_date__payment_method">
+                                <p
+                                  style="
+                                    font-size: 16px;
+                                    line-height: 19px;
+                                    font-weight: 400;
+                                    margin-bottom: 6px;
+                                    margin-top: 0;
+                                  "
+                                >
+                                  Purchase Date:
+                                  <span style="font-weight: 700">'.date("F d, Y").'</span>
+                                </p>
+                                <p
+                                  style="
+                                    font-size: 16px;
+                                    line-height: 19px;
+                                    font-weight: 400;
+                                    margin-bottom: 6px;
+                                    margin-top: 0;
+                                  "
+                                >
+                                  Payment Method:
+                                  <span style="font-weight: 700">Stripe</span>
+                                </p>
+                              </div>
+                            </td>
+                            <td
+                              style="
+                                border: none;
+                                padding: 0;
+                                vertical-align: middle;
+                                text-align: right;
+                                width: 40%;
+                              "
                             >
-                          </p>
-                          <p
-                            style="
-                              font-size: 16px;
-                              line-height: 19px;
-                              font-weight: 400;
-                              margin-bottom: 6px;
-                              margin-top: 0;
-                            "
-                          >
-                            Payment Method:
-                            <span style="font-weight: 700">Stripe</span>
-                          </p>
-                        </div>
+                              <a
+                                style="
+                                  background: transparent;
+                                  outline: none;
+                                  box-shadow: none;
+                                  padding: 13px;
+                                  border: 1px solid #707070;
+                                  border-radius: 0;
+                                  font-size: 18px;
+                                  line-height: 22px;
+                                  font-weight: 600;
+                                  color: #005aff;
+                                  min-width: 165px;
+                                  text-align: left;
+                                  cursor: pointer;
+                                  display: inline-block;
+                                  text-decoration: none;
+                                "
+                                href="'.site_url().'"
+                              >
+                                Get started
+                                <img
+                                  style="
+                                    width: 17px;
+                                    hight: auto;
+                                    margin-left: 12px;
+                                    object-fit: contain;
+                                  "
+                                  src="'.get_template_directory_uri().'/assets/email/right_arrow.png"
+                                  alt=""
+                                />
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
                       </div>
                       <table
                         style="
