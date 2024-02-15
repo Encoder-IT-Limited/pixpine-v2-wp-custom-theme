@@ -413,7 +413,9 @@ if($billing_l_name == ''){
                         <div id="paypal-button-container" style="width: 100%;margin-top: 15px;"></div>
                     </div>
                 </div>
-                <?php if(!is_user_logged_in()){ ?>
+
+                <?php 
+                  if((!is_user_logged_in()) || ($is_billing_form_filled==0)){ ?>
                   <button class="_btn get_premium_btn btn_primary payment-submit-dummy-nonlogged-user" type="button">Place Order</button>
                 <?php }else{ ?>
                   <button class="_btn get_premium_btn btn_primary payment-submit" type="submit">Place Order</button>
@@ -476,6 +478,14 @@ if($billing_l_name == ''){
               }).render('#paypal-button-container');
 
 
+              jQuery(document).on('click', '.payment-submit', function(e){
+                if(!jQuery('.tc_checkbox').is(":checked")){
+                  e.preventDefault();
+                  alert("Please agree with the terms and condision");
+                }
+              });
+
+
               jQuery('input[name="payment_method"]').change(function(){
                 show_payment_options();
               })
@@ -487,6 +497,7 @@ if($billing_l_name == ''){
               jQuery('.tc_checkbox').change(function(){
                 show_payment_options()
               });
+
 
               function show_payment_options(){
                 var payment_method_selected = jQuery('input[name="payment_method"]:checked').val();
@@ -542,6 +553,7 @@ if($billing_l_name == ''){
               function scroll_to_form(){
                 jQuery('html, body').scrollTop(jQuery('.billing-info-form').offset().top);
               }
+              
             });
 
           </script>
