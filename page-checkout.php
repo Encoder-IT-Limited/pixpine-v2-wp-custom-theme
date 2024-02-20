@@ -104,6 +104,10 @@ if($billing_email == '') {
   $form_class_name = '';
   $info_class_name = 'd-none';
   $is_billing_form_filled = 0;
+  if(is_user_logged_in()){
+    $current_user = wp_get_current_user();
+    $billing_email = $current_user->user_email;
+  }
 }
 
 if($billing_f_name == ''){
