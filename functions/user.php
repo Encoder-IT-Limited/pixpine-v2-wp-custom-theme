@@ -201,3 +201,90 @@ function wpdocs_my_login_redirect( $url, $request, $user ) {
 }
  
 add_filter( 'login_redirect', 'wpdocs_my_login_redirect', 10, 3 );
+
+
+function pixpine_save_billing_info(){
+
+    if(!is_user_logged_in()){
+        // User login credentials
+        $signup_first_name = $_POST['billing_f_name'];
+        $signup_last_name = $_POST['billing_l_name'];
+        // User registration data
+        $username = $signup_first_name.' '.$signup_last_name;
+        $email = $_POST['billing_email'];
+        $password = $_POST['billing_password'];
+
+        // Check if the user already exists by email
+        $user_exists = email_exists($email);
+
+        if (!$user_exists) {
+            // User does not exist, proceed with registration
+            $user_id = wp_create_user($username, $password, $email);
+
+            if (is_wp_error($user_id)) {
+                // Registration failed
+                $msg = 'Registration failed: ' . $user_id->get_error_message();
+            } else {
+                // Registration successful
+                // $msg = 'Registration successful. User ID: ' . $user_id;
+                move_session_cart_to_db_cart($user_id);
+                // send welcome email
+                $html = pixpine_welcome_email($username);
+                pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
+
+                $html = pixpine_new_account_password_email($username, $password);
+                pixpine_send_html_email($email, 'Your New Account Password', $html);
+
+                // Reauthenticate the user with the new password
+                $user_signin = wp_signon(array(
+                'user_login'    => $email,
+                'user_password' => $password,
+                'remember'      => true // You can set it to false if you don't want to remember the login
+                ));
+                if (!is_wp_error($user_signin)) {
+                    // Log the user in
+                    wp_set_current_user($user_id);
+                    wp_set_auth_cookie($user_id);
+                    do_action('wp_login', $email);
+                } else {
+                $msg = 'Login failed. Please check your credentials.';
+                }
+            }
+        } else {
+            // User already exists with the provided email
+            $msg = 'An account already exists with this email.';
+        }
+    }else{
+        $user_id = get_current_user_id();
+    }
+
+    $billing_f_name     = sanitize_text_field($_POST['billing_f_name']);
+    $billing_l_name     = sanitize_text_field($_POST['billing_l_name']);
+    $billing_email      = sanitize_email($_POST['billing_email']);
+    $billing_company    = sanitize_text_field($_POST['billing_company']);
+    $billing_country    = sanitize_text_field($_POST['billing_country']);
+    $billing_address    = sanitize_text_field($_POST['billing_address']);
+    $billing_city       = sanitize_text_field($_POST['billing_city']);
+    $billing_state      = sanitize_text_field($_POST['billing_state']);
+    $billing_zip        = sanitize_text_field($_POST['billing_zip']);
+
+    update_user_meta($user_id, 'billing_f_name', $billing_f_name);
+    update_user_meta($user_id, 'billing_l_name', $billing_l_name);
+    update_user_meta($user_id, 'billing_email', $billing_email);
+    update_user_meta($user_id, 'billing_company', $billing_company);
+    update_user_meta($user_id, 'billing_country', $billing_country);
+    update_user_meta($user_id, 'billing_address', $billing_address);
+    update_user_meta($user_id, 'billing_city', $billing_city);
+    update_user_meta($user_id, 'billing_state', $billing_state);
+    update_user_meta($user_id, 'billing_zip', $billing_zip);
+
+    if($msg == ''){
+        echo 'success';
+    }else{
+        echo $msg;
+    }
+
+    die();
+}
+add_action('wp_ajax_pixpine_save_billing_info', 'pixpine_save_billing_info'); // For logged-in users
+add_action('wp_ajax_nopriv_pixpine_save_billing_info', 'pixpine_save_billing_info'); // For non-logged-in users

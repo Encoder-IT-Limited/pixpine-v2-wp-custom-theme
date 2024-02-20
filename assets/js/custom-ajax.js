@@ -16,6 +16,103 @@ jQuery(document).ready(function ($) {
     //     },
     // });
 
+    // checkput page
+    jQuery(document).on('click', '.payment-submit', function(e){
+      e.preventDefault();
+      var tmpFlag = false;
+      // mandetory fields required
+      var is_billing_form_filled = jQuery("#is_billing_form_filled").val();
+      var is_user_logged_in = jQuery("#is_user_logged_in").val();
+      if(is_billing_form_filled == 0){
+        var billing_f_name = jQuery("input[name='billing_f_name']").val();
+        var billing_l_name = jQuery("input[name='billing_l_name']").val();
+        var billing_email = jQuery("input[name='billing_email']").val();
+        if(is_user_logged_in == 1){
+          var billing_password = 'loggedin';
+        }else{
+          var billing_password = jQuery("input[name='billing_password']").val();
+        }
+ 
+        var billing_company    = jQuery("input[name='billing_company']").val();
+        var billing_country    = jQuery("input[name='billing_country']").val();
+        var billing_address    = jQuery("input[name='billing_address']").val();
+        var billing_city       = jQuery("input[name='billing_city']").val();
+        var billing_state      = jQuery("input[name='billing_state']").val();
+        var billing_zip        = jQuery("input[name='billing_zip']").val();
+
+        if( (billing_f_name == '') || (billing_l_name == '') || 
+        (billing_email == '') || (billing_password == '') ){
+          tmpFlag = true;
+          scroll_to_form();
+          alert("Please fill the mandetory fields.");
+        }else{
+          $.ajax({
+            url: ajax_object.ajax_url,
+            type: "POST",
+            data: {
+              action: "pixpine_save_billing_info",
+              nonce: ajax_object.ajax_nonce, // Include the nonce
+              billing_f_name: billing_f_name,
+              billing_l_name: billing_l_name,
+              billing_email: billing_email,
+              billing_password: billing_password,
+              billing_company: billing_company,
+              billing_country: billing_country,
+              billing_address: billing_address,
+              billing_city: billing_city,
+              billing_state: billing_state,
+              billing_zip: billing_zip,
+            },
+            success: function (response) {
+              if(response == 'success'){
+                jQuery("#is_billing_form_filled").val('1');
+                jQuery("#is_user_logged_in").val('1');
+                // console.log('111111')
+                // jQuery('.checkout-payment-form').submit()
+                if((!jQuery('input[name="payment_method"]').is(":checked")) && (!tmpFlag)){
+                  tmpFlag = true;
+                  alert("Please select one of the payment method.");
+                }
+                if((!jQuery('.tc_checkbox').is(":checked")) && (!tmpFlag)){
+                  tmpFlag = true;
+                  alert("Please agree with the terms and condision.");
+                }
+              }else{
+                tmpFlag = true;
+                alert(response);
+              }
+              console.log('response-11', response);
+            }
+          });
+        }
+      }else{
+        if((!jQuery('input[name="payment_method"]').is(":checked")) && (!tmpFlag)){
+          tmpFlag = true;
+          alert("Please select one of the payment method.");
+        }
+        if((!jQuery('.tc_checkbox').is(":checked")) && (!tmpFlag)){
+          tmpFlag = true;
+          alert("Please agree with the terms and condision.");
+        }
+
+        if(!tmpFlag){
+          jQuery(this).closest('form').submit();
+        }
+      }
+
+
+
+    });
+
+    function scroll_to_form(){
+      jQuery('html, body').scrollTop(jQuery('.billing-info-form').offset().top);
+    }
+    // end of checkout 
+
+
+
+
+
 
     function number_of_cart_items(){
       $.ajax({
