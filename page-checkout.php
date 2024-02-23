@@ -247,14 +247,14 @@ if($billing_l_name == ''){
                 />
               </div>
             </div>
-            <div class="form_btn_container">
+            <!-- <div class="form_btn_container">
               <input
                 class="_btn btn_primary billing-info-form-submit"
                 type="submit"
                 name="submit"
                 value="Update"
               />
-            </div>
+            </div> -->
           </form>
         </div>
 
