@@ -597,7 +597,7 @@ function sub_stripesuccess()
 
     $subscription_plan = $wpdb->get_var("SELECT subscripton_plan FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id='$checkoutSession->subscription'");
     if($subscription_plan == 'monthly'){
-        $download_per_month = 56;
+        $download_per_month = 10; //56;
         $available_download = get_user_meta($user_id, 'available_download', true);
 
         if($available_download == ''){
@@ -663,7 +663,7 @@ function stripesuccess()
     $wpdb->query($query);
 
     $discount = get_user_specific_discount();
-    $html = order_confirmation_email($product_ids, 'stripe', $discount);
+    $html = order_confirmation_email($product_ids, 'stripe', $discount, $order_id);
     $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 

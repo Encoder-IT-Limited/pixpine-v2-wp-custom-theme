@@ -1,5 +1,5 @@
 <?php
-function order_confirmation_email($product_ids, $method, $discount){
+function order_confirmation_email($product_ids, $method, $discount, $order_id){
   $user_id = get_current_user_id();
   $first_name = get_user_meta($user_id, 'first_name', true);
   $last_name = get_user_meta($user_id, 'last_name', true);
@@ -777,7 +777,7 @@ function order_confirmation_email($product_ids, $method, $discount){
                             line-height: 19px;
                             font-weight: 700;
                           "
-                          >215478</span
+                          >'.$order_id.'</span
                         >
                       </h4>
                       <h3
