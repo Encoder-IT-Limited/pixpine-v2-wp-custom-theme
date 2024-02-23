@@ -463,8 +463,25 @@ if($billing_l_name == ''){
                       let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
                       let paypal_transaction_name=details.payer.name.given_name;
                       if(paypal_transaction_status == "COMPLETED"){
-                        var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tnx_id='+paypal_tansaction_id+'&amount='+total_price;
-                        window.location.href = paypalSuccessUrl;
+                        // var paypalSuccessUrl = jQuery("#payment-success-page-url").val()+'?tnx_id='+paypal_tansaction_id+'&amount='+total_price;
+                        // window.location.href = paypalSuccessUrl;
+                        jQuery.ajax({
+                            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                            type: 'POST',
+                            data: {
+                              action: "pixpine_paypal_order_success",
+                              nonce: ajax_object.ajax_nonce, // Include the nonce
+                              tnx_id: paypal_tansaction_id,
+                              amount: total_price,
+                            },
+                            success: function(response) {
+                                // Display AJAX response
+                                window.location.href = response;
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
                     }
                   });
                 },
