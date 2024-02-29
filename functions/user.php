@@ -232,8 +232,8 @@ function pixpine_save_billing_info(){
                 $html = pixpine_welcome_email($username);
                 pixpine_send_html_email($email, 'Welcome to Pixpine', $html);
 
-                $html = pixpine_new_account_password_email($username, $password);
-                pixpine_send_html_email($email, 'Your New Account Password', $html);
+                // $html = pixpine_new_account_password_email($username, $password);
+                // pixpine_send_html_email($email, 'Your New Account Password', $html);
 
                 // Reauthenticate the user with the new password
                 $user_signin = wp_signon(array(
