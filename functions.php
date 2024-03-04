@@ -957,18 +957,22 @@ function is_show_download_btn($product_id=null, $mockup_cat=null){
             }
         }
 
-        $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
+        // subscription
+        $todays_date = date("Y-m-d");
+        $active_subscriptions = $wpdb->get_col("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND end_date >= '$todays_date'");
+        $number_of_subscription = $wpdb->num_rows;
         
-        if ($active_subscription != null) {
+        // if has subscription
+        if ($number_of_subscription > 0) {
             $bought_product = $wpdb->get_var("SELECT id FROM " . $wpdb->prefix . "pixpine_subscription_downloaded_items WHERE user_id='" . $user_id . "' AND product_id='".$product_id."'");
             if($bought_product != null){
                 return true;
             }
 
-            if(($active_subscription == 'yearly') && ($mockup_cat != 'bundle-mockups')){
+            if(in_array('yearly',$active_subscriptions) && ($mockup_cat != 'bundle-mockups')){
                 return true;
-            }elseif($active_subscription == 'monthly'){
-            $available_download = get_user_meta($user_id, 'available_download', true);
+            }elseif(in_array('monthly',$active_subscriptions)){
+                $available_download = get_user_meta($user_id, 'available_download', true);
                 if(($available_download > 0) && ($mockup_cat != 'bundle-mockups')){
                     return true;
                 }
