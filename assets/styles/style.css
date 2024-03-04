@@ -3022,3 +3022,15 @@ header .dropdown-menu .dropdown-item:hover {
   border: 1px solid var(--text-color) !important;
   color: var(--text-color) !important;
 }
+
+.commect-title{
+  font-size: 19px;
+  line-height: 23px;
+  font-weight: 500;
+}
+
+.comment-seperator {
+  /* padding-top: 30px; */
+  border-bottom: 1px solid #707070;
+  margin-bottom: 30px;
+}

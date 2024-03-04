@@ -663,7 +663,7 @@ function stripesuccess()
     $wpdb->query($query);
 
     $discount = get_user_specific_discount();
-    $html = order_confirmation_email($product_ids, 'stripe', $discount, $order_id);
+    $html = order_confirmation_email($product_ids, 'stripe', $discount, $dborderid);
     $email = 'orders@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 

@@ -344,7 +344,14 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                       </div>
                     </div>
                   </div>
-                   <div class="separetor"></div>
+
+       
+                  <br>
+                  <div class="mt-5 mb-1">
+                    <h2 class="commect-title">Comments</h2>
+                  </div>
+                  <div class="comment-seperator"></div>
+
                   <div class="comment_box_container">
                     <?php
                     $table_name = $wpdb->prefix . 'pixpine_reviews';

@@ -75,7 +75,7 @@ jQuery(document).ready(function ($) {
                 }
                 if((!jQuery('.tc_checkbox').is(":checked")) && (!tmpFlag)){
                   tmpFlag = true;
-                  alert("Please agree with the terms and condision.");
+                  alert("Please agree with the terms and conditions.");
                 }
               }else{
                 tmpFlag = true;
@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
         }
         if((!jQuery('.tc_checkbox').is(":checked")) && (!tmpFlag)){
           tmpFlag = true;
-          alert("Please agree with the terms and condision.");
+          alert("Please agree with the terms and conditions.");
         }
 
         if(!tmpFlag){
