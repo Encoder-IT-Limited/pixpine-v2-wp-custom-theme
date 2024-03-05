@@ -250,7 +250,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           </h5>
                         </div>
                         <button class="_btn btn_primary 
-                        <?php echo is_show_download_btn($cpt->ID) ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
+                        <?php echo is_show_download_btn($cpt->ID) ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>" type="bundle-mockups">
                         <?php if (is_show_download_btn($cpt->ID)) {
                           echo "Download";
                         }else{
@@ -435,7 +435,7 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                           </h5>
                         </div>
                         <button class="_btn btn_primary 
-                        <?php echo is_show_download_btn($cpt->ID, 'bundle-mockups') ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>">
+                        <?php echo is_show_download_btn($cpt->ID, 'bundle-mockups') ? 'download-product':'add-to-cart';?> " p-id="<?php echo $cpt->ID;?>" is-logged-in="<?php echo $is_logged_in;?>" in-cart="<?php echo $in_cart;?>" cart-url="<?php echo site_url('cart');?>" type="bundle-mockups">
                         <?php if (is_show_download_btn($cpt->ID, 'bundle-mockups')) {
                           echo "Download";
                         }else{

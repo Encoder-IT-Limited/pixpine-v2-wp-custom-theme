@@ -175,6 +175,7 @@ jQuery(document).ready(function ($) {
     // remove cart
     $(document).on("click", ".download-product", function () {
       var pId = $(this).attr("p-id");
+      var type = $(this).attr("type");
       $.ajax({
         url: ajax_object.ajax_url,
         type: "POST",
@@ -182,6 +183,7 @@ jQuery(document).ready(function ($) {
           action: "pixpine_download_product",
           nonce: ajax_object.ajax_nonce, // Include the nonce
           pId: pId,
+          type: type,
         },
         success: function (response) {
           if (response == "fail") {
