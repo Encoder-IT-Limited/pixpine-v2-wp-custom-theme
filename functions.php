@@ -607,15 +607,14 @@ function sub_stripesuccess()
         }
         
         update_user_meta($user_id, 'available_download', $available_download);
-    }else{
-        $download_per_month = '-1';
-        update_user_meta($user_id, 'available_download', $available_download);
     }
 
     $query = "DELETE from " . $wpdb->prefix . "pixpine_carts  WHERE user_id='$user_id' ";
     $wpdb->query($query);
 
-    $html = pixpine_subscription_email($subscription_plan);
+    $db_order_id = $wpdb->get_var("SELECT id FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id='$checkoutSession->subscription'");
+
+    $html = pixpine_subscription_email($subscription_plan, $db_order_id);
     $email = 'subscribe@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com, '.$current_user->user_email;
     pixpine_send_html_email($email, ' Thank you for your payment', $html);
 

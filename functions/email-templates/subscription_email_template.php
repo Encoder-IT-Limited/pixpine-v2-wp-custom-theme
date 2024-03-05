@@ -1,5 +1,5 @@
 <?php
-function pixpine_subscription_email($subscription_plan){
+function pixpine_subscription_email($subscription_plan, $order_id){
   $amount = ($subscription_plan == "monthly") ? "21.00" : "168.00";
   $user_id = get_current_user_id();
   $first_name = get_user_meta($user_id, 'first_name', true);
@@ -769,6 +769,7 @@ function pixpine_subscription_email($subscription_plan){
                           font-weight: 700;
                         "
                       >
+
                         Order ID:
                         <span
                           style="
@@ -777,7 +778,7 @@ function pixpine_subscription_email($subscription_plan){
                             line-height: 19px;
                             font-weight: 700;
                           "
-                          >215478</span
+                          >'.$order_id.'</span
                         >
                       </h4>
                       <h3
