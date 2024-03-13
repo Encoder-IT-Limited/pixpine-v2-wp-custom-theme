@@ -515,8 +515,10 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
       var pop_container = jQuery(".modal-dialog");
       if (!pop_container.is(e.target) && pop_container.has(e.target).length === 0) {
         if (localStorage["redirect_url"]) {
+          // localStorage.setItem('scrollFlag', 1);
           var redirect_url = localStorage.getItem("redirect_url");
-          window.location.href = redirect_url;
+          // window.location.href = redirect_url;
+          window.history.back();
         }
       }
     });

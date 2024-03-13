@@ -494,10 +494,11 @@ if(isset($_POST['p_submit'])){
           var totalSize = 0;
           var files = event.target.files;
           var imagesHTML = '';
+          var limitSingleImage = 5*1024*1024;
 
           // Calculate total size of selected files
           jQuery('#selectedImages').html('');
-          if(files.length <= 4){
+          if(files.length <= 5){
             jQuery(".p_submit").attr('disabled', false);
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
@@ -506,18 +507,18 @@ if(isset($_POST['p_submit'])){
               
 
               reader.onload = function(e) {
-                if(p_size <= 1048576){
+                if(p_size <= limitSingleImage){
                   imagesHTML += '<img src="' + e.target.result + '" alt="Selected Image" style="height: 80px; width: auto; padding: 10px;">';
                   jQuery('#selectedImages').html(imagesHTML);
                 }
               };
               reader.readAsDataURL(file);
-              if(files[i].size > 1048576){
+              if(files[i].size > limitSingleImage){
                 alert("File can not be more than 1 MB.")
               }
             }
           }else{
-            alert("You can not upload more than 4 images.");
+            alert("You can not upload more than 5 images.");
             jQuery(".p_submit").attr('disabled', true);
           }
 
