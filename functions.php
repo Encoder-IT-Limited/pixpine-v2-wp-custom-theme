@@ -589,6 +589,16 @@ function sub_stripesuccess()
     $checkoutSession = $stripeHelper->getSession($sessionId);
     $jsonData = json_encode($checkoutSession);
 
+
+    // if no current subscription, clear old subscriptoin download
+    $todays_date = date("Y-m-d");
+    $active_subscriptions = $wpdb->get_col("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND end_date >= '$todays_date'");
+    $number_of_subscription = $wpdb->num_rows;
+    if($number_of_subscription == 0){
+        $query = "DELETE FROM `".$wpdb->prefix."pixpine_subscription_downloaded_items` WHERE `user_id`='".$user_id."'";
+        $wpdb->query($query);
+    }
+
     $query = "UPDATE " . $wpdb->prefix . "pixpine_payment_details SET payment_status='Completed',payment_info='" . $jsonData . "',tnx_id='" . $checkoutSession->subscription . "' WHERE item_number='$order_id' ";
     $wpdb->query($query);
 

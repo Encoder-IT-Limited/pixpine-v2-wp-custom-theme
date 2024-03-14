@@ -74,9 +74,11 @@ if(isset($_GET['type'])){
                   <div class="tab_inner_content">
                     <ul>
                       <?php
-                          $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
+                          $todays_date = date("Y-m-d");
+                          $active_subscriptions = $wpdb->get_col("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND end_date >= '$todays_date'");
+                          $number_of_subscription = $wpdb->num_rows;
     
-                          if ($active_subscription != null) {
+                          if ($number_of_subscription > 0) {
                           $results = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "pixpine_subscription_downloaded_items WHERE user_id='$user_id' ", ARRAY_A);
                           if (!empty($results)) {
                               foreach ($results as $sitem) {
