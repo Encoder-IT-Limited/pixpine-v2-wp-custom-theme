@@ -581,11 +581,14 @@ function sub_stripesuccess()
     require_once get_template_directory() . '/stripe/StripeHelper.php';
     $stripeHelper = new StripeHelper();
     $stripe = $stripeHelper->stripeClient;
+    echo '<pre>';
     $sessionId = $_GET['session_id'];
     $order_id = $_GET['order_id'];
+    // print_r($sessionId);
+    // print_r($order_id);
     $checkoutSession = $stripeHelper->getSession($sessionId);
     $jsonData = json_encode($checkoutSession);
-    //print_r($checkoutSession);exit;
+
     $query = "UPDATE " . $wpdb->prefix . "pixpine_payment_details SET payment_status='Completed',payment_info='" . $jsonData . "',tnx_id='" . $checkoutSession->subscription . "' WHERE item_number='$order_id' ";
     $wpdb->query($query);
 
@@ -594,6 +597,7 @@ function sub_stripesuccess()
     $query = "UPDATE " . $wpdb->prefix . "pixpine_subscriptions SET subscription_id='" . $checkoutSession->subscription . "',starting_date='" . $subscriptioninfo['start_date'] . "',status='Active',end_date='" . $subscriptioninfo['end_date'] . "' WHERE item_number='$order_id' ";
 
     $wpdb->query($query);
+
 
     $subscription_plan = $wpdb->get_var("SELECT subscripton_plan FROM ".$wpdb->prefix."pixpine_subscriptions WHERE subscription_id='$checkoutSession->subscription'");
     if($subscription_plan == 'monthly'){
@@ -984,16 +988,24 @@ function is_show_download_btn($product_id=null, $mockup_cat=null){
 function get_user_specific_discount(){
     // is user has subscription
     if(is_user_logged_in()){
+        // is user has subscription
         global $wpdb;
         $user_id = get_current_user_id();
-        $active_subscription = $wpdb->get_var("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND status='Active'");
-        if ($active_subscription != null) {
-            if($active_subscription == 'yearly'){
+
+        // subscription
+        $todays_date = date("Y-m-d");
+        $active_subscriptions = $wpdb->get_col("SELECT subscripton_plan FROM " . $wpdb->prefix . "pixpine_subscriptions WHERE user_id='" . $user_id . "' AND end_date >= '$todays_date'");
+        $number_of_subscription = $wpdb->num_rows;
+        
+        // if has subscription
+        if ($number_of_subscription > 0) {
+            if(in_array('yearly',$active_subscriptions)){
                 return 50;
-            }elseif($active_subscription == 'monthly'){
+            }elseif(in_array('monthly',$active_subscriptions)){
                 return 30;
             }
         }
+        return 0;
     }
     return 0;
 }
