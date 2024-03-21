@@ -1,3 +1,6 @@
+<?php
+get_header();
+?>
 <main>
   <section class="banner_section">
     <div class="container">
@@ -202,3 +205,5 @@
 <!-- Bundle Modal -->
 <?php include get_template_directory() .'/includes/bundle-modal.php';?>
 <input type="hidden" value="1" id="hidden-show-bundle-modal">
+<?php
+get_footer();

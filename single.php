@@ -1,6 +1,11 @@
 <?php
-get_header();
 $post_id = get_the_ID();
+
+if(rtrim($_SERVER['HTTP_REFERER'], '/') == rtrim(site_url(), '/')){
+  $_SESSION['background_type'] = 'home';
+}else{
+  $_SESSION['background_type'] = 'mockup-index';
+}
 
 $current_category_name = '';
 $taxonomy = 'mockup_category'; //'your_custom_taxonomy'; 
@@ -18,12 +23,20 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
 ?>
 <?php
 if($current_category_name == "premium-mockups"){
-	include get_template_directory() .'/page-premium-mockup-single-product.php';
+  if($_SESSION['background_type'] == 'home'){
+    include get_template_directory() .'/page-premium-mockup-single-product-home-template.php';
+  }else{
+    include get_template_directory() .'/page-premium-mockup-single-product.php';
+  }
 }elseif($current_category_name == "bundle-mockups"){
-	include get_template_directory() .'/page-bundle-mockup-single-product.php';
+  if($_SESSION['background_type'] == 'home'){
+    include get_template_directory() .'/page-bundle-mockup-single-product-home-template.php';
+  }else{
+    include get_template_directory() .'/page-bundle-mockup-single-product.php';
+  }
+	
 }elseif($current_category_name == "free-mockups"){
 	include get_template_directory() .'/page-free-mockup-single-product.php';
 }
 ?>
-<?php
-get_footer();
+

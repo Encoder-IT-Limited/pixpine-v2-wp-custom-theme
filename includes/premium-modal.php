@@ -512,14 +512,16 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
 
 <script>
   jQuery(document).ready(function(){
+    var homeUrl = '<?php site_url();?>';
+    var homeUrl = '<?php site_url("premium-mockups");?>';
     jQuery(document).on('click', function(e) {
       var pop_container = jQuery(".modal-dialog");
       if (!pop_container.is(e.target) && pop_container.has(e.target).length === 0) {
         if (localStorage["redirect_url"]) {
           // localStorage.setItem('scrollFlag', 1);
           var redirect_url = localStorage.getItem("redirect_url");
-          // window.location.href = redirect_url;
-          window.history.back();
+          window.location.href = redirect_url;
+          // window.history.back();
         }
       }
     });
