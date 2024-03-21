@@ -178,14 +178,14 @@ if ($parent_term && !is_wp_error($parent_term)) {
                                         <h2
                                           class="section_heading section_heading_primary section_heading_bold"
                                         >
-                                          Get 96% Off
+                                          Get 93% Off
                                           <span
                                             class="section_heading_medium default_color"
                                             >on premium mockups</span
-                                          >
+                                          > 
                                         </h2>
                                         <span class="primary_color"
-                                          >As low as $0.14 a mockup</span
+                                          >as low as $0.25 mockup each</span
                                         >
                                         <a
                                           href="<?php echo site_url('get-subscription');?>"
@@ -216,14 +216,14 @@ if ($parent_term && !is_wp_error($parent_term)) {
                                   <h2
                                     class="section_heading section_heading_primary section_heading_bold"
                                   >
-                                    Get 96% Off
+                                    Get 93% Off
                                     <span
                                       class="section_heading_medium default_color"
                                       >on premium mockups</span
                                     >
                                   </h2>
                                   <span class="primary_color"
-                                    >As low as $0.14 a mockup</span
+                                    >as low as $0.25 mockup each</span
                                   >
                                   <a
                                     href="<?php echo site_url('get-subscription');?>"

@@ -10,11 +10,14 @@ get_header();
         <div class="container">
           <div class="section_width">
             <div class="heading_col text-center">
-              <h1 class="page_heading">PICK YOUR MEMBERSHIP PLAN</h1>
+              <h1 class="page_heading">MEMBERSHIP PLAN</h1>
               <p class="sub_heading">
-                All subscriptions come with
-                <a href="<?php echo site_url('license');?>">Extended Commercial License</a> (limited time) at no
-                extra cost, which means you can use our mockups unlimited times.
+                
+                
+                
+                Pick your Membership Plan that’s right for you and get instant access to our pool of high-quality PSD mockups. <br>
+Save up to 93% with our membership plans and our all-premium mockups come with an <a href="<?php echo site_url('license');?>">Extended Commercial License</a> at no extra cost.
+
               </p>
             </div>
             <div class="subscriptions_package_container">
@@ -22,24 +25,27 @@ get_header();
                 <div class="content_col">
                   <div class="top_content">
                     <div class="heading__col">
-                      <h4>Monthly Subscription</h4>
+                      <h4>Monthly Membership</h4>
                     </div>
                     <div class="price_container">
-                      <h2>$21.00 <span>/ month</span></h2>
+                      <h2>$19.00 <span>/ month</span></h2>
                     </div>
                   </div>
                   <ul>
                     <li>
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
-                      <p>90% off on Premium Mockups</p>
+                      <h5>Membership Benefits</h5>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
-                      <p>30% off on Bundle Mockups</p>
+                      <p>88% Off on Premium Mockups</p>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
-                      <p>56 downloads every month</p>
+                      <p>30% Off on Bundle Mockups</p>
+                    </li>
+                    <li>
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
+                      <p>46 Downloads Every Month</p>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
@@ -51,15 +57,11 @@ get_header();
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
-                      <p>Priority email support</p>
+                      <p>Priority Email Support</p>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
-                      <p>Unused downloads roll over to next month</p>
-                    </li>
-                    <li>
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__dark-mark.png" alt="" />
-                      <p>First to know about daily free mockups</p>
+                      <p>Unused Downloads Roll Over to Next Month</p>
                     </li>
                   </ul>
                 </div>
@@ -74,25 +76,28 @@ get_header();
               <div class="subscriptions_package yearly__subscription">
                 <div class="premium_saves_container">
                   <h3>PREMIUM</h3>
-                  <h5>Saves you $72.00</h5>
+                  <h5>Instant saves you $93.00</h5>
                 </div>
                 <div class="content_col">
                   <div class="top_content">
                     <div class="heading__col">
-                      <h4>Yearly Subscription <span>$168.00</span></h4>
+                      <h4>Yearly Membership <span>$135.00</span></h4>
                     </div>
                     <div class="price_container">
-                      <h2>$14.00 <span>/ month</span></h2>
+                      <h2>$11.25 <span>/ month</span></h2>
                     </div>
                   </div>
                   <ul>
                     <li>
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
-                      <p>96% off on Premium Mockups</p>
+                      <h5>Membership Benefits</h5>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
-                      <p>50% off on Bundle Mockups</p>
+                      <p>93% Off on Premium Mockups</p>
+                    </li>
+                    <li>
+                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
+                      <p>50% Off on Bundle Mockups</p>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
@@ -100,7 +105,7 @@ get_header();
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
-                      <p>Unlimited downloads every month</p>
+                      <p>Unlimited Downloads of Premium Mockups</p>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
@@ -110,18 +115,14 @@ get_header();
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
                       <p>Commercial and Personal Use</p>
                     </li>
-                    <li>
-                      <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
-                      <p>Priority email support</p>
-                    </li>
 
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
-                      <p>Custom Mockups wishlist</p>
+                      <p>Priority Email Support</p>
                     </li>
                     <li>
                       <img src="<?php echo get_template_directory_uri();?>/assets/images/subscription__white-mark.png" alt="" />
-                      <p>First to know about daily free mockups</p>
+                      <p>First to Know About Weekly Free Mockups</p>
                     </li>
                   </ul>
                 </div>
@@ -220,7 +221,7 @@ get_header();
                 >
                   <div class="accordion-body">
                     <p>
-                      You can download 56 premium mockups with a monthly
+                      You can download 46 premium mockups with a monthly
                       subscription and the remaining downloads will roll over to
                       the next month if you have an active subscription. We
                       offer unlimited downloads with a yearly subscription
@@ -274,7 +275,7 @@ get_header();
                 >
                   <div class="accordion-body">
                     <p>
-                      We use secure payment gateways provided by 2Checkout and
+                      We use secure payment gateways provided by PayPal and
                       Stripe.
                     </p>
                   </div>
@@ -332,7 +333,7 @@ get_header();
                       resolve it. If you paid twice for the same item or you are
                       having issues with the payment process in that case reach
                       out to our support team. Do not lodge a dispute with our
-                      payment gateway partners (Stripe & 2Checkout) otherwise,
+                      payment gateway partners (Stripe & PayPal) otherwise,
                       it will take longer time to get your refund
                     </p>
                   </div>

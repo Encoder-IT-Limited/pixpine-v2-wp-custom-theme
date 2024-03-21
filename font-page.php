@@ -140,7 +140,7 @@
         <div class="container">
           <div class="heading_col text-center">
             <h1 class="page_heading">
-              Visualize your design with our Premium PSD Mockups
+              Bring your designs to life with our Premium PSD Mockups
             </h1>
             <p class="sub_heading">
               A growing online market for Photoshop Templates at an unbelievable

@@ -37,11 +37,11 @@
             <div class="item subscribe_col">
               <div class="inner_col">
                 <h2>Download Unlimited Mockups</h2>
-                <p>As low as $0.14 a mockup</p>
+                <p>As low as $0.25 mockup each</p>
                 <div
                   class="btn_subscribe_cont d-flex justify-content-between align-items-center"
                 >
-                  <span>$14.00/mo</span>
+                  <span>$11.25/mo</span>
                   <a class="btn_primary _btn" href="<?php echo site_url('get-subscription');?>">
                     Get premium
                   </a>

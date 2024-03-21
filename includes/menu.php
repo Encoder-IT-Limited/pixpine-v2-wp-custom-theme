@@ -65,7 +65,7 @@
             <a class="nav-link" href="<?php echo site_url('bundle-mockups');?>">Bundle Mockups</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('customized-mockup-request');?>">Customise Mockups</a>
+            <a class="nav-link" href="<?php echo site_url('customized-mockup-request');?>">Customize Mockups</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('about-us');?>">About</a>

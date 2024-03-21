@@ -95,7 +95,7 @@ if(isset($_GET['type'])){
                         }else{ ?>
                           <li>
                             <p>
-                              No mockup downloaded through subscription.
+                              No download is available.
                             </p>
                           </li>
                       <?php }}else{ ?>
@@ -126,7 +126,7 @@ if(isset($_GET['type'])){
                     }else{ ?>
                       <li>
                         <p>
-                          No mockup downloaded through subscription.
+                          No download is available.
                         </p>
                       </li>
                     <?php } ?>

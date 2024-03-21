@@ -89,7 +89,7 @@ Template Name: Home
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo site_url('customized-mockup-request');?>"
-                    >Customise Mockups</a
+                    >Customize Mockups</a
                   >
                 </li>
                 <li class="nav-item">
@@ -192,7 +192,7 @@ Template Name: Home
         <div class="container">
           <div class="heading_col text-center">
             <h1 class="page_heading">
-              Visualize your design with our Premium PSD Mockups
+              Bring your designs to life with our Premium PSD Mockups
             </h1>
             <p class="sub_heading">
               A growing online market for Photoshop Templates at an unbelievable
@@ -232,7 +232,7 @@ Template Name: Home
       <section class="get_mockup_section">
         <div class="container">
           <div class="get_mockup text-center">
-            <h6>Get 96% off, as low as $0.14 a mockup</h6>
+            <h6>Get 93% off, as low as $0.25 a mockup</h6>
             <a class="btn_black _btn btn_black_small" href="<?php echo site_url('get-subscription');?>"
               >Get Premium</a
             >
@@ -284,16 +284,13 @@ Template Name: Home
               <h2
                 class="section_heading section_heading_primary section_heading_bold"
               >
-                Get 96% Off
+                Save Big!
                 <span class="section_heading_medium default_color"
-                  >on premium mockups</span
+                  >Get 93% Off with our yearly subscription</span
                 >
               </h2>
               <p class="sub_heading">
-                With a yearly subscription, you can get each mockup for only
-                <span class="primary_color"
-                  >$0.14 with unlimited downloads.</span
-                >
+                Unlimited downloads, as little as $0.25 mockup each
               </p>
               <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                 >Get premium</a
@@ -308,7 +305,7 @@ Template Name: Home
       <section id="premium_mockups" class="recently_added_premium_mockups">
         <div class="container">
           <div class="heading_col text-center">
-            <h2 class="section_heading">Recently Added Premium Mockups</h2>
+            <h2 class="section_heading">Explore Recently Added Premium Mockups</h2>
           </div>
           <div class="tab_img_container">
             <?php 
@@ -404,7 +401,7 @@ Template Name: Home
                 <div class="separetor"></div>
             </div>
           <div class="heading_col text-center">
-            <h2 class="section_heading">Recently Added Free Mockups</h2>
+            <h2 class="section_heading">Explore Recently Added Free Mockups</h2>
           </div>
           <div class="tab_img_container">
 
@@ -490,15 +487,15 @@ Template Name: Home
                   <h2
                     class="section_heading section_heading_primary section_heading_bold"
                   >
-                    Get 50% Off
+                    Get 50% Off on Bundle Mockups
                     <span class="section_heading_medium default_color">
-                      on bundle mockups
+                      Transform your creative concept into reality
                     </span>
                   </h2>
                   <p class="sub_heading">
-                    <span class="primary_color">
-                      Save big with our yearly subscription
-                    </span>
+                    <!--<span class="primary_color">-->
+                    <!--  Save big with our yearly subscription-->
+                    <!--</span>-->
                   </p>
                   <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                     >Get premium</a
@@ -511,7 +508,7 @@ Template Name: Home
             </div>
           </div>
           <div class="heading_col text-center">
-            <h2 class="section_heading">Our Bundle Mockups Collection</h2>
+            <h2 class="section_heading">Explore Recently Added Bundle Mockups</h2>
           </div>
           <div class="separetor_container">
                 <div class="separetor"></div>

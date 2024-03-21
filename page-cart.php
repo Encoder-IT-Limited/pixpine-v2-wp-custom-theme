@@ -112,8 +112,8 @@ $get_user_specific_discount_amount = get_user_specific_discount_amount($products
               <div class="get_premium_mockups_section">
                 <div class="premium_mockups_inner">
                   <h2>Download Unlimited Mockups</h2>
-                  <p>As low as $0.14 a mockup</p>
-                  <span>$14.00/mo</span>
+                  <p>As low as $0.25 a mockup</p>
+                  <span>$11.25/mo</span>
                   <a class="_btn btn_black" href="<?php echo site_url('get-subscription');?>">Get premium</a>
                 </div>
               </div>

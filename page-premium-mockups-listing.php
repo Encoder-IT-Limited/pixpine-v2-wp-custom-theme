@@ -24,9 +24,9 @@ get_header();
               <div class="collection_premium_text_col">
                 <div class="heading_col">
                   <h1 class="page_heading">
-                    Big Collection of Premium Mockups at the Best Price
+                    Explore Your Creativity
                   </h1>
-                  <p>Weekly update with freshly baked premium mockups</p>
+                  <p>Offering high-quality Premium Mockups at the Best Price. Get your hands on our freshly updated premium mockups every week, each offering a range of features that allow you to customize everything from label highlights and shadows to special effects.</p>
                 </div>
                 <div class="premium_mockups_content">
                   <div class="premium_mockups_inner">
@@ -34,21 +34,32 @@ get_header();
                       <h2
                         class="section_heading section_heading_primary section_heading_bold"
                       >
-                        Get 96% Off
+                        Get 93% Off
                         <span class="section_heading_medium default_color"
                           >on premium mockups</span
                         >
                       </h2>
-                      <p class="primary_color">As low as $0.14 a mockup</p>
-                      <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
+                      <p class="primary_color">As low as $0.25 mockup each</p>
+                      <div class="text-center">
+                          <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                         >Get premium</a
                       >
+                      </div>
                     </div>
                     <div class="get_best_container">
                       <h2 class="section_heading">
                         Get the Best out of this deal.
                       </h2>
                       <ul>
+                        <li>
+                          <img
+                            src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
+                            alt=""
+                          />
+                          <p>
+                               <strong>Unlimited Downloads</strong>
+                            </p>
+                        </li>
                         <li>
                           <img
                             src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
@@ -61,14 +72,7 @@ get_header();
                             src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
                             alt=""
                           />
-                          <p>30% Off on Customize Mockup</p>
-                        </li>
-                        <li>
-                          <img
-                            src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
-                            alt=""
-                          />
-                          <p>Commercial and Personal Use</p>
+                          <p>30% Off on Customise Mockup</p>
                         </li>
                         <li>
                           <img
@@ -82,15 +86,8 @@ get_header();
                             src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
                             alt=""
                           />
-                          <p>Priority email support</p>
-                        </li>
-                        <li>
-                          <img
-                            src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
-                            alt=""
-                          />
                           <p>
-                            <strong>Unlimited downloads every month</strong>
+                            Commercial and Personal Use
                           </p>
                         </li>
                         <li>
@@ -98,14 +95,14 @@ get_header();
                             src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
                             alt=""
                           />
-                          <p>Custom Mockups wishlist</p>
+                          <p>Priority Email Support</p>
                         </li>
                         <li>
                           <img
                             src="<?php echo get_template_directory_uri();?>/assets/images/premium_mockups_subscription__mark.png"
                             alt=""
                           />
-                          <p>First to know about daily free mockups</p>
+                          <p>First to Know About Weekly Free Mockups</p>
                         </li>
                       </ul>
                     </div>
@@ -161,7 +158,10 @@ get_header();
       <section id="premium_mockups_page" class="recently_added_premium_mockups">
         <div class="container">
           <div class="heading_col text-center">
-            <h2 class="section_heading">Recently Added Premium Mockups</h2>
+              <div class="separetor_container">
+                <div class="separetor"></div>
+            </div>
+            <!--<h2 class="section_heading">Recently Added Premium Mockups</h2>-->
           </div>
           <div class="tab_img_container">
             <?php 

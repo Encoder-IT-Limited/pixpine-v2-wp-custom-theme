@@ -24,11 +24,10 @@ get_header();
     <div class="container">
       <div class="heading_col text-center">
         <h1 class="section_heading">
-          100% free mockups download directly to your desktop
+          100% FREE MOCKUPS - DOWNLOAD DIRECTLY TO YOUR DESKTOP
         </h1>
         <p>
-          These freebies are exclusively available only on Pixpine.com, you can
-          use our free mockups for commercial and personal projects.
+          These freebies are exclusively available on Pixpine.com. High-quality mockups, perfect to showcase your work with style and professionalism, all free mockups available on our website come with commercial and personal licenses. Download and take your design or product to the next level.
         </p>
       </div>
       <div class="separetor_container">
@@ -91,17 +90,19 @@ get_header();
                                 <h2
                                   class="section_heading section_heading_primary section_heading_bold"
                                 >
-                                  Get 96% Off
+                                  Create Without Limits
                                   <span class="section_heading_medium default_color"
-                                    >on premium mockups</span
+                                    >Download as many premium mockups as you want.</span
                                   >
                                 </h2>
                                 <span class="primary_color"
-                                  >As low as $0.14 a mockup</span
+                                  >As low as $0.25 mockup each</span
                                 >
-                                <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
+                                <div class="text-center">
+                                    <a href="<?php echo site_url('get-subscription');?>" class="btn_primary _btn"
                                   >Get premium</a
                                 >
+                                </div>
                               </div>
                             </div>
                           </div>

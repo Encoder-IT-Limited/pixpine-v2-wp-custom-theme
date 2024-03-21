@@ -25,7 +25,7 @@ get_header();
             <h1 class="page_heading">
               With Our Bundle Mockups, Limitless Creativity
             </h1>
-            <p>High-quality ready to use assets.</p>
+            <p>Our Bundle Mockups are of high quality, ready to use, and often include pre-made scenes to save you time and effort.</p>
           </div>
           <div class="premium_mockups_content">
             <div class="premium_mockups_inner">

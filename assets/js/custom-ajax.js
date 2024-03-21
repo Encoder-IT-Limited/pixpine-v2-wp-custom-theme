@@ -155,11 +155,10 @@ jQuery(document).ready(function ($) {
           if (response == "success") {
             $("#review").val("");
             $(".new-added-review").append(`
-              <p>
-                <p><b>`+jQuery('.autor_name').html()+`</b> - `+formattedDate+`</p>
-                `+review+`
+                <h5 class="user_name">`+jQuery('.autor_name').html()+`</h5>
+                <span class="date">`+formattedDate+`</span>
+                <p class="user_comment">`+review+`</p>
                 <hr>
-              </p>
             `);
           }else{
             alert("Something went wrong. Please try again.");

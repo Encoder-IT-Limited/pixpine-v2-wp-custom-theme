@@ -357,15 +357,16 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
                         $datetime = new DateTime($datetimeString);
                         $formattedDate = $datetime->format('F j, Y');
                     ?>
-                    <p>
-                      <p><b><?=get_user_meta($result->user_id, 'first_name', true);?> <?=get_user_meta($result->user_id, 'last_name', true);?></b> - <?=$formattedDate?></p>
-                      <?=$result->review;?>
+                    <div class="comment_item">
+                      <h5 class="user_name"><?=get_user_meta($result->user_id, 'first_name', true);?> <?=get_user_meta($result->user_id, 'last_name', true);?></h5>
+                      <span class="date"><?=$formattedDate?></span>
+                      <p class="user_comment"><?=$result->review;?></p>
                       <hr>
-                    </p>
+                    </div>
                     <?php
                     }
                     ?>
-                    <div class="new-added-review"></div>
+                    <div class="new-added-review comment_item"></div>
                   
                     <?php if(!is_user_logged_in()){ ?>
                     <p>

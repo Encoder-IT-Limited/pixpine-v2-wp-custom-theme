@@ -515,7 +515,7 @@ header .nav-link.cart_icon {
 /* get_mockup_section Start*/
 .get_mockup_section {
   background-color: var(--banner-color);
-  padding: 25px 0;
+  padding: 14px 0;
   border-top: 1px solid #fff;
   display: block;
 }
@@ -578,7 +578,7 @@ header .nav-link.cart_icon {
   font-family: var(--second-font-family);
   font-weight: 500;
   line-height: 27px;
-  margin-top: 12px;
+  margin-top: 5px;
   margin-bottom: 35px;
 }
 .get_premium_mockups_section .sub_heading span {
@@ -617,6 +617,11 @@ header .nav-link.cart_icon {
 #free_mockups .separetor_container {
   padding-bottom: 60px;
 }
+
+#premium_mockups_page .separetor_container{
+    padding-bottom: 30px;
+}
+#premium_mockups_page .separetor,
 #bundle_mockups .separetor,
 #free_mockups .separetor {
   border-top: 1px solid #cecece;
@@ -2156,6 +2161,18 @@ footer .menu_inner_col .item:nth-child(3) {
   #free_mockups_page .tab-content .card_item,
   .pixpine_free_product_top .first_card_col {
     width: 100%;
+  }
+  .pixpine_free_product_top .first_card_col .card_item {
+	width: calc(50% - 20px);
+	margin: 10px;
+}
+ .pixpine_free_product_top .first_card_col .card_item.get_off{
+    	width: calc(100% - 20px);
+}
+   .pixpine_free_product_top .first_card_col{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
   }
   .bundle_mockups_yearly_subscription .card_item,
   .recently_added_free_mockups .tab-content .card_item,
