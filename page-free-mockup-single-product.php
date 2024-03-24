@@ -1,4 +1,6 @@
 <?php
+get_header();
+
 $post_id = get_the_ID();
 $post = get_post($post_id);
 
@@ -349,3 +351,5 @@ if ($parent_term && !is_wp_error($parent_term)) {
         </div>
       </section>
     </main>
+    <?php
+    get_footer();

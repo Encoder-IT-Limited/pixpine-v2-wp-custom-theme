@@ -512,8 +512,6 @@ if (!is_wp_error($custom_categories) && !empty($custom_categories)) {
 
 <script>
   jQuery(document).ready(function(){
-    var homeUrl = '<?php site_url();?>';
-    var homeUrl = '<?php site_url("premium-mockups");?>';
     jQuery(document).on('click', function(e) {
       var pop_container = jQuery(".modal-dialog");
       if (!pop_container.is(e.target) && pop_container.has(e.target).length === 0) {

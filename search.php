@@ -479,9 +479,20 @@ if($type == 'search'){
       <?php include 'includes/never-miss-out-form.php';?>
     </main>
     <script>
-      jQuery(document).ready(function(){
-        localStorage.setItem('redirect_url', window.location.href);
-      })
-    </script>
+        jQuery(document).ready(function(){
+          // set redirect URL
+          localStorage.setItem('redirect_url', window.location.href);
+          // scrollbar to specific position
+          var desiredScrollPosition = localStorage.getItem('scroll_bar_position');
+          jQuery(window).scrollTop(desiredScrollPosition);
+          // set scrollbar to Zero(0) by default
+          localStorage.setItem('scroll_bar_position', 0);
+          // updating scrollbar when scrollbar is moving
+          jQuery(window).scroll(function() {
+              var scrollPosition = jQuery(this).scrollTop();
+              localStorage.setItem('scroll_bar_position', scrollPosition);
+          });
+        })
+      </script>
 <!-- Footer -->
 <?php get_footer();?>
