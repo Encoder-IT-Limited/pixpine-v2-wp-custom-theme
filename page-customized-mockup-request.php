@@ -13,20 +13,21 @@ if(isset($_POST['p_submit'])){
     $subject = "Form Customized Mockup page";
     
     // Create email headers
-    $headers = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+    );
     
     // Define the message body
-    $message = "--boundary\r\n";
-    $message .= "Content-type: text/plain; charset='UTF-8'\r\n\r\n";
-    $message .= "Name: " . $_POST["p_name"] . "\r\n";
-    $message .= "Email: " . $_POST["p_email"] . "\r\n";
-    $message .= "License Type: " . $_POST["p_license_type"] . "\r\n\r\n";
-    $message .= "Details: " . $_POST["p_details"] . "\r\n\r\n";
-    $message .= "--boundary\r\n";
+
+    $message  = "Name: " . $_POST["p_name"] . "<br>";
+    $message .= "Email: " . $_POST["p_email"] . "<br>";
+    $message .= "License Type: " . $_POST["p_license_type"] . "<br>";
+    $message .= "Details: " . $_POST["p_details"] . "<br>";
+
     
     // Process the uploaded file
     $totalFiles = count($_FILES['p_file']['name']);
+    $attachments = array();
     // Loop through each file
     for ($i = 0; $i < $totalFiles; $i++) {
       $file_name = $_FILES["p_file"]["name"][$i];
@@ -34,27 +35,24 @@ if(isset($_POST['p_submit'])){
       $file_type = $_FILES["p_file"]["type"][$i];
       $file_size = $_FILES["p_file"]["size"][$i];
       
-      if ($file_size > 1048576) {
-        if ($file_name) {
-          $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
-          $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
-          $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
-          $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
-          if(($i+1) == $totalFiles){
-            $message .= "--boundary--";
-          }else{
-            $message .= "--boundary\r\n";
-          }
-        }
+      // Check if file exists and is readable
+      if ($file_size <= 1048576 && is_uploaded_file($file_temp)) {
+        // Add the file as an attachment
+        $attachments[$file_name] = $file_temp;
+      } else {
+          // Log or display an error message
+          $msg = 'Error: File upload failed or file size exceeds the limit.';
       }
     }
     
     // Send the email
-    if (mail($to, $subject, $message, $headers)) {
-      $msg = 'success';
-    } else {
-      $msg = 'fail';
-    }   
+    if (empty($msg)) {
+      if (wp_mail($to, $subject, $message, $headers, $attachments)) {
+          $msg = 'success';
+      } else {
+          $msg = 'Error: Failed to send email.';
+      }
+    }
   }
 }
 ?>
