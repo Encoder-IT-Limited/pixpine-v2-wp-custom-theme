@@ -5,60 +5,53 @@ Template Name: Request
 get_header();
 
 $msg = '';
-if(isset($_POST['p_submit'])){
-  if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
-    // Define recipient email address
-    $to = "request@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com";
+if (isset($_POST['p_submit'])) {
+    if (isset($_POST['client_form_nonce']) && wp_verify_nonce($_POST['client_form_nonce'], 'client_form_nonce')) {
+        // Define recipient email address
+        $to = "request@pixpine.site, innovawebdeveloper@gmail.com, harun@encoderit.net, harun.encoderit@gmail.com";
 
-    // Define email subject
-    $subject = "REQUEST MOCKUP";
+        // Define email subject
+        $subject = "REQUEST MOCKUP";
 
-    // Define sender's email address
-    $from = $_POST["p_email"];
+        // Create email headers
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+        );
 
-    // Create email headers
-    $headers = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
+        // Define the message body
+        $message = "Name: " . $_POST["p_name"] . "<br>";
+        $message .= "Email: " . $_POST["p_email"] . "<br>";
+        $message .= "Instruction: " . $_POST["p_instruction"] . "<br>";
 
-    // Define the message body
-    $message = "--boundary\r\n";
-    $message .= "Content-type: text/plain; charset='UTF-8'\r\n\r\n";
-    $message .= "Name: " . $_POST["p_name"] . "\r\n";
-    $message .= "Email: " . $_POST["p_email"] . "\r\n";
-    $message .= "Instruction: " . $_POST["p_instruction"] . "\r\n\r\n";
-    $message .= "--boundary\r\n";
+        // Process the uploaded file
+        $totalFiles = count($_FILES['p_file']['name']);
+        $attachments = array();
 
-    // Process the uploaded file
-    $totalFiles = count($_FILES['p_file']['name']);
-    // Loop through each file
-    for ($i = 0; $i < $totalFiles; $i++) {
-      $file_name = $_FILES["p_file"]["name"][$i];
-      $file_temp = $_FILES["p_file"]["tmp_name"][$i];
-      $file_type = $_FILES["p_file"]["type"][$i];
-      $file_size = $_FILES["p_file"]["size"][$i];
-      
-      if ($file_size > 1048576) {
-        if ($file_name) {
-          $message .= "Content-Type: $file_type; name=\"$file_name\"\r\n";
-          $message .= "Content-Disposition: attachment; filename=\"$file_name\"\r\n";
-          $message .= "Content-Transfer-Encoding: base64\r\n\r\n";
-          $message .= chunk_split(base64_encode(file_get_contents($file_temp))) . "\r\n";
-          if(($i+1) == $totalFiles){
-            $message .= "--boundary--";
-          }else{
-            $message .= "--boundary\r\n";
-          }
+        // Loop through each file
+        for ($i = 0; $i < $totalFiles; $i++) {
+            $file_name = $_FILES["p_file"]["name"][$i];
+            $file_temp = $_FILES["p_file"]["tmp_name"][$i];
+            $file_size = $_FILES["p_file"]["size"][$i];
+
+            // Check if file exists and is readable
+            if ($file_size <= 1048576 && is_uploaded_file($file_temp)) {
+                // Add the file as an attachment
+                $attachments[$file_name] = $file_temp;
+            } else {
+                // Log or display an error message
+                $msg = 'Error: File upload failed or file size exceeds the limit.';
+            }
         }
-      }
-    }
 
-    // Send the email
-    if (mail($to, $subject, $message, $headers)) {
-      $msg = 'success';
-    } else {
-      $msg = 'fail';
-    }   
-  }
+        // Send the email
+        if (empty($msg)) {
+            if (wp_mail($to, $subject, $message, $headers, $attachments)) {
+                $msg = 'success';
+            } else {
+                $msg = 'Error: Failed to send email.';
+            }
+        }
+    }
 }
 ?>
 
